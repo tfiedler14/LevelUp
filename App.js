@@ -14,7 +14,7 @@ export default function App() {
         <Provider store={createStore(RootReducer, applyMiddleware(thunk))}>
           <View
               style={{
-                  backgroundColor: '#d5f5e7',
+                  backgroundColor: '#4d4f52',
                   height: '100%',
               }}>
               <View>
