@@ -16,9 +16,9 @@ export const setProfile = data => {
   };
 };
 
-export const setSkills= data => {
+export const setUser= data => {
   return {
-    type: 'SET_SKILLS',
+    type: 'SET_USER',
     data
   };
 };
@@ -37,8 +37,8 @@ export const getData = (target, dataPoint) => {
       .then(response => {
         if (dataPoint === 'profile') {
           dispatch(setProfile(response.data));
-        } else if (dataPoint === 'skills') {
-          dispatch(setSkills(response.data));
+        } else if (dataPoint === 'user') {
+          dispatch(setUser(response.data));
         }
       })
       .catch(error => {

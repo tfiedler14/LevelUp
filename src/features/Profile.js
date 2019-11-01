@@ -9,44 +9,13 @@ import * as Progress from 'react-native-progress';
 import { Divider } from 'react-native-elements';
 import { tsConstructorType } from '@babel/types';
 
-export const Profile = ({ profile, skills, putData, getData, auth, quests }) => {
+export const Profile = ({ profile, putData, getData, auth, quests }) => {
   
-    useEffect(() => {
-      getData('https://levelup-10cfc.firebaseio.com/users/9dyqQWyX3lPtybCuF7OZCgMYbOa2/skills' + '.json', 'skills');
-      
-  
-    }, []);
+    
 
-  var attributes = {
-    Academics: [],
-    Crafts: [],
-    Mental: [],
-    Fitness: [],
-    Community: [],
-    Hobby: [],
-  } ;
+ 
   
-  
-    for (var i = 0; i < skills.length; i++){
-      if (skills[i].attribute == 'academics'){
-        attributes.Academics = [skills[i].name, ...attributes.Academics];
-      }
-      if (skills[i].attribute == 'crafts'){
-        attributes.Crafts = [skills[i].name, ...attributes.Crafts];
-      }
-      if (skills[i].attribute == 'mental'){
-        attributes.Mental = [skills[i].name, ...attributes.Mental];
-      }
-      if (skills[i].attribute == 'fitness'){
-        attributes.Fitness = [skills[i].name, ...attributes.Fitness];
-      }
-      if (skills[i].attribute == 'community'){
-        attributes.Community = [skills[i].name, ...attributes.Community];
-      }
-      if (skills[i].attribute == 'hobby'){
-        attributes.Hobby = [skills[i].name, ...attributes.Hobby];
-      }
-    }
+    console.log(quests);
 
 
 
@@ -89,40 +58,40 @@ export const Profile = ({ profile, skills, putData, getData, auth, quests }) => 
             <Text style={{fontSize:17}}>
                 Academics
             </Text>
-            <AttributeListItem skills={attributes.Academics}></AttributeListItem>
+            <AttributeListItem skills={skills.filter(skill=>skill.attribute='academics').map((data)=>{return(data.name)})}></AttributeListItem>
             </View>
 
             <View >
             <Text style={{fontSize:17}}>
                 Crafts
             </Text>
-            <AttributeListItem skills={attributes.Crafts}></AttributeListItem>
+            <AttributeListItem skills={skills.filter(skill=>skill.attribute='crafts').map((data)=>{return(data.name)})}></AttributeListItem>
             </View>
 
             <View >
             <Text style={{fontSize:17}}>
                 Mental
             </Text>
-            <AttributeListItem skills={attributes.Mental}></AttributeListItem>
+            <AttributeListItem skills={skills.filter(skill=>skill.attribute='mental').map((data)=>{return(data.name)})}></AttributeListItem>
             </View>
 
             <View >
             <Text style={{fontSize:17}}>
                 Fitness
             </Text>
-            <AttributeListItem skills={attributes.Fitness}></AttributeListItem>
+            <AttributeListItem skills={skills.filter(skill=>skill.attribute='fitness').map((data)=>{return(data.name)})}></AttributeListItem>
             </View>
             <View >
             <Text style={{fontSize:17}}>
                 Community
             </Text>
-            <AttributeListItem skills={attributes.Community}></AttributeListItem>
+            <AttributeListItem skills={skills.filter(skill=>skill.attribute='community').map((data)=>{return(data.name)})}></AttributeListItem>
             </View>
             <View >
             <Text style={{fontSize:17}}>
                 Hobby
             </Text>
-            <AttributeListItem skills={attributes.Hobby}></AttributeListItem>
+            <AttributeListItem skills={skills.filter(skill=>skill.attribute='hobby').map((data)=>{return(data.name)})}></AttributeListItem>
             </View>
             
 
@@ -240,8 +209,9 @@ const styles = EStyleSheet.create({
 
 const mapStateToProps = state => {
   return {
+    skills: state.skills,
+    quests: state.quests
     
-    skills: state.data.skills
   };
 };
 

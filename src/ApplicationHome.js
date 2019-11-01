@@ -13,8 +13,15 @@ import Quest from './features/Quest';
 import AddQuest from './features/AddQuest';
 import Settings from './features/Settings';
 import { Col, Grid } from 'react-native-easy-grid';
+import { getData, putData } from './logic/data/actions';
 
-export const ApplicationHome = ({ location, setLocation }) => {
+export const ApplicationHome = ({ location,  setLocation, getData}) => {
+
+  useEffect(() => {
+    getData('https://levelup-10cfc.firebaseio.com/users/9dyqQWyX3lPtybCuF7OZCgMYbOa2' + '.json', 'user');
+    
+
+  }, []);
   
   return (
     <View>
@@ -117,14 +124,18 @@ const styles = EStyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-    location: state.location
+    location: state.location,
+    
   };
 };
 const mapDispatchToProps = dispatch => {
   return {
     setLocation: location => {
       dispatch(setLocation(location));
-    }
+    },
+    getData: (data, dataPoint) => {
+      dispatch(getData(data, dataPoint));
+    },    
   };
 };
 
