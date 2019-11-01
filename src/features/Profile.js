@@ -1,12 +1,24 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Image, ScrollView, View, Text } from 'react-native';
-import EStyleSheet from 'react-native-extended-stylesheet';
+import { Image, ScrollView, View, Text} from 'react-native';
+import EStyleSheet, { absoluteFill } from 'react-native-extended-stylesheet';
 import { setLocation } from '../logic/location/actions';
 import { getData, putData } from '../logic/data/actions';
 import { Button, Card } from 'react-native-paper';
+import Modal from "react-native-modal";
+
 
 export const Profile = ({ profile, putData, getData, auth, quests }) => {
+  
+  state = {
+    showAddSkills: false,
+
+  };
+  toggalSkillsModal = () => {
+    this.setState({ showAddSkills: !this.state.showAddSkills });
+  };
+    
+
   /* useEffect(() => {
     getData('https://roommate-finder-afd9b.firebaseio.com/users/' + auth.uid + '.json', 'profile');
   }, []); */
@@ -38,8 +50,22 @@ export const Profile = ({ profile, putData, getData, auth, quests }) => {
           </Card>
         </View>
       )}
+        
+      <View >
+        <Button title="Add Skill" onPress={this.toggalSkillsModal} />
+        <Modal isVisible={this.state.showAddSkills}>
+          <View style={{ flex: 1 }}>
+            <Text>I am the modal content!</Text>
+            <Button type="submit" title="Save" onPress={this.toggalSkillsModal} />
+          </View>
+        </Modal>
+      </View>
     </>
   );
+
+
+  
+
 };
 
 const styles = EStyleSheet.create({
@@ -95,8 +121,12 @@ const styles = EStyleSheet.create({
   },
 
   buttons: {
-    marginBottom: '2rem'
-  },
+   // marginBottom: '2rem',
+    backgroundColor: "#fff",
+    padding: '0rem',
+    color: '#000',
+    borderRadius: 3
+    },
 
   cardPadding: {
     padding: '1rem',
