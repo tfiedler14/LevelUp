@@ -125,6 +125,7 @@ const styles = EStyleSheet.create({
 const mapStateToProps = state => {
   return {
     location: state.location,
+    skills: state.data.skills,
     
   };
 };

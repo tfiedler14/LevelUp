@@ -9,17 +9,9 @@ import * as Progress from 'react-native-progress';
 import { Divider } from 'react-native-elements';
 import { tsConstructorType } from '@babel/types';
 
-export const Profile = ({ profile, putData, getData, auth, quests }) => {
+export const Profile = ({ skills}) => {
   
-    
-
- 
-  
-    console.log(quests);
-
-
-
-  return (
+    return (
     
     <View style={{}}>
       
@@ -93,15 +85,7 @@ export const Profile = ({ profile, putData, getData, auth, quests }) => {
             </Text>
             <AttributeListItem skills={skills.filter(skill=>skill.attribute='hobby').map((data)=>{return(data.name)})}></AttributeListItem>
             </View>
-            
-
-            
-       
-    
-    
-    
-  
-  </View>
+    </View>
   );
 };
 
@@ -209,8 +193,8 @@ const styles = EStyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-    skills: state.skills,
-    quests: state.quests
+    skills: state.data.skills,
+    quests: state.data.quests
     
   };
 };
