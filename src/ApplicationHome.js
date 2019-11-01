@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 import { Platform, Text, Image, View, TouchableOpacity, StatusBar } from 'react-native';
 import { Button, ThemeProvider } from 'react-native-elements';
 import { connect } from 'react-redux';
@@ -14,6 +15,7 @@ import Settings from './features/Settings';
 import { Col, Grid } from 'react-native-easy-grid';
 
 export const ApplicationHome = ({ location, setLocation }) => {
+  
   return (
     <View>
      <View style={styles.topNav}>

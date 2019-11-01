@@ -7,20 +7,49 @@ import { getData, putData } from '../logic/data/actions';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import * as Progress from 'react-native-progress';
 import { Divider } from 'react-native-elements';
+import { tsConstructorType } from '@babel/types';
 
-export const Profile = ({ profile, putData, getData, auth, quests }) => {
-  /* useEffect(() => {
-    getData('https://roommate-finder-afd9b.firebaseio.com/users/' + auth.uid + '.json', 'profile');
-  }, []); */
+export const Profile = ({ profile, skills, putData, getData, auth, quests }) => {
+  
+    useEffect(() => {
+      getData('https://levelup-10cfc.firebaseio.com/users/9dyqQWyX3lPtybCuF7OZCgMYbOa2/skills' + '.json', 'skills');
+      
+  
+    }, []);
 
   var attributes = {
-      Academics: ['Apples', 'Oranges'],
-      Crafts: ['Bananas', 'Eggs'],
-      Mental: ['Yeet', 'Yote'],
-      Fitness: ['Run', 'Lift'],
-      Comminity: ['Talk', 'Yeah'],
-      Hobby: ['Hobby1', 'Hobby2'],
-  };
+    Academics: [],
+    Crafts: [],
+    Mental: [],
+    Fitness: [],
+    Community: [],
+    Hobby: [],
+  } ;
+  
+  
+    for (var i = 0; i < skills.length; i++){
+      if (skills[i].attribute == 'academics'){
+        attributes.Academics = [skills[i].name, ...attributes.Academics];
+      }
+      if (skills[i].attribute == 'crafts'){
+        attributes.Crafts = [skills[i].name, ...attributes.Crafts];
+      }
+      if (skills[i].attribute == 'mental'){
+        attributes.Mental = [skills[i].name, ...attributes.Mental];
+      }
+      if (skills[i].attribute == 'fitness'){
+        attributes.Fitness = [skills[i].name, ...attributes.Fitness];
+      }
+      if (skills[i].attribute == 'community'){
+        attributes.Community = [skills[i].name, ...attributes.Community];
+      }
+      if (skills[i].attribute == 'hobby'){
+        attributes.Hobby = [skills[i].name, ...attributes.Hobby];
+      }
+    }
+
+
+
   return (
     
     <View style={{}}>
@@ -85,9 +114,9 @@ export const Profile = ({ profile, putData, getData, auth, quests }) => {
             </View>
             <View >
             <Text style={{fontSize:17}}>
-                Comminity
+                Community
             </Text>
-            <AttributeListItem skills={attributes.Comminity}></AttributeListItem>
+            <AttributeListItem skills={attributes.Community}></AttributeListItem>
             </View>
             <View >
             <Text style={{fontSize:17}}>
@@ -211,9 +240,8 @@ const styles = EStyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-    profile: state.data.profile,
-    auth: state.auth,
-    houses: state.data.houses
+    
+    skills: state.data.skills
   };
 };
 
