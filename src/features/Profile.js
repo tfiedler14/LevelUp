@@ -1,26 +1,34 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Image, ScrollView, View, Text } from 'react-native';
+import { Image, ScrollView, View, Text, Button, TouchableHighlight } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { setLocation } from '../logic/location/actions';
 import { getData, putData } from '../logic/data/actions';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import * as Progress from 'react-native-progress';
 import { Divider } from 'react-native-elements';
+import Modal from 'react-native-modal';
+import Card from 'react-native-elements';
 
 
-export const Profile = ({ profile, putData, getData, auth, quests }) => {
+export const Profile = ({  profile, skills, putData, getData, auth, quests  }) => {
   
+    skills = {
+      attribute: 'Academics',
+      skillDef: 'reading documentation'
+    };
+
     state = {
       showAddSkills: false,
     }
 
     toggleAddSkillsModal = () => {
-      this.setState({ showAddSkills: !this.state.showAddSkills });
-    };
+      this.state.showAddSkills = !this.state.showAddSkills;
+      console.log("switching modal state", this.state.showAddSkills);
+    }
  
   
-    console.log(quests);
+    console.log(skills, quests);
 
 
 
@@ -63,58 +71,84 @@ export const Profile = ({ profile, putData, getData, auth, quests }) => {
             <Text style={{fontSize:17}}>
                 Academics
             </Text>
-            <AttributeListItem skills={skills.filter(skill=>skill.attribute='academics').map((data)=>{return(data.name)})}></AttributeListItem>
+            {/* <AttributeListItem skills={skills.filter(skill=>skill.attribute='academics').map((data)=>{return(data.name)})}></AttributeListItem> */}
             </View>
 
             <View>
             <Text style={{fontSize:17}}>
                 Crafts
             </Text>
-            <AttributeListItem skills={skills.filter(skill=>skill.attribute='crafts').map((data)=>{return(data.name)})}></AttributeListItem>
+            {/* <AttributeListItem skills={skills.filter(skill=>skill.attribute='crafts').map((data)=>{return(data.name)})}></AttributeListItem> */}
             </View>
 
             <View >
             <Text style={{fontSize:17}}>
                 Mental
             </Text>
-            <AttributeListItem skills={skills.filter(skill=>skill.attribute='mental').map((data)=>{return(data.name)})}></AttributeListItem>
+            {/* <AttributeListItem skills={skills.filter(skill=>skill.attribute='mental').map((data)=>{return(data.name)})}></AttributeListItem> */}
             </View>
 
             <View >
             <Text style={{fontSize:17}}>
                 Fitness
             </Text>
-            <AttributeListItem skills={skills.filter(skill=>skill.attribute='fitness').map((data)=>{return(data.name)})}></AttributeListItem>
+            {/* <AttributeListItem skills={skills.filter(skill=>skill.attribute='fitness').map((data)=>{return(data.name)})}></AttributeListItem> */}
             </View>
             <View >
             <Text style={{fontSize:17}}>
                 Community
             </Text>
-            <AttributeListItem skills={skills.filter(skill=>skill.attribute='community').map((data)=>{return(data.name)})}></AttributeListItem>
+            {/* <AttributeListItem skills={skills.filter(skill=>skill.attribute='community').map((data)=>{return(data.name)})}></AttributeListItem> */}
             </View>
             <View >
             <Text style={{fontSize:17}}>
                 Hobby
             </Text>
-            <AttributeListItem skills={skills.filter(skill=>skill.attribute='hobby').map((data)=>{return(data.name)})}></AttributeListItem>
+            {/* <AttributeListItem skills={skills.filter(skill=>skill.attribute='hobby').map((data)=>{return(data.name)})}></AttributeListItem> */}
             </View>
             
 
             
-      <View >
+      {/* <View>
         <Button title="Add Skill" onPress={this.toggleAddSkillsModal} />
         <Modal isVisible={this.state.showAddSkills}>
           <View style={{ flex: 1 }}>
-            <Text>I am the modal content!</Text>
+            <Text>
+                I am the modal content!
+            </Text>
             <Button type="submit" title="Save" onPress={this.toggleAddSkillsModal} />
           </View>
         </Modal>
-      </View>
+      </View> */}
+
+
+
+    {/* <View style={{flex: 1, flexDirection: 'column', justifyContent: 'space-between', alignSelf: 'flex-end', position:'absolute', botton: '0'}} > 
+      <Button color="#fff"  title="Add Skill" onPress={this.toggleAddSkillsModal} style={styles.addSkillsBtn}/>
+      <Modal isVisibile={this.state.showAddSkills} transparent={false} onRequestClose={() => console.log('changing modal visibility... confirm with UI')}>
+        <View style={{flex:1, margin:0}} >
+            <Card title="Adding a skill">
+                <Text>Define the skill's attribute</Text> 
+
+
+            </Card>
+                  
+          
+          <Button color="#fff"  title="Add Skill" onPress={this.toggleAddSkillsModal} style={styles.addSkillsBtn}/>
+
+        </View>
+      </Modal>
+    </View> */}
+
+
+
+      
     
     
     
   
   </View>
+        
   );
 };
 
@@ -213,6 +247,12 @@ const styles = EStyleSheet.create({
   buttons: {
     marginBottom: '2rem'
   },
+  addSkillsBtn: {
+    alignSelf: 'flex-end',
+    position: 'absolute',
+    bottom: 35,
+    color: "#fff"
+},
 
   cardPadding: {
     padding: '1rem',
