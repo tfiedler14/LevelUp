@@ -50,40 +50,40 @@ export const Profile = ({ skills}) => {
             <Text style={{fontSize:17}}>
                 Academics
             </Text>
-            <AttributeListItem skills={skills.filter(skill=>skill.attribute='academics').map((data)=>{return(data.name)})}></AttributeListItem>
+            <AttributeListItem skills={skills.filter(skill=>skill.attribute=='academics').map((data)=>{return(data.name)})}></AttributeListItem>
             </View>
 
             <View >
             <Text style={{fontSize:17}}>
                 Crafts
             </Text>
-            <AttributeListItem skills={skills.filter(skill=>skill.attribute='crafts').map((data)=>{return(data.name)})}></AttributeListItem>
+            <AttributeListItem skills={skills.filter(skill=>skill.attribute=='crafts').map((data)=>{return(data.name)})}></AttributeListItem>
             </View>
 
             <View >
             <Text style={{fontSize:17}}>
                 Mental
             </Text>
-            <AttributeListItem skills={skills.filter(skill=>skill.attribute='mental').map((data)=>{return(data.name)})}></AttributeListItem>
+            <AttributeListItem skills={skills.filter(skill=>skill.attribute=='mental').map((data)=>{return(data.name)})}></AttributeListItem>
             </View>
 
             <View >
             <Text style={{fontSize:17}}>
                 Fitness
             </Text>
-            <AttributeListItem skills={skills.filter(skill=>skill.attribute='fitness').map((data)=>{return(data.name)})}></AttributeListItem>
+            <AttributeListItem skills={skills.filter(skill=>skill.attribute=='fitness').map((data)=>{return(data.name)})}></AttributeListItem>
             </View>
             <View >
             <Text style={{fontSize:17}}>
                 Community
             </Text>
-            <AttributeListItem skills={skills.filter(skill=>skill.attribute='community').map((data)=>{return(data.name)})}></AttributeListItem>
+            <AttributeListItem skills={skills.filter(skill=>skill.attribute=='community').map((data)=>{return(data.name)})}></AttributeListItem>
             </View>
             <View >
             <Text style={{fontSize:17}}>
                 Hobby
             </Text>
-            <AttributeListItem skills={skills.filter(skill=>skill.attribute='hobby').map((data)=>{return(data.name)})}></AttributeListItem>
+            <AttributeListItem skills={skills.filter(skill=>skill.attribute=='hobby').map((data)=>{return(data.name)})}></AttributeListItem>
             </View>
     </View>
   );
