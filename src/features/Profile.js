@@ -47,49 +47,49 @@ export const Profile = ({ skills}) => {
             
           </View>
           <View >
-            <Text style={{fontSize:17}}>
+            <Text style={{color: '#ffffff', fontSize:17}}>
                 Academics
             </Text>
-            <AttributeListItem skills={skills.filter(skill=>skill.attribute=='academics').map((data)=>{return(data.name)})}></AttributeListItem>
+            <AttributeListItem skills={skills.filter(skill=>skill.attribute=='academics').map((data)=>{return({name: data.name, level: data.val})})}></AttributeListItem>
             </View>
 
             <View >
-            <Text style={{fontSize:17}}>
+            <Text style={{color: '#ffffff', fontSize:17}}>
                 Crafts
             </Text>
-            <AttributeListItem skills={skills.filter(skill=>skill.attribute=='crafts').map((data)=>{return(data.name)})}></AttributeListItem>
+            <AttributeListItem skills={skills.filter(skill=>skill.attribute=='crafts').map((data)=>{return({name: data.name, level: data.val})})}></AttributeListItem>
             </View>
 
             <View >
-            <Text style={{fontSize:17}}>
+            <Text style={{color: '#ffffff', fontSize:17}}>
                 Mental
             </Text>
-            <AttributeListItem skills={skills.filter(skill=>skill.attribute=='mental').map((data)=>{return(data.name)})}></AttributeListItem>
+            <AttributeListItem skills={skills.filter(skill=>skill.attribute=='mental').map((data)=>{return({name: data.name, level: data.val})})}></AttributeListItem>
             </View>
 
             <View >
-            <Text style={{fontSize:17}}>
+            <Text style={{color: '#ffffff', fontSize:17}}>
                 Fitness
             </Text>
-            <AttributeListItem skills={skills.filter(skill=>skill.attribute=='fitness').map((data)=>{return(data.name)})}></AttributeListItem>
+            <AttributeListItem skills={skills.filter(skill=>skill.attribute=='fitness').map((data)=>{return({name: data.name, level: data.val})})}></AttributeListItem>
             </View>
             <View >
-            <Text style={{fontSize:17}}>
+            <Text style={{color: '#ffffff', fontSize:17}}>
                 Community
             </Text>
-            <AttributeListItem skills={skills.filter(skill=>skill.attribute=='community').map((data)=>{return(data.name)})}></AttributeListItem>
+            <AttributeListItem skills={skills.filter(skill=>skill.attribute=='community').map((data)=>{return({name: data.name, level: data.val})})}></AttributeListItem>
             </View>
             <View >
-            <Text style={{fontSize:17}}>
+            <Text style={{color: '#ffffff', fontSize:17}}>
                 Hobby
             </Text>
-            <AttributeListItem skills={skills.filter(skill=>skill.attribute=='hobby').map((data)=>{return(data.name)})}></AttributeListItem>
+            <AttributeListItem skills={skills.filter(skill=>skill.attribute=='hobby').map((data)=>{return({name: data.name, level: data.val})})}></AttributeListItem>
             </View>
     </View>
   );
 };
 
-const AttributeListItem = ({skills}) => {
+const AttributeListItem = ({skills, levels}) => {
   return (
     
       
@@ -97,8 +97,10 @@ const AttributeListItem = ({skills}) => {
         return (
           <View>
           
-          <Text>
-            {data}
+          <Text style={{color: '#ffffff'}}>
+            {data.name} -
+            {data.level}
+            
           </Text>
           </View>
         )
