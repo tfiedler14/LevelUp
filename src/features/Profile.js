@@ -10,105 +10,109 @@ import { Divider } from 'react-native-elements';
 import Modal from 'react-native-modal';
 import Card from 'react-native-elements';
 
+import { tsConstructorType } from '@babel/types';
 
-export const Profile = ({  profile, skills, putData, getData, auth, quests  }) => {
-  
-    skills = {
-      attribute: 'Academics',
-      skillDef: 'reading documentation'
-    };
+export const Profile = ({ skills }) => {
 
-    state = {
-      showAddSkills: false,
-    }
+  skills = {
+    attribute: 'Academics',
+    skillDef: 'reading documentation'
+  };
 
-    toggleAddSkillsModal = () => {
-      this.state.showAddSkills = !this.state.showAddSkills;
-      console.log("switching modal state", this.state.showAddSkills);
-    }
- 
-  
-    console.log(skills, quests);
+  state = {
+    showAddSkills: false,
+  }
 
+  toggleAddSkillsModal = () => {
+    this.state.showAddSkills = !this.state.showAddSkills;
+    console.log("switching modal state", this.state.showAddSkills);
+  }
 
 
   return (
-    
-    <View style={{flex: 1}}>
-      
-          <View >
-            <View>
-              <View style={{ position: 'absolute', alignSelf: 'flex-end', flex: 1}}>
-                <Icon
-                  style={styles.padding}
-                  name="settings-applications"
-                  size={48}
-                  color="white"
-                  onPress={() => setLocation('settings')}
-                />
-              </View>
-              <View style={{ flex: 1, alignItems: 'center', paddingTop: 30 }}>
-                <Image
-                  style={styles.addBorder}
-                  source={require('../../assets/images/girlwhiteorange.png')}
-                />
-                <View style={{ paddingTop: 15 }}>
-                  <Progress.Bar
-                    style={styles.progress}
-                    color='white'
-                    height={15}
-                    progress={0.3}
-                  />
-                </View>
-              </View>
-              <View style={{paddingTop:280}}>
-                <Divider style={{ backgroundColor: 'white' , height: 2 }} />
-              </View>
-            </View >
-            
+
+
+    <View style={{}}>
+
+      <View >
+        <View>
+          <View style={{ position: 'absolute', alignSelf: 'flex-end', flex: 1 }}>
+            <Icon
+              style={styles.padding}
+              name="settings-applications"
+              size={48}
+              color="white"
+              onPress={() => setLocation('settings')}
+            />
           </View>
-          <View >
-            <Text style={{fontSize:17}}>
-                Academics
-            </Text>
-            {/* <AttributeListItem skills={skills.filter(skill=>skill.attribute='academics').map((data)=>{return(data.name)})}></AttributeListItem> */}
+          <View style={{ flex: 1, alignItems: 'center', paddingTop: 30 }}>
+            <Image
+              style={styles.addBorder}
+              source={require('../../assets/images/girlwhiteorange.png')}
+            />
+            <View style={{ paddingTop: 15 }}>
+              <Progress.Bar
+                style={styles.progress}
+                color='white'
+                height={15}
+                progress={0.3}
+              />
             </View>
+          </View>
+          <View style={{ paddingTop: 280 }}>
+            <Divider style={{ backgroundColor: 'white', height: 2 }} />
+          </View>
+        </View >
 
-            <View>
-            <Text style={{fontSize:17}}>
-                Crafts
+      </View>
+      <View >
+        <Text style={{ color: '#ffffff', fontSize: 17 }}>
+          Academics
             </Text>
-            {/* <AttributeListItem skills={skills.filter(skill=>skill.attribute='crafts').map((data)=>{return(data.name)})}></AttributeListItem> */}
-            </View>
+        <AttributeListItem skills={skills.filter(skill => skill.attribute == 'academics').map((data) => { return ({ name: data.name, level: data.val }) })}></AttributeListItem>
+      </View>
 
-            <View >
-            <Text style={{fontSize:17}}>
-                Mental
+      <View>
+        <Text style={{ color: '#ffffff', fontSize: 17 }}>
+          Crafts
             </Text>
-            {/* <AttributeListItem skills={skills.filter(skill=>skill.attribute='mental').map((data)=>{return(data.name)})}></AttributeListItem> */}
-            </View>
+        <AttributeListItem skills={skills.filter(skill => skill.attribute == 'crafts').map((data) => { return ({ name: data.name, level: data.val }) })}></AttributeListItem>
+      </View>
 
-            <View >
-            <Text style={{fontSize:17}}>
-                Fitness
+      <View >
+        <Text style={{ color: '#ffffff', fontSize: 17 }}>
+          Mental
             </Text>
-            {/* <AttributeListItem skills={skills.filter(skill=>skill.attribute='fitness').map((data)=>{return(data.name)})}></AttributeListItem> */}
-            </View>
-            <View >
-            <Text style={{fontSize:17}}>
-                Community
-            </Text>
-            {/* <AttributeListItem skills={skills.filter(skill=>skill.attribute='community').map((data)=>{return(data.name)})}></AttributeListItem> */}
-            </View>
-            <View >
-            <Text style={{fontSize:17}}>
-                Hobby
-            </Text>
-            {/* <AttributeListItem skills={skills.filter(skill=>skill.attribute='hobby').map((data)=>{return(data.name)})}></AttributeListItem> */}
-            </View>
-            
 
-            
+        <AttributeListItem skills={skills.filter(skill => skill.attribute == 'mental').map((data) => { return ({ name: data.name, level: data.val }) })}></AttributeListItem>
+      </View>
+
+      <View >
+        <Text style={{ color: '#ffffff', fontSize: 17 }}>
+          Fitness
+            </Text>
+        <AttributeListItem skills={skills.filter(skill => skill.attribute == 'fitness').map((data) => { return ({ name: data.name, level: data.val }) })}></AttributeListItem>
+      </View>
+      <View >
+        <Text style={{ color: '#ffffff', fontSize: 17 }}>
+          Community
+            </Text>
+
+        <AttributeListItem skills={skills.filter(skill => skill.attribute == 'community').map((data) => { return ({ name: data.name, level: data.val }) })}></AttributeListItem>
+      </View>
+      <View >
+        <Text style={{ color: '#ffffff', fontSize: 17 }}>
+          Hobby
+            </Text>
+
+        {/* <AttributeListItem skills={skills.filter(skill=>skill.attribute='hobby').map((data)=>{return(data.name)})}></AttributeListItem> */}
+      </View>
+      <View>
+        <AttributeListItem skills={skills.filter(skill => skill.attribute == 'hobby').map((data) => { return ({ name: data.name, level: data.val }) })}></AttributeListItem>
+
+      </View>
+
+
       {/* <View>
         <Button title="Add Skill" onPress={this.toggleAddSkillsModal} />
         <Modal isVisible={this.state.showAddSkills}>
@@ -123,7 +127,7 @@ export const Profile = ({  profile, skills, putData, getData, auth, quests  }) =
 
 
 
-    {/* <View style={{flex: 1, flexDirection: 'column', justifyContent: 'space-between', alignSelf: 'flex-end', position:'absolute', botton: '0'}} > 
+      {/* <View style={{flex: 1, flexDirection: 'column', justifyContent: 'space-between', alignSelf: 'flex-end', position:'absolute', botton: '0'}} > 
       <Button color="#fff"  title="Add Skill" onPress={this.toggleAddSkillsModal} style={styles.addSkillsBtn}/>
       <Modal isVisibile={this.state.showAddSkills} transparent={false} onRequestClose={() => console.log('changing modal visibility... confirm with UI')}>
         <View style={{flex:1, margin:0}} >
@@ -142,32 +146,34 @@ export const Profile = ({  profile, skills, putData, getData, auth, quests  }) =
 
 
 
-      
-    
-    
-    
-  
-  </View>
-        
+
+
+
+
+
+    </View>
+
   );
 };
 
-const AttributeListItem = ({skills}) => {
+const AttributeListItem = ({ skills, levels }) => {
   return (
-    
-      
-      skills.map((data) => {
-        return (
-          <View>
-          
-          <Text>
-            {data}
-          </Text>
-          </View>
-        )
-      })
 
-    
+
+    skills.map((data) => {
+      return (
+        <View>
+
+          <Text style={{ color: '#ffffff' }}>
+            {data.name} -
+            {data.level}
+
+          </Text>
+        </View>
+      )
+    })
+
+
   );
 }
 
@@ -252,7 +258,7 @@ const styles = EStyleSheet.create({
     position: 'absolute',
     bottom: 35,
     color: "#fff"
-},
+  },
 
   cardPadding: {
     padding: '1rem',
@@ -262,9 +268,9 @@ const styles = EStyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-    skills: state.skills,
-    quests: state.quests
-    
+    skills: state.data.skills,
+    quests: state.data.quests
+
   };
 };
 
