@@ -1,72 +1,141 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Image, ScrollView, View, Text} from 'react-native';
-import EStyleSheet, { absoluteFill } from 'react-native-extended-stylesheet';
+import { Image, ScrollView, View, Text } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import { setLocation } from '../logic/location/actions';
 import { getData, putData } from '../logic/data/actions';
-import { Button, Card } from 'react-native-paper';
-import Modal from "react-native-modal";
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import * as Progress from 'react-native-progress';
+import { Divider } from 'react-native-elements';
 
 
 export const Profile = ({ profile, putData, getData, auth, quests }) => {
   
-  state = {
-    showAddSkills: false,
+    state = {
+      showAddSkills: false,
+    }
 
-  };
-  toggalSkillsModal = () => {
-    this.setState({ showAddSkills: !this.state.showAddSkills });
-  };
-    
+    toggleAddSkillsModal = () => {
+      this.setState({ showAddSkills: !this.state.showAddSkills });
+    };
+ 
+  
+    console.log(quests);
 
-  /* useEffect(() => {
-    getData('https://roommate-finder-afd9b.firebaseio.com/users/' + auth.uid + '.json', 'profile');
-  }, []); */
+
 
   return (
-    <>
-      {auth.loggedIn ? (
-        <View style={{ height: '100%' }}>
-          <View size={3} style={styles.profileHeader}>
-            <View style={styles.profileWrapper}>
-              <Image
-                style={styles.profileImage}
-                source={{uri: (profile.profile && profile.profile.image)}}
-              />
-              <View style={styles.infoMargin}>
-                <Text style={styles.mainInfo}>{profile.profile && profile.profile.name}</Text>
+    
+    <View style={{flex: 1}}>
+      
+          <View >
+            <View>
+              <View style={{ position: 'absolute', alignSelf: 'flex-end', flex: 1}}>
+                <Icon
+                  style={styles.padding}
+                  name="settings-applications"
+                  size={48}
+                  color="white"
+                  onPress={() => setLocation('settings')}
+                />
               </View>
-              <Text style={styles.secondaryInfo}>
-                Age: {profile.profile && profile.profile.age} | Gender:{' '}
-                {profile.profile && profile.profile.gender}
-              </Text>
+              <View style={{ flex: 1, alignItems: 'center', paddingTop: 30 }}>
+                <Image
+                  style={styles.addBorder}
+                  source={require('../../assets/images/girlwhiteorange.png')}
+                />
+                <View style={{ paddingTop: 15 }}>
+                  <Progress.Bar
+                    style={styles.progress}
+                    color='white'
+                    height={15}
+                    progress={0.3}
+                  />
+                </View>
+              </View>
+              <View style={{paddingTop:280}}>
+                <Divider style={{ backgroundColor: 'white' , height: 2 }} />
+              </View>
+            </View >
+            
+          </View>
+          <View >
+            <Text style={{fontSize:17}}>
+                Academics
+            </Text>
+            <AttributeListItem skills={skills.filter(skill=>skill.attribute='academics').map((data)=>{return(data.name)})}></AttributeListItem>
             </View>
-          </View>
-        </View>
-      ) : (
-        <View>
-          <Card style={styles.cardPadding}>
-            <Text>Log in on the settings page to view your profile.</Text>
-          </Card>
-        </View>
-      )}
-        
-      <View >
-        <Button title="Add Skill" onPress={this.toggalSkillsModal} />
-        <Modal isVisible={this.state.showAddSkills}>
-          <View style={{ flex: 1 }}>
-            <Text>I am the modal content!</Text>
-            <Button type="submit" title="Save" onPress={this.toggalSkillsModal} />
-          </View>
-        </Modal>
-      </View>
-    </>
-  );
 
+            <View>
+            <Text style={{fontSize:17}}>
+                Crafts
+            </Text>
+            <AttributeListItem skills={skills.filter(skill=>skill.attribute='crafts').map((data)=>{return(data.name)})}></AttributeListItem>
+            </View>
 
+            <View >
+            <Text style={{fontSize:17}}>
+                Mental
+            </Text>
+            <AttributeListItem skills={skills.filter(skill=>skill.attribute='mental').map((data)=>{return(data.name)})}></AttributeListItem>
+            </View>
+
+            <View >
+            <Text style={{fontSize:17}}>
+                Fitness
+            </Text>
+            <AttributeListItem skills={skills.filter(skill=>skill.attribute='fitness').map((data)=>{return(data.name)})}></AttributeListItem>
+            </View>
+            <View >
+            <Text style={{fontSize:17}}>
+                Community
+            </Text>
+            <AttributeListItem skills={skills.filter(skill=>skill.attribute='community').map((data)=>{return(data.name)})}></AttributeListItem>
+            </View>
+            <View >
+            <Text style={{fontSize:17}}>
+                Hobby
+            </Text>
+            <AttributeListItem skills={skills.filter(skill=>skill.attribute='hobby').map((data)=>{return(data.name)})}></AttributeListItem>
+            </View>
+            
+
+            
+      <View >
+        <Button title="Add Skill" onPress={this.toggleAddSkillsModal} />
+        <Modal isVisible={this.state.showAddSkills}>
+          <View style={{ flex: 1 }}>
+            <Text>I am the modal content!</Text>
+            <Button type="submit" title="Save" onPress={this.toggleAddSkillsModal} />
+          </View>
+        </Modal>
+      </View>
+    
+    
+    
   
-
+  </View>
+  );
 };
+
+const AttributeListItem = ({skills}) => {
+  return (
+    
+      
+      skills.map((data) => {
+        return (
+          <View>
+          
+          <Text>
+            {data}
+          </Text>
+          </View>
+        )
+      })
+
+    
+  );
+}
 
 const styles = EStyleSheet.create({
   profileHeader: {
@@ -75,7 +144,30 @@ const styles = EStyleSheet.create({
     height: '12rem',
     zIndex: 4
   },
-
+  container: {
+    flex: 1
+  },
+  addBorder: {
+    width: 225,
+    height: 225,
+    resizeMode: "stretch",
+    // Set border width.
+    borderWidth: 2,
+    // Set border color.
+    borderColor: 'white',
+  },
+  progress: {
+    height: 15,
+    width: 100,
+    borderColor: 'white',
+    borderWidth: 1
+  },
+  padding: {
+    paddingTop: '2rem',
+    paddingRight: '1rem',
+    paddingBottom: '2rem',
+    paddingLeft: '1rem'
+  },
   profileWrapper: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -101,7 +193,6 @@ const styles = EStyleSheet.create({
     fontWeight: 'bold',
     fontSize: '1.5rem',
     margin: 'auto'
-    // fontFamily: 'sans-serif',
   },
 
   secondaryInfo: {
@@ -109,7 +200,6 @@ const styles = EStyleSheet.create({
     fontWeight: '300',
     margin: 'auto',
     fontSize: '1rem'
-    // fontFamily: 'sans-serif',
   },
 
   viewPadding: {
@@ -121,12 +211,8 @@ const styles = EStyleSheet.create({
   },
 
   buttons: {
-   // marginBottom: '2rem',
-    backgroundColor: "#fff",
-    padding: '0rem',
-    color: '#000',
-    borderRadius: 3
-    },
+    marginBottom: '2rem'
+  },
 
   cardPadding: {
     padding: '1rem',
@@ -136,9 +222,9 @@ const styles = EStyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-    profile: state.data.profile,
-    auth: state.auth,
-    houses: state.data.houses
+    skills: state.skills,
+    quests: state.quests
+    
   };
 };
 
