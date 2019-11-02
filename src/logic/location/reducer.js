@@ -1,4 +1,4 @@
-export default (state = "login", action) => {
+export default (state = "signin", action) => {
     switch (action.type) {
         case 'SET_LOCATION':
             return action.location;
