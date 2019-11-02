@@ -1,17 +1,46 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Image, ScrollView, View, Text, Button, TouchableHighlight } from 'react-native';
+import { Image, ScrollView, View, Text, TextInput, Button, TouchableHighlight, StyleSheet } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { setLocation } from '../logic/location/actions';
 import { getData, putData } from '../logic/data/actions';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import RNPickerSelect from 'react-native-picker-select';
+import { FormHeader } from '../shared-components/FormHeader';
+import { Field, getFormValues, initialize, reduxForm } from 'redux-form';
+import { compose } from 'redux';
+import { WrappedTextInput } from '../shared-components/FormField';
 
 
 
 
-export const AddSkill = ({ skills }) => {
 
+export const AddSkill = ({ skills, setLocation, location, handleSubmit }) => {
+
+    const placeHolder = {
+        label: 'Select an Attribute for new skill',
+        attr: '',
+        def: ''
+
+    };
+
+    handleAttrValue = (attr) => {
+        placeHolder.attr = attr;
+        console.log(placeHolder.attr);
+    }
+    //currently undefined
+    handleAttrDef = (def) => {
+        placeHolder.def = def;
+        console.log(placeHolder.def);
+    }
+    handleSkillSave = (location) => {
+        console.log("saving new skill");
+        setLocation('profile');
+    }
+
+    attrValue = placeHolder.value;
     console.log("made it to addSkill const");
+    console.log(attrValue);
 
     return (
 
@@ -19,7 +48,7 @@ export const AddSkill = ({ skills }) => {
         <View style={{}}>
             <View>
                 <View>
-                    <View style={{ position: 'absolute', alignSelf: 'flex-end', flex: 0 }}>
+                    <View style={{ position: 'absolute', alignSelf: 'flex-end', flex: 1 }}>
                         <Icon
                             style={styles.padding}
                             name="settings-applications"
@@ -29,9 +58,41 @@ export const AddSkill = ({ skills }) => {
                         />
                     </View>
 
-                    <View style={{ flex: 1, alignItems: 'center', paddingTop: 30 }}>
-                        <Text style={{ color: '#ffffff', fontSize: 17 }}>Associate New Skill with an Attribute</Text>
-                    </View>
+                </View>
+
+                <View >
+
+                </View>
+
+                <View style={styles.cardPadding}>
+
+                    <FormHeader title={'Attribute:'} style={{ fontSize: 24, paddingBottom: '8' }} ></FormHeader>
+                    <RNPickerSelect
+                        style={pickerStyles} placeholder={placeHolder} onValueChange={(value) => this.handleAttrValue(value)}
+                        items={[
+                            { label: 'Academics', value: 'Academics' },
+                            { label: 'Crafts', value: 'Crafts' },
+                            { label: 'Mental', value: 'Mental' },
+                            { label: 'Fitness', value: 'Fitness' },
+                            { label: 'Community', value: 'Community' },
+                            { label: 'Hobbies', value: 'Hobbies' },
+                        ]}
+                    />
+                    <FormHeader title={'Definition of skill:'} style={{ fontSize: 18, paddingBottom: '8' }}></FormHeader>
+                    <Field
+                        name="addSkill"
+                        id="addSkill"
+                        component={WrappedTextInput}
+
+                    />
+                </View>
+
+                <View>
+                    <Button
+                        color="#fff"
+                        mode="contained"
+                        title="Save Skill"
+                        onPress={() => this.handleSkillSave(location)} />
 
                 </View>
 
@@ -44,6 +105,19 @@ export const AddSkill = ({ skills }) => {
 };
 
 
+
+const pickerStyles = StyleSheet.create({
+    inputIOS: {
+        color: 'white',
+        fontSize: 22,
+        paddingTop: 8,
+        paddingHorizontal: 10,
+        paddingBottom: 8,
+
+
+    },
+
+});
 
 const styles = EStyleSheet.create({
 
@@ -95,8 +169,8 @@ const styles = EStyleSheet.create({
 const mapStateToProps = state => {
     return {
         skills: state.data.skills,
-        quests: state.data.quests
-
+        quests: state.data.quests,
+        location: state.location
     };
 };
 
@@ -114,7 +188,10 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+export default compose(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    ),
+    reduxForm({ form: 'addSkills-form' })
 )(AddSkill);

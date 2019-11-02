@@ -7,7 +7,7 @@ import { getData, putData } from '../logic/data/actions';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import * as Progress from 'react-native-progress';
 import { Divider } from 'react-native-elements';
-import Modal from 'react-native-modal';
+
 
 
 
@@ -96,11 +96,7 @@ handleAddSkill = (location) => {
           Hobby
             </Text>
 
-        <AttributeListItem skills={skills.filter(skill=>skill.attribute='hobby').map((data)=>{return(data.name)})}></AttributeListItem>
-      </View>
-      <View>
-        <AttributeListItem skills={skills.filter(skill => skill.attribute == 'hobby').map((data) => { return ({ name: data.name, level: data.val }) })}></AttributeListItem>
-
+        <AttributeListItem skills={skills.filter(skill=>skill.attribute == 'hobby').map((data)=>{return ({ name: data.name, level: data.val }) })}></AttributeListItem>
       </View>
 
 
