@@ -21,7 +21,7 @@ import { auth } from 'firebase';
 export const ApplicationHome = ({ location,  setLocation, getData}) => {
 
   useEffect(() => {
-    getData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '.json', 'user');
+    getData('https://levelup-10cfc.firebaseio.com/users/9dyqQWyX3lPtybCuF7OZCgMYbOa2.json', 'user');
     
 
   }, []);
