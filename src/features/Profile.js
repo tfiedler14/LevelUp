@@ -1,21 +1,26 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Image, ScrollView, View, Text } from 'react-native';
+import { Image, ScrollView, View, Text, Button, TouchableHighlight } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { setLocation } from '../logic/location/actions';
 import { getData, putData } from '../logic/data/actions';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import * as Progress from 'react-native-progress';
 import { Divider } from 'react-native-elements';
-import { tsConstructorType } from '@babel/types';
+import Modal from 'react-native-modal';
 
-export const Profile = ({ skills, profile }) => {
 
+
+export const Profile = ({ setLocation, skills, location }) => {
+
+  handleAddSkill = (location) => {
+    setLocation('addSkill');
+    console.log("chaning location to addSkill");
+    console.log(location);
+  }
   return (
-
-    <View style={{}}>
-
-      <View >
+    <View>
+      <View>
         <View>
           <View style={{ position: 'absolute', alignSelf: 'flex-end', flex: 1 }}>
             <Icon
@@ -27,7 +32,7 @@ export const Profile = ({ skills, profile }) => {
             />
           </View>
           <View>
-          <Text style={{textAlign: 'center', fontSize: 26, color: 'white', marginTop: 20}}>Tom</Text>
+            <Text style={{ textAlign: 'center', fontSize: 26, color: 'white', marginTop: 20 }}>Tom</Text>
           </View>
           <View style={{ flex: 1, alignItems: 'center', paddingTop: 20 }}>
             <Image
@@ -77,28 +82,33 @@ export const Profile = ({ skills, profile }) => {
         <AttributeListItem skills={skills.filter(skill => skill.attribute == 'fitness').map((data) => { return ({ name: data.name, level: data.val }) })}></AttributeListItem>
       </View>
       <View style={styles.skillSec}>
-        <Text style={{ color: '#ffffff', fontSize: 17, marginLeft: 5 }}>
+        <Text style={{ color: '#ffffff', fontSize: 17 }}>
           Community
             </Text>
         <AttributeListItem skills={skills.filter(skill => skill.attribute == 'community').map((data) => { return ({ name: data.name, level: data.val }) })}></AttributeListItem>
       </View>
       <View style={styles.skillSec}>
-        <Text style={{ color: '#ffffff', fontSize: 17, marginLeft: 5 }}>
+        <Text style={{ color: '#ffffff', fontSize: 17 }}>
           Hobby
             </Text>
-        <AttributeListItem skills={skills.filter(skill => skill.attribute == 'hobby').map((data) => { return ({ name: data.name, level: data.val }) })}></AttributeListItem>
+        <AttributeListItem skills={skills.filter(skill => skill.attribute == 'hobby').map((data) => { return ({name: data.name, level: data.val })})}></AttributeListItem>
       </View>
 
-      <View>
-
+      <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'space-between', alignSelf: 'flex-end', position: 'absolute', botton: '0' }} >
+        <Button
+          color="#fff"
+          title="Add Skill"
+          onPress={() => this.handleAddSkill(location)}
+        />
       </View>
+
     </View>
+
   );
 };
 
 const AttributeListItem = ({ skills, levels }) => {
   return (
-
 
     skills.map((data) => {
       return (
@@ -108,24 +118,16 @@ const AttributeListItem = ({ skills, levels }) => {
             {data.name} -
             {data.level}
           </Text>
+          <View>
           <Progress.Bar
             style={styles.progress}
             color='green'
             height={15}
             progress={data.level / 100 + .2}
-
           />
+          </View>
         </View>
       )
-    })
-  );
-}
-const ProfileInfo = ({ profile, levels }) => {
-  return (
-    profile.map((data) => {
-      <Text style={{ color: '#ffffff' }}>
-            {data.name}
-          </Text>
     })
   );
 }
@@ -210,6 +212,10 @@ const styles = EStyleSheet.create({
   buttons: {
     marginBottom: '2rem'
   },
+  topPadding: {
+    paddingLeft: '2.5rem',
+    paddingTop: '2.5rem'
+  },
 
   cardPadding: {
     padding: '1rem',
@@ -221,7 +227,7 @@ const mapStateToProps = state => {
   return {
     skills: state.data.skills,
     quests: state.data.quests,
-    profile: state.data.profile
+    location: state.location
 
   };
 };
