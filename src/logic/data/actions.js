@@ -23,9 +23,9 @@ export const setUser= data => {
   };
 };
 
-export const setHouse = data => {
+export const setQuest = data => {
   return {
-    type: 'SET_HOUSE',
+    type: 'SET_QUEST',
     data
   };
 };
@@ -55,7 +55,7 @@ export const putData = (target, data, redirect, type) => {
       .then(response => {
         dispatch(getData(target, 'profile'));
         redirect && dispatch(setLocation(redirect));
-        type === 'house' && setHouse(response.data);
+        type === 'quest' && setQuest(response.data);
       })
       .catch(error => {
         throw error;

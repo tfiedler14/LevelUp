@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { setLocation } from './logic/location/actions';
 import EStyleSheet, { absoluteFill } from 'react-native-extended-stylesheet';
 import Profile from './features/Profile';
-import HouseList from './features/QuestList';
+import QuestList from './features/QuestList';
 import SignIn from './features/SignIn';
 import AddSkill from './features/AddSkill';
 import SignUp from './features/SignUp';
@@ -75,7 +75,7 @@ export const ApplicationHome = ({ location,  setLocation, getData}) => {
         {location === 'addSkill' && <AddSkill />}
         {location === 'editquest' && <AddQuest editProp={true} />}
         {location === 'quest' && <Quest />}
-        {location === 'home' && <HouseList />}
+        {location === 'home' && <QuestList />}
         {location === 'signin' && <SignIn />}
         {location === 'signup' && <SignUp />}
         {location === 'settings' && <Settings />}
