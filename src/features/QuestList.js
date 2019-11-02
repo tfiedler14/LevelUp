@@ -6,9 +6,9 @@ import { getData } from '../logic/data/actions';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import QuestComponent from '../shared-components/QuestComponent';
 
-export const QuestList = ({ quests, getData }) => {
+export const QuestList = ({ quests, getData, auth }) => {
   useEffect(() => {
-    getData('https://roommate-finder-afd9b.firebaseio.com/quests' + '.json', 'quests');
+    getData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid +'/quests.json', 'quests');
   }, []);
   return (
     <View style={styles.sectionHeight}>
@@ -16,7 +16,7 @@ export const QuestList = ({ quests, getData }) => {
         <View style={styles.sectionPadding}>
           {quests &&
             Object.values(quests).map((quest, index) => {
-              return (<QuestComponent key={index} available={true} info={quest} />);
+              return (<QuestComponent key={index} info={quest} />);
             })}
         </View>
       </ScrollView>
@@ -47,8 +47,10 @@ const mapDispatchToProps = dispatch => {
 };
 
 const mapStateToProps = state => {
+  console.log(state);
   return {
     quests: state.data.quests,
+    auth: state.auth
   };
 };
 

@@ -33,7 +33,7 @@ export const QuestComponent = ({ info, setLocation, setQuest, deleteData }) => {
                       color="#999999"
                       onPress={() => {
                         setQuest(info);
-                        setLocation('editQuest');
+                       // setLocation('editQuest');
                       }}
                     />
                   </View>
@@ -45,7 +45,7 @@ export const QuestComponent = ({ info, setLocation, setQuest, deleteData }) => {
                       size={24}
                       color="#999999"
                       onPress={() => {
-                        deleteData("https://roommate-finder-afd9b.firebaseio.com/houses/" + info.id + ".json", "home");
+                       // deleteData("https://roommate-finder-afd9b.firebaseio.com/houses/" + info.id + ".json", "home");
                       }}
                     />
                   </View>
@@ -56,10 +56,9 @@ export const QuestComponent = ({ info, setLocation, setQuest, deleteData }) => {
               </View>
           </View>
           <View style={styles.informationWrapper}>
-            <Text style={styles.availability}>{info ? (info.availability + ' room(s) available') : 'Not Available'}</Text>
-            <Text style={styles.subText}>{info ? info.address : 'No Info'}</Text>
+            <Text style={styles.subText}>{info ? info.skill : 'No Info'}</Text>
             <Text style={styles.subText}>
-              {info ? info.city : 'No Info'}, {info ? info.zip : 'No Info'}
+              {info ? info.expVal : 'No Info'}
             </Text>
           </View>
         </Col>

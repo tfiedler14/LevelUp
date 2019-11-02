@@ -16,16 +16,16 @@ export const setProfile = data => {
   };
 };
 
-export const setHouses = data => {
+export const setQuests = data => {
   return {
-    type: 'SET_HOUSES',
+    type: 'SET_QUESTS',
     data
   };
 };
 
-export const setHouse = data => {
+export const setQuest = data => {
   return {
-    type: 'SET_HOUSE',
+    type: 'SET_QUEST',
     data
   };
 };
@@ -37,8 +37,8 @@ export const getData = (target, dataPoint) => {
       .then(response => {
         if (dataPoint === 'profile') {
           dispatch(setProfile(response.data));
-        } else if (dataPoint === 'houses') {
-          dispatch(setHouses(response.data));
+        } else if (dataPoint === 'quests') {
+          dispatch(setQuests(response.data));
         }
       })
       .catch(error => {
@@ -55,7 +55,7 @@ export const putData = (target, data, redirect, type) => {
       .then(response => {
         dispatch(getData(target, 'profile'));
         redirect && dispatch(setLocation(redirect));
-        type === 'house' && setHouse(response.data);
+        type === 'house' && setQuest(response.data);
       })
       .catch(error => {
         throw error;

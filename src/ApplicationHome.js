@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { setLocation } from './logic/location/actions';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import Profile from './features/Profile';
-import HouseList from './features/QuestList';
+import QuestList from './features/QuestList';
 import SignIn from './features/SignIn';
 import SignUp from './features/SignUp';
 import Quest from './features/Quest';
@@ -63,7 +63,7 @@ export const ApplicationHome = ({ location, setLocation }) => {
         {location === 'addquest' && <AddQuest editProp={false}/>}
         {location === 'editquest' && <AddQuest editProp={true} />}
         {location === 'quest' && <Quest />}
-        {location === 'home' && <HouseList />}
+        {location === 'home' && <QuestList />}
         {location === 'signin' && <SignIn />}
         {location === 'signup' && <SignUp />}
         {location === 'settings' && <Settings />}
