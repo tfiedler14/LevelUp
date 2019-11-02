@@ -8,9 +8,11 @@ import EStyleSheet, { absoluteFill } from 'react-native-extended-stylesheet';
 import Profile from './features/Profile';
 import HouseList from './features/QuestList';
 import SignIn from './features/SignIn';
+import AddSkill from './features/AddSkill';
 import SignUp from './features/SignUp';
 import Quest from './features/Quest';
 import AddQuest from './features/AddQuest';
+
 import Settings from './features/Settings';
 import { Col, Grid } from 'react-native-easy-grid';
 import { getData, putData } from './logic/data/actions';
@@ -69,6 +71,7 @@ export const ApplicationHome = ({ location,  setLocation, getData}) => {
         <View>
         {location === 'profile' && <Profile />}
         {location === 'addquest' && <AddQuest editProp={false} />}
+        {location === 'addSkill' && <AddSkill />}
         {location === 'editquest' && <AddQuest editProp={true} />}
         {location === 'quest' && <Quest />}
         {location === 'home' && <HouseList />}

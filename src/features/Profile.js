@@ -8,25 +8,16 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import * as Progress from 'react-native-progress';
 import { Divider } from 'react-native-elements';
 import Modal from 'react-native-modal';
-import Card from 'react-native-elements';
 
-import { tsConstructorType } from '@babel/types';
 
-export const Profile = ({ skills }) => {
 
-  skills = {
-    attribute: 'Academics',
-    skillDef: 'reading documentation'
-  };
+export const Profile = ({ setLocation, skills, location }) => {
 
-  state = {
-    showAddSkills: false,
-  }
-
-  toggleAddSkillsModal = () => {
-    this.state.showAddSkills = !this.state.showAddSkills;
-    console.log("switching modal state", this.state.showAddSkills);
-  }
+handleAddSkill = (location) => {
+  setLocation('addSkill');
+  console.log("chaning location to addSkill");
+  console.log(location);
+}
 
 
   return (
@@ -105,7 +96,7 @@ export const Profile = ({ skills }) => {
           Hobby
             </Text>
 
-        {/* <AttributeListItem skills={skills.filter(skill=>skill.attribute='hobby').map((data)=>{return(data.name)})}></AttributeListItem> */}
+        <AttributeListItem skills={skills.filter(skill=>skill.attribute='hobby').map((data)=>{return(data.name)})}></AttributeListItem>
       </View>
       <View>
         <AttributeListItem skills={skills.filter(skill => skill.attribute == 'hobby').map((data) => { return ({ name: data.name, level: data.val }) })}></AttributeListItem>
@@ -113,43 +104,14 @@ export const Profile = ({ skills }) => {
       </View>
 
 
-      {/* <View>
-        <Button title="Add Skill" onPress={this.toggleAddSkillsModal} />
-        <Modal isVisible={this.state.showAddSkills}>
-          <View style={{ flex: 1 }}>
-            <Text>
-                I am the modal content!
-            </Text>
-            <Button type="submit" title="Save" onPress={this.toggleAddSkillsModal} />
-          </View>
-        </Modal>
-      </View> */}
 
-
-
-      {/* <View style={{flex: 1, flexDirection: 'column', justifyContent: 'space-between', alignSelf: 'flex-end', position:'absolute', botton: '0'}} > 
-      <Button color="#fff"  title="Add Skill" onPress={this.toggleAddSkillsModal} style={styles.addSkillsBtn}/>
-      <Modal isVisibile={this.state.showAddSkills} transparent={false} onRequestClose={() => console.log('changing modal visibility... confirm with UI')}>
-        <View style={{flex:1, margin:0}} >
-            <Card title="Adding a skill">
-                <Text>Define the skill's attribute</Text> 
-
-
-            </Card>
-                  
-          
-          <Button color="#fff"  title="Add Skill" onPress={this.toggleAddSkillsModal} style={styles.addSkillsBtn}/>
-
-        </View>
-      </Modal>
-    </View> */}
-
-
-
-
-
-
-
+      <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'space-between', alignSelf: 'flex-end', position: 'absolute', botton: '0' }} >
+        <Button
+              color="#fff" 
+              title="Add Skill" 
+              onPress={() => this.handleAddSkill(location)}
+              />
+      </View>
 
     </View>
 
@@ -253,11 +215,9 @@ const styles = EStyleSheet.create({
   buttons: {
     marginBottom: '2rem'
   },
-  addSkillsBtn: {
-    alignSelf: 'flex-end',
-    position: 'absolute',
-    bottom: 35,
-    color: "#fff"
+  topPadding: {
+    paddingLeft: '2.5rem',
+    paddingTop: '2.5rem'
   },
 
   cardPadding: {
@@ -269,7 +229,8 @@ const styles = EStyleSheet.create({
 const mapStateToProps = state => {
   return {
     skills: state.data.skills,
-    quests: state.data.quests
+    quests: state.data.quests,
+    location: state.location
 
   };
 };
