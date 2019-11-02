@@ -6,6 +6,7 @@ import RootReducer from './src/logic/RootReducer.js';
 import thunk from 'redux-thunk';
 import ApplicationHome from "./src/ApplicationHome";
 import EStyleSheet from 'react-native-extended-stylesheet';
+console.disableYellowBox = true;
 
 EStyleSheet.build();
 
@@ -14,7 +15,7 @@ export default function App() {
         <Provider store={createStore(RootReducer, applyMiddleware(thunk))}>
           <View
               style={{
-                  backgroundColor: '#d5f5e7',
+                  backgroundColor: '#4d4f52',
                   height: '100%',
               }}>
               <View>
