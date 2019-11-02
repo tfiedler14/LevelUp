@@ -17,6 +17,7 @@ import Settings from './features/Settings';
 import { Col, Grid } from 'react-native-easy-grid';
 import { getData, putData } from './logic/data/actions';
 import { auth } from 'firebase';
+console.disableYellowBox = true;
 
 export const ApplicationHome = ({ location,  setLocation, getData}) => {
 
