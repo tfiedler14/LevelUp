@@ -16,11 +16,12 @@ import AddQuest from './features/AddQuest';
 import Settings from './features/Settings';
 import { Col, Grid } from 'react-native-easy-grid';
 import { getData, putData } from './logic/data/actions';
+import { auth } from 'firebase';
 
 export const ApplicationHome = ({ location,  setLocation, getData}) => {
 
   useEffect(() => {
-    getData('https://levelup-10cfc.firebaseio.com/users/9dyqQWyX3lPtybCuF7OZCgMYbOa2' + '.json', 'user');
+    getData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '.json', 'user');
     
 
   }, []);
@@ -47,7 +48,7 @@ export const ApplicationHome = ({ location,  setLocation, getData}) => {
               <Button
               style={styles.topPadding}
                 title="Quests"
-                onPress={() => setLocation('profile')}
+                onPress={() => setLocation('quest')}
               />
               </ThemeProvider>
               </View>
@@ -58,7 +59,7 @@ export const ApplicationHome = ({ location,  setLocation, getData}) => {
               <Button
               style={styles.topPadding}
                 title="Map"
-                onPress={() => setLocation('profile')}
+                onPress={() => setLocation('home')}
               />
               </ThemeProvider>
               </View>

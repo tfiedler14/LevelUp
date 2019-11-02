@@ -13,19 +13,14 @@ import { Divider } from 'react-native-elements';
 
 export const Profile = ({ setLocation, skills, location }) => {
 
-handleAddSkill = (location) => {
-  setLocation('addSkill');
-  console.log("chaning location to addSkill");
-  console.log(location);
-}
-
-
+  handleAddSkill = (location) => {
+    setLocation('addSkill');
+    console.log("chaning location to addSkill");
+    console.log(location);
+  }
   return (
-
-
-    <View style={{}}>
-
-      <View >
+    <View>
+      <View>
         <View>
           <View style={{ position: 'absolute', alignSelf: 'flex-end', flex: 1 }}>
             <Icon
@@ -36,7 +31,10 @@ handleAddSkill = (location) => {
               onPress={() => setLocation('settings')}
             />
           </View>
-          <View style={{ flex: 1, alignItems: 'center', paddingTop: 30 }}>
+          <View>
+            <Text style={{ textAlign: 'center', fontSize: 26, color: 'white', marginTop: 20 }}>Tom</Text>
+          </View>
+          <View style={{ flex: 1, alignItems: 'center', paddingTop: 20 }}>
             <Image
               style={styles.addBorder}
               source={require('../../assets/images/girlwhiteorange.png')}
@@ -44,9 +42,9 @@ handleAddSkill = (location) => {
             <View style={{ paddingTop: 15 }}>
               <Progress.Bar
                 style={styles.progress}
-                color='white'
+                color='green'
                 height={15}
-                progress={0.3}
+                progress={0.5}
               />
             </View>
           </View>
@@ -56,57 +54,52 @@ handleAddSkill = (location) => {
         </View >
 
       </View>
-      <View >
-        <Text style={{ color: '#ffffff', fontSize: 17 }}>
+      <View style={styles.skillSec}>
+        <Text style={{ color: '#ffffff', fontSize: 17, marginLeft: 5 }}>
           Academics
             </Text>
         <AttributeListItem skills={skills.filter(skill => skill.attribute == 'academics').map((data) => { return ({ name: data.name, level: data.val }) })}></AttributeListItem>
       </View>
 
-      <View>
-        <Text style={{ color: '#ffffff', fontSize: 17 }}>
+      <View style={styles.skillSec}>
+        <Text style={{ color: '#ffffff', fontSize: 17, marginLeft: 5 }}>
           Crafts
             </Text>
         <AttributeListItem skills={skills.filter(skill => skill.attribute == 'crafts').map((data) => { return ({ name: data.name, level: data.val }) })}></AttributeListItem>
       </View>
 
-      <View >
-        <Text style={{ color: '#ffffff', fontSize: 17 }}>
+      <View style={styles.skillSec}>
+        <Text style={{ color: '#ffffff', fontSize: 17, marginLeft: 5 }}>
           Mental
             </Text>
-
         <AttributeListItem skills={skills.filter(skill => skill.attribute == 'mental').map((data) => { return ({ name: data.name, level: data.val }) })}></AttributeListItem>
       </View>
 
-      <View >
-        <Text style={{ color: '#ffffff', fontSize: 17 }}>
+      <View style={styles.skillSec}>
+        <Text style={{ color: '#ffffff', fontSize: 17, marginLeft: 5 }}>
           Fitness
             </Text>
         <AttributeListItem skills={skills.filter(skill => skill.attribute == 'fitness').map((data) => { return ({ name: data.name, level: data.val }) })}></AttributeListItem>
       </View>
-      <View >
+      <View style={styles.skillSec}>
         <Text style={{ color: '#ffffff', fontSize: 17 }}>
           Community
             </Text>
-
         <AttributeListItem skills={skills.filter(skill => skill.attribute == 'community').map((data) => { return ({ name: data.name, level: data.val }) })}></AttributeListItem>
       </View>
-      <View >
+      <View style={styles.skillSec}>
         <Text style={{ color: '#ffffff', fontSize: 17 }}>
           Hobby
-            </Text>
-
-        <AttributeListItem skills={skills.filter(skill=>skill.attribute == 'hobby').map((data)=>{return ({ name: data.name, level: data.val }) })}></AttributeListItem>
+        </Text>
+        <AttributeListItem skills={skills.filter(skill => skill.attribute == 'hobby').map((data) => { return ({ name: data.name, level: data.val }) })}></AttributeListItem>
       </View>
-
-
 
       <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'space-between', alignSelf: 'flex-end', position: 'absolute', botton: '0' }} >
         <Button
-              color="#fff" 
-              title="Add Skill" 
-              onPress={() => this.handleAddSkill(location)}
-              />
+          color="#fff"
+          title="Add Skill"
+          onPress={() => this.handleAddSkill(location)}
+        />
       </View>
 
     </View>
@@ -117,21 +110,25 @@ handleAddSkill = (location) => {
 const AttributeListItem = ({ skills, levels }) => {
   return (
 
-
     skills.map((data) => {
       return (
-        <View>
+        <View style={{ marginLeft: 45 }}>
 
           <Text style={{ color: '#ffffff' }}>
             {data.name} -
             {data.level}
-
           </Text>
+          <View>
+            <Progress.Bar
+              style={styles.progress}
+              color='green'
+              height={15}
+              progress={data.level / 100 + .2}
+            />
+          </View>
         </View>
       )
     })
-
-
   );
 }
 
@@ -144,6 +141,10 @@ const styles = EStyleSheet.create({
   },
   container: {
     flex: 1
+  },
+  skillSec: {
+    flexDirection: 'row',
+    paddingTop: 30
   },
   addBorder: {
     width: 225,
