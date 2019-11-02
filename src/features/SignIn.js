@@ -4,6 +4,7 @@ import {Text, View} from 'react-native';
 import { setErrors } from '../logic/errors/actions';
 import { setLocation } from '../logic/location/actions';
 import { setAuth } from '../logic/auth/actions';
+import { getData } from '../logic/data/actions';
 import { firebaseApp } from '../../Const';
 import { compose } from 'redux';
 import {Field, getFormValues, initialize, reduxForm} from 'redux-form';
@@ -12,7 +13,7 @@ import { Button, Card } from 'react-native-paper';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { FormHeader } from '../shared-components/FormHeader';
 
-export const SignIn = ({ setLocation, handleSubmit, setAuthentication, initialize, setErrors, errors, values }) => {
+export const SignIn = ({ setLocation, handleSubmit, setAuthentication, initialize, setErrors, errors, values, getData, auth }) => {
   const [initialized, setInitialized] = useState(false);
 
   useEffect(() => {
@@ -59,7 +60,7 @@ export const SignIn = ({ setLocation, handleSubmit, setAuthentication, initializ
               uppercase={false}
               mode="contained"
               onPress={handleSubmit(values => {
-                handleLogin(values, setLocation, setAuthentication, setErrors);
+                handleLogin(values, setLocation, setAuthentication, setErrors, getData, auth);
               })}>
               Sign In
             </Button>
@@ -77,14 +78,15 @@ export const SignIn = ({ setLocation, handleSubmit, setAuthentication, initializ
   );
 };
 
-const handleLogin = (values, setLocation, setAuth, setErrors) => {
+const handleLogin = (values, setLocation, setAuth, setErrors, getData, auth) => {
   firebaseApp
     .auth()
     .signInWithEmailAndPassword(values.email, values.password)
     .then(response => {
       console.log(response);
       setAuth({ loggedIn: true, email: response.user.email, uid: response.user.uid });
-      setLocation('profile');
+      console.log("UID:",auth.uid);
+      getData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '.json', 'user', 'profile');
     }).catch(error => {
     console.log('Failed to sign in.');
     setErrors({ signIn: true });
@@ -115,7 +117,8 @@ const mapStateToProps = state => {
   return {
     location: state.location,
     values: getFormValues('sign-in-form')(state),
-    errors: state.errors
+    errors: state.errors,
+    auth: state.auth
   };
 };
 
@@ -132,6 +135,9 @@ const mapDispatchToProps = dispatch => {
     },
     setErrors: errors => {
       dispatch(setErrors(errors));
+    },
+    getData: data => {
+      dispatch(getData(data));
     }
   };
 };

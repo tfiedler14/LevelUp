@@ -7,9 +7,9 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import QuestComponent from '../shared-components/QuestComponent';
 
 export const QuestList = ({ quests, getData, auth }) => {
-  useEffect(() => {
+  /*useEffect(() => {
     getData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid +'/quests.json', 'quests');
-  }, []);
+  }, []); */
   return (
     <View style={styles.sectionHeight}>
       <ScrollView>

@@ -1,66 +1,72 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
+import { useEffect } from 'react';
+import { Platform, Text, Image, View, TouchableOpacity, StatusBar } from 'react-native';
+import { Button, ThemeProvider } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { setLocation } from './logic/location/actions';
-import EStyleSheet from 'react-native-extended-stylesheet';
+import EStyleSheet, { absoluteFill } from 'react-native-extended-stylesheet';
 import Profile from './features/Profile';
 import QuestList from './features/QuestList';
 import SignIn from './features/SignIn';
+import AddSkill from './features/AddSkill';
 import SignUp from './features/SignUp';
 import Quest from './features/Quest';
 import AddQuest from './features/AddQuest';
-import { Col, Grid } from 'react-native-easy-grid';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import Settings from './features/Settings';
 
-export const ApplicationHome = ({ location, setLocation }) => {
+import Settings from './features/Settings';
+import { Col, Grid } from 'react-native-easy-grid';
+import { getData, putData } from './logic/data/actions';
+import { auth } from 'firebase';
+
+export const ApplicationHome = ({ location,  setLocation, getData}) => {
+
   return (
     <View>
       <View style={styles.topNav}>
         <View>
           <Grid>
-            <Col size={5}>
-              <Text style={{ ...styles.header, position: 'absolute' }}>RoomMeet</Text>
-            </Col>
             <Col size={2}>
               <View style={{ position: 'absolute' }}>
-                <Icon
-                  style={styles.topPadding}
-                  name="list"
-                  size={48}
-                  color="#d5f5e7"
-                  onPress={() => setLocation('home')}
-                />
+                <ThemeProvider theme={theme}>
+                  <Button
+                    style={styles.topPadding}
+                    title="Character"
+                    onPress={() => setLocation('profile')}
+                  />
+                </ThemeProvider>
               </View>
             </Col>
             <Col size={2}>
               <View style={{ position: 'absolute' }}>
-                <Icon
-                  style={styles.topPadding}
-                  name="supervisor-account"
-                  size={48}
-                  color="#d5f5e7"
-                  onPress={() => setLocation('profile')}
-                />
+                <ThemeProvider theme={theme}>
+                  <Button
+                    style={styles.topPadding}
+                    title="Quests"
+                    onPress={() => setLocation('quest')}
+                  />
+                </ThemeProvider>
               </View>
             </Col>
             <Col size={2}>
               <View style={{ position: 'absolute' }}>
-                <Icon
-                  style={styles.topPadding}
-                  name="settings-applications"
-                  size={48}
-                  color="#d5f5e7"
-                  onPress={() => setLocation('settings')}
-                />
+                <ThemeProvider theme={theme}>
+                  <Button
+                    style={styles.topPadding}
+                    title="Map"
+                    onPress={() => setLocation('home')}
+                  />
+                </ThemeProvider>
               </View>
             </Col>
           </Grid>
         </View>
       </View>
+
+
       <View>
         {location === 'profile' && <Profile />}
-        {location === 'addquest' && <AddQuest editProp={false}/>}
+        {location === 'addquest' && <AddQuest editProp={false} />}
+        {location === 'addSkill' && <AddSkill />}
         {location === 'editquest' && <AddQuest editProp={true} />}
         {location === 'quest' && <Quest />}
         {location === 'home' && <QuestList />}
@@ -69,57 +75,66 @@ export const ApplicationHome = ({ location, setLocation }) => {
         {location === 'settings' && <Settings />}
       </View>
     </View>
+
   );
+};
+
+const theme = {
+  Button: {
+    titleStyle: {
+      color: 'black'
+    },
+    buttonStyle: {
+      backgroundColor: 'white'
+    }
+  }
 };
 
 const styles = EStyleSheet.create({
   appMargin: {
     margin: '1rem'
   },
-
-  header: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: '1.5rem',
-    // fontFamily: 'sans-serif',
-    marginTop: '2.5rem',
-    marginLeft: '1rem'
-  },
-
   topNav: {
     height: '6rem',
     zIndex: 5,
-    backgroundColor: '#064f2f',
+    backgroundColor: 'white',
     top: 0,
     left: 0,
     width: '100%'
   },
-
-  buttonStyle: {
-    width: '40%',
-    height: '100%',
-    margin: '1rem'
+  bottomNav: {
+    flexDirection: 'row',
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+    zIndex: 5,
+    justifyContent: 'center'
   },
-
   profileButton: {
     marginTop: '16rem'
   },
-
   topPadding: {
-    paddingTop: '2rem'
+    paddingLeft: '2.5rem',
+    paddingTop: '2.5rem'
   }
+
 });
 
 const mapStateToProps = state => {
   return {
-    location: state.location
+    location: state.location,
+    skills: state.data.skills,
+
   };
 };
 const mapDispatchToProps = dispatch => {
   return {
     setLocation: location => {
       dispatch(setLocation(location));
-    }
+    },
+    getData: (data, dataPoint) => {
+      dispatch(getData(data, dataPoint));
+    },
   };
 };
 

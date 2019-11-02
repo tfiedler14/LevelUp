@@ -16,9 +16,9 @@ export const setProfile = data => {
   };
 };
 
-export const setQuests = data => {
+export const setUser= data => {
   return {
-    type: 'SET_QUESTS',
+    type: 'SET_USER',
     data
   };
 };
@@ -30,16 +30,17 @@ export const setQuest = data => {
   };
 };
 
-export const getData = (target, dataPoint) => {
+export const getData = (target, dataPoint, redirect) => {
   return dispatch => {
     return axios
       .get(target)
       .then(response => {
         if (dataPoint === 'profile') {
           dispatch(setProfile(response.data));
-        } else if (dataPoint === 'quests') {
-          dispatch(setQuests(response.data));
+        } else if (dataPoint === 'user') {
+          dispatch(setUser(response.data));
         }
+        redirect && dispatch(setLocation(redirect));
       })
       .catch(error => {
         throw error;
@@ -55,7 +56,7 @@ export const putData = (target, data, redirect, type) => {
       .then(response => {
         dispatch(getData(target, 'profile'));
         redirect && dispatch(setLocation(redirect));
-        type === 'house' && setQuest(response.data);
+        type === 'quest' && setQuest(response.data);
       })
       .catch(error => {
         throw error;
