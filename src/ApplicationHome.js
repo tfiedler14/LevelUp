@@ -45,7 +45,7 @@ export const ApplicationHome = ({ location,  setLocation, getData}) => {
               <Button
               style={styles.topPadding}
                 title="Quests"
-                onPress={() => setLocation('profile')}
+                onPress={() => setLocation('quest')}
               />
               </ThemeProvider>
               </View>
@@ -56,7 +56,7 @@ export const ApplicationHome = ({ location,  setLocation, getData}) => {
               <Button
               style={styles.topPadding}
                 title="Map"
-                onPress={() => setLocation('profile')}
+                onPress={() => setLocation('home')}
               />
               </ThemeProvider>
               </View>
