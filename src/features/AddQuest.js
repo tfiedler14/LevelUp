@@ -45,29 +45,9 @@ export const AddQuest = ({
             component={WrappedTextInput}
           />
           <Field
-            name="address"
-            id="address"
-            props={{ title: 'Address' }}
-            component={WrappedTextInput}
-          />
-          <Field name="city" id="city" props={{ title: 'City' }} component={WrappedTextInput} />
-          <Field name="zip" id="zip" props={{ title: 'ZIP Code' }} component={WrappedTextInput} />
-          <Field
-            name="availability"
-            id="availability"
-            props={{ title: 'Availability' }}
-            component={WrappedTextInput}
-          />
-          <Field
-            name="rent"
-            id="rent"
-            props={{ title: 'Monthly Rent ($)' }}
-            component={WrappedTextInput}
-          />
-          <Field
-            name="image"
-            id="image"
-            props={{ title: 'Image (url, optional)' }}
+            name="attribute"
+            id="attribute"
+            props={{ title: 'Attribute' }}
             component={WrappedTextInput}
           />
           <Button
@@ -78,14 +58,13 @@ export const AddQuest = ({
             onPress={handleSubmit(values => {
               values.name &&
                 putData(
-                  'https://roommate-finder-afd9b.firebaseio.com/quests/' +
-                    (values.id || id) +
+                  'https://levelup-10cfc.firebaseio.com/users/' + auth.uid +
+                    '/quests/' +
+                    (values.name || 'name') +
                     '.json',
                   {
                     ...values,
                     id: values.id || id,
-                    owner: auth.uid,
-                    favorites: values.favorites || ['empty']
                   },
                   'home'
                 );
@@ -122,7 +101,7 @@ const mapStateToProps = (state, { editProp }) => {
     profile: state.data.profile,
     initialValues: editProp
       ? state.data.quest
-      : { image: 'https://equalrightscenter.org/wp-content/uploads/quest-icon-1.png' }
+      : {}
   };
 };
 
