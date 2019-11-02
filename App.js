@@ -6,6 +6,7 @@ import RootReducer from './src/logic/RootReducer.js';
 import thunk from 'redux-thunk';
 import ApplicationHome from "./src/ApplicationHome";
 import EStyleSheet from 'react-native-extended-stylesheet';
+console.disableYellowBox = true;
 
 EStyleSheet.build();
 
