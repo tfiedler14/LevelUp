@@ -86,7 +86,7 @@ const handleLogin = (values, setLocation, setAuth, setErrors, getData, auth) => 
       console.log(response);
       setAuth({ loggedIn: true, email: response.user.email, uid: response.user.uid });
       console.log("UID:",auth.uid);
-      getData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '.json', 'user', 'profile');
+      setLocation('profile');
     }).catch(error => {
     console.log('Failed to sign in.');
     setErrors({ signIn: true });
