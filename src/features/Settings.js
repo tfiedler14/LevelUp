@@ -131,8 +131,7 @@ const handleSignOut = (setAuth, setLocation, setFilter) => {
     .signOut()
     .then(response => {
       setAuth({ loggedIn: false, email: '', uid: '' });
-      setFilter({ capacity: null, minRent: null, maxRent: null, favorites: false});
-      setLocation('home');
+      setLocation('signin');
     })
     .catch(error => {
       console.log('Failed to sign out.');

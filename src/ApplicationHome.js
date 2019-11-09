@@ -20,12 +20,6 @@ import { auth } from 'firebase';
 console.disableYellowBox = true;
 
 export const ApplicationHome = ({ location,  setLocation, getData}) => {
-
-  useEffect(() => {
-    getData('https://levelup-10cfc.firebaseio.com/users/9dyqQWyX3lPtybCuF7OZCgMYbOa2.json', 'user');
-    
-
-  }, []);
   
   return (
     <View>

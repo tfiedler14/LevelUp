@@ -1,6 +1,7 @@
 import axios from 'axios';
 import firebaseApp from '../../../Const';
 import { setLocation } from '../location/actions';
+import { setLoading } from '../loading/actions';
 
 export const setData = data => {
   return {
@@ -16,7 +17,28 @@ export const setProfile = data => {
   };
 };
 
-export const setUser= data => {
+export const setSkills = data => {
+  return {
+    type: 'SET_SKILLS',
+    data
+  };
+};
+
+export const setAttributes = data => {
+  return {
+    type: 'SET_ATTRIBUTES',
+    data
+  };
+};
+
+export const setQuests = data => {
+  return {
+    type: 'SET_QUESTS',
+    data
+  };
+};
+
+export const setUser = data => {
   return {
     type: 'SET_USER',
     data
@@ -37,8 +59,20 @@ export const getData = (target, dataPoint) => {
       .then(response => {
         if (dataPoint === 'profile') {
           dispatch(setProfile(response.data));
+          dispatch(setLoading(false));
         } else if (dataPoint === 'user') {
           dispatch(setUser(response.data));
+          dispatch(setLoading(false));
+        } else if (dataPoint === 'skills') {
+          console.log("Got inside get skills");
+          dispatch(setSkills(response.data));
+          dispatch(setLoading(false));
+        } else if (dataPoint === 'attributes') {
+          dispatch(setAttributes(response.data));
+          dispatch(setLoading(false));
+        } else if (dataPoint === 'quests') {
+          dispatch(setQuests(response.data));
+          dispatch(setLoading(false));
         }
       })
       .catch(error => {

@@ -55,7 +55,7 @@ export const SignIn = ({ setLocation, handleSubmit, setAuthentication, initializ
           />
           <View style={styles.buttons}>
             <Button
-              color="#064f2f"
+              color="#222222"
               uppercase={false}
               mode="contained"
               onPress={handleSubmit(values => {
@@ -64,7 +64,7 @@ export const SignIn = ({ setLocation, handleSubmit, setAuthentication, initializ
               Sign In
             </Button>
             <Button
-              color="#064f2f"
+              color="#222222"
               uppercase={false}
               mode="text"
               onPress={() => setLocation('signup')}>

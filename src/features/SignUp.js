@@ -21,15 +21,7 @@ export const SignUp = ({ setLocation, handleSubmit, setAuthentication, putData }
           name="email"
           id="email"
           props={{
-            title: 'Email'
-          }}
-          component={WrappedTextInput}
-        />
-        <Field
-          name="name"
-          id="name"
-          props={{
-            title: 'Name'
+            title: 'Email', textContentType: 'emailAddress', autoCompleteType: 'email'
           }}
           component={WrappedTextInput}
         />
@@ -57,7 +49,7 @@ export const SignUp = ({ setLocation, handleSubmit, setAuthentication, putData }
         />
         <View style={styles.buttons}>
           <Button
-            color="#064f2f"
+            color="#222222"
             uppercase={false}
             mode="contained"
             onPress={handleSubmit(values => {
@@ -90,12 +82,6 @@ const validate = values => {
     errors.cpassword = 'Passwords must match';
   }
 
-  if (!values.name) {
-    errors.name = 'Required';
-  } else if (values.name.length > 20) {
-    errors.name = 'Must be fewer than 20 characters'
-  }
-
   return errors;
 };
 
@@ -105,9 +91,11 @@ const handleSignUp = (values, setLocation, setAuthentication, putData) => {
     .createUserWithEmailAndPassword(values.email, values.password)
     .then(response => {
       setAuthentication({ loggedIn: true, email: values.email, uid: response.user.uid });
-      putData('https://roommate-finder-afd9b.firebaseio.com/users/' + response.user.uid + '.json', {
+      putData('https://levelup-10cfc.firebaseio.com/users/' + response.user.uid + '.json', {
         quests: ['empty'],
-        profile: { age: "N/A", gender: 'N/A', image: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png', name: values.name }
+        profile: { brows: "type-1", eyes: "type-1", hairColor: "type-1", hairStyle: "type-1", headShape: "type-1", mouth: "type-1" ,name: "none", nose: "type-1", skinColor: "tan" },
+        skills: ['empty'],
+        attributes: {fitness: {exp: 0, level: 1}, academics: {exp: 0, level: 1}, crafts: {exp: 0, level: 1}, community: {exp: 0, level: 1}, mental: {exp: 0, level: 1}, hobby: {exp: 0, level: 1}}
       }, 'profile', 'profile');
     })
     .catch(error => {
