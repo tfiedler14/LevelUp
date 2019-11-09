@@ -80,55 +80,19 @@ export const Profile = ({
               </View>
             </View>
           </View>
-          {console.log('Profile: ', profile)}
-          <View style={styles.skillSec}>
-            <Text style={{ color: '#ffffff', fontSize: 17 }}>Academics</Text>
-            <AttributeListItem
-              skills={(skills || [])
-                .filter(skill => skill.attribute === 'academics')
-                .map(data => ({ name: data.name, level: data.val }))}
-            />
-          </View>
-          <View style={styles.skillSec}>
-            <Text style={{ color: '#ffffff', fontSize: 17 }}>Crafts</Text>
-            <AttributeListItem
-              skills={skills
-                .filter(skill => skill.attribute === 'crafts')
-                .map(data => ({ name: data.name, level: data.val }))}
-            />
-          </View>
-          <View style={styles.skillSec}>
-            <Text style={{ color: '#ffffff', fontSize: 17 }}>Mental</Text>
-            <AttributeListItem
-              skills={skills
-                .filter(skill => skill.attribute === 'mental')
-                .map(data => ({ name: data.name, level: data.val }))}
-            />
-          </View>
-          <View style={styles.skillSec}>
-            <Text style={{ color: '#ffffff', fontSize: 17 }}>Fitness</Text>
-            <AttributeListItem
-              skills={skills
-                .filter(skill => skill.attribute === 'fitness')
-                .map(data => ({ name: data.name, level: data.val }))}
-            />
-          </View>
-          <View style={styles.skillSec}>
-            <Text style={{ color: '#ffffff', fontSize: 17 }}>Community</Text>
-            <AttributeListItem
-              skills={skills
-                .filter(skill => skill.attribute === 'community')
-                .map(data => ({ name: data.name, level: data.val }))}
-            />
-          </View>
-          <View style={styles.skillSec}>
-            <Text style={{ color: '#ffffff', fontSize: 17 }}>Hobby</Text>
-            <AttributeListItem
-              skills={skills
-                .filter(skill => skill.attribute === 'hobby')
-                .map(data => ({ name: data.name, level: data.val }))}
-            />
-          </View>
+
+        
+
+          {console.log("Profile: ", profile)}
+          
+          <ScrollView>
+          {attributeList.map(data =>{
+            return (
+          <AttributeItem attributeName={data} skills1 = {skills}/>
+            )
+          })}
+          </ScrollView>
+
           <View
             style={{
               flex: 1,
