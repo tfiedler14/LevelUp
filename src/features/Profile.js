@@ -13,18 +13,24 @@ import {attributes} from '../../Const';
 
 const attributeList = attributes;
 
-export const Profile = ({ getData, setLocation, skills, location, loading, auth, setLoading, profile }) => {
-  const handleAddSkill = location => {
-    setLocation('addSkill');
-    console.log('chaning location to addSkill');
-    console.log(location);
-  };
-
+export const Profile = ({
+  getData,
+  setLocation,
+  skills,
+  location,
+  loading,
+  auth,
+  setLoading,
+  profile
+}) => {
   useEffect(() => {
     getData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/profile.json', 'profile');
     getData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/skills.json', 'skills');
-    getData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/attributes.json', 'attributes');
-    
+    getData(
+      'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/attributes.json',
+      'attributes'
+    );
+    //getData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/profile.json', 'profile');
     setLoading(true);
   }, []);
 
@@ -34,13 +40,20 @@ export const Profile = ({ getData, setLocation, skills, location, loading, auth,
         <View>
           <View>
             <View>
-              <View style={{ position: 'absolute', alignSelf: 'flex-end', flex: 1 }}>
+              <View style={{ position: 'absolute', alignSelf: 'flex-end', flex: 1, zIndex: 20 }}>
                 <Icon
                   style={styles.padding}
-                  name="settings-applications"
+                  name="settings"
                   size={48}
                   color="white"
                   onPress={() => setLocation('settings')}
+                />
+                <Icon
+                  style={styles.padding}
+                  name="add"
+                  size={48}
+                  color="white"
+                  onPress={() => setLocation('addSkill')}
                 />
               </View>
               <View>
@@ -54,7 +67,12 @@ export const Profile = ({ getData, setLocation, skills, location, loading, auth,
                   source={require('../../assets/images/girlwhiteorange.png')}
                 />
                 <View style={{ paddingTop: 15 }}>
-                  <Progress.Bar style={styles.progress} color="green" height={15} progress={0.5} />
+                  <Progress.Bar
+                    style={styles.progress}
+                    color="#55db37"
+                    height={15}
+                    progress={0.5}
+                  />
                 </View>
               </View>
               <View style={{ paddingTop: 280 }}>
@@ -62,17 +80,55 @@ export const Profile = ({ getData, setLocation, skills, location, loading, auth,
               </View>
             </View>
           </View>
-          {console.log("Profile: ", profile)}
-          <View style={{width:400, height:300}}>
-          <ScrollView>
-          {attributeList.map(data =>{
-            return (
-          <AttributeItem attributeName={data} skills1 = {skills}/>
-            )
-          })}
-          </ScrollView>
+          {console.log('Profile: ', profile)}
+          <View style={styles.skillSec}>
+            <Text style={{ color: '#ffffff', fontSize: 17 }}>Academics</Text>
+            <AttributeListItem
+              skills={(skills || [])
+                .filter(skill => skill.attribute === 'academics')
+                .map(data => ({ name: data.name, level: data.val }))}
+            />
           </View>
-
+          <View style={styles.skillSec}>
+            <Text style={{ color: '#ffffff', fontSize: 17 }}>Crafts</Text>
+            <AttributeListItem
+              skills={skills
+                .filter(skill => skill.attribute === 'crafts')
+                .map(data => ({ name: data.name, level: data.val }))}
+            />
+          </View>
+          <View style={styles.skillSec}>
+            <Text style={{ color: '#ffffff', fontSize: 17 }}>Mental</Text>
+            <AttributeListItem
+              skills={skills
+                .filter(skill => skill.attribute === 'mental')
+                .map(data => ({ name: data.name, level: data.val }))}
+            />
+          </View>
+          <View style={styles.skillSec}>
+            <Text style={{ color: '#ffffff', fontSize: 17 }}>Fitness</Text>
+            <AttributeListItem
+              skills={skills
+                .filter(skill => skill.attribute === 'fitness')
+                .map(data => ({ name: data.name, level: data.val }))}
+            />
+          </View>
+          <View style={styles.skillSec}>
+            <Text style={{ color: '#ffffff', fontSize: 17 }}>Community</Text>
+            <AttributeListItem
+              skills={skills
+                .filter(skill => skill.attribute === 'community')
+                .map(data => ({ name: data.name, level: data.val }))}
+            />
+          </View>
+          <View style={styles.skillSec}>
+            <Text style={{ color: '#ffffff', fontSize: 17 }}>Hobby</Text>
+            <AttributeListItem
+              skills={skills
+                .filter(skill => skill.attribute === 'hobby')
+                .map(data => ({ name: data.name, level: data.val }))}
+            />
+          </View>
           <View
             style={{
               flex: 1,
@@ -81,9 +137,7 @@ export const Profile = ({ getData, setLocation, skills, location, loading, auth,
               alignSelf: 'flex-end',
               position: 'absolute',
               botton: '0'
-            }}>
-            <Button color="#fff" title="Add Skill" onPress={() => this.handleAddSkill(location)} />
-          </View>
+            }} />
         </View>
       }
     />
@@ -114,7 +168,7 @@ const AttributeListItem = ({ skills, levels }) => {
         <View>
           <Progress.Bar
             style={styles.progress}
-            color="green"
+            color="#55db37"
             height={15}
             progress={data.level / 100 + 0.2}
           />
@@ -154,9 +208,9 @@ const styles = EStyleSheet.create({
     borderWidth: 1
   },
   padding: {
-    paddingTop: '2rem',
+    paddingTop: '1rem',
     paddingRight: '1rem',
-    paddingBottom: '2rem',
+    paddingBottom: '1rem',
     paddingLeft: '1rem'
   },
   profileWrapper: {

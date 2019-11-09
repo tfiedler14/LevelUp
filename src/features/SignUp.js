@@ -49,13 +49,20 @@ export const SignUp = ({ setLocation, handleSubmit, setAuthentication, putData }
         />
         <View style={styles.buttons}>
           <Button
-            color="#222222"
+            color="#de3c57"
             uppercase={false}
             mode="contained"
             onPress={handleSubmit(values => {
               handleSignUp(values, setLocation, setAuthentication, putData);
             })}>
             Sign Up
+          </Button>
+          <Button
+            color="white"
+            uppercase={false}
+            mode="text"
+            onPress={() => setLocation('signin')}>
+            Sign In
           </Button>
         </View>
       </View>
@@ -106,7 +113,8 @@ const handleSignUp = (values, setLocation, setAuthentication, putData) => {
 const styles = EStyleSheet.create({
   card: {
     padding: '1rem',
-    margin: '1rem'
+    margin: '1rem',
+    backgroundColor: '#555'
     //  border: 'none',
   },
 

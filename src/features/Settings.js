@@ -69,7 +69,7 @@ export const Settings = ({
               />
               <View style={styles.buttons}>
                 <Button
-                  color="#064f2f"
+                  color="#de3c57"
                   uppercase={false}
                   mode="contained"
                   onPress={handleSubmit(values => {
@@ -105,11 +105,10 @@ export const Settings = ({
                   Save Profile
                 </Button>
                 <Button
-                  color="#064f2f"
+                  color="#fff"
                   uppercase={false}
                   mode="text"
                   onPress={() => {
-                    // TODO: no op -- need a sign out action
                     handleSignOut(setAuth, setLocation, setFilter);
                   }}>
                   Sign Out
@@ -146,7 +145,9 @@ const styles = EStyleSheet.create({
 
   card: {
     padding: '1rem',
-    margin: '1rem'
+    margin: '1rem',
+    color: 'white',
+    backgroundColor: '#555'
     //  border: 'none',
   },
 

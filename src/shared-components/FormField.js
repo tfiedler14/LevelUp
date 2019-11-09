@@ -9,7 +9,7 @@ export const WrappedTextInput = props => {
   const touched = meta.touched;
   return (
     <View>
-      <Text>{title}</Text>
+      <Text style={styles.title}>{title}</Text>
         <TextInput
           {...inputProps}
           onChangeText={input.onChange}
@@ -30,15 +30,19 @@ export const WrappedTextInput = props => {
 
 const styles = EStyleSheet.create({
   textEntry: {
-    borderWidth: '.1rem',
-    borderRadius: '.5rem',
-    borderColor: '#999',
+    borderBottomColor: '#ccc',
+    borderBottomWidth: '.1rem',
+    backgroundColor: '#666',
+    color: 'white',
     padding: '.5rem',
     marginRight: '1rem',
     marginLeft: '1rem',
     marginBottom: '.5rem'
   },
-
+  title: {
+    color: 'white',
+    marginBottom: '.25rem'
+  },
   errorText: {
     color: '#880000',
     fontSize: '.9rem',

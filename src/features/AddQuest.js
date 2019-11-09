@@ -105,7 +105,9 @@ const styles = EStyleSheet.create({
 
   card: {
     padding: '1rem',
-    margin: '1rem'
+    margin: '1rem',
+    color: 'white',
+    backgroundColor: '#555'
     //  border: 'none',
   },
 
