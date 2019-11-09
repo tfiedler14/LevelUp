@@ -50,7 +50,9 @@ const styles = EStyleSheet.create({
     //  border: 'none',
     marginBottom: '1rem',
     height: '24rem',
-    padding: '1rem'
+    padding: '1rem',
+    color: 'white',
+    backgroundColor: '#555'
   },
 
   comment: {

@@ -73,7 +73,9 @@ const styles = EStyleSheet.create({
     width: '100%',
     height: '8rem',
     //  border: 'none',
-    marginBottom: '1rem'
+    marginBottom: '1rem',
+    color: 'white',
+    backgroundColor: '#555'
   },
 
   informationWrapper: {

@@ -10,6 +10,7 @@ const styles = EStyleSheet.create({
   header: {
     paddingBottom: '1rem',
     fontWeight: 'bold',
-    fontSize: '1rem'
+    fontSize: '1rem',
+    color: 'white'
   }
 });
