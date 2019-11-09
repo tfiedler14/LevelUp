@@ -6,4 +6,10 @@ const firebaseConfig = {
     databaseURL: "https://levelup-10cfc.firebaseio.com",
     storageBucket: "",
 };
+
+
+
 export const firebaseApp = firebase.initializeApp(firebaseConfig);
+export const attributes = [
+    'academics', 'crafts', 'mental', 'fitness', 'community', 'hobby'
+];

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Image, ScrollView, View, Text, Button, TouchableHighlight } from 'react-native';
+import { Image, ScrollView, View, Text, Button, FlatList, TouchableHighlight } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { setLocation } from '../logic/location/actions';
 import { getData, putData } from '../logic/data/actions';
@@ -9,6 +9,9 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import * as Progress from 'react-native-progress';
 import { Divider } from 'react-native-elements';
 import Async from '../shared-components/Async';
+import {attributes} from '../../Const';
+
+const attributeList = attributes;
 
 export const Profile = ({ getData, setLocation, skills, location, loading, auth, setLoading, profile }) => {
   const handleAddSkill = location => {
@@ -18,9 +21,10 @@ export const Profile = ({ getData, setLocation, skills, location, loading, auth,
   };
 
   useEffect(() => {
+    getData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/profile.json', 'profile');
     getData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/skills.json', 'skills');
     getData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/attributes.json', 'attributes');
-    getData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/profile.json', 'profile');
+    
     setLoading(true);
   }, []);
 
@@ -41,7 +45,7 @@ export const Profile = ({ getData, setLocation, skills, location, loading, auth,
               </View>
               <View>
                 <Text style={{ textAlign: 'center', fontSize: 26, color: 'white', marginTop: 20 }}>
-                  Tom
+                  {profile.name}
                 </Text>
               </View>
               <View style={{ flex: 1, alignItems: 'center', paddingTop: 20 }}>
@@ -59,54 +63,14 @@ export const Profile = ({ getData, setLocation, skills, location, loading, auth,
             </View>
           </View>
           {console.log("Profile: ", profile)}
-          <View style={styles.skillSec}>
-            <Text style={{ color: '#ffffff', fontSize: 17 }}>Academics</Text>
-            <AttributeListItem
-              skills={(skills || [])
-                .filter(skill => skill.attribute === 'academics')
-                .map(data => ({ name: data.name, level: data.val }))}
-            />
-          </View>
-          <View style={styles.skillSec}>
-            <Text style={{ color: '#ffffff', fontSize: 17 }}>Crafts</Text>
-            <AttributeListItem
-              skills={skills
-                .filter(skill => skill.attribute === 'crafts')
-                .map(data => ({ name: data.name, level: data.val }))}
-            />
-          </View>
-          <View style={styles.skillSec}>
-            <Text style={{ color: '#ffffff', fontSize: 17 }}>Mental</Text>
-            <AttributeListItem
-              skills={skills
-                .filter(skill => skill.attribute === 'mental')
-                .map(data => ({ name: data.name, level: data.val }))}
-            />
-          </View>
-          <View style={styles.skillSec}>
-            <Text style={{ color: '#ffffff', fontSize: 17 }}>Fitness</Text>
-            <AttributeListItem
-              skills={skills
-                .filter(skill => skill.attribute === 'fitness')
-                .map(data => ({ name: data.name, level: data.val }))}
-            />
-          </View>
-          <View style={styles.skillSec}>
-            <Text style={{ color: '#ffffff', fontSize: 17 }}>Community</Text>
-            <AttributeListItem
-              skills={skills
-                .filter(skill => skill.attribute === 'community')
-                .map(data => ({ name: data.name, level: data.val }))}
-            />
-          </View>
-          <View style={styles.skillSec}>
-            <Text style={{ color: '#ffffff', fontSize: 17 }}>Hobby</Text>
-            <AttributeListItem
-              skills={skills
-                .filter(skill => skill.attribute === 'hobby')
-                .map(data => ({ name: data.name, level: data.val }))}
-            />
-          </View>
+          
+          <ScrollView>
+          {attributeList.map(data =>{
+            return (
+          <AttributeItem attributeName={data} skills1 = {skills}/>
+            )
+          })}
+          </ScrollView>
 
           <View
             style={{
@@ -124,6 +88,20 @@ export const Profile = ({ getData, setLocation, skills, location, loading, auth,
     />
   );
 };
+
+
+const AttributeItem = ({attributeName, skills1}) => {
+  return (
+    <View style={styles.skillSec}>
+            <Text style={{ color: '#ffffff', fontSize: 17 }}>{attributeName.charAt(0).toUpperCase() + attributeName.slice(1)}</Text>
+            <AttributeListItem
+              skills={skills1
+                .filter(skill => skill.attribute === attributeName)
+                .map(data => ({ name: data.name, level: data.val }))}
+            />
+          </View>
+  )
+}
 
 const AttributeListItem = ({ skills, levels }) => {
   return skills.map(data => {
@@ -243,7 +221,7 @@ const mapStateToProps = state => {
     location: state.location,
     loading: state.loading,
     auth: state.auth,
-    profile: state.profile
+    profile: state.data.profile
   };
 };
 
