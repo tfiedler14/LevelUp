@@ -5,13 +5,24 @@ import { ScrollView, Text, View } from 'react-native';
 import { getData } from '../logic/data/actions';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import QuestComponent from '../shared-components/QuestComponent';
+import {setLoading} from '../logic/loading/actions';
+export const QuestList = ({ getData, quests, setLocation, location, auth}) => {
+  
+  const handleAddQuest = location => {
+    setLocation('addQuest');
+    console.log('changing location to addQuest');
+    console.log(location);
+  };
 
-export const QuestList = ({ quests, getData }) => {
   useEffect(() => {
-    getData('https://roommate-finder-afd9b.firebaseio.com/quests' + '.json', 'quests');
+    getData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests.json', 'quests');
   }, []);
+
   return (
     <View style={styles.sectionHeight}>
+      <Text style={{ textAlign: 'center', fontSize:26, color: 'white', marginTop:20}}>
+        {'Active Quests'}
+      </Text>
       <ScrollView>
         <View style={styles.sectionPadding}>
           {quests &&
@@ -42,6 +53,9 @@ const mapDispatchToProps = dispatch => {
   return {
     getData: (data, dataPoint) => {
       dispatch(getData(data, dataPoint));
+    },
+    setLocation: location => {
+      dispatch(setLocation(location));
     }
   };
 };
@@ -49,6 +63,8 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
   return {
     quests: state.data.quests,
+    location: state.location,
+    auth: state.auth
   };
 };
 
