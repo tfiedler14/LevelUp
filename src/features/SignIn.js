@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import {Text, View} from 'react-native';
+import {Text, View, ImageBackground} from 'react-native';
 import { setErrors } from '../logic/errors/actions';
 import { setLocation } from '../logic/location/actions';
 import { setAuth } from '../logic/auth/actions';
@@ -27,6 +27,7 @@ export const SignIn = ({ setLocation, handleSubmit, setAuthentication, initializ
 
   return (
     <>
+    <ImageBackground source={require('../../assets/images/darkverylowopacityshapes.png')} style={{height: '100%', width: '100%'}}>
       {errors.signIn && (
         <Card style={styles.errorCard}>
           <View>
@@ -74,6 +75,7 @@ export const SignIn = ({ setLocation, handleSubmit, setAuthentication, initializ
           </View>
         </View>
       </Card>
+      </ImageBackground>
     </>
   );
 };

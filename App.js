@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { View } from 'react-native';
-import { createStore, applyMiddleware  } from 'redux';
+import { View, Image } from 'react-native';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import RootReducer from './src/logic/RootReducer.js';
 import thunk from 'redux-thunk';
@@ -13,15 +13,11 @@ EStyleSheet.build();
 export default function App() {
     return (
         <Provider store={createStore(RootReducer, applyMiddleware(thunk))}>
-          <View
-              style={{
-                  backgroundColor: '#444',
-                  height: '100%',
-              }}>
-              <View>
-                  <ApplicationHome />
-              </View>
-          </View>
-      </Provider>
+            
+                <View>
+                    <ApplicationHome />
+                </View>
+            
+        </Provider>
     );
 }

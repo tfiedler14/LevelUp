@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Image, ScrollView, View, Text, Button, FlatList, TouchableHighlight } from 'react-native';
+import { Image, ScrollView, View, Text, ImageBackground } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { setLocation } from '../logic/location/actions';
 import { getData, putData } from '../logic/data/actions';
@@ -9,7 +9,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import * as Progress from 'react-native-progress';
 import { Divider } from 'react-native-elements';
 import Async from '../shared-components/Async';
-import {attributes} from '../../Const';
+import { attributes } from '../../Const';
 
 const attributeList = attributes;
 
@@ -26,99 +26,108 @@ export const Profile = ({
   useEffect(() => {
     getData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/profile.json', 'profile');
     getData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/skills.json', 'skills');
+<<<<<<< HEAD
     getData(
       'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/attributes.json',
       'attributes'
     );
     //getData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/profile.json', 'profile');
+=======
+    getData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/attributes.json', 'attributes');
+
+    //name now reflects actual logged in user name instead of always the name tom, cleaned up code for rendering skills by adding a new element called AttributeItem and adding array of attribute names to Const, made this section a scrollview but that is currently not working
+>>>>>>> new background, buttons, and characters
     setLoading(true);
   }, []);
 
   return (
-    <Async
-      render={
-        <View>
+    <ImageBackground source={require('../../assets/images/darkverylowopacityshapes.png')} style={{ height: '100%', width: '100%' }}>
+      <Async
+        render={
           <View>
             <View>
-              <View style={{ position: 'absolute', alignSelf: 'flex-end', flex: 1, zIndex: 20 }}>
-                <Icon
-                  style={styles.padding}
-                  name="settings"
-                  size={48}
-                  color="white"
-                  onPress={() => setLocation('settings')}
-                />
-                <Icon
-                  style={styles.padding}
-                  name="add"
-                  size={48}
-                  color="white"
-                  onPress={() => setLocation('addSkill')}
-                />
-              </View>
               <View>
-                <Text style={{ textAlign: 'center', fontSize: 26, color: 'white', marginTop: 20 }}>
-                  {profile.name}
-                </Text>
-              </View>
-              <View style={{ flex: 1, alignItems: 'center', paddingTop: 20 }}>
+                <View style={{ position: 'absolute', alignSelf: 'flex-end', flex: 1, zIndex: 20 }}>
+                  <Icon
+                    style={styles.padding}
+                    name="settings"
+                    size={48}
+                    color="white"
+                    onPress={() => setLocation('settings')}
+                  />
+                  <Icon
+                    style={styles.padding}
+                    name="add"
+                    size={48}
+                    color="white"
+                    onPress={() => setLocation('addSkill')}
+                  />
+                </View>
+                <View>
+                  <Text style={{ textAlign: 'center', fontSize: 26, color: 'white', marginTop: 20 }}>
+                    {profile.name}
+                  </Text>
+                </View>
+                <View style={{ flex: 1, alignItems: 'center', paddingTop: 20 }}>
+                  <Image
+                    style={styles.imageProfile}
+                    source={require('../../assets/images/waycoolercharacter.png')}
+                  />
+                  <View style={{ paddingTop: 15 }}>
+                    <Text>Level</Text>
+                    <Progress.Bar
+                      style={styles.progress}
+                      color="#55db37"
+                      height={15}
+                      progress={0.5}
+                    />
+                  </View>
+                </View>
+              < View style={{flex:1, paddingTop: 275}}>
                 <Image
-                  style={styles.addBorder}
-                  source={require('../../assets/images/girlwhiteorange.png')}
-                />
-                <View style={{ paddingTop: 15 }}>
-                  <Progress.Bar
-                    style={styles.progress}
-                    color="#55db37"
-                    height={15}
-                    progress={0.5}
+                    source={require('../../assets/images/favorite.png')} style={{ resizeMode: 'contain', width: '100%'}}
                   />
                 </View>
               </View>
-              <View style={{ paddingTop: 280 }}>
-                <Divider style={{ backgroundColor: 'white', height: 2 }} />
-              </View>
             </View>
+
+            {console.log("Profile: ", profile)}
+
+            <ScrollView style={{paddingTop: 25, paddingLeft: 15}}>
+              {attributeList.map(data => {
+                return (
+                  <AttributeItem attributeName={data} skills1={skills} />
+                )
+              })}
+            </ScrollView>
+
+            <View
+              style={{
+                flex: 1,
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                alignSelf: 'flex-end',
+                position: 'absolute',
+                botton: '0'
+              }} />
           </View>
-
-        
-
-          {console.log("Profile: ", profile)}
-          
-          <ScrollView>
-          {attributeList.map(data =>{
-            return (
-          <AttributeItem attributeName={data} skills1 = {skills}/>
-            )
-          })}
-          </ScrollView>
-
-          <View
-            style={{
-              flex: 1,
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              alignSelf: 'flex-end',
-              position: 'absolute',
-              botton: '0'
-            }} />
-        </View>
-      }
-    />
+        }
+      />
+    </ImageBackground>
   );
 };
 
 
-const AttributeItem = ({attributeName, skills1}) => {
+const AttributeItem = ({ attributeName, skills1 }) => {
   return (
     <View style={styles.skillSec}>
-            <Text style={{ color: '#ffffff', fontSize: 17 }}>{attributeName.charAt(0).toUpperCase() + attributeName.slice(1)}</Text>
-            <AttributeListItem
-              skills={skills1
-                .filter(skill => skill.attribute === attributeName)
-                .map(data => ({ name: data.name, level: data.val }))}
-            />
-          </View>
+      <Text style={{ color: '#ffffff', fontSize: 17 }}>{attributeName.charAt(0).toUpperCase() + attributeName.slice(1)}</Text>
+      <AttributeListItem
+        skills={skills1
+          .filter(skill => skill.attribute === attributeName)
+          .map(data => ({ name: data.name, level: data.val }))}
+      />
+    </View>
   )
 }
 
@@ -156,14 +165,10 @@ const styles = EStyleSheet.create({
     flexDirection: 'row',
     paddingTop: 30
   },
-  addBorder: {
+  imageProfile: {
     width: 225,
     height: 225,
     resizeMode: 'stretch',
-    // Set border width.
-    borderWidth: 2,
-    // Set border color.
-    borderColor: 'white'
   },
   progress: {
     height: 15,

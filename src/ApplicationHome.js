@@ -81,10 +81,10 @@ export const ApplicationHome = ({ location, setLocation, getData }) => {
 const theme = {
   Button: {
     titleStyle: {
-      color: 'black'
+      color: 'white'
     },
     buttonStyle: {
-      backgroundColor: 'white'
+      backgroundColor: 'black'
     }
   }
 };
@@ -96,7 +96,7 @@ const styles = EStyleSheet.create({
   topNav: {
     height: '6rem',
     zIndex: 5,
-    backgroundColor: 'white',
+    backgroundColor: 'black',
     top: 0,
     left: 0,
     width: '100%'
