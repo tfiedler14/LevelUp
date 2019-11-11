@@ -1,15 +1,16 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { ScrollView, Text, View } from 'react-native';
+import { ScrollView, Text, View, Button } from 'react-native';
 import { getData } from '../logic/data/actions';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import QuestComponent from '../shared-components/QuestComponent';
 import {setLoading} from '../logic/loading/actions';
+import { setLocation } from '../logic/location/actions';
 export const QuestList = ({ getData, quests, setLocation, location, auth}) => {
   
   const handleAddQuest = location => {
-    setLocation('addQuest');
+    setLocation('addquest');
     console.log('changing location to addQuest');
     console.log(location);
   };
@@ -20,9 +21,14 @@ export const QuestList = ({ getData, quests, setLocation, location, auth}) => {
 
   return (
     <View style={styles.sectionHeight}>
-      <Text style={{ textAlign: 'center', fontSize:26, color: 'white', marginTop:20}}>
-        {'Active Quests'}
-      </Text>
+      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+        <Text style={{ textAlign: 'center', fontSize:26, color: 'white', marginTop:20}}>
+          {'Active Quests'}
+        </Text>
+        <Button color="#fff" title = "Add Quest" onPress={() => handleAddQuest(location)} />
+      </View> 
+     
+      
       <ScrollView>
         <View style={styles.sectionPadding}>
           {quests &&
