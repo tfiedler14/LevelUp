@@ -63,7 +63,7 @@ export const Profile = ({ getData, setLocation, skills, location, loading, auth,
             </View>
           </View>
           {console.log("Profile: ", profile)}
-          
+          <View style={{width:400, height:300}}>
           <ScrollView>
           {attributeList.map(data =>{
             return (
@@ -71,6 +71,7 @@ export const Profile = ({ getData, setLocation, skills, location, loading, auth,
             )
           })}
           </ScrollView>
+          </View>
 
           <View
             style={{
