@@ -69,7 +69,7 @@ export const ApplicationHome = ({ location,  setLocation, getData}) => {
         {location === 'addquest' && <AddQuest editProp={false} />}
         {location === 'addSkill' && <AddSkill />}
         {location === 'editquest' && <AddQuest editProp={true} />}
-        {location === 'quest' && <Quest />}
+        {location === 'quest' && <QuestList />}
         {location === 'home' && <QuestList />}
         {location === 'signin' && <SignIn />}
         {location === 'signup' && <SignUp />}
