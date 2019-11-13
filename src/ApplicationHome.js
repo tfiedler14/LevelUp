@@ -23,6 +23,8 @@ export const ApplicationHome = ({ location,  setLocation, getData}) => {
   
   return (
     <View>
+
+      {location != 'signin' &&
      <View style={styles.topNav}>
         <View>
           <Grid>
@@ -61,7 +63,7 @@ export const ApplicationHome = ({ location,  setLocation, getData}) => {
             </Col>
           </Grid>
         </View>
-      </View>
+      </View>}
       
     
         <View>
