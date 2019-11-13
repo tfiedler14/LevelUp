@@ -16,7 +16,7 @@ export const QuestList = ({ getData, quests, setLocation, location, auth}) => {
   };
 
   useEffect(() => {
-    getData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests.json', 'quests');
+    getData('https://levelup-10cfc.firebaseio.com/users/' + auth.id + '/quests.json', 'quests');
   }, []);
 
   return (
