@@ -6,10 +6,20 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll --env=jsdom --coverage --coverageDirectory=./coverage/jest"
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "jest-expo",
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "setupFiles": [
+      "./setupTests.js"
+    ],
+    "coverageReporters": [
+      "text",
+      "html"
+    ]
   },
   "dependencies": {
     "@expo/samples": "~3.0.3",
@@ -45,8 +55,11 @@
   },
   "devDependencies": {
     "babel-preset-expo": "^6.0.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
     "jest-expo": "^34.0.0",
-    "prettier": "^1.18.2"
+    "prettier": "^1.18.2",
+    "enzyme-to-json": "^3.4.3"
   },
   "private": true
 }

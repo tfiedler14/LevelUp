@@ -1,0 +1,128 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddSkill should render AddSkill correctly with no location 1`] = `
+<View
+  style={Object {}}
+>
+  <View>
+    <View>
+      <View
+        style={
+          Object {
+            "alignSelf": "flex-end",
+            "flex": 1,
+            "position": "absolute",
+          }
+        }
+      >
+        <Icon
+          allowFontScaling={false}
+          color="white"
+          name="settings-applications"
+          onPress={[Function]}
+          size={48}
+        />
+      </View>
+    </View>
+    <View />
+    <View>
+      <FormHeader
+        style={
+          Object {
+            "fontSize": 24,
+            "paddingBottom": "8",
+          }
+        }
+        title="Attribute:"
+      />
+      <RNPickerSelect
+        Icon={null}
+        InputAccessoryView={null}
+        disabled={false}
+        doneText="Done"
+        hideDoneBar={false}
+        itemKey={null}
+        items={
+          Array [
+            Object {
+              "label": "Academics",
+              "value": "Academics",
+            },
+            Object {
+              "label": "Crafts",
+              "value": "Crafts",
+            },
+            Object {
+              "label": "Mental",
+              "value": "Mental",
+            },
+            Object {
+              "label": "Fitness",
+              "value": "Fitness",
+            },
+            Object {
+              "label": "Community",
+              "value": "Community",
+            },
+            Object {
+              "label": "Hobbies",
+              "value": "Hobbies",
+            },
+          ]
+        }
+        modalProps={Object {}}
+        onClose={null}
+        onDonePress={null}
+        onDownArrow={null}
+        onOpen={null}
+        onUpArrow={null}
+        onValueChange={[Function]}
+        pickerProps={Object {}}
+        placeholder={
+          Object {
+            "attr": "",
+            "def": "",
+            "label": "Select an Attribute for new skill",
+          }
+        }
+        placeholderTextColor="#C7C7CD"
+        style={
+          Object {
+            "inputIOS": Object {
+              "color": "white",
+              "fontSize": 22,
+              "paddingBottom": 8,
+              "paddingHorizontal": 10,
+              "paddingTop": 8,
+            },
+          }
+        }
+        textInputProps={Object {}}
+        useNativeAndroidPickerStyle={true}
+      />
+      <FormHeader
+        style={
+          Object {
+            "fontSize": 18,
+            "paddingBottom": "8",
+          }
+        }
+        title="Definition of skill:"
+      />
+      <Field
+        component={[Function]}
+        id="addSkill"
+        name="addSkill"
+      />
+    </View>
+    <View>
+      <Button
+        color="#fff"
+        mode="contained"
+        onPress={[Function]}
+        title="Save Skill"
+      />
+    </View>
+  </View>
+</View>
+`;

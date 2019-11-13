@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SignIn should render sign in correctly 1`] = `
+<Fragment>
+  <withTheme(Card)>
+    <View>
+      <FormHeader
+        title="Sign In"
+      />
+      <Field
+        component={[Function]}
+        id="email"
+        name="email"
+        props={
+          Object {
+            "autoCompleteType": "email",
+            "textContentType": "emailAddress",
+            "title": "Email",
+          }
+        }
+      />
+      <Field
+        component={[Function]}
+        id="password"
+        name="password"
+        props={
+          Object {
+            "autoCompleteType": "password",
+            "password": true,
+            "textContentType": "password",
+            "title": "Password",
+          }
+        }
+      />
+      <View>
+        <withTheme(Button)
+          color="#222222"
+          mode="contained"
+          uppercase={false}
+        >
+          Sign In
+        </withTheme(Button)>
+        <withTheme(Button)
+          color="#222222"
+          mode="text"
+          onPress={[Function]}
+          uppercase={false}
+        >
+          Need an account? Sign up!
+        </withTheme(Button)>
+      </View>
+    </View>
+  </withTheme(Card)>
+</Fragment>
+`;

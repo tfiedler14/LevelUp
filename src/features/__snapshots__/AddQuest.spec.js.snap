@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddQuest should render AddQuest correctly with no auth 1`] = `
+<View>
+  <ScrollViewMock>
+    <withTheme(Card)>
+      <FormHeader
+        title="Edit quest"
+      />
+      <Field
+        component={[Function]}
+        id="name"
+        name="name"
+        props={
+          Object {
+            "title": "Name",
+          }
+        }
+      />
+      <Field
+        component={[Function]}
+        id="description"
+        name="description"
+        props={
+          Object {
+            "title": "Description",
+          }
+        }
+      />
+      <Field
+        component={[Function]}
+        id="address"
+        name="address"
+        props={
+          Object {
+            "title": "Address",
+          }
+        }
+      />
+      <Field
+        component={[Function]}
+        id="city"
+        name="city"
+        props={
+          Object {
+            "title": "City",
+          }
+        }
+      />
+      <Field
+        component={[Function]}
+        id="zip"
+        name="zip"
+        props={
+          Object {
+            "title": "ZIP Code",
+          }
+        }
+      />
+      <Field
+        component={[Function]}
+        id="availability"
+        name="availability"
+        props={
+          Object {
+            "title": "Availability",
+          }
+        }
+      />
+      <Field
+        component={[Function]}
+        id="rent"
+        name="rent"
+        props={
+          Object {
+            "title": "Monthly Rent ($)",
+          }
+        }
+      />
+      <Field
+        component={[Function]}
+        id="image"
+        name="image"
+        props={
+          Object {
+            "title": "Image (url, optional)",
+          }
+        }
+      />
+      <withTheme(Button)
+        color="#064f2f"
+        mode="contained"
+        uppercase={false}
+      >
+        Edit quest
+      </withTheme(Button)>
+    </withTheme(Card)>
+  </ScrollViewMock>
+</View>
+`;

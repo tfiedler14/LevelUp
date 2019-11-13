@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Quest should render Quest correctly with no auth 1`] = `
+<View>
+  <ScrollViewMock>
+    <View>
+      <withTheme(Card)>
+        <View>
+          <FormHeader />
+          <View>
+            <Image
+              resizeMode="center"
+              source={
+                Object {
+                  "uri": undefined,
+                }
+              }
+            />
+          </View>
+          <View>
+            <Text>
+              undefined room(s) available
+            </Text>
+            <Text />
+            <Text>
+              , 
+            </Text>
+          </View>
+        </View>
+      </withTheme(Card)>
+    </View>
+  </ScrollViewMock>
+</View>
+`;

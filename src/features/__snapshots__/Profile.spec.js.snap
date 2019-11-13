@@ -1,0 +1,151 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Profile should render Profile correctly with no skills 1`] = `
+<Connect(Async)
+  render={
+    <View>
+      <View>
+        <View>
+          <View
+            style={
+              Object {
+                "alignSelf": "flex-end",
+                "flex": 1,
+                "position": "absolute",
+              }
+            }
+          >
+            <Icon
+              allowFontScaling={false}
+              color="white"
+              name="settings-applications"
+              onPress={[Function]}
+              size={48}
+            />
+          </View>
+          <View>
+            <Text
+              style={
+                Object {
+                  "color": "white",
+                  "fontSize": 26,
+                  "marginTop": 20,
+                  "textAlign": "center",
+                }
+              }
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flex": 1,
+                "paddingTop": 20,
+              }
+            }
+          >
+            <Image
+              source={1}
+            />
+            <View
+              style={
+                Object {
+                  "paddingTop": 15,
+                }
+              }
+            >
+              <ProgressBar
+                animated={true}
+                animationConfig={
+                  Object {
+                    "bounciness": 0,
+                  }
+                }
+                animationType="spring"
+                borderRadius={4}
+                borderWidth={1}
+                color="green"
+                height={15}
+                indeterminate={false}
+                indeterminateAnimationDuration={1000}
+                progress={0.5}
+                useNativeDriver={false}
+                width={150}
+              />
+            </View>
+          </View>
+          <View
+            style={
+              Object {
+                "paddingTop": 280,
+              }
+            }
+          >
+            <Themed.Divider
+              style={
+                Object {
+                  "backgroundColor": "white",
+                  "height": 2,
+                }
+              }
+            />
+          </View>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "height": 300,
+            "width": 400,
+          }
+        }
+      >
+        <ScrollViewMock>
+          <AttributeItem
+            attributeName="academics"
+            skills1={Array []}
+          />
+          <AttributeItem
+            attributeName="crafts"
+            skills1={Array []}
+          />
+          <AttributeItem
+            attributeName="mental"
+            skills1={Array []}
+          />
+          <AttributeItem
+            attributeName="fitness"
+            skills1={Array []}
+          />
+          <AttributeItem
+            attributeName="community"
+            skills1={Array []}
+          />
+          <AttributeItem
+            attributeName="hobby"
+            skills1={Array []}
+          />
+        </ScrollViewMock>
+      </View>
+      <View
+        style={
+          Object {
+            "alignSelf": "flex-end",
+            "botton": "0",
+            "flex": 1,
+            "flexDirection": "column",
+            "justifyContent": "space-between",
+            "position": "absolute",
+          }
+        }
+      >
+        <Button
+          color="#fff"
+          onPress={[Function]}
+          title="Add Skill"
+        />
+      </View>
+    </View>
+  }
+/>
+`;

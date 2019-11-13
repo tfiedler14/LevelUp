@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`QuestList should render quest list correctly with no quests 1`] = `
+<View>
+  <ScrollViewMock>
+    <View />
+  </ScrollViewMock>
+</View>
+`;
+
+exports[`QuestList should render quest list correctly with quests 1`] = `
+<View>
+  <ScrollViewMock>
+    <View>
+      <Connect(QuestComponent)
+        available={true}
+        info={
+          Object {
+            "description": "test",
+            "expVal": 10,
+            "name": "testing",
+            "skill": "jest",
+          }
+        }
+        key="0"
+      />
+      <Connect(QuestComponent)
+        available={true}
+        info={
+          Object {
+            "description": "atest",
+            "expVal": 10,
+            "name": "testingstuff",
+            "skill": "enzyme",
+          }
+        }
+        key="1"
+      />
+    </View>
+  </ScrollViewMock>
+</View>
+`;
