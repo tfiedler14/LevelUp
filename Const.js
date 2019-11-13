@@ -7,7 +7,7 @@ const firebaseConfig = {
     storageBucket: "",
 };
 
-
+export const databaseSecret = "D1ExzUbYDYreTuI7wrk1EphceuNN6Ssxgs9vt9rj";
 
 export const firebaseApp = firebase.initializeApp(firebaseConfig);
 export const attributes = [

@@ -7,7 +7,6 @@ export const Async = ({ render, loading }) => {
 };
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     loading: state.loading
   };
