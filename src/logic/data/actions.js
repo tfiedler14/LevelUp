@@ -1,5 +1,5 @@
 import axios from 'axios';
-import firebaseApp from '../../../Const';
+import {databaseSecret} from '../../../Const';
 import { setLocation } from '../location/actions';
 import { setLoading } from '../loading/actions';
 
@@ -51,11 +51,12 @@ export const setQuest = data => {
     data
   };
 };
-
+// + "?auth=" + databaseSecret
 export const getData = (target, dataPoint) => {
+  console.log("Secret: ", databaseSecret);
   return dispatch => {
     return axios
-      .get(target)
+      .get(target + "?auth=" + databaseSecret)
       .then(response => {
         if (dataPoint === 'profile') {
           dispatch(setProfile(response.data));
