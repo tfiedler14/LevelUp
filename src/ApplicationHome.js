@@ -20,7 +20,7 @@ import { auth } from 'firebase';
 console.disableYellowBox = true;
 
 export const ApplicationHome = ({ location,  setLocation, getData}) => {
-  
+
   return (
     <View>
 
@@ -64,14 +64,14 @@ export const ApplicationHome = ({ location,  setLocation, getData}) => {
           </Grid>
         </View>
       </View>}
-      
-    
+
+
         <View>
         {location === 'profile' && <Profile />}
         {location === 'addquest' && <AddQuest editProp={false} />}
         {location === 'addSkill' && <AddSkill />}
         {location === 'editquest' && <AddQuest editProp={true} />}
-        {location === 'quest' && <Quest />}
+        {location === 'quest' && <QuestList />}
         {location === 'home' && <QuestList />}
         {location === 'signin' && <SignIn />}
         {location === 'signup' && <SignUp />}
@@ -127,7 +127,7 @@ const mapStateToProps = state => {
   return {
     location: state.location,
     skills: state.data.skills,
-    
+
   };
 };
 const mapDispatchToProps = dispatch => {
@@ -137,7 +137,7 @@ const mapDispatchToProps = dispatch => {
     },
     getData: (data, dataPoint) => {
       dispatch(getData(data, dataPoint));
-    },    
+    },
   };
 };
 
