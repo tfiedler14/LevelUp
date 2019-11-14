@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useEffect } from 'react';
-import { Platform, Text, Image, View, TouchableOpacity, StatusBar } from 'react-native';
+import {  View, ImageBackground} from 'react-native';
 import { Button, ThemeProvider } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { setLocation } from './logic/location/actions';
@@ -21,6 +21,7 @@ console.disableYellowBox = true;
 
 export const ApplicationHome = ({ location, setLocation, getData }) => {
   return (
+    <ImageBackground source={require('../assets/images/darkgradient.jpg')} style={{width: '100%'}}>
     <View>
       {location != 'signin' &&
         <View style={styles.topNav}>
@@ -75,6 +76,7 @@ export const ApplicationHome = ({ location, setLocation, getData }) => {
           {location === 'settings' && <Settings />}
         </View>
     </View>
+    </ImageBackground>
   );
 };
 
@@ -84,7 +86,7 @@ const theme = {
       color: 'white'
     },
     buttonStyle: {
-      backgroundColor: 'black'
+      backgroundColor: 'transparent'
     }
   }
 };
@@ -94,9 +96,9 @@ const styles = EStyleSheet.create({
     margin: '1rem'
   },
   topNav: {
-    height: '6rem',
+    height: '8%',
     zIndex: 5,
-    backgroundColor: 'black',
+    backgroundColor: 'transparent',
     top: 0,
     left: 0,
     width: '100%'
