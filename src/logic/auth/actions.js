@@ -7,7 +7,7 @@ export const setAuth = (auth) => {
         auth
     }
 };
-
+/*
 export const signOut = () => {
     firebaseApp
     .auth()
@@ -20,4 +20,4 @@ export const signOut = () => {
         console.log("Failed to sign out.");
         throw error;
       });
-};
+};*/

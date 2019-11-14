@@ -53,7 +53,6 @@ export const setQuest = data => {
 };
 // + "?auth=" + databaseSecret
 export const getData = (target, dataPoint) => {
-  console.log("Secret: ", databaseSecret);
   return dispatch => {
     return axios
       .get(target + "?auth=" + databaseSecret)
@@ -86,7 +85,7 @@ export const putData = (target, data, redirect, type) => {
   return dispatch => {
     // const token = firebaseApp.auth().currentUser.getIdToken();
     return axios
-      .put(target, data)
+      .put(target + "?auth=" + databaseSecret, data)
       .then(response => {
         dispatch(getData(target, 'profile'));
         redirect && dispatch(setLocation(redirect));
@@ -101,7 +100,7 @@ export const putData = (target, data, redirect, type) => {
 export const deleteData = (target, redirect) => {
   return dispatch => {
     return axios
-      .delete(target)
+      .delete(target + "?auth=" + databaseSecret)
       .then(response => {
         redirect && dispatch(setLocation(redirect));
       })

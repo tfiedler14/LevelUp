@@ -24,7 +24,7 @@ export const AddQuest = ({
   let id = uid();
 
   const [initialized, setInitialized] = useState(false);
-
+  /* istanbul ignore next */
   useEffect(() => {
     if (!initialized) {
       initialize(editProp ? profile.quest : {});

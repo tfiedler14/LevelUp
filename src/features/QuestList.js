@@ -7,6 +7,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import QuestComponent from '../shared-components/QuestComponent';
 
 export const QuestList = ({ quests, getData }) => {
+  /* istanbul ignore next */
   useEffect(() => {
     getData('https://roommate-finder-afd9b.firebaseio.com/quests' + '.json', 'quests');
   }, []);

@@ -1,5 +1,5 @@
 import { getData, putData } from '../logic/data/actions';
-import { setAuth, signOut } from '../logic/auth/actions';
+import { setAuth } from '../logic/auth/actions';
 import { View, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import SignIn from './SignIn';
@@ -19,9 +19,7 @@ export const Settings = ({
   auth,
   handleSubmit,
   setAuth,
-  signOut,
   profile,
-  setFilter,
   values
 }) => {
   if (auth.loggedIn) {
@@ -110,7 +108,7 @@ export const Settings = ({
                   mode="text"
                   onPress={() => {
                     // TODO: no op -- need a sign out action
-                    handleSignOut(setAuth, setLocation, setFilter);
+                    handleSignOut(setAuth, setLocation);
                   }}>
                   Sign Out
                 </Button>
@@ -125,7 +123,7 @@ export const Settings = ({
   }
 };
 
-const handleSignOut = (setAuth, setLocation, setFilter) => {
+const handleSignOut = (setAuth, setLocation) => {
   firebaseApp
     .auth()
     .signOut()
@@ -177,17 +175,11 @@ const mapDispatchToProps = dispatch => {
     setLocation: location => {
       dispatch(setLocation(location));
     },
-    signOut: () => {
-      dispatch(signOut());
-    },
     setAuth: auth => {
       dispatch(setAuth(auth));
     },
     initialize: values => {
       dispatch(initialize('settings-form', values));
-    },
-    setFilter: filter => {
-      dispatch(setFilter(filter));
     }
   };
 };
