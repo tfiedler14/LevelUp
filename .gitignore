@@ -11,3 +11,5 @@ web-build/
 web-report/
 .idea/
 coverage/
+.DS_Store
+**/.DS_Store/**
