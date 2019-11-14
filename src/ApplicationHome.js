@@ -23,7 +23,7 @@ export const ApplicationHome = ({ location, setLocation, getData }) => {
   return (
     <ImageBackground source={require('../assets/images/darkgradient.jpg')} style={{width: '100%'}}>
     <View>
-      {location != 'signin' &&
+      {location != 'signin' && location != 'signup' &&
         <View style={styles.topNav}>
           <View>
             <Grid>

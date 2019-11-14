@@ -8,6 +8,12 @@
     "eject": "expo eject",
     "test": "jest --watchAll --env=jsdom --coverage --coverageDirectory=./coverage/jest"
   },
+  
+"rnpm": {
+  "assets": [
+"./assets/fonts/"
+  ]
+},
   "jest": {
     "preset": "jest-expo",
     "snapshotSerializers": [
