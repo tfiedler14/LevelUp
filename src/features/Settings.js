@@ -107,12 +107,8 @@ export const Settings = ({
                   uppercase={false}
                   mode="text"
                   onPress={() => {
-<<<<<<< HEAD
                     // TODO: no op -- need a sign out action
                     handleSignOut(setAuth, setLocation);
-=======
-                    handleSignOut(setAuth, setLocation, setFilter);
->>>>>>> indiait2
                   }}>
                   Sign Out
                 </Button>

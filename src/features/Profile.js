@@ -13,7 +13,6 @@ import { attributes } from '../../Const';
 
 const attributeList = attributes;
 
-<<<<<<< HEAD
 export const Profile = ({ getData, setLocation, skills, location, loading, auth, setLoading, profile }) => {
   const handleAddSkill = location => {
     setLocation('addSkill');
@@ -21,18 +20,6 @@ export const Profile = ({ getData, setLocation, skills, location, loading, auth,
     console.log(location);
   };
   /* istanbul ignore next */
-=======
-export const Profile = ({
-  getData,
-  setLocation,
-  skills,
-  location,
-  loading,
-  auth,
-  setLoading,
-  profile
-}) => {
->>>>>>> indiait2
   useEffect(() => {
     getData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/profile.json', 'profile');
     getData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/skills.json', 'skills');
