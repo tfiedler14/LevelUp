@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import {Text, View} from 'react-native';
+import {Text, View, ImageBackground, Image} from 'react-native';
 import { setErrors } from '../logic/errors/actions';
 import { setLocation } from '../logic/location/actions';
 import { setAuth } from '../logic/auth/actions';
@@ -11,6 +11,7 @@ import { WrappedTextInput } from '../shared-components/FormField';
 import { Button, Card } from 'react-native-paper';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { FormHeader } from '../shared-components/FormHeader';
+import {AppLoading} from 'expo'
 
 export const SignIn = ({ setLocation, handleSubmit, setAuthentication, initialize, setErrors, errors, values }) => {
   // const [initialized, setInitialized] = useState(false);
@@ -24,9 +25,9 @@ export const SignIn = ({ setLocation, handleSubmit, setAuthentication, initializ
       setInitialized(true);
     }
   });*/
-
   return (
-    <>
+    <> 
+    <ImageBackground source={require('../../assets/images/darkverylowopacityshapes.png')} style={{height: '100%', width: '100%'}}>
       {errors.signIn && (
         <Card style={styles.errorCard}>
           <View>
@@ -34,6 +35,11 @@ export const SignIn = ({ setLocation, handleSubmit, setAuthentication, initializ
           </View>
         </Card>
       )}
+      <View style={{paddingTop: 150}}>
+      <Image
+    style={{alignSelf: 'center', resizeMode: 'contain', width: '92%'}}
+    source={require('../../assets/images/title.png')}
+  />
       <Card style={styles.card}>
         <View>
           <FormHeader title={'Sign In'} />
@@ -56,7 +62,7 @@ export const SignIn = ({ setLocation, handleSubmit, setAuthentication, initializ
           />
           <View style={styles.buttons}>
             <Button
-              color="#222222"
+              color="#cda845"
               uppercase={false}
               mode="contained"
               onPress={handleSubmit(values => {
@@ -65,7 +71,7 @@ export const SignIn = ({ setLocation, handleSubmit, setAuthentication, initializ
               Sign In
             </Button>
             <Button
-              color="#222222"
+              color="white"
               uppercase={false}
               mode="text"
               onPress={() => setLocation('signup')}>
@@ -74,6 +80,8 @@ export const SignIn = ({ setLocation, handleSubmit, setAuthentication, initializ
           </View>
         </View>
       </Card>
+      </View>
+      </ImageBackground>
     </>
   );
 };
@@ -95,7 +103,8 @@ const handleLogin = (values, setLocation, setAuth, setErrors) => {
 const styles = EStyleSheet.create({
   card: {
     padding: '1rem',
-    margin: '1rem'
+    margin: '1rem',
+    backgroundColor: '#555'
     //  border: 'none',
   },
 
@@ -109,7 +118,7 @@ const styles = EStyleSheet.create({
     marginTop: '1rem',
     marginLeft: '2rem',
     marginRight: '2rem'
-  }
+  },
 });
 
 export const mapStateToProps = state => {

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { View } from 'react-native';
+import { View, ImageBackground } from 'react-native';
 import { setLocation } from '../logic/location/actions';
 import { setAuth } from '../logic/auth/actions';
 import { firebaseApp } from '../../Const';
@@ -14,6 +14,8 @@ import { putData } from '../logic/data/actions';
 
 export const SignUp = ({ setLocation, handleSubmit, setAuthentication, putData }) => {
   return (
+    <ImageBackground source={require('../../assets/images/darkverylowopacityshapes.png')} style={{height: '100%', width: '100%'}}>
+    <View style={{paddingTop: 100}}>
     <Card style={styles.card}>
       <View>
         <FormHeader title={'Sign Up'} />
@@ -49,7 +51,7 @@ export const SignUp = ({ setLocation, handleSubmit, setAuthentication, putData }
         />
         <View style={styles.buttons}>
           <Button
-            color="#222222"
+            color="#de3c57"
             uppercase={false}
             mode="contained"
             onPress={handleSubmit(values => {
@@ -57,9 +59,18 @@ export const SignUp = ({ setLocation, handleSubmit, setAuthentication, putData }
             })}>
             Sign Up
           </Button>
+          <Button
+            color="white"
+            uppercase={false}
+            mode="text"
+            onPress={() => setLocation('signin')}>
+            Sign In
+          </Button>
         </View>
       </View>
     </Card>
+    </View>
+    </ImageBackground>
   );
 };
 
@@ -106,7 +117,8 @@ const handleSignUp = (values, setLocation, setAuthentication, putData) => {
 const styles = EStyleSheet.create({
   card: {
     padding: '1rem',
-    margin: '1rem'
+    margin: '1rem',
+    backgroundColor: '#555'
     //  border: 'none',
   },
 

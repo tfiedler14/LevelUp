@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Image, ScrollView, View, Text, TextInput, Button, TouchableHighlight, StyleSheet } from 'react-native';
+import { View, ImageBackground, Button, StyleSheet } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { setLocation } from '../logic/location/actions';
 import { getData, putData } from '../logic/data/actions';
@@ -44,7 +44,7 @@ export const AddSkill = ({ skills, setLocation, location, handleSubmit }) => {
 
     return (
 
-
+<ImageBackground source={require('../../assets/images/darkverylowopacityshapes.png')} style={{ height: '100%', width: '100%' }}>
         <View style={{}}>
             <View>
                 <View>
@@ -100,7 +100,7 @@ export const AddSkill = ({ skills, setLocation, location, handleSubmit }) => {
 
 
         </View>
-
+        </ImageBackground>
     );
 };
 
