@@ -5,7 +5,7 @@ import { Card } from 'react-native-paper';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { setLocation } from '../logic/location/actions';
 import { connect } from 'react-redux';
-import {deleteData} from '../logic/data/actions';
+import {deleteData, setQuest} from '../logic/data/actions';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export const QuestComponent = ({ info, setLocation, setQuest, deleteData }) => {
@@ -56,11 +56,8 @@ export const QuestComponent = ({ info, setLocation, setQuest, deleteData }) => {
               </View>
           </View>
           <View style={styles.informationWrapper}>
-            <Text style={styles.availability}>{info ? (info.availability + ' room(s) available') : 'Not Available'}</Text>
-            <Text style={styles.subText}>{info ? info.address : 'No Info'}</Text>
-            <Text style={styles.subText}>
-              {info ? info.city : 'No Info'}, {info ? info.zip : 'No Info'}
-            </Text>
+            <Text style={styles.availability}>{info ? ('Description: ' + info.description) : 'No Description'}</Text>
+
           </View>
         </Col>
       </Grid>
@@ -115,6 +112,9 @@ const mapDispatchToProps = dispatch => {
     },
     deleteData: (data, location) => {
       dispatch(deleteData(data, location));
+    },
+    setQuest: (data, location) => {
+        dispatch(setQuest(data));
     }
   };
 };

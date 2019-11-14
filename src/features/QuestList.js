@@ -19,7 +19,7 @@ export const QuestList = ({ getData, setLocation, quests, location, auth }) => {
         <View style={styles.sectionPadding}>
           {quests &&
             Object.values(quests).map((quest, index) => {
-              return (<QuestComponent key={index} available={true} info={quest} />);
+              return (<QuestComponent key={index} info={quest} />);
             })}
         </View>
       </ScrollView>

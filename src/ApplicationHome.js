@@ -45,7 +45,7 @@ export const ApplicationHome = ({ location,  setLocation, getData}) => {
               <Button
               style={styles.topPadding}
                 title="Quests"
-                onPress={() => setLocation('quest')}
+                onPress={() => setLocation('questlist')}
               />
               </ThemeProvider>
               </View>
@@ -71,8 +71,8 @@ export const ApplicationHome = ({ location,  setLocation, getData}) => {
         {location === 'addquest' && <AddQuest editProp={false} />}
         {location === 'addSkill' && <AddSkill />}
         {location === 'editquest' && <AddQuest editProp={true} />}
-        {location === 'quest' && <QuestList />}
-        {location === 'home' && <QuestList />}
+        {location === 'questlist' && <QuestList />}
+        {location === 'quest' && <Quest />}
         {location === 'signin' && <SignIn />}
         {location === 'signup' && <SignUp />}
         {location === 'settings' && <Settings />}
