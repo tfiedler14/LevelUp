@@ -201,7 +201,7 @@ const validate = values => {
     errors.name = 'Must be less than 100 characters';
   }
 
-  if (!values.gender) {
+  /*if (!values.gender) {
     errors.gender = 'Required';
   } else if (values.gender.length > 20) {
     errors.gender = 'Must be less than 20 characters';
@@ -222,7 +222,7 @@ const validate = values => {
     if (values.cpassword !== values.password) {
       errors.cpassword = 'Passwords must match';
     }
-  }
+  }*/
 
   return errors;
 };

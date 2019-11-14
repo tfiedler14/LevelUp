@@ -13,9 +13,9 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import { FormHeader } from '../shared-components/FormHeader';
 
 export const SignIn = ({ setLocation, handleSubmit, setAuthentication, initialize, setErrors, errors, values }) => {
-  const [initialized, setInitialized] = useState(false);
+  // const [initialized, setInitialized] = useState(false);
 
-  useEffect(() => {
+  /*useEffect(() => {
     if (!initialized) {
       initialize({
         email: '',
@@ -23,7 +23,8 @@ export const SignIn = ({ setLocation, handleSubmit, setAuthentication, initializ
       });
       setInitialized(true);
     }
-  });
+  });*/
+
   return (
     <>
       {errors.signIn && (
@@ -111,7 +112,8 @@ const styles = EStyleSheet.create({
   }
 });
 
-const mapStateToProps = state => {
+export const mapStateToProps = state => {
+  console.log(state);
   return {
     location: state.location,
     values: getFormValues('sign-in-form')(state),
@@ -136,7 +138,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const validate = values => {
+export const validate = values => {
   const errors = {};
 
   if (!values.email) {

@@ -63,7 +63,7 @@ export const SignUp = ({ setLocation, handleSubmit, setAuthentication, putData }
   );
 };
 
-const validate = values => {
+export const validate = values => {
   const errors = {};
 
   if (!values.email) {
@@ -117,7 +117,7 @@ const styles = EStyleSheet.create({
   }
 });
 
-const mapStateToProps = state => {
+export const mapStateToProps = state => {
   return {
     location: state.location
   };
