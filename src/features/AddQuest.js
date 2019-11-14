@@ -116,7 +116,7 @@ const styles = EStyleSheet.create({
   }
 });
 
-const mapStateToProps = (state, { editProp }) => {
+export const mapStateToProps = (state, { editProp }) => {
   return {
     auth: state.auth,
     profile: state.data.profile,
@@ -126,7 +126,7 @@ const mapStateToProps = (state, { editProp }) => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
+export const mapDispatchToProps = dispatch => {
   return {
     putData: (path, data, redirect) => {
       dispatch(putData(path, data, redirect));
@@ -143,7 +143,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const validate = values => {
+export const validate = values => {
   const errors = {};
 
   if (!values.name) {
@@ -158,7 +158,7 @@ const validate = values => {
     errors.description = 'Must be 500 characters or less';
   }
 
-  if (!values.address) {
+  /*if (!values.address) {
     errors.address = 'Required';
   } else if (values.address.length > 50) {
     errors.address = 'Must be less than 50 characters';
@@ -188,7 +188,7 @@ const validate = values => {
     errors.rent = 'Must be 200-10000';
   } else if (isNaN(values.rent)) {
     errors.rent = 'Must be a number';
-  }
+  }*/
 
   return errors;
 };

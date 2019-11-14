@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FormField should render FormField correctly 1`] = `
+<View>
+  <Text>
+    test
+  </Text>
+  <TextInput
+    allowFontScaling={true}
+    autoCompleteType="any"
+    maxLength={2500}
+    multiline={false}
+    rejectResponderTermination={true}
+    secureTextEntry={false}
+    textContentType="any"
+    underlineColorAndroid="transparent"
+  />
+</View>
+`;

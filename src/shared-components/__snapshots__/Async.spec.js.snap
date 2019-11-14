@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Async should render Async correctly 1`] = `
+<View>
+  <Component />
+</View>
+`;
