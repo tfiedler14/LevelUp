@@ -17,20 +17,14 @@ export const Quest = ({ info, auth, putData, handleSubmit }) => {
           <Card style={styles.card}>
             <View>
               <FormHeader title={info && info.name} />
-              <View style={styles.imageWrapper}>
-                <Image
-                  style={styles.imageArea}
-                  source={{uri: info.image}}
-                  resizeMode="center"
-                />
-              </View>
+
               <View style={styles.infoWrapper}>
                 <Text style={styles.availability}>
-                  {info ? (info.availability + ' room(s) available') : 'Not Available'}
+                  {info ? ('Quest Description: ' + info.description) : 'Not Available'}
                 </Text>
-                <Text style={styles.address}>{info ? info.address : 'No Info'}</Text>
+                <Text style={styles.address}>{info ? ('Experience Points: ' + info.expVal) : 'No Info'}</Text>
                 <Text style={styles.city}>
-                  {info ? info.city : 'No Info'}, {info ? info.zip : 'No Info'}
+                  {info ? ('Associated Skills: ' + info.skill) : 'No Info'}
                 </Text>
               </View>
             </View>
@@ -49,7 +43,7 @@ const styles = EStyleSheet.create({
   card: {
     //  border: 'none',
     marginBottom: '1rem',
-    height: '24rem',
+    height: '30rem',
     padding: '1rem',
     color: 'white',
     backgroundColor: '#555'
@@ -70,7 +64,7 @@ const styles = EStyleSheet.create({
   },
 
   infoWrapper: {
-    paddingTop: '11rem'
+    paddingTop: '1rem'
   },
 
   imageArea: {
@@ -80,7 +74,7 @@ const styles = EStyleSheet.create({
 
   questName: {
     fontWeight: 'bold',
-    fontSize: '1rem',
+    fontSize: '3rem',
     marginBottom: '.5rem'
     // fontFamily: 'sans-serif',
   },
@@ -88,7 +82,6 @@ const styles = EStyleSheet.create({
   availability: {
     fontSize: '1rem',
     marginBottom: '.5rem',
-    fontStyle: 'italic'
     // fontFamily: 'sans-serif',
   },
 
