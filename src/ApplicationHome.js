@@ -77,6 +77,7 @@ export const ApplicationHome = ({ location, setLocation, getData }) => {
         {location === 'settings' && <Settings />}
       </View>
       </View>
+      </ImageBackground>
 
   );
 };
