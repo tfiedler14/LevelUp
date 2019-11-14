@@ -66,7 +66,7 @@ export const Profile = ({
                 />
               </View>
               <View>
-                <Text style={{ textAlign: 'center', fontSize: 26, color: 'white', marginTop: 20 }}>
+                <Text style={{ textAlign: 'center', fontSize: 40, color: '#cda845', marginTop: 20, fontFamily: 'Academy Engraved LET' }}>
                   {profile.name}
                 </Text>
               </View>
@@ -79,12 +79,18 @@ export const Profile = ({
                   <Text>Level</Text>
                   <Progress.Bar
                     style={styles.progress}
-                    color="#55db37"
+                    color="#c41c10"
                     height={15}
                     progress={0.5}
                   />
                 </View>
               </View>
+              < View style={{ flex: 1, paddingTop: 275 }}>
+                <Image
+                  source={require('../../assets/images/divider.png')} style={{ resizeMode: 'contain', width: '100%' }}
+                />
+              </View>
+
               <View style={{ flex: 1, paddingTop: 275 }}>
                 <Image
                   source={require('../../assets/images/favorite.png')}
@@ -92,9 +98,6 @@ export const Profile = ({
                 />
               </View>
             </View>
-            <View style={{ height: 50, width: 500 }}></View>
-
-            {console.log('Profile: ', profile)}
             <View style={{ height: 300, width: 500 }}>
               <ScrollView>
                 {attributeList.map(data => {
@@ -112,9 +115,7 @@ export const Profile = ({
 const AttributeItem = ({ attributeName, skills1 }) => {
   return (
     <View style={styles.skillSec}>
-      <Text style={{ color: '#ffffff', fontSize: 17 }}>
-        {attributeName.charAt(0).toUpperCase() + attributeName.slice(1)}
-      </Text>
+      <Text style={{ color: '#ffffff', fontSize: 20, fontFamily: 'Bodoni 72' }}>{attributeName.charAt(0).toUpperCase() + attributeName.slice(1)}</Text>
       <AttributeListItem
         skills={skills1
           .filter(skill => skill.attribute === attributeName)
@@ -128,13 +129,13 @@ const AttributeListItem = ({ skills, levels }) => {
   return skills.map(data => {
     return (
       <View style={{ marginLeft: 45 }} key={data}>
-        <Text style={{ color: '#ffffff' }}>
-          {data.name}: {data.level}
+        <Text style={{ color: '#ffffff', fontFamily: 'Bodoni 72' }}>
+          {data.name} -{data.level}
         </Text>
         <View>
           <Progress.Bar
             style={styles.progress}
-            color="#55db37"
+            color="#c41c10"
             height={15}
             progress={data.level / 100 + 0.2}
           />
