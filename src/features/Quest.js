@@ -22,10 +22,11 @@ export const Quest = ({ info, auth, putData, handleSubmit }) => {
                 <Text style={styles.availability}>
                   {info ? ('Quest Description: ' + info.description) : 'Not Available'}
                 </Text>
-                <Text style={styles.address}>{info ? ('Experience Points: ' + info.expVal) : 'No Info'}</Text>
+                <Text style={styles.address}>{info ? ('Experience Reward: ' + info.expVal) : 'No Info'}</Text>
                 <Text style={styles.city}>
                   {info ? ('Associated Skills: ' + info.skill) : 'No Info'}
                 </Text>
+
               </View>
             </View>
           </Card>
@@ -36,6 +37,7 @@ export const Quest = ({ info, auth, putData, handleSubmit }) => {
 };
 
 const styles = EStyleSheet.create({
+
   sectionHeight: {
     height: '100% - 6rem'
   },
@@ -45,10 +47,12 @@ const styles = EStyleSheet.create({
     marginBottom: '1rem',
     height: '30rem',
     padding: '1rem',
-    color: 'white',
+    color: '#cda845',
     backgroundColor: '#555'
   },
-
+  buttonPadding: {
+    padding: '20rem'
+  },
   comment: {
     marginBottom: '1rem',
     padding: '1rem'
@@ -75,7 +79,8 @@ const styles = EStyleSheet.create({
   questName: {
     fontWeight: 'bold',
     fontSize: '3rem',
-    marginBottom: '.5rem'
+    marginBottom: '.5rem',
+    color: 'black'
     // fontFamily: 'sans-serif',
   },
 

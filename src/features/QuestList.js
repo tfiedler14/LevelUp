@@ -2,11 +2,13 @@ import * as React from 'react';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { ScrollView, Text, View, Button } from 'react-native';
-import { setLocation } from '../logic/data/actions';
+import { setLocation } from '../logic/location/actions';
 import { getData } from '../logic/data/actions';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Divider} from 'react-native-elements';
 import QuestComponent from '../shared-components/QuestComponent';
+import { Card } from 'react-native-paper';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export const QuestList = ({ getData, setLocation, quests, location, auth }) => {
   /* istanbul ignore next */
@@ -21,6 +23,21 @@ export const QuestList = ({ getData, setLocation, quests, location, auth }) => {
             Object.values(quests).map((quest, index) => {
               return (<QuestComponent key={index} info={quest} />);
             })}
+
+            <Card
+              style={styles.card}
+              onPress={() => {
+                setLocation('addquest');
+              }}>
+              <View style={styles.addIconPadding}>
+                <Icon
+                  name="add"
+                  size={48}
+                  color="#999999"
+
+                  />
+              </View>
+            </Card>
         </View>
       </ScrollView>
     </View>
@@ -28,8 +45,19 @@ export const QuestList = ({ getData, setLocation, quests, location, auth }) => {
 };
 
 const styles = EStyleSheet.create({
+  card: {
+    width: '100%',
+    height: '5rem',
+    color: 'white',
+    backgroundColor: '#555',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
   sectionHeight: {
     height: '100% - 6rem'
+  },
+  addIconPadding: {
+    padding: '1 `rem'
   },
 
   sectionPadding: {
