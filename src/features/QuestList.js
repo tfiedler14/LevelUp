@@ -47,20 +47,6 @@ export const QuestList = ({ getData, setLocation, quests, location, auth }) => {
                 <QuestComponent key={index} info={quest} />
               </View>);
             })}
-
-            <Card
-              style={styles.card}
-              onPress={() => {
-                setLocation('addquest');
-              }}>
-              <View style={styles.addIconPadding}>
-                <Icon
-                  name="add"
-                  size={48}
-                  color="#999999"
-                  />
-              </View>
-            </Card>
         </View>
       </ScrollView>
     </View>
