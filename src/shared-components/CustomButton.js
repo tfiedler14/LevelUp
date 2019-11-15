@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     fontSize:20,
 	color: '#ffffff',
     textAlign: 'center',
-    fontFamily: 'Bodoni 72'
+    fontFamily: 'Papyrus'
   },
   
   buttonStyle: {

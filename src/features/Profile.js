@@ -49,28 +49,43 @@ export const Profile = ({
         render={
           <View>
             <View>
-              <View style={{ position: 'absolute', alignSelf: 'flex-end', flex: 1, zIndex: 20 }}>
-                <Icon
-                  style={styles.padding}
-                  name="add"
-                  size={48}
-                  color="white"
-                  onPress={() => setLocation('addSkill')}
-                />
-                <Icon
-                  style={styles.padding}
-                  name="settings"
-                  size={48}
-                  color="white"
-                  onPress={() => setLocation('settings')}
-                />
-              </View>
-              <View>
-                <Text style={{ textAlign: 'center', fontSize: 40, color: '#cda845', marginTop: 20, fontFamily: 'Academy Engraved LET' }}>
-                  {profile.name}
-                </Text>
-              </View>
-              <View style={{ flex: 1, alignItems: 'center', paddingTop: 20 }}>
+                <View style={{ position: 'absolute', alignSelf: 'flex-end', flex: 1, zIndex: 20 }}>
+                  <Icon
+                    style={styles.padding}
+                    name="settings"
+                    size={48}
+                    color="white"
+                    onPress={() => setLocation('settings')}
+                  />
+                  <Icon
+                    style={styles.padding}
+                    name="add"
+                    size={48}
+                    color="white"
+                    onPress={() => setLocation('addSkill')}
+                  />
+                </View>
+                <View>
+                  <Text style={{ textAlign: 'center', fontSize: 40, color: '#cda845', marginTop: 20 , fontFamily: 'Academy Engraved LET'}}>
+                    {profile.name}
+                  </Text>
+                </View>
+                <View style={{ flex: 1, alignItems: 'center', paddingTop: 20 }}>
+                  <Image
+                    style={styles.imageProfile}
+                    source={require('../../assets/images/waycoolercharacter.png')}
+                  />
+                  <View style={{ paddingTop: 15 }}>
+                    <Text>Level</Text>
+                    <Progress.Bar
+                      style={styles.progress}
+                      color="#cda845"
+                      height={15}
+                      progress={0.5}
+                    />
+                  </View>
+                </View>
+              < View style={{flex:1, paddingTop: 275}}>
                 <Image
                   style={styles.imageProfile}
                   source={require('../../assets/images/waycoolercharacter.png')}
@@ -115,7 +130,7 @@ export const Profile = ({
 const AttributeItem = ({ attributeName, skills1 }) => {
   return (
     <View style={styles.skillSec}>
-      <Text style={{ color: '#ffffff', fontSize: 20, fontFamily: 'Bodoni 72' }}>{attributeName.charAt(0).toUpperCase() + attributeName.slice(1)}</Text>
+      <Text style={{ color: '#ffffff', fontSize: 20, fontFamily: 'Optima' }}>{attributeName.charAt(0).toUpperCase() + attributeName.slice(1)}</Text>
       <AttributeListItem
         skills={skills1
           .filter(skill => skill.attribute === attributeName)
@@ -129,13 +144,13 @@ const AttributeListItem = ({ skills, levels }) => {
   return skills.map(data => {
     return (
       <View style={{ marginLeft: 45 }} key={data}>
-        <Text style={{ color: '#ffffff', fontFamily: 'Bodoni 72' }}>
+        <Text style={{ color: '#ffffff', fontFamily: 'Optima' }}>
           {data.name} -{data.level}
         </Text>
         <View>
           <Progress.Bar
             style={styles.progress}
-            color="#c41c10"
+            color="#cda845"
             height={15}
             progress={data.level / 100 + 0.2}
           />
