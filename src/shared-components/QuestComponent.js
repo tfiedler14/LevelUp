@@ -56,7 +56,7 @@ export const QuestComponent = ({ info, setLocation, setQuest, deleteData }) => {
               </View>
           </View>
           <View style={styles.informationWrapper}>
-            <Text style={styles.availability}>{info ? ('Description: ' + info.description) : 'No Description'}</Text>
+            <Text style={styles.description}>{info ? (info.description) : 'No Description'}</Text>
 
           </View>
         </Col>
@@ -68,7 +68,7 @@ export const QuestComponent = ({ info, setLocation, setQuest, deleteData }) => {
 const styles = EStyleSheet.create({
   card: {
     width: '100%',
-    height: '8rem',
+    height: '5rem',
     //  border: 'none',
     marginBottom: '1rem',
     color: 'white',
@@ -76,15 +76,16 @@ const styles = EStyleSheet.create({
   },
 
   informationWrapper: {
-    marginTop: '1rem',
+    marginTop: '.5rem',
     marginBottom: '.5rem',
-    marginRight: '1rem'
+    marginRight: '.5rem',
+    marginLeft: '.5rem'
   },
 
   questName: {
     fontWeight: 'bold',
     fontSize: '1rem',
-    marginBottom: '.5rem'
+    marginBottom: '1rem'
     // fontFamily: 'sans-serif',
   },
 
