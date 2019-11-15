@@ -87,7 +87,7 @@ const styles = EStyleSheet.create({
     height: '30rem',
     paddingLeft: '1rem',
     paddingRight: '1rem',
-    backgroundColor: '#555'
+    backgroundColor: 'transparent'
   },
   buttonPadding: {
     padding: '20rem'

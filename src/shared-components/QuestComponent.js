@@ -39,7 +39,7 @@ const styles = EStyleSheet.create({
     //  border: 'none',
     marginBottom: '.4rem',
     color: 'white',
-    backgroundColor: '#555'
+    backgroundColor: 'transparent'
   },
   questnameContainer: {
     position: 'absolute',

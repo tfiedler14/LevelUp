@@ -37,7 +37,15 @@ export const QuestList = ({ getData, setLocation, quests, location, auth }) => {
         <View>
           {quests &&
             Object.values(quests).map((quest, index) => {
-              return (<QuestComponent key={index} info={quest} />);
+              return (
+                <View
+                  style={{
+                    borderBottomColor: 'white',
+                    borderBottomWidth: 1,
+                  }}
+                >
+                <QuestComponent key={index} info={quest} />
+              </View>);
             })}
 
             <Card
@@ -64,7 +72,7 @@ const styles = EStyleSheet.create({
     width: '100%',
     height: '5rem',
     color: 'white',
-    backgroundColor: '#555',
+    backgroundColor: 'transparent',
     alignItems: 'center',
     justifyContent: 'center'
   },
