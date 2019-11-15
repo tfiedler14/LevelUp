@@ -45,6 +45,7 @@ export const SignIn = ({ setLocation, handleSubmit, setAuthentication, initializ
           <FormHeader title={'Sign In'} />
           <Field
             name="email"
+            autoCapitalize='none'
             id="email"
             props={{ title: 'Email', textContentType: 'emailAddress', autoCompleteType: 'email' }}
             component={WrappedTextInput}
