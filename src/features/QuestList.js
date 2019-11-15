@@ -23,6 +23,14 @@ export const QuestList = ({ getData, setLocation, quests, location, auth }) => {
         <Text style={{ textAlign: 'center', fontSize: 26, color: 'white', marginTop: 20 }}>
           {'Active Quests'}
         </Text>
+        <View style = {styles.iconcontainer}>
+          <Icon
+            name="add"
+            size={48}
+            color="white"
+            onPress={() => setLocation('addquest')}
+            />
+        </View>
 
       </View>
       <ScrollView>
@@ -60,6 +68,10 @@ const styles = EStyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
+  iconcontainer: {
+    paddingLeft: '7rem',
+    paddingTop: '.6rem'
+  },
   sectionHeight: {
     height: '100%',
   },
@@ -68,7 +80,8 @@ const styles = EStyleSheet.create({
   },
 
   sectionPadding: {
-    padding: '2rem'
+    padding: '2rem',
+    flexDirection: 'row'
   },
 
   buttons: {

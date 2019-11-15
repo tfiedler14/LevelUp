@@ -16,21 +16,21 @@ export const Quest = ({ info, auth, putData, handleSubmit }) => {
       <View style={styles.formPadding}>
       </View>
       <ScrollView>
-        <View>
+        <View style={styles.infoWrapper}>
           <Card style={styles.card}>
-            <View>
-              <Text style={{ textAlign: 'center', fontSize: 26, color: 'white', marginTop: 10 }}>
-                {info && info.name}
-              </Text>
 
+            <Text style={styles.questtitle}>
+              {info && info.name}
+            </Text>
+
+            <View>
               <View style={styles.infoWrapper}>
                 <Text style={styles.description}>
                   {info ? ('Quest Description: ' + info.description) : 'Not Available'}
                 </Text>
-                <Text style={styles.experience}>{info ? ('Experience Reward: ' + info.expVal) : 'No Info'}</Text>
-                <Text style={styles.skills}>
-                  {info ? ('Associated Skills: ' + info.skill) : 'No Info'}
-                </Text>
+                <Text style={styles.skills}>{info ? ('Associated Skills: ' + info.skill) : 'No Info'}</Text>
+                <Text style={styles.time}>{info ? ('Quest Length: ' + info.time) : 'No Info'}</Text>
+                <Text style={styles.time}>{info ? ('Quest Difficulty: ' + info.difficulty) : 'No Info'}</Text>
               </View>
             </View>
             <View style={styles.completeContainer}>
@@ -73,12 +73,20 @@ const styles = EStyleSheet.create({
   sectionHeight: {
     height: '100%'
   },
+  questtitle: {
+    textAlign: 'center',
+    fontSize: '2rem',
+    color: 'white',
+    marginTop: '1rem'
+  },
 
   card: {
     //  border: 'none',
+    paddingTop: '0rem',
     marginBottom: '1rem',
     height: '30rem',
-    padding: '1rem',
+    paddingLeft: '1rem',
+    paddingRight: '1rem',
     backgroundColor: '#555'
   },
   buttonPadding: {
@@ -116,21 +124,21 @@ const styles = EStyleSheet.create({
   },
 
   description: {
-    fontSize: '1rem',
+    fontSize: '1.15rem',
     marginBottom: '.5rem',
     color: 'white'
     // fontFamily: 'sans-serif',
   },
 
-  experience: {
-    fontSize: '.9rem',
+  time: {
+    fontSize: '1rem',
     marginBottom: '.25rem',
     color: 'white'
     // fontFamily: 'sans-serif',
   },
 
   skills: {
-    fontSize: '.9rem',
+    fontSize: '1rem',
     marginBottom: '.25rem',
     color: 'white'
     // fontFamily: 'sans-serif',
@@ -140,7 +148,7 @@ const styles = EStyleSheet.create({
     left: 0,
     right: 0,
     justifyContent: 'center',
-    bottom: '6rem',
+    bottom: '7rem',
     alignItems: 'center',
   },
   editContainer: {
@@ -149,7 +157,7 @@ const styles = EStyleSheet.create({
     right: 0,
     justifyContent: 'center',
     alignItems: 'center',
-    bottom: '3rem'
+    bottom: '4rem'
   },
   deleteContainer: {
     position: 'absolute',
@@ -157,7 +165,7 @@ const styles = EStyleSheet.create({
     right: 0,
     justifyContent: 'center',
     alignItems: 'center',
-    bottom: 0
+    bottom: '1rem'
   },
   formPadding: {
     padding: '1rem'

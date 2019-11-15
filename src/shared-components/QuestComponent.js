@@ -19,21 +19,12 @@ export const QuestComponent = ({ info, setLocation, setQuest, deleteData }) => {
       <Grid style={{ width: '100%' }}>
         <Col size={2}>
           <View style={styles.informationWrapper}>
-              <Grid>
-                <Col size={6}>
-                  <View style={{ position: 'absolute' }}>
-                    <Text style={styles.questName}>{info ? info.name : 'No Info'}</Text>
-                  </View>
-                </Col>
-
-              </Grid>
-              <View style={{ position: 'absolute' }}>
-                <Text style={styles.questName}>{info ? info.name : 'No Info'}</Text>
-              </View>
+            <View style={{ position: 'absolute' }}>
+              <Text style={styles.questName}>{info ? info.name : 'No Info'}</Text>
+            </View>
           </View>
           <View style={styles.informationWrapper}>
-            <Text style={styles.description}>{info ? (info.description) : 'No Description'}</Text>
-
+            <Text style={styles.skills}>{info ? ('Skills: ' + (info.skill)) : 'No skills'}</Text>
           </View>
         </Col>
       </Grid>
@@ -44,9 +35,9 @@ export const QuestComponent = ({ info, setLocation, setQuest, deleteData }) => {
 const styles = EStyleSheet.create({
   card: {
     width: '100%',
-    height: '5rem',
+    height: '4rem',
     //  border: 'none',
-    marginBottom: '1rem',
+    marginBottom: '.4rem',
     color: 'white',
     backgroundColor: '#555'
   },
@@ -55,6 +46,7 @@ const styles = EStyleSheet.create({
     padding: '.5rem'
   },
   informationWrapper: {
+    paddingTop: '.3rem',
     marginTop: '.5rem',
     marginBottom: '.5rem',
     marginRight: '.5rem',
@@ -69,7 +61,7 @@ const styles = EStyleSheet.create({
     // fontFamily: 'sans-serif',
   },
 
-  description: {
+  skills: {
     fontSize: '1rem',
     marginBottom: '.5rem',
     fontStyle: 'italic',
