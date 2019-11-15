@@ -15,17 +15,19 @@ export const Quest = ({ info, auth, putData, handleSubmit }) => {
       <View style={styles.formPadding}>
       </View>
       <ScrollView>
-        <View style={styles.formPadding}>
+        <View>
           <Card style={styles.card}>
             <View>
-              <FormHeader title={info && info.name} />
+            <Text style={{ textAlign: 'center', fontSize: 26, color: 'black', marginTop: 20 }}>
+              {info && info.name}
+            </Text>
 
               <View style={styles.infoWrapper}>
-                <Text style={styles.availability}>
+                <Text style={styles.description}>
                   {info ? ('Quest Description: ' + info.description) : 'Not Available'}
                 </Text>
-                <Text style={styles.address}>{info ? ('Experience Reward: ' + info.expVal) : 'No Info'}</Text>
-                <Text style={styles.city}>
+                <Text style={styles.experience}>{info ? ('Experience Reward: ' + info.expVal) : 'No Info'}</Text>
+                <Text style={styles.skills}>
                   {info ? ('Associated Skills: ' + info.skill) : 'No Info'}
                 </Text>
 
@@ -41,7 +43,7 @@ export const Quest = ({ info, auth, putData, handleSubmit }) => {
 const styles = EStyleSheet.create({
 
   sectionHeight: {
-    height: '100% - 6rem'
+    height: '100%'
   },
 
   card: {
@@ -85,19 +87,19 @@ const styles = EStyleSheet.create({
     // fontFamily: 'sans-serif',
   },
 
-  availability: {
+  description: {
     fontSize: '1rem',
     marginBottom: '.5rem',
     // fontFamily: 'sans-serif',
   },
 
-  address: {
+  experience: {
     fontSize: '.9rem',
     marginBottom: '.25rem'
     // fontFamily: 'sans-serif',
   },
 
-  city: {
+  skills: {
     fontSize: '.9rem',
     marginBottom: '.25rem'
     // fontFamily: 'sans-serif',
