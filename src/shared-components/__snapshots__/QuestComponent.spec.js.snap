@@ -80,11 +80,99 @@ exports[`QuestComponent should render QuestComponent correctly 1`] = `
       </View>
       <View>
         <Text>
-          undefined room(s) available
+          Description: undefined
         </Text>
-        <Text />
+      </View>
+    </ColumnNB>
+  </GridNB>
+</withTheme(Card)>
+`;
+
+exports[`QuestComponent should render QuestComponent correctly when info is null 1`] = `
+<withTheme(Card)
+  onPress={[Function]}
+>
+  <GridNB
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+  >
+    <ColumnNB
+      size={2}
+    >
+      <View>
+        <GridNB>
+          <ColumnNB
+            size={6}
+          >
+            <View
+              style={
+                Object {
+                  "position": "absolute",
+                }
+              }
+            >
+              <Text>
+                No Info
+              </Text>
+            </View>
+          </ColumnNB>
+          <ColumnNB
+            size={1}
+          >
+            <View
+              style={
+                Object {
+                  "position": "absolute",
+                }
+              }
+            >
+              <Icon
+                allowFontScaling={false}
+                color="#999999"
+                name="edit"
+                onPress={[Function]}
+                size={24}
+              />
+            </View>
+          </ColumnNB>
+          <ColumnNB
+            size={1}
+          >
+            <View
+              style={
+                Object {
+                  "position": "absolute",
+                }
+              }
+            >
+              <Icon
+                allowFontScaling={false}
+                color="#999999"
+                name="delete"
+                onPress={[Function]}
+                size={24}
+              />
+            </View>
+          </ColumnNB>
+        </GridNB>
+        <View
+          style={
+            Object {
+              "position": "absolute",
+            }
+          }
+        >
+          <Text>
+            No Info
+          </Text>
+        </View>
+      </View>
+      <View>
         <Text>
-          , 
+          No Description
         </Text>
       </View>
     </ColumnNB>

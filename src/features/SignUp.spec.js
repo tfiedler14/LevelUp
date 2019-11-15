@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { mapStateToProps, SignUp, validate } from './SignUp';
+import { mapDispatchToProps, mapStateToProps, SignUp, validate } from './SignUp';
 
 describe('SignIn', () => {
   it('should render sign up correctly', () => {
@@ -14,6 +14,32 @@ describe('SignIn', () => {
     );
 
     expect(component).toMatchSnapshot();
+  });
+});
+
+describe('mapDispatchToProps', () => {
+  it('should dispatch putData when putData is called', () => {
+    const dispatch = jest.fn();
+    const props = mapDispatchToProps(dispatch);
+    props.putData('/', {}, '');
+
+    expect(dispatch).toHaveBeenCalledWith(expect.any(Function));
+  });
+
+  it('should dispatch setAuthentication when setAuthentication is called', () => {
+    const dispatch = jest.fn();
+    const props = mapDispatchToProps(dispatch);
+    props.setAuthentication({}, 'test');
+
+    expect(dispatch).toHaveBeenCalledWith({ auth: {}, type: 'SET_AUTH' });
+  });
+
+  it('should dispatch setLocation when setLocation is called', () => {
+    const dispatch = jest.fn();
+    const props = mapDispatchToProps(dispatch);
+    props.setLocation('home');
+
+    expect(dispatch).toHaveBeenCalledWith({ location: 'home', type: 'SET_LOCATION' });
   });
 });
 
@@ -43,9 +69,7 @@ describe('validatorTest', () => {
   });
 
   it('should validate email is a real email', () => {
-    expect(
-      validate({ ...dummyValues, email: 'not an email' })
-    ).toEqual({
+    expect(validate({ ...dummyValues, email: 'not an email' })).toEqual({
       email: 'Invalid email address'
     });
   });

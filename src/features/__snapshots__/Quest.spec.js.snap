@@ -8,22 +8,14 @@ exports[`Quest should render Quest correctly with no auth 1`] = `
         <View>
           <FormHeader />
           <View>
-            <Image
-              resizeMode="center"
-              source={
-                Object {
-                  "uri": undefined,
-                }
-              }
-            />
-          </View>
-          <View>
             <Text>
-              undefined room(s) available
+              Quest Description: undefined
             </Text>
-            <Text />
             <Text>
-              , 
+              Experience Points: undefined
+            </Text>
+            <Text>
+              Associated Skills: undefined
             </Text>
           </View>
         </View>

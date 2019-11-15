@@ -1,9 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Profile should render Profile correctly with no skills 1`] = `
-<Connect(Async)
-  render={
-    <View>
+<ImageBackground
+  source={1}
+  style={
+    Object {
+      "height": "100%",
+      "width": "100%",
+    }
+  }
+>
+  <Connect(Async)
+    render={
       <View>
         <View>
           <View
@@ -12,13 +20,21 @@ exports[`Profile should render Profile correctly with no skills 1`] = `
                 "alignSelf": "flex-end",
                 "flex": 1,
                 "position": "absolute",
+                "zIndex": 20,
               }
             }
           >
             <Icon
               allowFontScaling={false}
               color="white"
-              name="settings-applications"
+              name="add"
+              onPress={[Function]}
+              size={48}
+            />
+            <Icon
+              allowFontScaling={false}
+              color="white"
+              name="settings"
               onPress={[Function]}
               size={48}
             />
@@ -54,6 +70,9 @@ exports[`Profile should render Profile correctly with no skills 1`] = `
                 }
               }
             >
+              <Text>
+                Level
+              </Text>
               <ProgressBar
                 animated={true}
                 animationConfig={
@@ -64,7 +83,7 @@ exports[`Profile should render Profile correctly with no skills 1`] = `
                 animationType="spring"
                 borderRadius={4}
                 borderWidth={1}
-                color="green"
+                color="#55db37"
                 height={15}
                 indeterminate={false}
                 indeterminateAnimationDuration={1000}
@@ -77,75 +96,67 @@ exports[`Profile should render Profile correctly with no skills 1`] = `
           <View
             style={
               Object {
-                "paddingTop": 280,
+                "flex": 1,
+                "paddingTop": 275,
               }
             }
           >
-            <Themed.Divider
+            <Image
+              source={1}
               style={
                 Object {
-                  "backgroundColor": "white",
-                  "height": 2,
+                  "resizeMode": "contain",
+                  "width": "100%",
                 }
               }
             />
           </View>
         </View>
-      </View>
-      <View
-        style={
-          Object {
-            "height": 300,
-            "width": 400,
+        <View
+          style={
+            Object {
+              "height": 50,
+              "width": 500,
+            }
           }
-        }
-      >
-        <ScrollViewMock>
-          <AttributeItem
-            attributeName="academics"
-            skills1={Array []}
-          />
-          <AttributeItem
-            attributeName="crafts"
-            skills1={Array []}
-          />
-          <AttributeItem
-            attributeName="mental"
-            skills1={Array []}
-          />
-          <AttributeItem
-            attributeName="fitness"
-            skills1={Array []}
-          />
-          <AttributeItem
-            attributeName="community"
-            skills1={Array []}
-          />
-          <AttributeItem
-            attributeName="hobby"
-            skills1={Array []}
-          />
-        </ScrollViewMock>
-      </View>
-      <View
-        style={
-          Object {
-            "alignSelf": "flex-end",
-            "botton": "0",
-            "flex": 1,
-            "flexDirection": "column",
-            "justifyContent": "space-between",
-            "position": "absolute",
-          }
-        }
-      >
-        <Button
-          color="#fff"
-          onPress={[Function]}
-          title="Add Skill"
         />
+        <View
+          style={
+            Object {
+              "height": 300,
+              "width": 500,
+            }
+          }
+        >
+          <ScrollViewMock>
+            <AttributeItem
+              attributeName="academics"
+              skills1={Array []}
+            />
+            <AttributeItem
+              attributeName="crafts"
+              skills1={Array []}
+            />
+            <AttributeItem
+              attributeName="mental"
+              skills1={Array []}
+            />
+            <AttributeItem
+              attributeName="fitness"
+              skills1={Array []}
+            />
+            <AttributeItem
+              attributeName="community"
+              skills1={Array []}
+            />
+            <AttributeItem
+              attributeName="hobby"
+              skills1={Array []}
+            />
+          </ScrollViewMock>
+        </View>
       </View>
-    </View>
-  }
-/>
+    }
+  />
+</ImageBackground>
 `;

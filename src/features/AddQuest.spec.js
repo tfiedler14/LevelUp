@@ -54,8 +54,6 @@ describe('mapDispatchToProps', () => {
     const props = mapDispatchToProps(dispatch);
     props.putData('/', {}, '');
 
-    // This dispatch test doesn't feel very meaningful, but it shows that
-    // mapDispatchToProps is correctly executing SOME function.
     expect(dispatch).toHaveBeenCalledWith(expect.any(Function));
   });
 
@@ -64,8 +62,6 @@ describe('mapDispatchToProps', () => {
     const props = mapDispatchToProps(dispatch);
     props.getData({}, 'test');
 
-    // This dispatch test doesn't feel very meaningful, but it shows that
-    // mapDispatchToProps is correctly executing SOME function.
     expect(dispatch).toHaveBeenCalledWith(expect.any(Function));
   });
 

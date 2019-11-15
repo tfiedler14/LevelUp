@@ -13,7 +13,16 @@ import { attributes } from '../../Const';
 
 const attributeList = attributes;
 
-export const Profile = ({ getData, setLocation, skills, location, loading, auth, setLoading, profile }) => {
+export const Profile = ({
+  getData,
+  setLocation,
+  skills,
+  location,
+  loading,
+  auth,
+  setLoading,
+  profile
+}) => {
   const handleAddSkill = location => {
     setLocation('addSkill');
     console.log('chaning location to addSkill');
@@ -23,76 +32,76 @@ export const Profile = ({ getData, setLocation, skills, location, loading, auth,
   useEffect(() => {
     getData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/profile.json', 'profile');
     getData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/skills.json', 'skills');
-    getData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/attributes.json', 'attributes');
+    getData(
+      'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/attributes.json',
+      'attributes'
+    );
 
     //name now reflects actual logged in user name instead of always the name tom, cleaned up code for rendering skills by adding a new element called AttributeItem and adding array of attribute names to Const, made this section a scrollview but that is currently not working
     setLoading(true);
   }, []);
 
   return (
-    <ImageBackground source={require('../../assets/images/darkverylowopacityshapes.png')} style={{ height: '100%', width: '100%' }}>
+    <ImageBackground
+      source={require('../../assets/images/darkverylowopacityshapes.png')}
+      style={{ height: '100%', width: '100%' }}>
       <Async
         render={
           <View>
-           
+            <View>
+              <View style={{ position: 'absolute', alignSelf: 'flex-end', flex: 1, zIndex: 20 }}>
+                <Icon
+                  style={styles.padding}
+                  name="add"
+                  size={48}
+                  color="white"
+                  onPress={() => setLocation('addSkill')}
+                />
+                <Icon
+                  style={styles.padding}
+                  name="settings"
+                  size={48}
+                  color="white"
+                  onPress={() => setLocation('settings')}
+                />
+              </View>
               <View>
-                <View style={{ position: 'absolute', alignSelf: 'flex-end', flex: 1, zIndex: 20 }}>
-                  <Icon
-                    style={styles.padding}
-                    name="settings"
-                    size={48}
-                    color="white"
-                    onPress={() => setLocation('settings')}
-                  />
-                  <Icon
-                    style={styles.padding}
-                    name="add"
-                    size={48}
-                    color="white"
-                    onPress={() => setLocation('addSkill')}
-                  />
-                </View>
-                <View>
-                  <Text style={{ textAlign: 'center', fontSize: 26, color: 'white', marginTop: 20 }}>
-                    {profile.name}
-                  </Text>
-                </View>
-                <View style={{ flex: 1, alignItems: 'center', paddingTop: 20 }}>
-                  <Image
-                    style={styles.imageProfile}
-                    source={require('../../assets/images/waycoolercharacter.png')}
-                  />
-                  <View style={{ paddingTop: 15 }}>
-                    <Text>Level</Text>
-                    <Progress.Bar
-                      style={styles.progress}
-                      color="#55db37"
-                      height={15}
-                      progress={0.5}
-                    />
-                  </View>
-                </View>
-              < View style={{flex:1, paddingTop: 275}}>
+                <Text style={{ textAlign: 'center', fontSize: 26, color: 'white', marginTop: 20 }}>
+                  {profile.name}
+                </Text>
+              </View>
+              <View style={{ flex: 1, alignItems: 'center', paddingTop: 20 }}>
                 <Image
-                    source={require('../../assets/images/favorite.png')} style={{ resizeMode: 'contain', width: '100%'}}
+                  style={styles.imageProfile}
+                  source={require('../../assets/images/waycoolercharacter.png')}
+                />
+                <View style={{ paddingTop: 15 }}>
+                  <Text>Level</Text>
+                  <Progress.Bar
+                    style={styles.progress}
+                    color="#55db37"
+                    height={15}
+                    progress={0.5}
                   />
                 </View>
               </View>
-              <View style={{height:50, width:500}}></View>
-            
-
-            {console.log("Profile: ", profile)}
-          <View  style={{ height: 300, width: 500}}>
-            <ScrollView>
-              {attributeList.map(data => {
-                return (
-                  <AttributeItem attributeName={data} skills1={skills} />
-                )
-              })}
-            </ScrollView>
+              <View style={{ flex: 1, paddingTop: 275 }}>
+                <Image
+                  source={require('../../assets/images/favorite.png')}
+                  style={{ resizeMode: 'contain', width: '100%' }}
+                />
+              </View>
             </View>
+            <View style={{ height: 50, width: 500 }}></View>
 
-          
+            {console.log('Profile: ', profile)}
+            <View style={{ height: 300, width: 500 }}>
+              <ScrollView>
+                {attributeList.map(data => {
+                  return <AttributeItem attributeName={data} skills1={skills} />;
+                })}
+              </ScrollView>
+            </View>
           </View>
         }
       />
@@ -100,26 +109,27 @@ export const Profile = ({ getData, setLocation, skills, location, loading, auth,
   );
 };
 
-
 const AttributeItem = ({ attributeName, skills1 }) => {
   return (
     <View style={styles.skillSec}>
-      <Text style={{ color: '#ffffff', fontSize: 17 }}>{attributeName.charAt(0).toUpperCase() + attributeName.slice(1)}</Text>
+      <Text style={{ color: '#ffffff', fontSize: 17 }}>
+        {attributeName.charAt(0).toUpperCase() + attributeName.slice(1)}
+      </Text>
       <AttributeListItem
         skills={skills1
           .filter(skill => skill.attribute === attributeName)
           .map(data => ({ name: data.name, level: data.val }))}
       />
     </View>
-  )
-}
+  );
+};
 
 const AttributeListItem = ({ skills, levels }) => {
   return skills.map(data => {
     return (
       <View style={{ marginLeft: 45 }} key={data}>
         <Text style={{ color: '#ffffff' }}>
-          {data.name} -{data.level}
+          {data.name}: {data.level}
         </Text>
         <View>
           <Progress.Bar
@@ -151,7 +161,7 @@ const styles = EStyleSheet.create({
   imageProfile: {
     width: 225,
     height: 225,
-    resizeMode: 'stretch',
+    resizeMode: 'stretch'
   },
   progress: {
     height: 15,

@@ -1,58 +1,84 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SignIn should render sign up correctly 1`] = `
-<withTheme(Card)>
-  <View>
-    <FormHeader
-      title="Sign Up"
-    />
-    <Field
-      component={[Function]}
-      id="email"
-      name="email"
-      props={
-        Object {
-          "autoCompleteType": "email",
-          "textContentType": "emailAddress",
-          "title": "Email",
-        }
+<ImageBackground
+  source={1}
+  style={
+    Object {
+      "height": "100%",
+      "width": "100%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "paddingTop": 100,
       }
-    />
-    <Field
-      component={[Function]}
-      id="password"
-      name="password"
-      props={
-        Object {
-          "autoCompleteType": "password",
-          "password": true,
-          "textContentType": "password",
-          "title": "Password",
-        }
-      }
-    />
-    <Field
-      component={[Function]}
-      id="cpassword"
-      name="cpassword"
-      props={
-        Object {
-          "autoCompleteType": "password",
-          "password": true,
-          "textContentType": "password",
-          "title": "Confirm Password",
-        }
-      }
-    />
-    <View>
-      <withTheme(Button)
-        color="#222222"
-        mode="contained"
-        uppercase={false}
-      >
-        Sign Up
-      </withTheme(Button)>
-    </View>
+    }
+  >
+    <withTheme(Card)>
+      <View>
+        <FormHeader
+          title="Sign Up"
+        />
+        <Field
+          component={[Function]}
+          id="email"
+          name="email"
+          props={
+            Object {
+              "autoCompleteType": "email",
+              "textContentType": "emailAddress",
+              "title": "Email",
+            }
+          }
+        />
+        <Field
+          component={[Function]}
+          id="password"
+          name="password"
+          props={
+            Object {
+              "autoCompleteType": "password",
+              "password": true,
+              "textContentType": "password",
+              "title": "Password",
+            }
+          }
+        />
+        <Field
+          component={[Function]}
+          id="cpassword"
+          name="cpassword"
+          props={
+            Object {
+              "autoCompleteType": "password",
+              "password": true,
+              "textContentType": "password",
+              "title": "Confirm Password",
+            }
+          }
+        />
+        <View>
+          <withTheme(Button)
+            color="#de3c57"
+            mode="contained"
+            uppercase={false}
+          >
+            Sign Up
+          </withTheme(Button)>
+          <withTheme(Button)
+            color="white"
+            mode="text"
+            onPress={[Function]}
+            uppercase={false}
+          >
+            Sign In
+          </withTheme(Button)>
+        </View>
+      </View>
+    </withTheme(Card)>
   </View>
-</withTheme(Card)>
+</ImageBackground>
 `;

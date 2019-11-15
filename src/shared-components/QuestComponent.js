@@ -102,12 +102,13 @@ const styles = EStyleSheet.create({
   }
 });
 
-const mapStateToProps = state => {
+export const mapStateToProps = state => {
   return {
     location: state.location
   };
 };
-const mapDispatchToProps = dispatch => {
+
+export const mapDispatchToProps = dispatch => {
   return {
     setLocation: location => {
       dispatch(setLocation(location));
