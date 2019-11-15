@@ -120,7 +120,6 @@ const handleAddSkill = (auth, sID, skills,  values, putData, setSkills) => {
     })
 
 
-   // console.log('state', this.state.data.skills);
     setSkills(masterSkill);
     
 
