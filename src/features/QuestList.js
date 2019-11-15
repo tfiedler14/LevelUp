@@ -36,7 +36,7 @@ export const QuestList = ({ getData, setLocation, quests, location, auth }) => {
       <ScrollView>
         <View>
           {quests &&
-            Object.values(quests).map((quest, index) => {
+            Object.values(quests).filter(quest=>quest!=null).map((quest, index) => {
               return (
                 <View
                   style={{

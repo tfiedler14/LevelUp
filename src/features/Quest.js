@@ -10,7 +10,7 @@ import { WrappedTextInput } from '../shared-components/FormField';
 import { Field, reduxForm } from 'redux-form';
 import { compose } from 'redux';
 
-export const Quest = ({ info, setLocation, auth, putData, handleSubmit }) => {
+export const Quest = ({ info, setLocation, deleteData, auth, putData, handleSubmit }) => {
   return (
     <View style={styles.sectionHeight}>
       <View style={styles.formPadding}>
