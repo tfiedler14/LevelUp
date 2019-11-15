@@ -26,7 +26,7 @@ export const Quest = ({ info, auth, putData, handleSubmit }) => {
             <View>
               <View style={styles.infoWrapper}>
                 <Text style={styles.description}>
-                  {info ? ('Quest Description: ' + info.description) : 'Not Available'}
+                  {info ? ('Quest Description: ' + info.index) : 'Not Available'}
                 </Text>
                 <Text style={styles.skills}>{info ? ('Associated Skills: ' + info.skill) : 'No Info'}</Text>
                 <Text style={styles.time}>{info ? ('Quest Length: ' + info.time) : 'No Info'}</Text>
