@@ -29,13 +29,6 @@ export const WrappedTextInput = props => {
 };
 
 
-<<<<<<< HEAD
-=======
-export const DropdownList = props =>{
-  const { title, input, textContentType, autoCompleteType, password, multiline, meta, ...inputProps } = props;
-
-};
->>>>>>> 1f486c7477df13d9948993f333b18db0740ecaae
 
 const styles = EStyleSheet.create({
   textEntry: {

@@ -93,46 +93,19 @@ export const AddSkill = ({ auth, skills, setLocation, location, handleSubmit, pu
 const handleAddSkill = (auth, sID, skills,  values, putData, setSkills) => {
     console.log(sID);
     
-    // let key = values.addSkillAttribute;
-    // let value = values.addSkillDefinition;
-    // let insert = {values.attributeDropDown : values}
-    console.log(values);
-    console.log(values.addSkillAttribute);
-    console.log(values.addSkillDefinition);
-    // inserting newSkill { attr: def , val: 0}
-    //insert skill to {sID : newSkill}
-    //also need to add old skills to master
-    //for each object is skills
-    //master.push(skill)
-    //add skill to master [{sid: newSkill}]
     let toInsert = {};
-    let masterSkill = [];
+    let masterSkill = skills;
     toInsert[values.addSkillAttribute] = values.addSkillDefinition;
     toInsert["val"] = 0;
-    masterSkill.push({sID: toInsert});
+    masterSkill.push({sID : toInsert});
     console.log("mater", masterSkill);
-    Object.entries(skills).forEach( prevSkill => {
-        if(prevSkill[1] && prevSkill[1] !== "empty"){
-           console.log(prevSkill);
-        }
-        console.log('prevSkill', prevSkill);
-      
-    })
-
 
     setSkills(masterSkill);
-    
 
-    console.log("TOMM VALUES THE FIRST TIME RIGHT HERE", toInsert);
-    console.log("TOMM skills THE FIRST TIME RIGHT HERE", skills);
-
-    
-    
-
-        putData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + 'skills.json', {
+    putData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + 'skills.json', {
  
-       skills:  masterSkill,
-      }, 'profile');
+        masterSkill,
+      }, 'profile', );
 }
 
 
