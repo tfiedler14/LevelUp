@@ -135,7 +135,7 @@ export const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
+export const mapDispatchToProps = dispatch => {
   return {
     setLocation: location => {
       dispatch(setLocation(location));

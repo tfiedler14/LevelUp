@@ -13,7 +13,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import { FormHeader } from '../shared-components/FormHeader';
 import {AppLoading} from 'expo'
 
-export const SignIn = ({ setLocation, handleSubmit, setAuthentication, initialize, setErrors, errors, values }) => {
+export const SignIn = ({ setLocation, handleSubmit, setAuthentication, setErrors, errors }) => {
   // const [initialized, setInitialized] = useState(false);
 
   /*useEffect(() => {
@@ -131,16 +131,13 @@ export const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
+export const mapDispatchToProps = dispatch => {
   return {
     setAuthentication: auth => {
       dispatch(setAuth(auth));
     },
     setLocation: location => {
       dispatch(setLocation(location));
-    },
-    initialize: values => {
-      dispatch(initialize('sign-in-form', values));
     },
     setErrors: errors => {
       dispatch(setErrors(errors));

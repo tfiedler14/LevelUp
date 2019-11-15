@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Settings should render Settings correctly with no auth 1`] = `
+exports[`Settings should render Settings correctly while unauthorized 1`] = `
 <ReduxForm
   destroyOnUnmount={true}
   enableReinitialize={false}
@@ -20,4 +20,79 @@ exports[`Settings should render Settings correctly with no auth 1`] = `
   updateUnregisteredFields={false}
   validate={[Function]}
 />
+`;
+
+exports[`Settings should render Settings correctly with auth 1`] = `
+<View>
+  <ScrollViewMock>
+    <withTheme(Card)>
+      <View>
+        <FormHeader
+          title="Edit Settings"
+        />
+        <Field
+          component={[Function]}
+          id="email"
+          name="email"
+          props={
+            Object {
+              "title": "Change Email (optional)",
+            }
+          }
+        />
+        <Field
+          component={[Function]}
+          id="password"
+          name="password"
+          props={
+            Object {
+              "autoCompleteType": "password",
+              "password": true,
+              "textContentType": "password",
+              "title": "Change Password (optional)",
+            }
+          }
+        />
+        <Field
+          component={[Function]}
+          id="cpassword"
+          name="cpassword"
+          props={
+            Object {
+              "autoCompleteType": "password",
+              "password": true,
+              "textContentType": "password",
+              "title": "Confirm Change Password (optional)",
+            }
+          }
+        />
+        <View>
+          <withTheme(Button)
+            color="#de3c57"
+            mode="contained"
+            uppercase={false}
+          >
+            Save Profile
+          </withTheme(Button)>
+          <withTheme(Button)
+            color="#fff"
+            mode="text"
+            onPress={[Function]}
+            uppercase={false}
+          >
+            Sign Out
+          </withTheme(Button)>
+          <withTheme(Button)
+            color="#f33"
+            mode="text"
+            onPress={[Function]}
+            uppercase={false}
+          >
+            Delete Account
+          </withTheme(Button)>
+        </View>
+      </View>
+    </withTheme(Card)>
+  </ScrollViewMock>
+</View>
 `;

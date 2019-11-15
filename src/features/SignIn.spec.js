@@ -1,23 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { mapStateToProps, SignIn, validate } from './SignIn';
+import { mapDispatchToProps, mapStateToProps, SignIn, validate } from './SignIn';
 
 describe('SignIn', () => {
-  const quests = [
-    {
-      description: 'test',
-      expVal: 10,
-      name: 'testing',
-      skill: 'jest'
-    },
-    {
-      description: 'atest',
-      expVal: 10,
-      name: 'testingstuff',
-      skill: 'enzyme'
-    }
-  ];
-
   it('should render sign in correctly', () => {
     const component = shallow(
       <SignIn
@@ -27,6 +12,22 @@ describe('SignIn', () => {
         initialize={jest.fn()}
         setErrors={jest.fn()}
         errors={[]}
+        values={[]}
+      />
+    );
+
+    expect(component).toMatchSnapshot();
+  });
+
+  it('should render sign in correctly with errors', () => {
+    const component = shallow(
+      <SignIn
+        setLocation={jest.fn()}
+        handleSubmit={jest.fn()}
+        setAuthentication={jest.fn()}
+        initialize={jest.fn()}
+        setErrors={jest.fn()}
+        errors={{signIn: "the app is on fire"}}
         values={[]}
       />
     );
@@ -103,5 +104,31 @@ describe('validatorTest', () => {
     ).toEqual({
       password: 'Must be 6-16 characters'
     });
+  });
+});
+
+describe('mapDispatchToProps', () => {
+  it('should dispatch setAuthentication when setAuthentication is called', () => {
+    const dispatch = jest.fn();
+    const props = mapDispatchToProps(dispatch);
+    props.setAuthentication('home');
+
+    expect(dispatch).toHaveBeenCalledWith({ auth: 'home', type: 'SET_AUTH' });
+  });
+
+  it('should dispatch setErrors when setErrors is called', () => {
+    const dispatch = jest.fn();
+    const props = mapDispatchToProps(dispatch);
+    props.setErrors({});
+
+    expect(dispatch).toHaveBeenCalledWith({ errors: {}, type: 'SET_ERRORS'});
+  });
+
+  it('should dispatch setLocation when setLocation is called', () => {
+    const dispatch = jest.fn();
+    const props = mapDispatchToProps(dispatch);
+    props.setLocation('home');
+
+    expect(dispatch).toHaveBeenCalledWith({ location: 'home', type: 'SET_LOCATION' });
   });
 });

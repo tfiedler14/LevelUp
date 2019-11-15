@@ -2,54 +2,177 @@
 
 exports[`SignIn should render sign in correctly 1`] = `
 <Fragment>
-  <withTheme(Card)>
-    <View>
-      <FormHeader
-        title="Sign In"
-      />
-      <Field
-        component={[Function]}
-        id="email"
-        name="email"
-        props={
+  <ImageBackground
+    source={1}
+    style={
+      Object {
+        "height": "100%",
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "paddingTop": 150,
+        }
+      }
+    >
+      <Image
+        source={1}
+        style={
           Object {
-            "autoCompleteType": "email",
-            "textContentType": "emailAddress",
-            "title": "Email",
+            "alignSelf": "center",
+            "resizeMode": "contain",
+            "width": "92%",
           }
         }
       />
-      <Field
-        component={[Function]}
-        id="password"
-        name="password"
-        props={
-          Object {
-            "autoCompleteType": "password",
-            "password": true,
-            "textContentType": "password",
-            "title": "Password",
-          }
-        }
-      />
-      <View>
-        <withTheme(Button)
-          color="#222222"
-          mode="contained"
-          uppercase={false}
-        >
-          Sign In
-        </withTheme(Button)>
-        <withTheme(Button)
-          color="#222222"
-          mode="text"
-          onPress={[Function]}
-          uppercase={false}
-        >
-          Need an account? Sign up!
-        </withTheme(Button)>
-      </View>
+      <withTheme(Card)>
+        <View>
+          <FormHeader
+            title="Sign In"
+          />
+          <Field
+            component={[Function]}
+            id="email"
+            name="email"
+            props={
+              Object {
+                "autoCompleteType": "email",
+                "textContentType": "emailAddress",
+                "title": "Email",
+              }
+            }
+          />
+          <Field
+            component={[Function]}
+            id="password"
+            name="password"
+            props={
+              Object {
+                "autoCompleteType": "password",
+                "password": true,
+                "textContentType": "password",
+                "title": "Password",
+              }
+            }
+          />
+          <View>
+            <withTheme(Button)
+              color="#cda845"
+              mode="contained"
+              uppercase={false}
+            >
+              Sign In
+            </withTheme(Button)>
+            <withTheme(Button)
+              color="white"
+              mode="text"
+              onPress={[Function]}
+              uppercase={false}
+            >
+              Need an account? Sign up!
+            </withTheme(Button)>
+          </View>
+        </View>
+      </withTheme(Card)>
     </View>
-  </withTheme(Card)>
+  </ImageBackground>
+</Fragment>
+`;
+
+exports[`SignIn should render sign in correctly with errors 1`] = `
+<Fragment>
+  <ImageBackground
+    source={1}
+    style={
+      Object {
+        "height": "100%",
+        "width": "100%",
+      }
+    }
+  >
+    <withTheme(Card)>
+      <View>
+        <Text
+          style={
+            Object {
+              "color": "#FFFFFF",
+            }
+          }
+        >
+          Incorrect email and password combination
+        </Text>
+      </View>
+    </withTheme(Card)>
+    <View
+      style={
+        Object {
+          "paddingTop": 150,
+        }
+      }
+    >
+      <Image
+        source={1}
+        style={
+          Object {
+            "alignSelf": "center",
+            "resizeMode": "contain",
+            "width": "92%",
+          }
+        }
+      />
+      <withTheme(Card)>
+        <View>
+          <FormHeader
+            title="Sign In"
+          />
+          <Field
+            component={[Function]}
+            id="email"
+            name="email"
+            props={
+              Object {
+                "autoCompleteType": "email",
+                "textContentType": "emailAddress",
+                "title": "Email",
+              }
+            }
+          />
+          <Field
+            component={[Function]}
+            id="password"
+            name="password"
+            props={
+              Object {
+                "autoCompleteType": "password",
+                "password": true,
+                "textContentType": "password",
+                "title": "Password",
+              }
+            }
+          />
+          <View>
+            <withTheme(Button)
+              color="#cda845"
+              mode="contained"
+              uppercase={false}
+            >
+              Sign In
+            </withTheme(Button)>
+            <withTheme(Button)
+              color="white"
+              mode="text"
+              onPress={[Function]}
+              uppercase={false}
+            >
+              Need an account? Sign up!
+            </withTheme(Button)>
+          </View>
+        </View>
+      </withTheme(Card)>
+    </View>
+  </ImageBackground>
 </Fragment>
 `;

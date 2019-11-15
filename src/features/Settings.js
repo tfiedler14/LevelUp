@@ -1,4 +1,3 @@
-import { getData, putData } from '../logic/data/actions';
 import { setAuth } from '../logic/auth/actions';
 import { View, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
@@ -13,41 +12,25 @@ import { Button, Card } from 'react-native-paper';
 import { FormHeader } from '../shared-components/FormHeader';
 import { firebaseApp } from '../../Const';
 
-export const Settings = ({
-  setLocation,
-  putData,
-  auth,
-  handleSubmit,
-  setAuth,
-  profile,
-  values
-}) => {
+export const Settings = ({ setLocation, auth, handleSubmit, setAuth }) => {
   if (auth.loggedIn) {
     return (
       <View style={styles.sectionHeight}>
         <ScrollView>
           <Card style={styles.card}>
             <View>
-              <FormHeader title={'Edit Profile'} />
-              <Field name="name" id="name" props={{ title: 'Name' }} component={WrappedTextInput} />
+              <FormHeader title={'Edit Settings'} />
               <Field
-                name="gender"
-                id="gender"
-                props={{ title: 'Gender' }}
-                component={WrappedTextInput}
-              />
-              <Field name="age" id="age" props={{ title: 'Age' }} component={WrappedTextInput} />
-              <Field
-                name="image"
-                id="image"
-                props={{ title: 'Profile Image (optional)' }}
+                name="email"
+                id="email"
+                props={{ title: 'Change Email (optional)' }}
                 component={WrappedTextInput}
               />
               <Field
                 name="password"
                 id="password"
                 props={{
-                  title: 'Password (optional)',
+                  title: 'Change Password (optional)',
                   textContentType: 'password',
                   autoCompleteType: 'password',
                   password: true
@@ -58,7 +41,7 @@ export const Settings = ({
                 name="cpassword"
                 id="cpassword"
                 props={{
-                  title: 'Confirm Password',
+                  title: 'Confirm Change Password (optional)',
                   textContentType: 'password',
                   autoCompleteType: 'password',
                   password: true
@@ -75,30 +58,20 @@ export const Settings = ({
                       firebaseApp
                         .auth()
                         .currentUser.updatePassword(values.password)
-                        .then(() => {
-                          putData(
-                            'https://roommate-finder-afd9b.firebaseio.com/users/' +
-                              auth.uid +
-                              '/profile.json',
-                            {
-                              ...values,
-                              favorites: profile.profile.favorites
-                            },
-                            'profile'
-                          );
-                        })
                         .catch(error => {
                           console.log('Password not updated');
                         });
-                    } else {
-                      putData(
-                        'https://roommate-finder-afd9b.firebaseio.com/users/' +
-                          auth.uid +
-                          '/profile.json',
-                        values,
-                        'profile'
-                      );
                     }
+
+                    if (values.email) {
+                      firebaseApp
+                        .auth()
+                        .currentUser.updateEmail(values.email)
+                        .catch(error => {
+                          console.log('Email not updated');
+                        });
+                    }
+                    setLocation(values.email ? 'signin' : 'profile');
                   })}>
                   Save Profile
                 </Button>
@@ -107,10 +80,24 @@ export const Settings = ({
                   uppercase={false}
                   mode="text"
                   onPress={() => {
-                    // TODO: no op -- need a sign out action
                     handleSignOut(setAuth, setLocation);
                   }}>
                   Sign Out
+                </Button>
+                <Button
+                  color="#f33"
+                  uppercase={false}
+                  mode="text"
+                  onPress={() => {
+                    firebaseApp
+                      .auth()
+                      .currentUser.delete()
+                      .then(setLocation('signin'))
+                      .catch(error => {
+                        console.log('User not deleted.');
+                      });
+                  }}>
+                  Delete Account
                 </Button>
               </View>
             </View>
@@ -157,66 +144,38 @@ const styles = EStyleSheet.create({
   }
 });
 
-const mapStateToProps = state => {
+export const mapStateToProps = state => {
   return {
     auth: state.auth,
-    profile: state.data.profile,
-    initialValues: {...state.data.profile.profile, password: undefined, cpassword: undefined},
     values: getFormValues('settings-form')(state)
   };
 };
 
-const mapDispatchToProps = dispatch => {
+export const mapDispatchToProps = dispatch => {
   return {
-    putData: (path, data, redirect) => {
-      dispatch(putData(path, data, redirect));
-    },
-    getData: (data, dataPoint) => {
-      dispatch(getData(data, dataPoint));
-    },
     setLocation: location => {
       dispatch(setLocation(location));
     },
     setAuth: auth => {
       dispatch(setAuth(auth));
-    },
-    initialize: values => {
-      dispatch(initialize('settings-form', values));
     }
   };
 };
 
-const validate = values => {
+export const validate = values => {
   const errors = {};
 
-  if (!values.name) {
-    errors.name = 'Required';
-  } else if (values.name.length > 100) {
-    errors.name = 'Must be less than 100 characters';
+  if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    errors.email = 'Invalid email address';
   }
 
-  /*if (!values.gender) {
-    errors.gender = 'Required';
-  } else if (values.gender.length > 20) {
-    errors.gender = 'Must be less than 20 characters';
+  if (values.password && (values.password.length < 6 || values.password.length > 16)) {
+    errors.password = 'Must be 6-16 characters';
   }
 
-  if (!values.age) {
-    errors.age = 'Required';
-  } else if (isNaN(values.age)) {
-    errors.age = 'Must be a number';
-  } else if (parseInt(values.age, 10) < 15 || parseInt(values.age, 10) > 90) {
-    errors.age = 'Must be 15-90';
+  if (values.cpassword !== values.password) {
+    errors.cpassword = 'Passwords must match';
   }
-  if (values.password) {
-    if (values.password.length < 6 || values.password.length > 16) {
-      errors.password = 'Must be 6-16 characters';
-    }
-
-    if (values.cpassword !== values.password) {
-      errors.cpassword = 'Passwords must match';
-    }
-  }*/
 
   return errors;
 };

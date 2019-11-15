@@ -19,45 +19,12 @@ export const QuestComponent = ({ info, setLocation, setQuest, deleteData }) => {
       <Grid style={{ width: '100%' }}>
         <Col size={2}>
           <View style={styles.informationWrapper}>
-              <Grid>
-                <Col size={6}>
-                  <View style={{ position: 'absolute' }}>
-                    <Text style={styles.questName}>{info ? info.name : 'No Info'}</Text>
-                  </View>
-                </Col>
-                <Col size={1}>
-                  <View style={{ position: 'absolute' }}>
-                    <Icon
-                      name="edit"
-                      size={24}
-                      color="#999999"
-                      onPress={() => {
-                        setQuest(info);
-                        setLocation('editQuest');
-                      }}
-                    />
-                  </View>
-                </Col>
-                <Col size={1}>
-                  <View style={{ position: 'absolute' }}>
-                    <Icon
-                      name="delete"
-                      size={24}
-                      color="#999999"
-                      onPress={() => {
-                        deleteData("https://roommate-finder-afd9b.firebaseio.com/houses/" + info.id + ".json", "home");
-                      }}
-                    />
-                  </View>
-                </Col>
-              </Grid>
-              <View style={{ position: 'absolute' }}>
-                <Text style={styles.questName}>{info ? info.name : 'No Info'}</Text>
-              </View>
+            <View style={{ position: 'absolute' }}>
+              <Text style={styles.questName}>{info ? info.name : 'No Info'}</Text>
+            </View>
           </View>
           <View style={styles.informationWrapper}>
-            <Text style={styles.availability}>{info ? ('Description: ' + info.description) : 'No Description'}</Text>
-
+            <Text style={styles.skills}>{info ? ('Skills: ' + (info.skill)) : 'No skills'}</Text>
           </View>
         </Col>
       </Grid>
@@ -68,46 +35,44 @@ export const QuestComponent = ({ info, setLocation, setQuest, deleteData }) => {
 const styles = EStyleSheet.create({
   card: {
     width: '100%',
-    height: '8rem',
+    height: '4rem',
     //  border: 'none',
-    marginBottom: '1rem',
+    marginBottom: '.4rem',
     color: 'white',
-    backgroundColor: '#555'
+    backgroundColor: 'transparent'
   },
-
   informationWrapper: {
-    marginTop: '1rem',
+    paddingTop: '.3rem',
+    marginTop: '.5rem',
     marginBottom: '.5rem',
-    marginRight: '1rem'
+    marginRight: '.5rem',
+    marginLeft: '.5rem'
   },
 
   questName: {
     fontWeight: 'bold',
     fontSize: '1rem',
-    marginBottom: '.5rem'
+    marginBottom: '1rem',
+    color: 'white'
     // fontFamily: 'sans-serif',
   },
 
-  availability: {
+  skills: {
     fontSize: '1rem',
     marginBottom: '.5rem',
-    fontStyle: 'italic'
+    fontStyle: 'italic',
+    color: 'white'
     // fontFamily: 'sans-serif',
   },
-
-  subText: {
-    fontSize: '.85rem',
-    marginBottom: '.25rem'
-    // fontFamily: 'sans-serif',
-  }
 });
 
-const mapStateToProps = state => {
+export const mapStateToProps = state => {
   return {
     location: state.location
   };
 };
-const mapDispatchToProps = dispatch => {
+
+export const mapDispatchToProps = dispatch => {
   return {
     setLocation: location => {
       dispatch(setLocation(location));

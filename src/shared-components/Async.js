@@ -6,7 +6,7 @@ export const Async = ({ render, loading }) => {
   return <View>{loading ? <Text>Loading...</Text> : render}</View>;
 };
 
-const mapStateToProps = state => {
+export const mapStateToProps = state => {
   return {
     loading: state.loading
   };
