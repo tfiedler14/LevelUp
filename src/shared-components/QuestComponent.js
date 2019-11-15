@@ -14,6 +14,7 @@ export const QuestComponent = ({ info, key, setLocation, setQuest, deleteData })
       style={styles.card}
       onPress={() => {
         info.index = key;
+        console.log("Info: ",info);
         setQuest(info);
         setLocation('quest');
       }}>

@@ -44,7 +44,7 @@ export const QuestList = ({ getData, setLocation, quests, location, auth }) => {
                     borderBottomWidth: 1,
                   }}
                 >
-                <QuestComponent key={index} info={quest} />
+                <QuestComponent info={{...quest, id:index}} />
               </View>);
             })}
         </View>

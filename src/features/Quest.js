@@ -1,7 +1,7 @@
 import { Image, ScrollView, Text, View } from 'react-native';
 import React from 'react';
 import { Button, Card } from 'react-native-paper';
-import { getData, putData } from '../logic/data/actions';
+import { getData, putData, deleteData } from '../logic/data/actions';
 import { setLocation } from '../logic/location/actions';
 import { connect } from 'react-redux';
 import EStyleSheet from 'react-native-extended-stylesheet';
@@ -26,7 +26,7 @@ export const Quest = ({ info, auth, putData, handleSubmit }) => {
             <View>
               <View style={styles.infoWrapper}>
                 <Text style={styles.description}>
-                  {info ? ('Quest Description: ' + info.index) : 'Not Available'}
+                  {info ? ('Quest Description: ' + info.description) : 'Not Available'}
                 </Text>
                 <Text style={styles.skills}>{info ? ('Associated Skills: ' + info.skill) : 'No Info'}</Text>
                 <Text style={styles.time}>{info ? ('Quest Length: ' + info.time) : 'No Info'}</Text>
@@ -57,7 +57,11 @@ export const Quest = ({ info, auth, putData, handleSubmit }) => {
               <Button
                 color="#cda845"
                 uppercase={false}
-                mode="contained">
+                mode="contained"
+                onPress={() => {
+                  deleteData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests/' + info.id + '.json', 'quest');
+                  setLocation('questlist');
+                }}>
                 Delete Quest
               </Button>
             </View>
@@ -146,7 +150,7 @@ const styles = EStyleSheet.create({
 const mapStateToProps = state => {
   return {
     info: state.data.quest,
-    auth: state.auth
+    auth: state.auth,
   };
 };
 
@@ -155,9 +159,15 @@ const mapDispatchToProps = dispatch => {
     putData: (path, data, redirect) => {
       dispatch(putData(path, data, redirect));
     },
+    setLocation: location => {
+        dispatch(setLocation(location));
+    },
     getData: (data, dataPoint) => {
       dispatch(getData(data, dataPoint));
-    }
+    },
+    deleteData: (data, location) => {
+      dispatch(deleteData(data, location));
+    },
   };
 };
 
