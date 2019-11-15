@@ -10,7 +10,7 @@ import { WrappedTextInput } from '../shared-components/FormField';
 import { Field, reduxForm } from 'redux-form';
 import { compose } from 'redux';
 
-export const Quest = ({ info, auth, putData, handleSubmit }) => {
+export const Quest = ({ info, setLocation, auth, putData, handleSubmit }) => {
   return (
     <View style={styles.sectionHeight}>
       <View style={styles.formPadding}>
@@ -37,7 +37,10 @@ export const Quest = ({ info, auth, putData, handleSubmit }) => {
               <Button
                 color="#cda845"
                 uppercase={false}
-                mode="contained">
+                mode="contained"
+                onPress={() => {
+                  setLocation('questlist');
+                }}>
                 Complete Quest
             </Button>
 
