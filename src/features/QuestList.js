@@ -9,6 +9,7 @@ import {Divider} from 'react-native-elements';
 import QuestComponent from '../shared-components/QuestComponent';
 import { Card } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { Col, Grid } from 'react-native-easy-grid';
 
 export const QuestList = ({ getData, setLocation, quests, location, auth }) => {
   /* istanbul ignore next */
@@ -18,9 +19,11 @@ export const QuestList = ({ getData, setLocation, quests, location, auth }) => {
   return (
     <View style={styles.sectionHeight}>
       <View style = {styles.sectionPadding}>
+
         <Text style={{ textAlign: 'center', fontSize: 26, color: 'white', marginTop: 20 }}>
           {'Active Quests'}
         </Text>
+
       </View>
       <ScrollView>
         <View>
@@ -58,7 +61,7 @@ const styles = EStyleSheet.create({
     justifyContent: 'center'
   },
   sectionHeight: {
-    height: '100%'
+    height: '100%',
   },
   addIconPadding: {
     padding: '1rem'

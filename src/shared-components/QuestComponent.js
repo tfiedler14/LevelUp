@@ -50,7 +50,10 @@ const styles = EStyleSheet.create({
     color: 'white',
     backgroundColor: '#555'
   },
-
+  questnameContainer: {
+    position: 'absolute',
+    padding: '.5rem'
+  },
   informationWrapper: {
     marginTop: '.5rem',
     marginBottom: '.5rem',
@@ -61,14 +64,16 @@ const styles = EStyleSheet.create({
   questName: {
     fontWeight: 'bold',
     fontSize: '1rem',
-    marginBottom: '1rem'
+    marginBottom: '1rem',
+    color: 'white'
     // fontFamily: 'sans-serif',
   },
 
-  availability: {
+  description: {
     fontSize: '1rem',
     marginBottom: '.5rem',
-    fontStyle: 'italic'
+    fontStyle: 'italic',
+    color: 'white'
     // fontFamily: 'sans-serif',
   },
 
