@@ -69,18 +69,10 @@ const styles = EStyleSheet.create({
   sectionHeight: {
     height: '100%',
   },
-  addIconPadding: {
-    padding: '1rem'
-  },
-
   sectionPadding: {
     padding: '2rem',
     flexDirection: 'row'
   },
-
-  buttons: {
-    margin: '1rem'
-  }
 });
 
 const mapDispatchToProps = dispatch => {

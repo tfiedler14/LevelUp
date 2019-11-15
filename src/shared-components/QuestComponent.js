@@ -41,10 +41,6 @@ const styles = EStyleSheet.create({
     color: 'white',
     backgroundColor: 'transparent'
   },
-  questnameContainer: {
-    position: 'absolute',
-    padding: '.5rem'
-  },
   informationWrapper: {
     paddingTop: '.3rem',
     marginTop: '.5rem',
@@ -68,12 +64,6 @@ const styles = EStyleSheet.create({
     color: 'white'
     // fontFamily: 'sans-serif',
   },
-
-  subText: {
-    fontSize: '.85rem',
-    marginBottom: '.25rem'
-    // fontFamily: 'sans-serif',
-  }
 });
 
 export const mapStateToProps = state => {

@@ -89,38 +89,9 @@ const styles = EStyleSheet.create({
     paddingRight: '1rem',
     backgroundColor: 'transparent'
   },
-  buttonPadding: {
-    padding: '20rem'
-  },
-  comment: {
-    marginBottom: '1rem',
-    padding: '1rem'
-  },
-
-  poster: {
-    fontWeight: 'bold'
-  },
-
-  imageWrapper: {
-    flex: 1,
-    height: '10rem'
-  },
 
   infoWrapper: {
     paddingTop: '1rem'
-  },
-
-  imageArea: {
-    width: '100%',
-    height: '10rem'
-  },
-
-  questName: {
-    fontWeight: 'bold',
-    fontSize: '3rem',
-    marginBottom: '.5rem',
-    color: 'white'
-    // fontFamily: 'sans-serif',
   },
 
   description: {
@@ -190,22 +161,9 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const validate = values => {
-  const errors = {};
-
-  if (!values.comment) {
-    errors.comment = 'Required';
-  } else if (values.comment.length > 2000) {
-    errors.comment = 'Must be less than 3000 characters';
-  }
-
-  return errors;
-};
-
 export default compose(
   connect(
     mapStateToProps,
     mapDispatchToProps
-  ),
-  reduxForm({ form: 'quest-comment-form', validate })
+  )
 )(Quest);
