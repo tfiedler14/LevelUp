@@ -34,7 +34,7 @@ export const Profile = ({ getData, setLocation, skills, location, loading, auth,
       <Async
         render={
           <View>
-            <View>
+           
               <View>
                 <View style={{ position: 'absolute', alignSelf: 'flex-end', flex: 1, zIndex: 20 }}>
                   <Icon
@@ -78,27 +78,21 @@ export const Profile = ({ getData, setLocation, skills, location, loading, auth,
                   />
                 </View>
               </View>
-            </View>
+              <View style={{height:50, width:500}}></View>
+            
 
             {console.log("Profile: ", profile)}
-
-            <ScrollView style={{paddingTop: 25, paddingLeft: 15}}>
+          <View  style={{ height: 300, width: 500}}>
+            <ScrollView>
               {attributeList.map(data => {
                 return (
                   <AttributeItem attributeName={data} skills1={skills} />
                 )
               })}
             </ScrollView>
+            </View>
 
-            <View
-              style={{
-                flex: 1,
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                alignSelf: 'flex-end',
-                position: 'absolute',
-                botton: '0'
-              }} />
+          
           </View>
         }
       />
