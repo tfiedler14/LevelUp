@@ -12,6 +12,8 @@ import { compose } from 'redux';
 export const Quest = ({ info, auth, putData, handleSubmit }) => {
   return (
     <View style={styles.sectionHeight}>
+      <View style={styles.formPadding}>
+      </View>
       <ScrollView>
         <View style={styles.formPadding}>
           <Card style={styles.card}>
@@ -47,7 +49,6 @@ const styles = EStyleSheet.create({
     marginBottom: '1rem',
     height: '30rem',
     padding: '1rem',
-    color: '#cda845',
     backgroundColor: '#555'
   },
   buttonPadding: {

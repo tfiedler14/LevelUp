@@ -17,8 +17,13 @@ export const QuestList = ({ getData, setLocation, quests, location, auth }) => {
   }, []);
   return (
     <View style={styles.sectionHeight}>
+      <View style = {styles.sectionPadding}>
+        <Text style={{ textAlign: 'center', fontSize: 26, color: 'white', marginTop: 20 }}>
+          {'Active Quests'}
+        </Text>
+      </View>
       <ScrollView>
-        <View style={styles.sectionPadding}>
+        <View>
           {quests &&
             Object.values(quests).map((quest, index) => {
               return (<QuestComponent key={index} info={quest} />);
@@ -34,7 +39,6 @@ export const QuestList = ({ getData, setLocation, quests, location, auth }) => {
                   name="add"
                   size={48}
                   color="#999999"
-
                   />
               </View>
             </Card>
@@ -54,14 +58,14 @@ const styles = EStyleSheet.create({
     justifyContent: 'center'
   },
   sectionHeight: {
-    height: '100% - 6rem'
+    height: '100%'
   },
   addIconPadding: {
-    padding: '1 `rem'
+    padding: '1rem'
   },
 
   sectionPadding: {
-    padding: '1rem'
+    padding: '2rem'
   },
 
   buttons: {

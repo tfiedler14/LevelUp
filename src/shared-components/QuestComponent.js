@@ -25,31 +25,7 @@ export const QuestComponent = ({ info, setLocation, setQuest, deleteData }) => {
                     <Text style={styles.questName}>{info ? info.name : 'No Info'}</Text>
                   </View>
                 </Col>
-                <Col size={1}>
-                  <View style={{ position: 'absolute' }}>
-                    <Icon
-                      name="edit"
-                      size={24}
-                      color="#999999"
-                      onPress={() => {
-                        setQuest(info);
-                        setLocation('editQuest');
-                      }}
-                    />
-                  </View>
-                </Col>
-                <Col size={1}>
-                  <View style={{ position: 'absolute' }}>
-                    <Icon
-                      name="delete"
-                      size={24}
-                      color="#999999"
-                      onPress={() => {
-                        deleteData("https://roommate-finder-afd9b.firebaseio.com/houses/" + info.id + ".json", "home");
-                      }}
-                    />
-                  </View>
-                </Col>
+
               </Grid>
               <View style={{ position: 'absolute' }}>
                 <Text style={styles.questName}>{info ? info.name : 'No Info'}</Text>
