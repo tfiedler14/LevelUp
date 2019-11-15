@@ -28,6 +28,8 @@ export const WrappedTextInput = props => {
   );
 };
 
+
+
 const styles = EStyleSheet.create({
   textEntry: {
     borderBottomColor: '#ccc',

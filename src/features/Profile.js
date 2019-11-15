@@ -25,7 +25,11 @@ export const Profile = ({ getData, setLocation, skills, location, loading, auth,
     getData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/skills.json', 'skills');
     getData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/attributes.json', 'attributes');
 
-    //name now reflects actual logged in user name instead of always the name tom, cleaned up code for rendering skills by adding a new element called AttributeItem and adding array of attribute names to Const, made this section a scrollview but that is currently not working
+    //name now reflects actual logged in user name instead of always the name tom, 
+    //cleaned up code for rendering skills by adding a new element called AttributeItem 
+    //and adding array of attribute names to Const, made this section a scrollview 
+    //but that is currently not working
+    
     setLoading(true);
   }, []);
 
