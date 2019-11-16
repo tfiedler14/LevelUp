@@ -19,13 +19,14 @@ export const AddQuest = ({
   auth,
   handleSubmit,
   profile,
+  quest,
   quests
 }) => {
   const uid = require('uuid/v4');
   let id = uid();
 
   const [initialized, setInitialized] = useState(false);
-  /* istanbul ignore next */
+  /* istanbul ignore next*/
   useEffect(() => {
     if (!initialized) {
       initialize(editProp ? profile.quest : {});
@@ -66,7 +67,17 @@ export const AddQuest = ({
             mode="contained"
             style={styles.buttons}
             onPress={handleSubmit(values => {
-              
+             if(editProp){
+              var newQuests = [...quests];
+              newQuests[quest.id] = values; 
+              putData(
+                'https://levelup-10cfc.firebaseio.com/users/9dyqQWyX3lPtybCuF7OZCgMYbOa2/quests' +
+                  
+                  '.json',
+                newQuests,
+                'questlist'
+              );
+             } else{
               values.name &&
                 putData(
                   'https://levelup-10cfc.firebaseio.com/users/9dyqQWyX3lPtybCuF7OZCgMYbOa2/quests' +
@@ -75,7 +86,7 @@ export const AddQuest = ({
                   [...quests, values],
                   'questlist'
                 );
-            })}>
+            }})}>
             {editProp ? 'Edit quest' : 'Add quest'}
           </Button>
         </Card>
@@ -109,6 +120,7 @@ export const mapStateToProps = (state, { editProp }) => {
     auth: state.auth,
     quests: state.data.quests,
     profile: state.data.profile,
+    quest: state.data.quest,
     initialValues: editProp
       ? state.data.quest
       : { image: 'https://equalrightscenter.org/wp-content/uploads/quest-icon-1.png' }
