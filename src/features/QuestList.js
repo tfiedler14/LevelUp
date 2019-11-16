@@ -36,8 +36,10 @@ export const QuestList = ({ getData, setLocation, quests, location, auth }) => {
       <ScrollView>
         <View>
           {quests &&
-            Object.values(quests).filter(quest=>quest!=null).map((quest, index) => {
+            Object.values(quests).map((quest, index) => {
+              if (quest!=null){
               return (
+                
                 <View
                   style={{
                     borderBottomColor: 'white',
@@ -45,7 +47,9 @@ export const QuestList = ({ getData, setLocation, quests, location, auth }) => {
                   }}
                 >
                 <QuestComponent info={{...quest, id:index}} />
-              </View>);
+              </View>);} else {
+                return;
+              }
             })}
         </View>
       </ScrollView>

@@ -62,8 +62,7 @@ export const Quest = ({ info, setLocation, deleteData, auth, putData, handleSubm
                 uppercase={false}
                 mode="contained"
                 onPress={() => {
-                  deleteData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests/' + info.id + '.json', 'quest');
-                  setLocation('questlist');
+                  deleteData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests/' + info.id + '.json', 'questlist');
                 }}>
                 Delete Quest
               </Button>
