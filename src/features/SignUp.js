@@ -15,7 +15,7 @@ import { putData } from '../logic/data/actions';
 export const SignUp = ({ setLocation, handleSubmit, setAuthentication, putData }) => {
   return (
     <ImageBackground source={require('../../assets/images/darkverylowopacityshapes.png')} style={{height: '100%', width: '100%'}}>
-    <View style={{paddingTop: 150}}>
+    <View style={styles.mainView}>
       <Image
     style={{alignSelf: 'center', resizeMode: 'contain', width: '92%'}}
     source={require('../../assets/images/title.png')}
@@ -125,7 +125,9 @@ const styles = EStyleSheet.create({
     backgroundColor: '#555'
     //  border: 'none',
   },
-
+  mainView: {
+    paddingTop: '2rem'
+  },
   buttons: {
     marginTop: '1rem',
     marginLeft: '2rem',

@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import {Text, View, ImageBackground, Image} from 'react-native';
+import { Text, View, ImageBackground, Image } from 'react-native';
 import { setErrors } from '../logic/errors/actions';
 import { setLocation } from '../logic/location/actions';
 import { setAuth } from '../logic/auth/actions';
 import { firebaseApp } from '../../Const';
 import { compose } from 'redux';
-import {Field, getFormValues, initialize, reduxForm} from 'redux-form';
+import { Field, getFormValues, initialize, reduxForm } from 'redux-form';
 import { WrappedTextInput } from '../shared-components/FormField';
 import { Button, Card } from 'react-native-paper';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { FormHeader } from '../shared-components/FormHeader';
-import {AppLoading} from 'expo'
+import { AppLoading } from 'expo';
 
 export const SignIn = ({ setLocation, handleSubmit, setAuthentication, setErrors, errors }) => {
   // const [initialized, setInitialized] = useState(false);
@@ -48,40 +48,40 @@ export const SignIn = ({ setLocation, handleSubmit, setAuthentication, setErrors
             autoCapitalize='none'
             id="email"
             props={{ title: 'Email', textContentType: 'emailAddress', autoCompleteType: 'email' }}
-            component={WrappedTextInput}
-          />
-          <Field
-            name="password"
-            id="password"
-            props={{
-              title: 'Password',
-              textContentType: 'password',
-              autoCompleteType: 'password',
-              password: true
-            }}
-            component={WrappedTextInput}
-          />
-          <View style={styles.buttons}>
-            <Button
-              color="#cda845"
-              uppercase={false}
-              mode="contained"
-              onPress={handleSubmit(values => {
-                handleLogin(values, setLocation, setAuthentication, setErrors);
-              })}>
-              Sign In
-            </Button>
-            <Button
-              color="white"
-              uppercase={false}
-              mode="text"
-              onPress={() => setLocation('signup')}>
-              Need an account? Sign up!
-            </Button>
-          </View>
+            component={WrappedTextInput} />
+
+              <Field
+                name="password"
+                id="password"
+                props={{
+                  title: 'Password',
+                  textContentType: 'password',
+                  autoCompleteType: 'password',
+                  password: true
+                }}
+                component={WrappedTextInput}
+              />
+              <View style={styles.buttons}>
+                <Button
+                  color="#cda845"
+                  uppercase={false}
+                  mode="contained"
+                  onPress={handleSubmit(values => {
+                    handleLogin(values, setLocation, setAuthentication, setErrors);
+                  })}>
+                  Sign In
+                </Button>
+                <Button
+                  color="white"
+                  uppercase={false}
+                  mode="text"
+                  onPress={() => setLocation('signup')}>
+                  Need an account? Sign up!
+                </Button>
+              </View>
+            </View>
+          </Card>
         </View>
-      </Card>
-      </View>
       </ImageBackground>
     </>
   );
@@ -95,10 +95,11 @@ const handleLogin = (values, setLocation, setAuth, setErrors) => {
       console.log(response);
       setAuth({ loggedIn: true, email: response.user.email, uid: response.user.uid });
       setLocation('profile');
-    }).catch(error => {
-    console.log('Failed to sign in.');
-    setErrors({ signIn: true });
-  });
+    })
+    .catch(error => {
+      console.log('Failed to sign in.');
+      setErrors({ signIn: true });
+    });
 };
 
 const styles = EStyleSheet.create({
@@ -108,7 +109,9 @@ const styles = EStyleSheet.create({
     backgroundColor: '#555'
     //  border: 'none',
   },
-
+  mainView: {
+    paddingTop: '4rem'
+  },
   errorCard: {
     padding: '1rem',
     margin: '1rem',
@@ -119,7 +122,7 @@ const styles = EStyleSheet.create({
     marginTop: '1rem',
     marginLeft: '2rem',
     marginRight: '2rem'
-  },
+  }
 });
 
 export const mapStateToProps = state => {
