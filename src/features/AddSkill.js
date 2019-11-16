@@ -111,7 +111,7 @@ const placeHolder = {
 
 const attributeDropDown = ({ input: { onChange, value, ...inputProps }, children, ...pickerProps }) => (
     <Picker
-        itemStyle={{ color: "#ccc", fontFamily: "Ebrima", fontSize: 17 }}
+        itemStyle={{ color: "#ccc", fontFamily: "Academy Engraved LET", fontSize: 17 }}
         selectedValue={value}
         onValueChange={value => onChange(value)}
         {...inputProps}
