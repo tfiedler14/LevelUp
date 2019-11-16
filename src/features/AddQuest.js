@@ -70,26 +70,38 @@ export const AddQuest = ({
               mode="contained"
               style={styles.buttons}
               onPress={handleSubmit(values => {
-                if (editProp) {
-                  var newQuests = [...quests];
-                  newQuests[quest.id] = values;
+
+                if (quests == []) {
+                  var newQuests = [];
+                  newQuests[0] = values;
                   putData(
-                    'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests.json',
+                    'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests' +
+
+                    '.json',
                     newQuests,
                     'questlist'
                   );
-                } else {
+                } else
+                  if (editProp) {
+                    var newQuests = [...quests];
+                    newQuests[quest.id] = values;
+                    putData(
+                      'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests' +
 
-                  if (values.name !== undefined && values.description !== undefined && values.expVal !== undefined && values.skill !== undefined ) {
-                    let toInsert = {};
-                    toInsert["name"] = values.name;
-                    toInsert["description"] = values.description;
-                    toInsert["expVal"] = values.expVal;
-                    toInsert["skill"] = values.skill;
+                      '.json',
+                      newQuests,
+                      'questlist'
+                    );
+                  } else {
+                    values.name &&
+                      putData(
+                        'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests' +
 
-                    putData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests.json', [...quests, toInsert], 'questlist', 'questlist');
-                }
-                }
+                        '.json',
+                        [...quests, values],
+                        'questlist'
+                      );
+                  }
               })}>
               {editProp ? 'Edit quest' : 'Add quest'}
             </Button>
