@@ -45,31 +45,20 @@ export const AddQuest = ({
             component={WrappedTextInput}
           />
           <Field
-            name="address"
-            id="address"
-            props={{ title: 'Address' }}
-            component={WrappedTextInput}
-          />
-          <Field name="city" id="city" props={{ title: 'City' }} component={WrappedTextInput} />
-          <Field name="zip" id="zip" props={{ title: 'ZIP Code' }} component={WrappedTextInput} />
-          <Field
-            name="availability"
-            id="availability"
-            props={{ title: 'Availability' }}
+            name="expVal"
+            id="expVal"
+            props={{ title: 'XP' }}
             component={WrappedTextInput}
           />
           <Field
-            name="rent"
-            id="rent"
-            props={{ title: 'Monthly Rent ($)' }}
+            name="skill"
+            id="skill"
+            props={{ title: 'Skill' }}
             component={WrappedTextInput}
           />
-          <Field
-            name="image"
-            id="image"
-            props={{ title: 'Image (url, optional)' }}
-            component={WrappedTextInput}
-          />
+          
+          
+  
           <Button
             color="#064f2f"
             uppercase={false}
@@ -78,7 +67,7 @@ export const AddQuest = ({
             onPress={handleSubmit(values => {
               values.name &&
                 putData(
-                  'https://roommate-finder-afd9b.firebaseio.com/quests/' +
+                  'https://levelup-10cfc.firebaseio.com/users/9dyqQWyX3lPtybCuF7OZCgMYbOa2/quests' +
                     (values.id || id) +
                     '.json',
                   {
@@ -87,7 +76,7 @@ export const AddQuest = ({
                     owner: auth.uid,
                     favorites: values.favorites || ['empty']
                   },
-                  'home'
+                  'questlist'
                 );
             })}>
             {editProp ? 'Edit quest' : 'Add quest'}
