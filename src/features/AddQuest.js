@@ -9,7 +9,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { FormHeader } from '../shared-components/FormHeader';
 import { Button, Card } from 'react-native-paper';
-import { ScrollView, View } from 'react-native';
+import { ScrollView, View, ImageBackground } from 'react-native';
 
 export const AddQuest = ({
   editProp,
@@ -33,6 +33,9 @@ export const AddQuest = ({
   });
 
   return (
+    <ImageBackground
+      source={require('../../assets/images/darkverylowopacityshapes.png')}
+      style={{ height: '100%', width: '100%' }}>
     <View style={styles.sectionHeight}>
       <ScrollView>
         <Card style={styles.card}>
@@ -95,6 +98,7 @@ export const AddQuest = ({
         </Card>
       </ScrollView>
     </View>
+    </ImageBackground>
   );
 };
 

@@ -1,5 +1,5 @@
 import { setAuth } from '../logic/auth/actions';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, ImageBackground } from 'react-native';
 import { connect } from 'react-redux';
 import SignIn from './SignIn';
 import * as React from 'react';
@@ -15,6 +15,9 @@ import { firebaseApp } from '../../Const';
 export const Settings = ({ setLocation, auth, handleSubmit, setAuth }) => {
   if (auth.loggedIn) {
     return (
+      <ImageBackground
+      source={require('../../assets/images/darkverylowopacityshapes.png')}
+      style={{ height: '100%', width: '100%' }}>
       <View style={styles.sectionHeight}>
         <ScrollView>
           <Card style={styles.card}>
@@ -50,7 +53,7 @@ export const Settings = ({ setLocation, auth, handleSubmit, setAuth }) => {
               />
               <View style={styles.buttons}>
                 <Button
-                  color="#de3c57"
+                  color="#cda845"
                   uppercase={false}
                   mode="contained"
                   onPress={handleSubmit(values => {
@@ -104,6 +107,7 @@ export const Settings = ({ setLocation, auth, handleSubmit, setAuth }) => {
           </Card>
         </ScrollView>
       </View>
+      </ImageBackground>
     );
   } else {
     return <SignIn />;

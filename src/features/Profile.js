@@ -7,9 +7,9 @@ import { getData, putData } from '../logic/data/actions';
 import { setLoading } from '../logic/loading/actions';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import * as Progress from 'react-native-progress';
-import { Divider } from 'react-native-elements';
 import Async from '../shared-components/Async';
 import { attributes } from '../../Const';
+import { Col, Grid, Row } from 'react-native-easy-grid';
 
 const attributeList = attributes;
 
@@ -56,21 +56,21 @@ export const Profile = ({
               <View style={{ position: 'absolute', alignSelf: 'flex-end', flex: 1, zIndex: 20 }}>
                 <Icon
                   style={styles.padding}
-                  name="add"
-                  size={48}
-                  color="white"
-                  onPress={() => setLocation('addSkill')}
-                />
-                <Icon
-                  style={styles.padding}
                   name="settings"
                   size={48}
                   color="white"
                   onPress={() => setLocation('settings')}
                 />
+                <Icon
+                  style={styles.padding}
+                  name="add"
+                  size={48}
+                  color="white"
+                  onPress={() => setLocation('addSkill')}
+                />
               </View>
               <View>
-                <Text style={{ textAlign: 'center', fontSize: 26, color: 'white', marginTop: 20 }}>
+                <Text style={{ textAlign: 'center', fontSize: 40, color: '#cda845', marginTop: 20, fontFamily: 'Academy Engraved LET' }}>
                   {profile.name}
                 </Text>
               </View>
@@ -83,26 +83,30 @@ export const Profile = ({
                   <Text>Level</Text>
                   <Progress.Bar
                     style={styles.progress}
-                    color="#55db37"
+                    color="#cda845"
                     height={15}
                     progress={0.5}
                   />
                 </View>
               </View>
-              <View style={{ flex: 1, paddingTop: 275 }}>
+              < View style={{ flex: 1, paddingTop: 275 }}>
                 <Image
-                  source={require('../../assets/images/favorite.png')}
-                  style={{ resizeMode: 'contain', width: '100%' }}
+                  source={require('../../assets/images/divider.png')} style={{ resizeMode: 'contain', width: '100%' }}
                 />
               </View>
             </View>
-            <View style={{ height: 50, width: 500 }}></View>
-
-            {console.log('Profile: ', profile)}
-            <View style={{ height: 300, width: 500 }}>
+            <View style={{ height: '50%', width: 500, paddingTop: 15, paddingLeft: 15 }}>
               <ScrollView>
                 {attributeList.map(data => {
-                  return <AttributeItem attributeName={data} skills1={skills} />;
+                  return (
+                    <View style={{width: 200}}>
+                      <Grid>
+                        <Col>
+                          <AttributeItem attributeName={data} skills1={skills} />
+                        </Col>
+                      </Grid>
+                    </View>
+                  );
                 })}
               </ScrollView>
             </View>
@@ -116,9 +120,7 @@ export const Profile = ({
 const AttributeItem = ({ attributeName, skills1 }) => {
   return (
     <View style={styles.skillSec}>
-      <Text style={{ color: '#ffffff', fontSize: 17 }}>
-        {attributeName.charAt(0).toUpperCase() + attributeName.slice(1)}
-      </Text>
+      <Text style={{ color: '#ffffff', fontSize: 20, fontFamily: 'Optima' }}>{attributeName.charAt(0).toUpperCase() + attributeName.slice(1)}</Text>
       <AttributeListItem
         skills={skills1
           .filter(skill => skill.attribute === attributeName)
@@ -131,19 +133,20 @@ const AttributeItem = ({ attributeName, skills1 }) => {
 const AttributeListItem = ({ skills, levels }) => {
   return skills.map(data => {
     return (
-      <View style={{ marginLeft: 45 }} key={data}>
-        <Text style={{ color: '#ffffff' }}>
-          {data.name}: {data.level}
-        </Text>
-        <View>
-          <Progress.Bar
-            style={styles.progress}
-            color="#55db37"
-            height={15}
-            progress={data.level / 100 + 0.2}
-          />
-        </View>
-      </View>
+      
+              <View style={{ marginLeft: 45 }} key={data}>
+                <Text style={{ color: '#ffffff', fontFamily: 'Optima' }}>
+                  {data.name} -{data.level}
+                </Text>
+                <View>
+                  <Progress.Bar
+                    style={styles.progress}
+                    color="#cda845"
+                    height={15}
+                    progress={data.level / 100 + 0.2}
+                  />
+                </View>
+              </View>
     );
   });
 };

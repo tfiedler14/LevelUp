@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useEffect } from 'react';
-import {  View, ImageBackground} from 'react-native';
+import { View, ImageBackground, TouchableOpacity } from 'react-native';
 import { Button, ThemeProvider } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { setLocation } from './logic/location/actions';
@@ -12,73 +12,64 @@ import AddSkill from './features/AddSkill';
 import SignUp from './features/SignUp';
 import Quest from './features/Quest';
 import AddQuest from './features/AddQuest';
-
+import AndroidFonts from './features/AndroidFonts';
 import Settings from './features/Settings';
 import { Col, Grid } from 'react-native-easy-grid';
 import { getData, putData } from './logic/data/actions';
 import { auth } from 'firebase';
+import CustomButton from './shared-components/CustomButton'
 console.disableYellowBox = true;
 
 export const ApplicationHome = ({ location, setLocation, getData }) => {
   return (
-    <ImageBackground source={require('../assets/images/darkgradient.jpg')} style={{width: '100%'}}>
-    <View>
-      {location != 'signin' && location != 'signup' &&
-        <View style={styles.topNav}>
-          <View>
-          <Grid>
-            <Col size={2}>
-              <View style={{ position: 'absolute' }}>
-              <ThemeProvider theme={theme}>
-              <Button
-              style={styles.topPadding}
-                title="Character"
-                onPress={() => setLocation('profile')}
-              />
-              </ThemeProvider>
-              </View>
-            </Col>
-            <Col size={2}>
-              <View style={{ position: 'absolute' }}>
-              <ThemeProvider theme={theme}>
-              <Button
-              style={styles.topPadding}
-                title="Quests"
-                onPress={() => setLocation('questlist')}
-              />
-              </ThemeProvider>
-              </View>
-            </Col>
-            <Col size={2}>
-              <View style={{ position: 'absolute' }}>
-              <ThemeProvider theme={theme}>
-              <Button
-              style={styles.topPadding}
-                title="Map"
-                onPress={() => setLocation('home')}
-              />
-              </ThemeProvider>
-              </View>
-            </Col>
-          </Grid>
-        </View>
-      </View>}
-
+    <ImageBackground source={require('../assets/images/darkgradient.jpg')} style={{ width: '100%' }}>
+      <View>
+        {location != 'signin' && location != 'signup' && location != 'androidFonts' &&
+          <View style={styles.topNav}>
+            <View>
+              <Grid>
+                <Col size={2}>
+                  <View style={{ position: 'absolute', paddingTop: 40, paddingLeft: 25 }}>
+                    <CustomButton
+                      text="Character"
+                      onPress={() => setLocation('profile')}
+                    />
+                  </View>
+                </Col>
+                <Col size={2}>
+                  <View style={{ position: 'absolute', paddingTop: 40, paddingLeft: 30 }}>
+                    <CustomButton
+                      text="Quests"
+                      onPress={() => setLocation('quest')}
+                    />
+                  </View>
+                </Col>
+                <Col size={2}>
+                <View style={{ position: 'absolute', paddingTop: 40, paddingLeft: 35 }}>
+                    <CustomButton
+                      text="Map"
+                      onPress={() => setLocation('map')}
+                    />
+                  </View>
+                </Col>
+              </Grid>
+            </View>
+          </View>}
 
         <View>
-        {location === 'profile' && <Profile />}
-        {location === 'addquest' && <AddQuest editProp={false} />}
-        {location === 'addSkill' && <AddSkill />}
-        {location === 'editquest' && <AddQuest editProp={true} />}
-        {location === 'questlist' && <QuestList />}
-        {location === 'quest' && <Quest />}
-        {location === 'signin' && <SignIn />}
-        {location === 'signup' && <SignUp />}
-        {location === 'settings' && <Settings />}
+          {location === 'profile' && <Profile />}
+          {location === 'addquest' && <AddQuest editProp={false} />}
+          {location === 'addSkill' && <AddSkill />}
+          {location === 'editquest' && <AddQuest editProp={true} />}
+          {location === 'quest' && <Quest />}
+          {location === 'home' && <QuestList />}
+          {location === 'signin' && <SignIn />}
+          {location === 'signup' && <SignUp />}
+          {location === 'settings' && <Settings />}
+          {location === 'fonts' && <AndroidFonts />}
+        </View>
       </View>
-      </View>
-      </ImageBackground>
-
+    </ImageBackground>
   );
 };
 
