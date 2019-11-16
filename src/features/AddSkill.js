@@ -75,13 +75,8 @@ export const AddSkill = ({ auth, skills, setLocation, location, handleSubmit, pu
 
 
 const handleAddSkill = (auth, sID, skills, values, putData, setSkills) => {
-    console.log(sID);
 
     let toInsert = {};
-    console.log(skills[0]);
-
-    console.log(skills);
-    //if(skills[0])
     if (values.addSkillAttribute !== undefined && values.addSkillName !== undefined) {
 
         toInsert["attribute"] = values.addSkillAttribute;
