@@ -18,7 +18,8 @@ export const AddQuest = ({
   setLocation,
   auth,
   handleSubmit,
-  profile
+  profile,
+  quests
 }) => {
   const uid = require('uuid/v4');
   let id = uid();
@@ -65,17 +66,13 @@ export const AddQuest = ({
             mode="contained"
             style={styles.buttons}
             onPress={handleSubmit(values => {
+              
               values.name &&
                 putData(
                   'https://levelup-10cfc.firebaseio.com/users/9dyqQWyX3lPtybCuF7OZCgMYbOa2/quests' +
-                    (values.id || id) +
+                    
                     '.json',
-                  {
-                    ...values,
-                    id: values.id || id,
-                    owner: auth.uid,
-                    favorites: values.favorites || ['empty']
-                  },
+                  [...quests, values],
                   'questlist'
                 );
             })}>
@@ -110,6 +107,7 @@ const styles = EStyleSheet.create({
 export const mapStateToProps = (state, { editProp }) => {
   return {
     auth: state.auth,
+    quests: state.data.quests,
     profile: state.data.profile,
     initialValues: editProp
       ? state.data.quest
