@@ -128,7 +128,7 @@ export const mapStateToProps = (state, { editProp }) => {
     profile: state.data.profile,
     initialValues: editProp
       ? state.data.quest
-      : { image: 'https://equalrightscenter.org/wp-content/uploads/quest-icon-1.png' }
+      : { }
   };
 };
 
