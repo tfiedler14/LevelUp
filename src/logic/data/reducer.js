@@ -20,7 +20,7 @@ export default (
         skills: action.data.skills
       };
     case 'SET_QUEST':
-      return { ...state, quest: action.data };
+      return {...state, quest: action.data};
     default:
       return state;
   }

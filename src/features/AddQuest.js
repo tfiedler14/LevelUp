@@ -18,13 +18,15 @@ export const AddQuest = ({
   setLocation,
   auth,
   handleSubmit,
-  profile
+  profile,
+  quest,
+  quests
 }) => {
   const uid = require('uuid/v4');
   let id = uid();
 
   const [initialized, setInitialized] = useState(false);
-  /* istanbul ignore next */
+  /* istanbul ignore next*/
   useEffect(() => {
     if (!initialized) {
       initialize(editProp ? profile.quest : {});
@@ -48,51 +50,46 @@ export const AddQuest = ({
             component={WrappedTextInput}
           />
           <Field
-            name="address"
-            id="address"
-            props={{ title: 'Address' }}
-            component={WrappedTextInput}
-          />
-          <Field name="city" id="city" props={{ title: 'City' }} component={WrappedTextInput} />
-          <Field name="zip" id="zip" props={{ title: 'ZIP Code' }} component={WrappedTextInput} />
-          <Field
-            name="availability"
-            id="availability"
-            props={{ title: 'Availability' }}
+            name="expVal"
+            id="expVal"
+            props={{ title: 'XP' }}
             component={WrappedTextInput}
           />
           <Field
-            name="rent"
-            id="rent"
-            props={{ title: 'Monthly Rent ($)' }}
+            name="skill"
+            id="skill"
+            props={{ title: 'Skill' }}
             component={WrappedTextInput}
           />
-          <Field
-            name="image"
-            id="image"
-            props={{ title: 'Image (url, optional)' }}
-            component={WrappedTextInput}
-          />
+          
+          
+  
           <Button
             color="#064f2f"
             uppercase={false}
             mode="contained"
             style={styles.buttons}
             onPress={handleSubmit(values => {
+             if(editProp){
+              var newQuests = [...quests];
+              newQuests[quest.id] = values; 
+              putData(
+                'https://levelup-10cfc.firebaseio.com/users/9dyqQWyX3lPtybCuF7OZCgMYbOa2/quests' +
+                  
+                  '.json',
+                newQuests,
+                'questlist'
+              );
+             } else{
               values.name &&
                 putData(
-                  'https://roommate-finder-afd9b.firebaseio.com/quests/' +
-                    (values.id || id) +
+                  'https://levelup-10cfc.firebaseio.com/users/9dyqQWyX3lPtybCuF7OZCgMYbOa2/quests' +
+                    
                     '.json',
-                  {
-                    ...values,
-                    id: values.id || id,
-                    owner: auth.uid,
-                    favorites: values.favorites || ['empty']
-                  },
-                  'home'
+                  [...quests, values],
+                  'questlist'
                 );
-            })}>
+            }})}>
             {editProp ? 'Edit quest' : 'Add quest'}
           </Button>
         </Card>
@@ -125,7 +122,9 @@ const styles = EStyleSheet.create({
 export const mapStateToProps = (state, { editProp }) => {
   return {
     auth: state.auth,
+    quests: state.data.quests,
     profile: state.data.profile,
+    quest: state.data.quest,
     initialValues: editProp
       ? state.data.quest
       : { }

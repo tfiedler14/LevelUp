@@ -37,15 +37,19 @@ export const QuestList = ({ getData, setLocation, quests, location, auth }) => {
         <View>
           {quests &&
             Object.values(quests).map((quest, index) => {
+              if (quest!=null){
               return (
+                
                 <View
                   style={{
                     borderBottomColor: 'white',
                     borderBottomWidth: 1,
                   }}
                 >
-                <QuestComponent key={index} info={quest} />
-              </View>);
+                <QuestComponent info={{...quest, id:index}} />
+              </View>);} else {
+                return;
+              }
             })}
         </View>
       </ScrollView>
