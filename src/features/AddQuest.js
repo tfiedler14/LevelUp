@@ -70,11 +70,23 @@ export const AddQuest = ({
             mode="contained"
             style={styles.buttons}
             onPress={handleSubmit(values => {
+
+             if(quests == []){
+                var newQuests = [];
+                newQuests[0] = values;
+                putData(
+                  'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests' +
+                    
+                    '.json',
+                  newQuests,
+                  'questlist'
+                );
+             } else
              if(editProp){
               var newQuests = [...quests];
               newQuests[quest.id] = values; 
               putData(
-                'https://levelup-10cfc.firebaseio.com/users/9dyqQWyX3lPtybCuF7OZCgMYbOa2/quests' +
+                'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests' +
                   
                   '.json',
                 newQuests,
@@ -83,7 +95,7 @@ export const AddQuest = ({
              } else{
               values.name &&
                 putData(
-                  'https://levelup-10cfc.firebaseio.com/users/9dyqQWyX3lPtybCuF7OZCgMYbOa2/quests' +
+                  'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests' +
                     
                     '.json',
                   [...quests, values],
