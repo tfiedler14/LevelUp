@@ -123,7 +123,7 @@ export const mapStateToProps = (state, { editProp }) => {
     quest: state.data.quest,
     initialValues: editProp
       ? state.data.quest
-      : { image: 'https://equalrightscenter.org/wp-content/uploads/quest-icon-1.png' }
+      : { }
   };
 };
 
