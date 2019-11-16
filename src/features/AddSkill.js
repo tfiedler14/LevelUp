@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import DropdownList from 'react-widgets/lib/DropdownList';
 import { View, ImageBackground, Button, StyleSheet, Item, Picker } from 'react-native';
 import EStyleSheet, { value } from 'react-native-extended-stylesheet';
-import { setLocation} from '../logic/location/actions';
+import { setLocation } from '../logic/location/actions';
 import { setSkills } from '../logic/data/actions';
 import { getData, putData } from '../logic/data/actions';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -13,7 +13,7 @@ import { Field, getFormValues, initialize, reduxForm } from 'redux-form';
 import { compose } from 'redux';
 import { WrappedTextInput } from '../shared-components/FormField';
 
-export const AddSkill = ({ auth, skills, setLocation, location, handleSubmit, putData, setSkills}) => {
+export const AddSkill = ({ auth, skills, setLocation, location, handleSubmit, putData, setSkills }) => {
     const uid = require('uuid/v4');
     let id = uid();
 
@@ -21,28 +21,12 @@ export const AddSkill = ({ auth, skills, setLocation, location, handleSubmit, pu
     return (
 
         <ImageBackground source={require('../../assets/images/darkverylowopacityshapes.png')} style={{ height: '100%', width: '100%' }}>
-            <View style={{}}>
+            <View>
                 <View>
-                    <View>
-                        <View style={{ position: 'absolute', alignSelf: 'flex-end', flex: 1 }}>
-                            <Icon
-                                style={styles.padding}
-                                name="settings-applications"
-                                size={48}
-                                color="white"
-                                onPress={() => setLocation('settings')}
-                            />
-                        </View>
-
-                    </View>
-
-                    <View >
-
-                    </View>
 
                     <View style={styles.cardPadding}>
 
-                        <FormHeader title={'Define skill\'s attribute:'} style={{ fontSize: 24, paddingBottom: '8' }} />
+                        <FormHeader title={'Define skill\'s attribute:'} style={{ fontSize: 24, paddingBottom: '8', alignSelf: 'center' }} />
                         <Field
                             name="addSkillAttribute"
                             component={attributeDropDown}
@@ -50,19 +34,19 @@ export const AddSkill = ({ auth, skills, setLocation, location, handleSubmit, pu
                             mode="dropdown"
                             style={pickerStyles}
                         >
-                            <Picker.Item style={pickerStyles}label="Academics" value="Academics" />
+                            <Picker.Item style={pickerStyles} label="Academics" value="Academics" />
                             <Picker.Item style={pickerStyles} label="Crafts" value="Crafts" />
                             <Picker.Item style={pickerStyles} label="Mental" value="Mental" />
                             <Picker.Item style={pickerStyles} label="Fitness" value="Fitness" />
                             <Picker.Item style={pickerStyles} label="Community" value="Community" />
-                            <Picker.Item style={pickerStyles}  label="Hobbies" value="Hobbies" />
+                            <Picker.Item style={pickerStyles} label="Hobbies" value="Hobbies" />
                         </Field>
 
                         <Field
-                            name="addSkillDefinition"
-                            id="addSkillDefinition"
+                            name="addSkillName"
+                            id="addSkillName"
                             props={{
-                                title: 'Skill Definition',
+                                title: 'Skill Name',
                                 textContentType: 'string',
                             }}
                             component={WrappedTextInput}
@@ -90,22 +74,29 @@ export const AddSkill = ({ auth, skills, setLocation, location, handleSubmit, pu
 
 
 
-const handleAddSkill = (auth, sID, skills,  values, putData, setSkills) => {
+const handleAddSkill = (auth, sID, skills, values, putData, setSkills) => {
     console.log(sID);
-    
+
     let toInsert = {};
-    let masterSkill = skills;
-    toInsert[values.addSkillAttribute] = values.addSkillDefinition;
-    toInsert["val"] = 0;
-    masterSkill.push({sID : toInsert});
-    console.log("mater", masterSkill);
+    console.log(skills[0]);
 
-    setSkills(masterSkill);
+    console.log(skills);
+    //if(skills[0])
+    if (values.addSkillAttribute !== undefined && values.addSkillName !== undefined) {
 
-    putData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + 'skills.json', {
- 
-        masterSkill,
-      }, 'profile', );
+        toInsert["attribute"] = values.addSkillAttribute;
+        toInsert["name"] = values.addSkillName;
+        toInsert["val"] = 0;
+
+        skills.push({ [sID]: toInsert });
+
+        console.log("skills", skills);
+        setSkills(skills);
+
+        putData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/skills.json', skills, 'profile', 'profile');
+    } else {
+        alert("Must add attribute and name");
+    }
 }
 
 
@@ -116,16 +107,16 @@ const placeHolder = {
 
 const attributeDropDown = ({ input: { onChange, value, ...inputProps }, children, ...pickerProps }) => (
     <Picker
-      itemStyle={{color: "#ccc", fontFamily:"Ebrima", fontSize:17 }}
-      selectedValue={ value }
-      onValueChange={ value => onChange(value) }
-      { ...inputProps }
-      { ...pickerProps }
+        itemStyle={{ color: "#ccc", fontFamily: "Ebrima", fontSize: 17 }}
+        selectedValue={value}
+        onValueChange={value => onChange(value)}
+        {...inputProps}
+        {...pickerProps}
     >
-      { children }
-      
+        {children}
+
     </Picker>
-  );
+);
 const pickerStyles = StyleSheet.create({
     inputIOS: {
         color: 'white',
@@ -205,7 +196,7 @@ const mapDispatchToProps = dispatch => {
         setLocation: location => {
             dispatch(setLocation(location));
         },
-        setSkills : skills => {
+        setSkills: skills => {
             dispatch(setSkills(skills));
         }
     };
