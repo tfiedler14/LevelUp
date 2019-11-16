@@ -1,7 +1,7 @@
 import { Image, ScrollView, Text, View } from 'react-native';
 import React from 'react';
 import { Button, Card } from 'react-native-paper';
-import { getData, putData } from '../logic/data/actions';
+import { getData, putData, deleteData } from '../logic/data/actions';
 import { setLocation } from '../logic/location/actions';
 import { connect } from 'react-redux';
 import EStyleSheet from 'react-native-extended-stylesheet';
@@ -10,7 +10,7 @@ import { WrappedTextInput } from '../shared-components/FormField';
 import { Field, reduxForm } from 'redux-form';
 import { compose } from 'redux';
 
-export const Quest = ({ info, auth, putData, handleSubmit }) => {
+export const Quest = ({ info, setLocation, deleteData, auth, putData, handleSubmit }) => {
   return (
     <View style={styles.sectionHeight}>
       <View style={styles.formPadding}>
@@ -37,7 +37,10 @@ export const Quest = ({ info, auth, putData, handleSubmit }) => {
               <Button
                 color="#cda845"
                 uppercase={false}
-                mode="contained">
+                mode="contained"
+                onPress={() => {
+                  setLocation('questlist');
+                }}>
                 Complete Quest
             </Button>
 
@@ -57,7 +60,10 @@ export const Quest = ({ info, auth, putData, handleSubmit }) => {
               <Button
                 color="#cda845"
                 uppercase={false}
-                mode="contained">
+                mode="contained"
+                onPress={() => {
+                  deleteData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests/' + info.id + '.json', 'questlist');
+                }}>
                 Delete Quest
               </Button>
             </View>
@@ -146,7 +152,7 @@ const styles = EStyleSheet.create({
 const mapStateToProps = state => {
   return {
     info: state.data.quest,
-    auth: state.auth
+    auth: state.auth,
   };
 };
 
@@ -155,9 +161,15 @@ const mapDispatchToProps = dispatch => {
     putData: (path, data, redirect) => {
       dispatch(putData(path, data, redirect));
     },
+    setLocation: location => {
+        dispatch(setLocation(location));
+    },
     getData: (data, dataPoint) => {
       dispatch(getData(data, dataPoint));
-    }
+    },
+    deleteData: (data, location) => {
+      dispatch(deleteData(data, location));
+    },
   };
 };
 

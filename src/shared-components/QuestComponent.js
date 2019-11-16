@@ -8,11 +8,13 @@ import { connect } from 'react-redux';
 import {deleteData, setQuest} from '../logic/data/actions';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-export const QuestComponent = ({ info, setLocation, setQuest, deleteData }) => {
+export const QuestComponent = ({ info, key, setLocation, setQuest, deleteData }) => {
   return (
     <Card
       style={styles.card}
       onPress={() => {
+        info.index = key;
+        console.log("Info: ",info);
         setQuest(info);
         setLocation('quest');
       }}>
