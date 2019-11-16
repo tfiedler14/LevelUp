@@ -38,63 +38,64 @@ export const AddQuest = ({
     <ImageBackground
       source={require('../../assets/images/darkverylowopacityshapes.png')}
       style={{ height: '100%', width: '100%' }}>
-    <View style={styles.sectionHeight}>
-      <ScrollView>
-        <Card style={styles.card}>
-          <FormHeader title={editProp ? 'Edit quest' : 'Add quest'} />
-          <Field name="name" id="name" props={{ title: 'Name' }} component={WrappedTextInput} />
-          <Field
-            name="description"
-            id="description"
-            props={{ title: 'Description' }}
-            component={WrappedTextInput}
-          />
-          <Field
-            name="expVal"
-            id="expVal"
-            props={{ title: 'XP' }}
-            component={WrappedTextInput}
-          />
-          <Field
-            name="skill"
-            id="skill"
-            props={{ title: 'Skill' }}
-            component={WrappedTextInput}
-          />
-          
-          
-  
-          <Button
-            color="#064f2f"
-            uppercase={false}
-            mode="contained"
-            style={styles.buttons}
-            onPress={handleSubmit(values => {
-             if(editProp){
-              var newQuests = [...quests];
-              newQuests[quest.id] = values; 
-              putData(
-                'https://levelup-10cfc.firebaseio.com/users/9dyqQWyX3lPtybCuF7OZCgMYbOa2/quests' +
-                  
-                  '.json',
-                newQuests,
-                'questlist'
-              );
-             } else{
-              values.name &&
-                putData(
-                  'https://levelup-10cfc.firebaseio.com/users/9dyqQWyX3lPtybCuF7OZCgMYbOa2/quests' +
-                    
-                    '.json',
-                  [...quests, values],
-                  'questlist'
-                );
-            }})}>
-            {editProp ? 'Edit quest' : 'Add quest'}
-          </Button>
-        </Card>
-      </ScrollView>
-    </View>
+      <View style={styles.sectionHeight}>
+        <ScrollView>
+          <Card style={styles.card}>
+            <FormHeader title={editProp ? 'Edit quest' : 'Add quest'} />
+            <Field name="name" id="name" props={{ title: 'Name' }} component={WrappedTextInput} />
+            <Field
+              name="description"
+              id="description"
+              props={{ title: 'Description' }}
+              component={WrappedTextInput}
+            />
+            <Field
+              name="expVal"
+              id="expVal"
+              props={{ title: 'XP' }}
+              component={WrappedTextInput}
+            />
+            <Field
+              name="skill"
+              id="skill"
+              props={{ title: 'Skill' }}
+              component={WrappedTextInput}
+            />
+
+
+
+            <Button
+              color="#064f2f"
+              uppercase={false}
+              mode="contained"
+              style={styles.buttons}
+              onPress={handleSubmit(values => {
+                if (editProp) {
+                  var newQuests = [...quests];
+                  newQuests[quest.id] = values;
+                  putData(
+                    'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests.json',
+                    newQuests,
+                    'questlist'
+                  );
+                } else {
+
+                  if (values.name !== undefined && values.description !== undefined && values.expVal !== undefined && values.skill !== undefined ) {
+                    let toInsert = {};
+                    toInsert["name"] = values.name;
+                    toInsert["description"] = values.description;
+                    toInsert["expVal"] = values.expVal;
+                    toInsert["skill"] = values.skill;
+
+                    putData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests.json', [...quests, toInsert], 'questlist', 'questlist');
+                }
+                }
+              })}>
+              {editProp ? 'Edit quest' : 'Add quest'}
+            </Button>
+          </Card>
+        </ScrollView>
+      </View>
     </ImageBackground>
   );
 };
@@ -127,7 +128,7 @@ export const mapStateToProps = (state, { editProp }) => {
     quest: state.data.quest,
     initialValues: editProp
       ? state.data.quest
-      : { }
+      : {}
   };
 };
 

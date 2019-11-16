@@ -107,9 +107,9 @@ const handleSignUp = (values, setLocation, setAuthentication, putData) => {
     .then(response => {
       setAuthentication({ loggedIn: true, email: values.email, uid: response.user.uid });
       putData('https://levelup-10cfc.firebaseio.com/users/' + response.user.uid + '.json', {
-        quests: ['empty'],
+        quests: ["empty"],
         profile: { brows: "type-1", eyes: "type-1", hairColor: "type-1", hairStyle: "type-1", headShape: "type-1", mouth: "type-1" ,name: "none", nose: "type-1", skinColor: "tan" },
-        skills: [],
+        skills: ["empty"],
         attributes: {fitness: {exp: 0, level: 1}, academics: {exp: 0, level: 1}, crafts: {exp: 0, level: 1}, community: {exp: 0, level: 1}, mental: {exp: 0, level: 1}, hobby: {exp: 0, level: 1}}
       }, 'profile', 'profile');
     })

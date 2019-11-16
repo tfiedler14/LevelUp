@@ -34,12 +34,12 @@ export const AddSkill = ({ auth, skills, setLocation, location, handleSubmit, pu
                             mode="dropdown"
                             style={pickerStyles}
                         >
-                            <Picker.Item style={pickerStyles} label="Academics" value="Academics" />
-                            <Picker.Item style={pickerStyles} label="Crafts" value="Crafts" />
-                            <Picker.Item style={pickerStyles} label="Mental" value="Mental" />
-                            <Picker.Item style={pickerStyles} label="Fitness" value="Fitness" />
-                            <Picker.Item style={pickerStyles} label="Community" value="Community" />
-                            <Picker.Item style={pickerStyles} label="Hobbies" value="Hobbies" />
+                            <Picker.Item style={pickerStyles} label="academics" value="academics" />
+                            <Picker.Item style={pickerStyles} label="crafts" value="crafts" />
+                            <Picker.Item style={pickerStyles} label="mental" value="mental" />
+                            <Picker.Item style={pickerStyles} label="fitness" value="fitness" />
+                            <Picker.Item style={pickerStyles} label="community" value="community" />
+                            <Picker.Item style={pickerStyles} label="hobby" value="hobby" />
                         </Field>
 
                         <Field
@@ -59,7 +59,16 @@ export const AddSkill = ({ auth, skills, setLocation, location, handleSubmit, pu
                             mode="contained"
                             title="Save Skill"
                             onPress={handleSubmit(values => {
-                                handleAddSkill(auth, id, skills, values, putData, setSkills);
+                                if (values.addSkillAttribute !== undefined && values.addSkillName !== undefined) {
+                                    let toInsert = {};
+                                    toInsert["attribute"] = values.addSkillAttribute;
+                                    toInsert["name"] = values.addSkillName;
+                                    toInsert["val"] = 0;
+
+                                    putData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/skills.json', [...skills, toInsert], 'profile', 'profile');
+                                } else {
+                                    alert("Attribute and Name must be defined");
+                                }
                             })}>Save Skill</Button>
 
                     </View>
@@ -83,12 +92,12 @@ const handleAddSkill = (auth, sID, skills, values, putData, setSkills) => {
         toInsert["name"] = values.addSkillName;
         toInsert["val"] = 0;
 
-        skills.push({ [sID]: toInsert });
+        // skills.push({ [sID]: toInsert });
 
         console.log("skills", skills);
         setSkills(skills);
 
-        putData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/skills.json', skills, 'profile', 'profile');
+        putData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/skills.json', [...skills, toInsert], 'profile', 'profile');
     } else {
         alert("Must add attribute and name");
     }
