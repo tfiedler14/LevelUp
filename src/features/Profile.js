@@ -66,7 +66,7 @@ export const Profile = ({
                 />
               </View>
               <View>
-                <Text style={{ textAlign: 'center', fontSize: 40, color: '#cda845', marginTop: 20, fontFamily: 'Academy Engraved LET' }}>
+                <Text style={{ textAlign: 'center', fontSize: 40, color: '#cda845', marginTop: 20, fontFamily: 'cinzel-decor' }}>
                   {profile.name}
                 </Text>
               </View>
@@ -95,7 +95,7 @@ export const Profile = ({
               <ScrollView>
                 {attributeList.map(data => {
                   return (
-                    <View style={{width: 200}}>
+                    <View style={{ width: 200 }}>
                       <Grid>
                         <Col>
                           <AttributeItem attributeName={data} skills1={skills} />
@@ -116,7 +116,7 @@ export const Profile = ({
 const AttributeItem = ({ attributeName, skills1 }) => {
   return (
     <View style={styles.skillSec}>
-      <Text style={{ color: '#ffffff', fontSize: 20, fontFamily: 'Optima' }}>{attributeName.charAt(0).toUpperCase() + attributeName.slice(1)}</Text>
+      <Text style={{ color: '#ffffff', fontSize: 20, fontFamily: 'cinzel-decor' }}>{attributeName.charAt(0).toUpperCase() + attributeName.slice(1)}</Text>
       <AttributeListItem
         skills={skills1
           .filter(skill => skill.attribute === attributeName)
@@ -129,20 +129,20 @@ const AttributeItem = ({ attributeName, skills1 }) => {
 const AttributeListItem = ({ skills, levels }) => {
   return skills.map(data => {
     return (
-      
-              <View style={{ marginLeft: 45 }} key={data}>
-                <Text style={{ color: '#ffffff', fontFamily: 'Optima' }}>
-                  {data.name} -{data.level}
-                </Text>
-                <View>
-                  <Progress.Bar
-                    style={styles.progress}
-                    color="#cda845"
-                    height={15}
-                    progress={data.level / 100 + 0.2}
-                  />
-                </View>
-              </View>
+
+      <View style={{ marginLeft: 45 }} key={data}>
+        <Text style={{ color: '#ffffff', fontFamily: 'cinzel-decor' }}>
+          {data.name} -{data.level}
+        </Text>
+        <View>
+          <Progress.Bar
+            style={styles.progress}
+            color="#cda845"
+            height={15}
+            progress={data.level / 100 + 0.2}
+          />
+        </View>
+      </View>
     );
   });
 };

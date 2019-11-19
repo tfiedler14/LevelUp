@@ -18,11 +18,10 @@ export default class App extends React.Component {
             fontLoaded: false,
         }
     }
-    async componentDidMount() {
-        await Font.loadAsync({
+    componentDidMount() {
+        Font.loadAsync({
             'cinzel-decor': require('./assets/fonts/CinzelDecorative-Regular.ttf'),
         });
-        this.setState({ fontLoaded: true });
     }
     render() {
         return (
