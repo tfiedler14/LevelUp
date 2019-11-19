@@ -14,66 +14,66 @@ import { putData } from '../logic/data/actions';
 
 export const SignUp = ({ setLocation, handleSubmit, setAuthentication, putData }) => {
   return (
-    <ImageBackground source={require('../../assets/images/darkverylowopacityshapes.png')} style={{height: '100%', width: '100%'}}>
-    <View style={{paddingTop: 150}}>
-      <Image
-    style={{alignSelf: 'center', resizeMode: 'contain', width: '92%'}}
-    source={require('../../assets/images/title.png')}
-  />
-    <Card style={styles.card}>
-      <View>
-        <FormHeader title={'Sign Up'} />
-        <Field
-          name="email"
-          id="email"
-          props={{
-            title: 'Email', textContentType: 'emailAddress', autoCompleteType: 'email'
-          }}
-          component={WrappedTextInput}
+    <ImageBackground source={require('../../assets/images/darkverylowopacityshapes.png')} style={{ height: '100%', width: '100%' }}>
+      <View style={styles.mainView}>
+        <Image
+          style={{ alignSelf: 'center', resizeMode: 'contain', width: '92%' }}
+          source={require('../../assets/images/title.png')}
         />
-        <Field
-          name="password"
-          id="password"
-          props={{
-            title: 'Password',
-            textContentType: 'password',
-            autoCompleteType: 'password',
-            password: true
-          }}
-          component={WrappedTextInput}
-        />
-        <Field
-          name="cpassword"
-          id="cpassword"
-          props={{
-            title: 'Confirm Password',
-            textContentType: 'password',
-            autoCompleteType: 'password',
-            password: true
-          }}
-          component={WrappedTextInput}
-        />
-        <View style={styles.buttons}>
-          <Button
-            color="#cda845"
-            uppercase={false}
-            mode="contained"
-            onPress={handleSubmit(values => {
-              handleSignUp(values, setLocation, setAuthentication, putData);
-            })}>
-            Sign Up
+        <Card style={styles.card}>
+          <View>
+            <FormHeader title={'Sign Up'} />
+            <Field
+              name="email"
+              id="email"
+              props={{
+                title: 'Email', textContentType: 'emailAddress', autoCompleteType: 'email'
+              }}
+              component={WrappedTextInput}
+            />
+            <Field
+              name="password"
+              id="password"
+              props={{
+                title: 'Password',
+                textContentType: 'password',
+                autoCompleteType: 'password',
+                password: true
+              }}
+              component={WrappedTextInput}
+            />
+            <Field
+              name="cpassword"
+              id="cpassword"
+              props={{
+                title: 'Confirm Password',
+                textContentType: 'password',
+                autoCompleteType: 'password',
+                password: true
+              }}
+              component={WrappedTextInput}
+            />
+            <View style={styles.buttons}>
+              <Button
+                color="#cda845"
+                uppercase={false}
+                mode="contained"
+                onPress={handleSubmit(values => {
+                  handleSignUp(values, setLocation, setAuthentication, putData);
+                })}>
+                Sign Up
           </Button>
-          <Button
-            color="white"
-            uppercase={false}
-            mode="text"
-            onPress={() => setLocation('signin')}>
-            Sign In
+              <Button
+                color="white"
+                uppercase={false}
+                mode="text"
+                onPress={() => setLocation('signin')}>
+                Sign In
           </Button>
-        </View>
+            </View>
+          </View>
+        </Card>
       </View>
-    </Card>
-    </View>
     </ImageBackground>
   );
 };
@@ -107,10 +107,16 @@ const handleSignUp = (values, setLocation, setAuthentication, putData) => {
     .then(response => {
       setAuthentication({ loggedIn: true, email: values.email, uid: response.user.uid });
       putData('https://levelup-10cfc.firebaseio.com/users/' + response.user.uid + '.json', {
-        quests: ['empty'],
-        profile: { brows: "type-1", eyes: "type-1", hairColor: "type-1", hairStyle: "type-1", headShape: "type-1", mouth: "type-1" ,name: "none", nose: "type-1", skinColor: "tan" },
-        skills: ['empty'],
-        attributes: {fitness: {exp: 0, level: 1}, academics: {exp: 0, level: 1}, crafts: {exp: 0, level: 1}, community: {exp: 0, level: 1}, mental: {exp: 0, level: 1}, hobby: {exp: 0, level: 1}}
+
+        quests: [{
+          "description": "Welcome to Xperience, quests map to real life tasks!",
+          "expVal": 10,
+          "name": "Welcome",
+          "skill": "hobby"
+        }],
+        profile: { brows: "type-1", eyes: "type-1", hairColor: "type-1", hairStyle: "type-1", headShape: "type-1", mouth: "type-1", name: "none", nose: "type-1", skinColor: "tan" },
+        skills: ["empty"],
+        attributes: { fitness: { exp: 0, level: 1 }, academics: { exp: 0, level: 1 }, crafts: { exp: 0, level: 1 }, community: { exp: 0, level: 1 }, mental: { exp: 0, level: 1 }, hobby: { exp: 0, level: 1 } }
       }, 'profile', 'profile');
     })
     .catch(error => {
@@ -125,7 +131,9 @@ const styles = EStyleSheet.create({
     backgroundColor: '#555'
     //  border: 'none',
   },
-
+  mainView: {
+    paddingTop: '2rem'
+  },
   buttons: {
     marginTop: '1rem',
     marginLeft: '2rem',

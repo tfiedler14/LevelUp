@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { View, ImageBackground, Button, StyleSheet } from 'react-native';
-import EStyleSheet from 'react-native-extended-stylesheet';
+import DropdownList from 'react-widgets/lib/DropdownList';
+import { View, ImageBackground, Button, StyleSheet, Item, Picker } from 'react-native';
+import EStyleSheet, { value } from 'react-native-extended-stylesheet';
 import { setLocation } from '../logic/location/actions';
+import { setSkills } from '../logic/data/actions';
 import { getData, putData } from '../logic/data/actions';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import RNPickerSelect from 'react-native-picker-select';
@@ -11,110 +13,121 @@ import { Field, getFormValues, initialize, reduxForm } from 'redux-form';
 import { compose } from 'redux';
 import { WrappedTextInput } from '../shared-components/FormField';
 
+export const AddSkill = ({ auth, skills, setLocation, location, handleSubmit, putData, setSkills }) => {
+    const uid = require('uuid/v4');
+    let id = uid();
 
-
-
-
-export const AddSkill = ({ skills, setLocation, location, handleSubmit }) => {
-
-    const placeHolder = {
-        label: 'Select an Attribute for new skill',
-        attr: '',
-        def: ''
-
-    };
-
-    handleAttrValue = (attr) => {
-        placeHolder.attr = attr;
-        console.log(placeHolder.attr);
-    }
-    //currently undefined
-    handleAttrDef = (def) => {
-        placeHolder.def = def;
-        console.log(placeHolder.def);
-    }
-    handleSkillSave = (location) => {
-        console.log("saving new skill");
-        setLocation('profile');
-    }
-
-    attrValue = placeHolder.value;
-    console.log("made it to addSkill const");
-    console.log(attrValue);
 
     return (
 
-<ImageBackground source={require('../../assets/images/darkverylowopacityshapes.png')} style={{ height: '100%', width: '100%' }}>
-        <View style={{}}>
+        <ImageBackground source={require('../../assets/images/darkverylowopacityshapes.png')} style={{ height: '100%', width: '100%' }}>
             <View>
                 <View>
-                    <View style={{ position: 'absolute', alignSelf: 'flex-end', flex: 1 }}>
-                        <Icon
-                            style={styles.padding}
-                            name="settings-applications"
-                            size={48}
-                            color="white"
-                            onPress={() => setLocation('settings')}
+
+                    <View style={styles.cardPadding}>
+
+                        <FormHeader title={'Define skill\'s attribute:'} style={{ fontSize: 24, paddingBottom: '8', alignSelf: 'center' }} />
+                        <Field
+                            name="addSkillAttribute"
+                            component={attributeDropDown}
+                            iosHeader="Select one"
+                            mode="dropdown"
+                            style={pickerStyles}
+                        >
+                            <Picker.Item style={pickerStyles} label="academics" value="academics" />
+                            <Picker.Item style={pickerStyles} label="crafts" value="crafts" />
+                            <Picker.Item style={pickerStyles} label="mental" value="mental" />
+                            <Picker.Item style={pickerStyles} label="fitness" value="fitness" />
+                            <Picker.Item style={pickerStyles} label="community" value="community" />
+                            <Picker.Item style={pickerStyles} label="hobby" value="hobby" />
+                        </Field>
+
+                        <Field
+                            name="addSkillName"
+                            id="addSkillName"
+                            props={{
+                                title: 'Skill Name',
+                                textContentType: 'string',
+                            }}
+                            component={WrappedTextInput}
                         />
+                    </View>
+
+                    <View>
+                        <Button
+                            color="#fff"
+                            mode="contained"
+                            title="Save Skill"
+                            onPress={handleSubmit(values => {
+                                if (values.addSkillAttribute !== undefined && values.addSkillName !== undefined) {
+                                    let toInsert = {};
+                                    toInsert["attribute"] = values.addSkillAttribute;
+                                    toInsert["name"] = values.addSkillName;
+                                    toInsert["val"] = 0;
+
+                                    putData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/skills.json', [...skills, toInsert], 'profile', 'profile');
+                                } else {
+                                    alert("Attribute and Name must be defined");
+                                }
+                            })}>Save Skill</Button>
+
                     </View>
 
                 </View>
 
-                <View >
-
-                </View>
-
-                <View style={styles.cardPadding}>
-
-                    <FormHeader title={'Attribute:'} style={{ fontSize: 24, paddingBottom: '8' }} ></FormHeader>
-                    <RNPickerSelect
-                        style={pickerStyles} placeholder={placeHolder} onValueChange={(value) => this.handleAttrValue(value)}
-                        items={[
-                            { label: 'Academics', value: 'Academics' },
-                            { label: 'Crafts', value: 'Crafts' },
-                            { label: 'Mental', value: 'Mental' },
-                            { label: 'Fitness', value: 'Fitness' },
-                            { label: 'Community', value: 'Community' },
-                            { label: 'Hobbies', value: 'Hobbies' },
-                        ]}
-                    />
-                    <FormHeader title={'Definition of skill:'} style={{ fontSize: 18, paddingBottom: '8' }}></FormHeader>
-                    <Field
-                        name="addSkill"
-                        id="addSkill"
-                        component={WrappedTextInput}
-
-                    />
-                </View>
-
-                <View>
-                    <Button
-                        color="#fff"
-                        mode="contained"
-                        title="Save Skill"
-                        onPress={() => this.handleSkillSave(location)} />
-
-                </View>
 
             </View>
-
-
-        </View>
-        </ImageBackground>
+        </ImageBackground >
     );
 };
 
 
 
+const handleAddSkill = (auth, sID, skills, values, putData, setSkills) => {
+
+    let toInsert = {};
+    if (values.addSkillAttribute !== undefined && values.addSkillName !== undefined) {
+
+        toInsert["attribute"] = values.addSkillAttribute;
+        toInsert["name"] = values.addSkillName;
+        toInsert["val"] = 0;
+
+        // skills.push({ [sID]: toInsert });
+
+        console.log("skills", skills);
+        setSkills(skills);
+
+        putData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/skills.json', [...skills, toInsert], 'profile', 'profile');
+    } else {
+        alert("Must add attribute and name");
+    }
+}
+
+
+const placeHolder = {
+    label: "Select an Attribute for new skill"
+}
+
+
+const attributeDropDown = ({ input: { onChange, value, ...inputProps }, children, ...pickerProps }) => (
+    <Picker
+        itemStyle={{ color: "#ccc", fontFamily: "Academy Engraved LET", fontSize: 17 }}
+        selectedValue={value}
+        onValueChange={value => onChange(value)}
+        {...inputProps}
+        {...pickerProps}
+    >
+        {children}
+
+    </Picker>
+);
 const pickerStyles = StyleSheet.create({
     inputIOS: {
         color: 'white',
         fontSize: 22,
         paddingTop: 8,
         paddingHorizontal: 10,
-        paddingBottom: 8,
-
-
+        paddingBottom: 15,
     },
 
 });
@@ -170,20 +183,25 @@ const mapStateToProps = state => {
     return {
         skills: state.data.skills,
         quests: state.data.quests,
-        location: state.location
+        location: state.location,
+        auth: state.auth,
+        values: getFormValues('addSkills-form')(state)
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        putData: data => {
-            dispatch(putData(data));
+        putData: (path, data, redirect) => {
+            dispatch(putData(path, data, redirect));
         },
         getData: (data, dataPoint) => {
             dispatch(getData(data, dataPoint));
         },
         setLocation: location => {
             dispatch(setLocation(location));
+        },
+        setSkills: skills => {
+            dispatch(setSkills(skills));
         }
     };
 };
@@ -191,7 +209,7 @@ const mapDispatchToProps = dispatch => {
 export default compose(
     connect(
         mapStateToProps,
-        mapDispatchToProps
+        mapDispatchToProps,
     ),
     reduxForm({ form: 'addSkills-form' })
 )(AddSkill);

@@ -40,7 +40,7 @@ export const ApplicationHome = ({ location, setLocation, getData }) => {
                   <View style={{ position: 'absolute', paddingTop: 40, paddingLeft: 30 }}>
                     <CustomButton
                       text="Quests"
-                      onPress={() => setLocation('quest')}
+                      onPress={() => setLocation('questlist')}
                     />
                   </View>
                 </Col>
@@ -62,7 +62,7 @@ export const ApplicationHome = ({ location, setLocation, getData }) => {
           {location === 'addSkill' && <AddSkill />}
           {location === 'editquest' && <AddQuest editProp={true} />}
           {location === 'quest' && <Quest />}
-          {location === 'home' && <QuestList />}
+          {location === 'questlist' && <QuestList />}
           {location === 'signin' && <SignIn />}
           {location === 'signup' && <SignUp />}
           {location === 'settings' && <Settings />}
