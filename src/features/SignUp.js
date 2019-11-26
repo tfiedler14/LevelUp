@@ -114,9 +114,10 @@ const handleSignUp = (values, setLocation, setAuthentication, putData) => {
           "name": "Welcome",
           "skill": "hobby"
         }],
-        profile: { brows: "type-1", eyes: "type-1", hairColor: "type-1", hairStyle: "type-1", headShape: "type-1", mouth: "type-1", name: "none", nose: "type-1", skinColor: "tan" },
+        profile: { avatarImage: 0},
+        character: {characterName: 'name', mainLevel: 1, mainLevelXp: 0, mainLevelXpToNext: 0},
         skills: ["empty"],
-        attributes: { fitness: { exp: 0, level: 1 }, academics: { exp: 0, level: 1 }, crafts: { exp: 0, level: 1 }, community: { exp: 0, level: 1 }, mental: { exp: 0, level: 1 }, hobby: { exp: 0, level: 1 } }
+        attributes: { fitness: { exp: 0, level: 1, xpToNext: 50}, academics: { exp: 0, level: 1, xpToNext: 50 }, crafts: { exp: 0, level: 1, xpToNext: 50 }, community: { exp: 0, level: 1 , xpToNext: 50}, mental: { exp: 0, level: 1 , xpToNext: 50}, hobby: { exp: 0, level: 1, xpToNext: 50 } }
       }, 'profile', 'profile');
     })
     .catch(error => {

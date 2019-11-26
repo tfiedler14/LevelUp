@@ -63,7 +63,9 @@ export const AddSkill = ({ auth, skills, setLocation, location, handleSubmit, pu
                                     let toInsert = {};
                                     toInsert["attribute"] = values.addSkillAttribute;
                                     toInsert["name"] = values.addSkillName;
-                                    toInsert["val"] = 0;
+                                    toInsert["val"] = 1;
+                                    toInsert["xp"] = 0;
+                                    toInsert["xpToNext"] = 50;
 
                                     putData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/skills.json', [...skills, toInsert], 'profile', 'profile');
                                 } else {

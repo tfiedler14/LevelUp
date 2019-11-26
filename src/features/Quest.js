@@ -10,7 +10,7 @@ import { WrappedTextInput } from '../shared-components/FormField';
 import { Field, reduxForm } from 'redux-form';
 import { compose } from 'redux';
 
-export const Quest = ({ info, setLocation, deleteData, auth, putData, handleSubmit }) => {
+export const Quest = ({ info, setLocation, deleteData, auth, skills, putData, handleSubmit }) => {
   return (
     <View style={styles.sectionHeight}>
       <View style={styles.formPadding}>
@@ -39,7 +39,13 @@ export const Quest = ({ info, setLocation, deleteData, auth, putData, handleSubm
                 uppercase={false}
                 mode="contained"
                 onPress={() => {
-                  setLocation('questlist');
+                var skill = skills.filter(skill => skill.name === info.skill)[0];
+                skill.xp += 6*(info.difficulty + 0.1*skill.val) + 2*(info.time + 0.1* skill.val);
+                while(skill.xp >= skill.xp + skill.xpToNext){
+                  skill.val++; //levelUp!
+                  skill.xpToNext = skill.xpToNext*1.065;
+                }
+                deleteData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests/' + info.id + '.json', 'questlist');
                 }}>
                 Complete Quest
             </Button>
@@ -153,6 +159,7 @@ const mapStateToProps = state => {
   return {
     info: state.data.quest,
     auth: state.auth,
+    skills: state.data.skills,
   };
 };
 
