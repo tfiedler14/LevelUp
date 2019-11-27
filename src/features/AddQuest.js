@@ -50,9 +50,15 @@ export const AddQuest = ({
               component={WrappedTextInput}
             />
             <Field
-              name="expVal"
-              id="expVal"
-              props={{ title: 'XP' }}
+              name="difficulty"
+              id="difficulty"
+              props={{ title: 'Difficulty' }}
+              component={WrappedTextInput}
+            />
+            <Field
+              name="time"
+              id="time"
+              props={{ title: 'Time' }}
               component={WrappedTextInput}
             />
             <Field

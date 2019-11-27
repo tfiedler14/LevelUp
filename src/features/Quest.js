@@ -40,11 +40,14 @@ export const Quest = ({ info, setLocation, deleteData, auth, skills, putData, ha
                 mode="contained"
                 onPress={() => {
                 var skill = skills.filter(skill => skill.name === info.skill)[0];
+                console.log(6*(info.difficulty + 0.1*skill.val) + 2*(info.time + 0.1* skill.val));
+                console.log(skill);
                 skill.xp += 6*(info.difficulty + 0.1*skill.val) + 2*(info.time + 0.1* skill.val);
                 while(skill.xp >= skill.xp + skill.xpToNext){
                   skill.val++; //levelUp!
                   skill.xpToNext = skill.xpToNext*1.065;
                 }
+                putData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/skills.json', [...skills], null, 'profile');
                 deleteData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests/' + info.id + '.json', 'questlist');
                 }}>
                 Complete Quest
