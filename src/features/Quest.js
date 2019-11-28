@@ -10,7 +10,7 @@ import { WrappedTextInput } from '../shared-components/FormField';
 import { Field, reduxForm } from 'redux-form';
 import { compose } from 'redux';
 
-export const Quest = ({ info, setLocation, deleteData, auth, skills, putData, handleSubmit }) => {
+export const Quest = ({ info, setLocation, deleteData, character, auth, skills, putData, handleSubmit }) => {
   return (
     <View style={styles.sectionHeight}>
       <View style={styles.formPadding}>
@@ -43,9 +43,22 @@ export const Quest = ({ info, setLocation, deleteData, auth, skills, putData, ha
                 console.log(6*(info.difficulty + 0.1*skill.val) + 2*(info.time + 0.1* skill.val));
                 console.log(skill);
                 skill.xp += 6*(info.difficulty + 0.1*skill.val) + 2*(info.time + 0.1* skill.val);
-                while(skill.xp >= skill.xp + skill.xpToNext){
+                var attribute;
+                while(skill.xp >= skill.xpToNext){
                   skill.val++; //levelUp!
-                  skill.xpToNext = skill.xpToNext*1.065;
+                  skill.xpToNext += skill.xpToNext*1.065;
+                  attribute = attribute[skill.attribute];
+                  attribute.xp += 6*skill.val;
+                }
+                while (attribute.xp >= attribute.xpToNext){
+                  attribute.level++;
+                  attribute.xpToNext += attribute.xpToNext*1.065;
+                  character.xp += 6*attribute.level;
+
+                }
+                while (character.xp >= character.xpToNext){
+                  character.level++;
+                  character.xpToNext += character.xpToNext*1.065;
                 }
                 putData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/skills.json', [...skills], null, 'profile');
                 deleteData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests/' + info.id + '.json', 'questlist');
@@ -163,6 +176,8 @@ const mapStateToProps = state => {
     info: state.data.quest,
     auth: state.auth,
     skills: state.data.skills,
+    attributes: state.data.attributes,
+    character: state.data.character,
   };
 };
 
