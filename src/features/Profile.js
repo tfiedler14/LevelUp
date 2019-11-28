@@ -21,6 +21,7 @@ export const Profile = ({
   loading,
   auth,
   setLoading,
+  character,
   profile
 }) => {
   const handleAddSkill = location => {
@@ -35,6 +36,10 @@ export const Profile = ({
     getData(
       'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/attributes.json',
       'attributes'
+    );
+    getData(
+      'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/character.json',
+      'character'
     );
 
     //name now reflects actual logged in user name instead of always the name tom, 
@@ -71,7 +76,7 @@ export const Profile = ({
               </View>
               <View>
                 <Text style={{ textAlign: 'center', fontSize: 40, color: '#cda845', marginTop: 20, fontFamily: 'cinzel-decor' }}>
-                  {profile.name}
+                  {character.characterName}
                 </Text>
               </View>
               <View style={{ flex: 1, alignItems: 'center', paddingTop: 20 }}>
@@ -245,7 +250,8 @@ const mapStateToProps = state => {
     location: state.location,
     loading: state.loading,
     auth: state.auth,
-    profile: state.data.profile
+    profile: state.data.profile,
+    character: state.data.character
   };
 };
 

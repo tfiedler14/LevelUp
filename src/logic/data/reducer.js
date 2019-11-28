@@ -1,5 +1,5 @@
 export default (
-  state = { profile: {}, quests: [], quest: {}, skills: [], attributes: [] },
+  state = { profile: {}, character: {}, quests: [], quest: {}, skills: [], attributes: [] },
   action
 ) => {
   switch (action.type) {
@@ -13,11 +13,14 @@ export default (
       return { ...state, attributes: action.data };
     case 'SET_QUESTS':
       return { ...state, quests: action.data };
+    case 'SET_CHARACTER':
+      return {...state, character: action.data};
     case 'SET_USER':
       return {
         profile: action.data.profile,
         quests: action.data.quests,
-        skills: action.data.skills
+        skills: action.data.skills,
+        character: action.data.character
       };
     case 'SET_QUEST':
       return {...state, quest: action.data};

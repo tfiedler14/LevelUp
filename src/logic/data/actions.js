@@ -24,6 +24,13 @@ export const setSkills = data => {
   };
 };
 
+export const setCharacter = data => {
+  return {
+    type: 'SET_CHARACTER',
+    data
+  };
+};
+
 export const setAttributes = data => {
   return {
     type: 'SET_ATTRIBUTES',
@@ -69,6 +76,9 @@ export const getData = (target, dataPoint) => {
           dispatch(setLoading(false));
         } else if (dataPoint === 'attributes') {
           dispatch(setAttributes(response.data));
+          dispatch(setLoading(false));
+        }else if (dataPoint === 'character') {
+          dispatch(setCharacter(response.data));
           dispatch(setLoading(false));
         } else if (dataPoint === 'quests') {
           dispatch(setQuests(response.data));

@@ -10,7 +10,7 @@ import { WrappedTextInput } from '../shared-components/FormField';
 import { Field, reduxForm } from 'redux-form';
 import { compose } from 'redux';
 
-export const Quest = ({ info, setLocation, deleteData, character, auth, skills, putData, handleSubmit }) => {
+export const Quest = ({ info, setLocation, deleteData, attributes, character, auth, skills, putData, handleSubmit }) => {
   return (
     <View style={styles.sectionHeight}>
       <View style={styles.formPadding}>
@@ -47,18 +47,18 @@ export const Quest = ({ info, setLocation, deleteData, character, auth, skills, 
                 while(skill.xp >= skill.xpToNext){
                   skill.val++; //levelUp!
                   skill.xpToNext += skill.xpToNext*1.065;
-                  attribute = attribute[skill.attribute];
+                  attribute = attributes[skill.attribute];
                   attribute.xp += 6*skill.val;
                 }
                 while (attribute.xp >= attribute.xpToNext){
                   attribute.level++;
                   attribute.xpToNext += attribute.xpToNext*1.065;
-                  character.xp += 6*attribute.level;
+                  character.mainLevelXp += 6*attribute.level;
 
                 }
-                while (character.xp >= character.xpToNext){
-                  character.level++;
-                  character.xpToNext += character.xpToNext*1.065;
+                while (character.mainLevelXp >= character.mainLevelXpToNext){
+                  character.mainLevel++;
+                  character.mainLevelXpToNext += character.mainLevelXpToNext*1.065;
                 }
                 putData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/skills.json', [...skills], null, 'profile');
                 deleteData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests/' + info.id + '.json', 'questlist');
