@@ -26,7 +26,6 @@ export const Profile = ({
   const handleAddSkill = location => {
     setLocation('addSkill');
     console.log('chaning location to addSkill');
-    console.log(location);
   };
   /* istanbul ignore next */
   useEffect(() => {
@@ -98,8 +97,9 @@ export const Profile = ({
             <View style={{ height: '50%', width: 500, paddingTop: 15, paddingLeft: 15 }}>
               <ScrollView>
                 {attributeList.map(data => {
+                  console.log(data);
                   return (
-                    <View style={{ width: 200 }}>
+                    <View style={{ width: 200 }} key={`${data}-attr`}>
                       <Grid>
                         <Col>
                           <AttributeItem attributeName={data} skills1={skills} />
@@ -134,7 +134,7 @@ const AttributeListItem = ({ skills, levels }) => {
   return skills.map(data => {
     return (
 
-      <View style={{ marginLeft: 45 }} key={data}>
+      <View style={{ marginLeft: 45 }} key={`${data}-li`}>
         <Text style={{ color: '#ffffff', fontFamily: 'cinzel-decor' }}>
           {data.name} -{data.level}
         </Text>

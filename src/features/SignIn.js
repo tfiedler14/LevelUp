@@ -14,41 +14,49 @@ import { FormHeader } from '../shared-components/FormHeader';
 import { AppLoading } from 'expo';
 
 export const SignIn = ({ setLocation, handleSubmit, setAuthentication, setErrors, errors }) => {
-  // const [initialized, setInitialized] = useState(false);
+  /*const [initialized, setInitialized] = useState(false);
 
-  /*useEffect(() => {
+  useEffect(() => {
     if (!initialized) {
       initialize({
-        email: '',
-        password: ''
+        email: 'rgrindrod@wisc.edu',
+        password: 'Password'
       });
       setInitialized(true);
     }
   });*/
+
   return (
-    <> 
-    <ImageBackground source={require('../../assets/images/darkverylowopacityshapes.png')} style={{height: '100%', width: '100%'}}>
-      {errors.signIn && (
-        <Card style={styles.errorCard}>
-          <View>
-            <Text style={{color: '#FFFFFF'}}>Incorrect email and password combination</Text>
-          </View>
-        </Card>
-      )}
-      <View style={{paddingTop: 150}}>
-      <Image
-    style={{alignSelf: 'center', resizeMode: 'contain', width: '92%'}}
-    source={require('../../assets/images/title.png')}
-  />
-      <Card style={styles.card}>
-        <View>
-          <FormHeader title={'Sign In'} />
-          <Field
-            name="email"
-            autoCapitalize='none'
-            id="email"
-            props={{ title: 'Email', textContentType: 'emailAddress', autoCompleteType: 'email' }}
-            component={WrappedTextInput} />
+    <>
+      <ImageBackground
+        source={require('../../assets/images/darkverylowopacityshapes.png')}
+        style={{ height: '100%', width: '100%' }}>
+        {errors.signIn && (
+          <Card style={styles.errorCard}>
+            <View>
+              <Text style={{ color: '#FFFFFF' }}>Incorrect email and password combination</Text>
+            </View>
+          </Card>
+        )}
+        <View style={{ paddingTop: 50 }}>
+          <Image
+            style={{ alignSelf: 'center', resizeMode: 'contain', width: '92%' }}
+            source={require('../../assets/images/title.png')}
+          />
+          <Card style={styles.card}>
+            <View>
+              <FormHeader title={'Sign In'} />
+              <Field
+                name="email"
+                autoCapitalize="none"
+                id="email"
+                props={{
+                  title: 'Email',
+                  textContentType: 'emailAddress',
+                  autoCompleteType: 'email'
+                }}
+                component={WrappedTextInput}
+              />
 
               <Field
                 name="password"
@@ -92,9 +100,8 @@ const handleLogin = (values, setLocation, setAuth, setErrors) => {
     .auth()
     .signInWithEmailAndPassword(values.email, values.password)
     .then(response => {
-      console.log(response);
       setAuth({ loggedIn: true, email: response.user.email, uid: response.user.uid });
-      setLocation('profile');
+      setLocation('calendar');
     })
     .catch(error => {
       console.log('Failed to sign in.');
@@ -110,7 +117,7 @@ const styles = EStyleSheet.create({
     //  border: 'none',
   },
   mainView: {
-    paddingTop: '4rem'
+    paddingTop: '1rem'
   },
   errorCard: {
     padding: '1rem',
@@ -126,11 +133,14 @@ const styles = EStyleSheet.create({
 });
 
 export const mapStateToProps = state => {
-  console.log(state);
   return {
     location: state.location,
     values: getFormValues('sign-in-form')(state),
-    errors: state.errors
+    errors: state.errors,
+    initialValues: {
+      email: 'rgrindrod@wisc.edu',
+      password: 'Password'
+    }
   };
 };
 
@@ -167,9 +177,9 @@ export const validate = values => {
 };
 
 export default compose(
-  reduxForm({ form: 'sign-in-form', validate }),
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )
+  ),
+  reduxForm({ form: 'sign-in-form', validate, enableReinitialize: true })
 )(SignIn);
