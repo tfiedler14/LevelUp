@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { getData, putData } from '../logic/data/actions';
 import { setLocation } from '../logic/location/actions';
+import { setQuests } from '../logic/data/actions';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { FormHeader } from '../shared-components/FormHeader';
@@ -16,6 +17,7 @@ export const AddQuest = ({
   getData,
   putData,
   setLocation,
+  setQuests,
   auth,
   handleSubmit,
   profile,
@@ -49,18 +51,7 @@ export const AddQuest = ({
               props={{ title: 'Description' }}
               component={WrappedTextInput}
             />
-            <Field
-              name="difficulty"
-              id="difficulty"
-              props={{ title: 'Difficulty' }}
-              component={WrappedTextInput}
-            />
-            <Field
-              name="time"
-              id="time"
-              props={{ title: 'Time' }}
-              component={WrappedTextInput}
-            />
+            <Field name="expVal" id="expVal" props={{ title: 'XP' }} component={WrappedTextInput} />
             <Field
               name="skill"
               id="skill"
@@ -68,46 +59,39 @@ export const AddQuest = ({
               component={WrappedTextInput}
             />
 
-
-
             <Button
               color="#064f2f"
               uppercase={false}
               mode="contained"
               style={styles.buttons}
               onPress={handleSubmit(values => {
-
-                if (quests == []) {
+                let toInsert = { ...values, finishDate: 'incomplete' };
+                if (quests === []) {
                   var newQuests = [];
-                  newQuests[0] = values;
+                  newQuests[0] = toInsert;
                   putData(
-                    'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests' +
-
-                    '.json',
+                    'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests' + '.json',
                     newQuests,
                     'questlist'
                   );
-                } else
-                  if (editProp) {
-                    var newQuests = [...quests];
-                    newQuests[quest.id] = values;
-                    putData(
-                      'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests' +
-
+                } else if (editProp) {
+                  var newQuests = [...quests];
+                  newQuests[quest.id] = toInsert;
+                  putData(
+                    'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests' + '.json',
+                    newQuests,
+                    'questlist'
+                  );
+                } else {
+                  putData(
+                    'https://levelup-10cfc.firebaseio.com/users/' +
+                      auth.uid +
+                      '/quests' +
                       '.json',
-                      newQuests,
-                      'questlist'
-                    );
-                  } else {
-                    values.name &&
-                      putData(
-                        'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests' +
-
-                        '.json',
-                        [...quests, values],
-                        'questlist'
-                      );
-                  }
+                    [...quests, toInsert],
+                    'questlist'
+                  );
+                }
               })}>
               {editProp ? 'Edit quest' : 'Add quest'}
             </Button>
@@ -144,9 +128,7 @@ export const mapStateToProps = (state, { editProp }) => {
     quests: state.data.quests,
     profile: state.data.profile,
     quest: state.data.quest,
-    initialValues: editProp
-      ? state.data.quest
-      : {}
+    initialValues: editProp ? state.data.quest : {}
   };
 };
 
@@ -160,6 +142,9 @@ export const mapDispatchToProps = dispatch => {
     },
     setLocation: location => {
       dispatch(setLocation(location));
+    },
+    setQuests: data => {
+      dispatch(setQuests(data))
     },
     initialize: values => {
       dispatch(initialize('add-quest-form', values));

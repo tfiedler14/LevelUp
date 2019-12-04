@@ -18,6 +18,7 @@ import { Col, Grid } from 'react-native-easy-grid';
 import { getData, putData } from './logic/data/actions';
 import { auth } from 'firebase';
 import CustomButton from './shared-components/CustomButton'
+import  CalendarPage  from "./features/CalendarPage";
 console.disableYellowBox = true;
 
 export const ApplicationHome = ({ location, setLocation, getData }) => {
@@ -47,8 +48,8 @@ export const ApplicationHome = ({ location, setLocation, getData }) => {
                 <Col size={2}>
                 <View style={{ position: 'absolute', paddingTop: 40, paddingLeft: 35 }}>
                     <CustomButton
-                      text="Map"
-                      onPress={() => setLocation('map')}
+                      text="Metrics"
+                      onPress={() => setLocation('calendar')}
                     />
                   </View>
                 </Col>
@@ -67,6 +68,7 @@ export const ApplicationHome = ({ location, setLocation, getData }) => {
           {location === 'signup' && <SignUp />}
           {location === 'settings' && <Settings />}
           {location === 'fonts' && <AndroidFonts />}
+          {location === 'calendar' && <CalendarPage />}
         </View>
       </View>
     </ImageBackground>

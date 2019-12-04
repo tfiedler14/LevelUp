@@ -114,7 +114,7 @@ const handleSignUp = (values, setLocation, setAuthentication, putData) => {
           "name": "Welcome",
           "skill": "hobby"
         }],
-        profile: { avatarImage: 0},
+        profile: { characterName: 'name', avatarImage: 0},
         character: {characterName: 'name', mainLevel: 1, mainLevelXp: 0, mainLevelXpToNext: 50},
         skills: ["empty"],
         attributes: { fitness: { id: 'fitness', exp: 0, level: 1, xpToNext: 50}, academics: { id: 'academics',exp: 0, level: 1, xpToNext: 50 }, crafts: { id: 'crafts', exp: 0, level: 1, xpToNext: 50 }, community: {id: 'community', exp: 0, level: 1 , xpToNext: 50}, mental: { id: 'mental', exp: 0, level: 1 , xpToNext: 50}, hobby: {id: 'hobby', exp: 0, level: 1, xpToNext: 50 } }
