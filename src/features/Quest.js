@@ -9,8 +9,9 @@ import { FormHeader } from '../shared-components/FormHeader';
 import { WrappedTextInput } from '../shared-components/FormField';
 import { Field, reduxForm } from 'redux-form';
 import { compose } from 'redux';
+import moment from "moment";
 
-export const Quest = ({ info, setLocation, deleteData, auth, putData, handleSubmit }) => {
+export const Quest = ({ info, setLocation, deleteData, auth, quests, putData, handleSubmit }) => {
   return (
     <View style={styles.sectionHeight}>
       <View style={styles.formPadding}>
@@ -39,7 +40,13 @@ export const Quest = ({ info, setLocation, deleteData, auth, putData, handleSubm
                 uppercase={false}
                 mode="contained"
                 onPress={() => {
-                  setLocation('questlist');
+                  let date = moment().format().split("T")[0];
+                  quests[info.id].finishDate = date;
+                  putData(
+                    'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests' + '.json',
+                    quests,
+                    'questlist'
+                  );
                 }}>
                 Complete Quest
             </Button>
@@ -153,6 +160,7 @@ const mapStateToProps = state => {
   return {
     info: state.data.quest,
     auth: state.auth,
+    quests: state.data.quests
   };
 };
 

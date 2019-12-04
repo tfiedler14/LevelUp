@@ -5,7 +5,7 @@ import { ScrollView, Text, View, Button } from 'react-native';
 import { setLocation } from '../logic/location/actions';
 import { getData } from '../logic/data/actions';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import {Divider} from 'react-native-elements';
+import { Divider } from 'react-native-elements';
 import QuestComponent from '../shared-components/QuestComponent';
 import { Card } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -18,36 +18,33 @@ export const QuestList = ({ getData, setLocation, quests, location, auth }) => {
   }, []);
   return (
     <View style={styles.sectionHeight}>
-      <View style = {styles.sectionPadding}>
-
+      <View style={styles.sectionPadding}>
         <Text style={{ textAlign: 'center', fontSize: 26, color: 'white', marginTop: 20 }}>
           {'Active Quests'}
         </Text>
-        <View style = {styles.iconcontainer}>
-          <Icon
-            name="add"
-            size={48}
-            color="white"
-            onPress={() => setLocation('addquest')}
-            />
+        <View style={styles.iconcontainer}>
+          <Icon name="add" size={48} color="white" onPress={() => setLocation('addquest')} />
         </View>
-
       </View>
       <ScrollView>
         <View>
           {quests &&
             Object.values(quests).map((quest, index) => {
-              if (quest!=null){
-              return (
-                
-                <View
-                  style={{
-                    borderBottomColor: 'white',
-                    borderBottomWidth: 1,
-                  }}
-                >
-                <QuestComponent info={{...quest, id:index}} />
-              </View>);} else {
+              if (quest != null) {
+                if (quest.finishDate === 'incomplete') {
+                  return (
+                    <View
+                      style={{
+                        borderBottomColor: 'white',
+                        borderBottomWidth: 1
+                      }}>
+                      <QuestComponent info={{ ...quest, id: index }} />
+                    </View>
+                  );
+                } else {
+                  return;
+                }
+              } else {
                 return;
               }
             })}
@@ -71,12 +68,12 @@ const styles = EStyleSheet.create({
     paddingTop: '.6rem'
   },
   sectionHeight: {
-    height: '100%',
+    height: '100%'
   },
   sectionPadding: {
     padding: '2rem',
     flexDirection: 'row'
-  },
+  }
 });
 
 const mapDispatchToProps = dispatch => {
@@ -85,7 +82,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(getData(data, dataPoint));
     },
     setLocation: location => {
-        dispatch(setLocation(location));
+      dispatch(setLocation(location));
     }
   };
 };

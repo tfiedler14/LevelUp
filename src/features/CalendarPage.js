@@ -15,6 +15,30 @@ export const CalendarPage = ({ getData, setLocation, quests, location, auth }) =
     getData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests.json', 'quests');
   }, []);
 
+  let completeQuests = {};
+  for (let i = 0; i < Object.keys(quests).length; i++) {
+    let currQuest = Object.keys(quests)[i];
+    if (quests[currQuest].finishDate && quests[currQuest].finishDate !== 'incomplete') {
+      if (!completeQuests[quests[currQuest].finishDate]) {
+        completeQuests[quests[currQuest].finishDate] = parseInt(quests[currQuest].expVal, 10);
+      } else {
+        completeQuests[quests[currQuest].finishDate] =
+          parseInt(completeQuests[quests[currQuest].finishDate], 10) +
+          parseInt(quests[currQuest].expVal, 10);
+      }
+    }
+  }
+  /*quests.forEach(quest => {
+    if(quest.finishDate && quest.finishDate !== 'incomplete') {
+      if(!(completeQuests[quest.finishDate])){
+        completeQuests[quest.finishDate] = parseInt(quest.expVal,10);
+      } else {
+        completeQuests[quest.finishDate] = parseInt(completeQuests[quest.finishDate], 10) + parseInt(quest.expVal, 10);
+      }
+    }
+  });*/
+  console.log(completeQuests);
+
   const today = moment(new Date());
 
   const [month, setMonth] = useState(today.month());
@@ -28,11 +52,33 @@ export const CalendarPage = ({ getData, setLocation, quests, location, auth }) =
   let week = 1;
 
   for (let i = 0; i < days; i++) {
+    let myColor = 'undefined';
+    let myDay = '';
+    if (i < 10) {
+      myDay = '0' + (i + 1);
+    } else {
+      myDay = '' + (i + 1);
+    }
+    let checkDay = year + '-' + (month + 1) + '-' + myDay;
+    console.log(checkDay);
+    if (completeQuests[checkDay]) {
+      if (completeQuests[checkDay] < 20) {
+        myColor = '#ee33cc';
+      } else if (completeQuests[checkDay] < 40) {
+        myColor = '#ee33aa';
+      } else if (completeQuests[checkDay] < 60) {
+        myColor = '#ee3366';
+      } else if (completeQuests[checkDay] < 80) {
+        myColor = '#ee3344';
+      } else if (completeQuests[checkDay] > 99) {
+        myColor = '#ee3322';
+      }
+    }
     monthInfo.push({
       date: i + 1,
       weekday: weekDayC,
       week,
-      color: (i + 1) % 5 === 0 ? '#ee3366' : undefined
+      color: myColor
     });
     weekDayC++;
     weekDayC = weekDayC % 7;
