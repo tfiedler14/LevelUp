@@ -27,7 +27,7 @@ export const SignIn = ({ setLocation, handleSubmit, setAuthentication, setErrors
   });*/
   return (
     <> 
-    <ImageBackground source={require('../../assets/images/darkverylowopacityshapes.png')} style={{height: '100%', width: '100%'}}>
+    <ImageBackground source={require('../../assets/images/newBackground.png')} style={{height: '100%', width: '100%'}}>
       {errors.signIn && (
         <Card style={styles.errorCard}>
           <View>
@@ -35,14 +35,14 @@ export const SignIn = ({ setLocation, handleSubmit, setAuthentication, setErrors
           </View>
         </Card>
       )}
-      <View style={{paddingTop: 150}}>
+      <View>
       <Image
     style={{alignSelf: 'center', resizeMode: 'contain', width: '92%'}}
-    source={require('../../assets/images/title.png')}
+    source={require('../../assets/images/newLogo.png')}
   />
       <Card style={styles.card}>
         <View>
-          <FormHeader title={'Sign In'} />
+          <FormHeader title={'Sign In'}  />
           <Field
             name="email"
             autoCapitalize='none'
@@ -63,7 +63,7 @@ export const SignIn = ({ setLocation, handleSubmit, setAuthentication, setErrors
               />
               <View style={styles.buttons}>
                 <Button
-                  color="#cda845"
+                  color="#edbf18"
                   uppercase={false}
                   mode="contained"
                   onPress={handleSubmit(values => {

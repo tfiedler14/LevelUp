@@ -14,11 +14,11 @@ import { putData } from '../logic/data/actions';
 
 export const SignUp = ({ setLocation, handleSubmit, setAuthentication, putData }) => {
   return (
-    <ImageBackground source={require('../../assets/images/darkverylowopacityshapes.png')} style={{ height: '100%', width: '100%' }}>
+    <ImageBackground source={require('../../assets/images/newBackground.png')} style={{ height: '100%', width: '100%' }}>
       <View style={styles.mainView}>
         <Image
           style={{ alignSelf: 'center', resizeMode: 'contain', width: '92%' }}
-          source={require('../../assets/images/title.png')}
+          source={require('../../assets/images/newLogo.png')}
         />
         <Card style={styles.card}>
           <View>
@@ -55,7 +55,7 @@ export const SignUp = ({ setLocation, handleSubmit, setAuthentication, putData }
             />
             <View style={styles.buttons}>
               <Button
-                color="#cda845"
+                color="#edbf18"
                 uppercase={false}
                 mode="contained"
                 onPress={handleSubmit(values => {
