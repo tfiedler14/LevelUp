@@ -13,6 +13,7 @@ import SignUp from './features/SignUp';
 import Quest from './features/Quest';
 import AddQuest from './features/AddQuest';
 import AndroidFonts from './features/AndroidFonts';
+import EditCharacter from './features/EditCharacter';
 import Settings from './features/Settings';
 import { Col, Grid } from 'react-native-easy-grid';
 import { getData, putData } from './logic/data/actions';
@@ -48,7 +49,7 @@ export const ApplicationHome = ({ location, setLocation, getData }) => {
                 <View style={{ position: 'absolute', paddingTop: 40, paddingLeft: 35 }}>
                     <CustomButton
                       text="Map"
-                      onPress={() => setLocation('map')}
+                      onPress={() => setLocation('editcharacter')}
                     />
                   </View>
                 </Col>
@@ -67,6 +68,7 @@ export const ApplicationHome = ({ location, setLocation, getData }) => {
           {location === 'signup' && <SignUp />}
           {location === 'settings' && <Settings />}
           {location === 'fonts' && <AndroidFonts />}
+          {location === 'editcharacter' && <EditCharacter />}
         </View>
       </View>
     </ImageBackground>
