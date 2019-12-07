@@ -42,9 +42,18 @@ export const Quest = ({ info, setLocation, deleteData, attributes, character, au
                 //get skills of quest from data.skills
                 var questSkills = skills.filter(skill => skill.name === info.skill);
                 var questAttributes = attributes;
+                var date = new Date();
+                var dateString = ("" + date.getDate() + " " + date.getMonth() + " " + date.getFullYear());
+                var dateEntry;
+                if (character.calender.filter(entry => dateString == entry.string).length > 0){
+                  dateEntry = character.calender.filter(entry => dateString == entry.string)[0];
+                } else {
+                  dateEntry = {string: dateString, xp: 0}
+                }
                 for (var curSkill of questSkills){
                   //add xp to skill
                   curSkill.xp += 6*(info.difficulty + 0.1*curSkill.val) + 2*(info.time + 0.1* curSkill.val);
+                  dateEntry.xp += 6*(info.difficulty + 0.1*curSkill.val) + 2*(info.time + 0.1* curSkill.val);
                   //while total xp of curSkill is greater/equal than xpToNext, increment level and update xpToNext
                   while(curSkill.xp >= curSkill.xpToNext){
                     curSkill.val++; //levelUp!
@@ -83,7 +92,16 @@ export const Quest = ({ info, setLocation, deleteData, attributes, character, au
                   character.mainLevel++;
                   character.mainLevelXpToNext += character.mainLevelXpToNext*1.065
                 }
+                console.log("DATE ENTRY: " + dateEntry.string)
+                var oldCalender = character.calender.filter((entry)=>entry.string != dateEntry.string);
+                var newCalender = [...oldCalender];
+                newCalender.push(dateEntry);
+                character.calender = newCalender;
+                console.log("CALENDER " + character.calender);
                 putData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/character.json', character, null, 'profile');
+
+                
+
                 deleteData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests/' + info.id + '.json', 'questlist');
                 }}>
                 Complete Quest
