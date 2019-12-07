@@ -42,8 +42,6 @@ export const Quest = ({ info, setLocation, deleteData, attributes, character, au
                 //get skills of quest from data.skills
                 var questSkills = skills.filter(skill => skill.name === info.skill);
                 var questAttributes = attributes;
-                
-                
                 for (var curSkill of questSkills){
                   //add xp to skill
                   curSkill.xp += 6*(info.difficulty + 0.1*curSkill.val) + 2*(info.time + 0.1* curSkill.val);
@@ -54,25 +52,17 @@ export const Quest = ({ info, setLocation, deleteData, attributes, character, au
                     //since we are leveling up a skill, we grant xp to its parent attribute
                     //get attribute from state
                     let attribute = questAttributes[curSkill.attribute]; 
-                    //if this attribute is already in updatedAttributes, get that instead
-                    
-                    //add xp to attribute
+                    //add xp to attribute and levelUp
                     attribute.exp += 6*curSkill.val;
                     while (attribute.exp >= attribute.xpToNext){
-                      
                       //level up and update xpToNext
                       attribute.level += 1;
                       attribute.xpToNext += attribute.xpToNext*1.065;
                       //as this is an attribute level up, grant xp to main level
                       character.mainLevelXp += 6*attribute.level;
-                     
-                      
-                    }
-                    
+                     }
                     questAttributes[attribute.id] = attribute;
-                    
-                    
-                  }
+                    }
                 }
                 //all skills updated and leveled up. create new array of skills to put
                 //first put skills that were updated on complete quest
@@ -83,24 +73,10 @@ export const Quest = ({ info, setLocation, deleteData, attributes, character, au
                     newSkills.push(a);
                   }
                 }
-                //put new skill array in firebase
+                //put new skill array
                 putData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/skills.json', [...newSkills], null, 'profile');
                 //level up attributes and grant xp to main level
-                //didn't need to do it this way, forgot that objects are obviously passed by reference but it works rn and I'm tired
-                
-                for (let a in questAttributes){
-                  while (a.exp >= a.xpToNext){
-                    
-                    //level up and update xpToNext
-                    a.level += 1;
-                    a.xpToNext += a.xpToNext*1.065;
-                    //as this is an attribute level up, grant xp to main level
-                    character.mainLevelXp += 6*a.level;
-                    //update attribute in attributes
-                    attributes[a.id] = a;
-                  }
-                  
-                }
+                //put attributes
                 putData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/attributes.json', attributes, null, 'profile');
                 //finally we level up main level in the same manner
                 while (character.mainLevelXp >= character.mainLevelUpToNext){
@@ -108,45 +84,7 @@ export const Quest = ({ info, setLocation, deleteData, attributes, character, au
                   character.mainLevelXpToNext += character.mainLevelXpToNext*1.065
                 }
                 putData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/character.json', character, null, 'profile');
-
-
-                /**var attribute;
-                while(skill.xp >= skill.xpToNext){
-                  skill.val++; //levelUp!
-                  skill.xpToNext += skill.xpToNext*1.065;
-                  attribute = attributes[skill.attribute];
-                  attribute.xp += 6*skill.val;
-                  var date = new Date();
-                  var dateString = ("" + date.getDate() + " " + date.getMonth() + " " + date.getFullYear());
-                  var dateObj;
-                  if (dateObj = character.calender.filter((dateEntry)=>{dateEntry.string==dateString}).length != 0){
-                    dateObj[0].xp += 6*(info.difficulty + 0.1*skill.val) + 2*(info.time + 0.1* skill.val);
-                  } else {
-                    dateObj = {'string': dateString, 'xp': (6*(info.difficulty + 0.1*skill.val) + 2*(info.time + 0.1* skill.val))};
-                    character.calender.push(dateObj);
-                  }
-                }
-                while (attribute.xp >= attribute.xpToNext){
-                  attribute.level++;
-                  attribute.xpToNext += attribute.xpToNext*1.065;
-                  character.mainLevelXp += 6*attribute.level;
-
-                }
-                while (character.mainLevelXp >= character.mainLevelXpToNext){
-                  character.mainLevel++;
-                  character.mainLevelXpToNext += character.mainLevelXpToNext*1.065;
-                }
-                putData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/skills.json', [...skills], null, 'profile');
-                putData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/character.json', character, null, 'profile');
                 deleteData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests/' + info.id + '.json', 'questlist');
-                }**/
-
-
-
-                deleteData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests/' + info.id + '.json', 'questlist');
-                
-
-                
                 }}>
                 Complete Quest
             </Button>
