@@ -41,13 +41,52 @@ export const Quest = ({ info, setLocation, deleteData, auth, quests, putData, ha
                 uppercase={false}
                 mode="contained"
                 onPress={() => {
-                  let date = moment().format().split("T")[0];
-                  quests[info.id].finishDate = date;
-                  putData(
-                    'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests' + '.json',
-                    quests,
-                    'questlist'
-                  );
+                //get skills of quest from data.skills
+                var questSkills = skills.filter(skill => skill.name === info.skill);
+                var questAttributes = attributes;
+                for (var curSkill of questSkills){
+                  //add xp to skill
+                  curSkill.xp += 6*(info.difficulty + 0.1*curSkill.val) + 2*(info.time + 0.1* curSkill.val);
+                  //while total xp of curSkill is greater/equal than xpToNext, increment level and update xpToNext
+                  while(curSkill.xp >= curSkill.xpToNext){
+                    curSkill.val++; //levelUp!
+                    curSkill.xpToNext += curSkill.xpToNext*1.065; //update xpTonext
+                    //since we are leveling up a skill, we grant xp to its parent attribute
+                    //get attribute from state
+                    let attribute = questAttributes[curSkill.attribute]; 
+                    //add xp to attribute and levelUp
+                    attribute.exp += 6*curSkill.val;
+                    while (attribute.exp >= attribute.xpToNext){
+                      //level up and update xpToNext
+                      attribute.level += 1;
+                      attribute.xpToNext += attribute.xpToNext*1.065;
+                      //as this is an attribute level up, grant xp to main level
+                      character.mainLevelXp += 6*attribute.level;
+                     }
+                    questAttributes[attribute.id] = attribute;
+                    }
+                }
+                //all skills updated and leveled up. create new array of skills to put
+                //first put skills that were updated on complete quest
+                var newSkills = [...questSkills];
+                for (let a of skills){
+                  // if this skill hasn't been updated, put the current version in the new array
+                  if(newSkills.filter(sk => sk.name === a.name).length == 0){
+                    newSkills.push(a);
+                  }
+                }
+                //put new skill array
+                putData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/skills.json', [...newSkills], null, 'profile');
+                //level up attributes and grant xp to main level
+                //put attributes
+                putData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/attributes.json', attributes, null, 'profile');
+                //finally we level up main level in the same manner
+                while (character.mainLevelXp >= character.mainLevelUpToNext){
+                  character.mainLevel++;
+                  character.mainLevelXpToNext += character.mainLevelXpToNext*1.065
+                }
+                putData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/character.json', character, null, 'profile');
+                deleteData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests/' + info.id + '.json', 'questlist');
                 }}>
                 Complete Quest
             </Button>
