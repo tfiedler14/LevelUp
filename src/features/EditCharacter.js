@@ -29,21 +29,29 @@ export const EditCharacter = ({ getData, setLocation, location, auth }) => {
           props={{ title: 'State your name peasant' }}
           component={WrappedTextInput}
         />
-        <View stlye ={styles.avatarSelect}>      
-          <Icon
-            name="58820"
-            size={48}
-            color="white"
-          />
-          <Image
-            style={styles.imageProfile}
-            source={require('../../assets/images/waycoolercharacter.png')}
-          />
-          <Icon
-            name="58820"
-            size={48}
-            color="white"
-          />
+        <View stlye ={styles.avatarSelect}>
+          <Grid>
+            <Col style={{ width: 20 }}>
+              <Icon
+              name="add"
+              size={48}
+              color="white"
+              />
+            </Col>
+            <Col style={{ width: 40 }}>
+              <Image
+                style={styles.imageProfile}
+                source={require('../../assets/images/waycoolercharacter.png')}
+              />
+            </Col>
+            <Col style={{ width: 20 }}>
+              <Icon
+                name="add"
+                size={48}
+                color="white"
+              />
+            </Col>
+          </Grid>
         </View>
       </View>
     </View>
@@ -52,7 +60,7 @@ export const EditCharacter = ({ getData, setLocation, location, auth }) => {
 
 const styles = EStyleSheet.create({
   avatarSelect: {
-    flexDirection: 'row'
+    paddingTop: '5rem'
   },
   nameField: {
     padding: '20rem'
