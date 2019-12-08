@@ -14,17 +14,6 @@ import { FormHeader } from '../shared-components/FormHeader';
 import { AppLoading } from 'expo';
 
 export const SignIn = ({ setLocation, handleSubmit, setAuthentication, setErrors, errors }) => {
-  // const [initialized, setInitialized] = useState(false);
-
-  /*useEffect(() => {
-    if (!initialized) {
-      initialize({
-        email: '',
-        password: ''
-      });
-      setInitialized(true);
-    }
-  });*/
   return (
     <> 
     <ImageBackground source={require('../../assets/images/newBackground.png')} style={{height: '100%', width: '100%'}}>
@@ -94,7 +83,7 @@ const handleLogin = (values, setLocation, setAuth, setErrors) => {
     .then(response => {
       console.log(response);
       setAuth({ loggedIn: true, email: response.user.email, uid: response.user.uid });
-      setLocation('profile');
+      setLocation('calendar');
     })
     .catch(error => {
       console.log('Failed to sign in.');
@@ -130,7 +119,11 @@ export const mapStateToProps = state => {
   return {
     location: state.location,
     values: getFormValues('sign-in-form')(state),
-    errors: state.errors
+    errors: state.errors,
+    initialValues: {
+      email: '',
+      password: ''
+    }
   };
 };
 
@@ -167,9 +160,9 @@ export const validate = values => {
 };
 
 export default compose(
-  reduxForm({ form: 'sign-in-form', validate }),
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )
+  ),
+  reduxForm({ form: 'sign-in-form', validate, enableReinitialize: true }),
 )(SignIn);

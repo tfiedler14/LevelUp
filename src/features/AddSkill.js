@@ -59,7 +59,7 @@ export const AddSkill = ({ auth, skills, setLocation, location, handleSubmit, pu
                             mode="contained"
                             title="Save Skill"
                             onPress={handleSubmit(values => {
-                                if (values.addSkillAttribute !== undefined && values.addSkillName !== undefined) {
+                                if (values.addSkillAttribute !== null && values.addSkillName !== null) {
                                     let toInsert = {};
                                     toInsert["attribute"] = values.addSkillAttribute;
                                     toInsert["name"] = values.addSkillName;

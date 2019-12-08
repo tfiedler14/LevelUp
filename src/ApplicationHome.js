@@ -17,44 +17,39 @@ import Settings from './features/Settings';
 import { Col, Grid } from 'react-native-easy-grid';
 import { getData, putData } from './logic/data/actions';
 import { auth } from 'firebase';
-import CustomButton from './shared-components/CustomButton'
+import CustomButton from './shared-components/CustomButton';
+import CalendarPage from './features/CalendarPage';
 console.disableYellowBox = true;
 
 export const ApplicationHome = ({ location, setLocation, getData }) => {
   return (
-    <ImageBackground source={require('../assets/images/darkgradient.jpg')} style={{ width: '100%' }}>
+    <ImageBackground
+      source={require('../assets/images/darkgradient.jpg')}
+      style={{ width: '100%' }}>
       <View>
-        {location != 'signin' && location != 'signup' && location != 'androidFonts' &&
+        {location !== 'signin' && location !== 'signup' && location !== 'androidFonts' && (
           <View style={styles.topNav}>
             <View>
               <Grid>
                 <Col size={2}>
                   <View style={{ position: 'absolute', paddingTop: 40, paddingLeft: 25 }}>
-                    <CustomButton
-                      text="Character"
-                      onPress={() => setLocation('profile')}
-                    />
+                    <CustomButton text="Character" onPress={() => setLocation('profile')} />
                   </View>
                 </Col>
                 <Col size={2}>
                   <View style={{ position: 'absolute', paddingTop: 40, paddingLeft: 30 }}>
-                    <CustomButton
-                      text="Quests"
-                      onPress={() => setLocation('questlist')}
-                    />
+                    <CustomButton text="Quests" onPress={() => setLocation('questlist')} />
                   </View>
                 </Col>
                 <Col size={2}>
-                <View style={{ position: 'absolute', paddingTop: 40, paddingLeft: 35 }}>
-                    <CustomButton
-                      text="Map"
-                      onPress={() => setLocation('map')}
-                    />
+                  <View style={{ position: 'absolute', paddingTop: 40, paddingLeft: 35 }}>
+                    <CustomButton text="Calendar" onPress={() => setLocation('calendar')} />
                   </View>
                 </Col>
               </Grid>
             </View>
-          </View>}
+          </View>
+        )}
 
         <View>
           {location === 'profile' && <Profile />}
@@ -66,6 +61,7 @@ export const ApplicationHome = ({ location, setLocation, getData }) => {
           {location === 'signin' && <SignIn />}
           {location === 'signup' && <SignUp />}
           {location === 'settings' && <Settings />}
+          {location === 'calendar' && <CalendarPage />}
           {location === 'fonts' && <AndroidFonts />}
         </View>
       </View>
@@ -116,8 +112,7 @@ const styles = EStyleSheet.create({
 const mapStateToProps = state => {
   return {
     location: state.location,
-    skills: state.data.skills,
-
+    skills: state.data.skills
   };
 };
 const mapDispatchToProps = dispatch => {
@@ -127,7 +122,7 @@ const mapDispatchToProps = dispatch => {
     },
     getData: (data, dataPoint) => {
       dispatch(getData(data, dataPoint));
-    },
+    }
   };
 };
 
