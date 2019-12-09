@@ -58,34 +58,32 @@ export const Profile = ({
         render={
           <View>
             <View>
-              <View style={{ position: 'absolute', alignSelf: 'flex-end', flex: 1, zIndex: 20 }}>
-                <Icon
-                  style={styles.padding}
-                  name="settings"
-                  size={48}
-                  color="white"
-                  onPress={() => setLocation('settings')}
+              
+              
+              <View style={{ flex: 1, alignItems: 'center', flexDirection: 'row',resizeMode: 'contain', paddingTop: 120, paddingBottom: 50 }}>
+                <Image
+                  style={styles.imageProfile}
+                  source={require('../../assets/images/newCharacter.png')}
                 />
-                <Icon
-                  style={styles.padding}
+                <View style={{}}>
+                <View style={{ position: 'absolute',  flexDirection: 'row', flex: 1, paddingLeft: 70, zIndex: 20 }}>
+              <Icon
+                  style={{}}
                   name="add"
-                  size={48}
+                  size={20}
                   color="white"
                   onPress={() => setLocation('addSkill')}
                 />
-              </View>
-              <View>
-                <Text style={{ textAlign: 'center', fontSize: 40, color: '#cda845', marginTop: 20, fontFamily: 'cinzel-decor' }}>
-                  {character.characterName}
-                </Text>
-              </View>
-              <View style={{ flex: 1, alignItems: 'center', paddingTop: 20 }}>
-                <Image
-                  style={styles.imageProfile}
-                  source={require('../../assets/images/waycoolercharacter.png')}
+                <Icon
+                  style={{}}
+                  name="settings"
+                  size={20}
+                  color="white"
+                  onPress={() => setLocation('settings')}
                 />
-                <View style={{ paddingTop: 15 }}>
-                  <Text>Level</Text>
+                
+              </View>
+                  <Text style={{paddingTop: 100, color: 'white', fontSize: 25}}>Level {character.mainLevel}</Text>
                   <Progress.Bar
                     style={styles.progress}
                     color="#cda845"
@@ -93,10 +91,16 @@ export const Profile = ({
                     progress={0.5}
                   />
                 </View>
+                
               </View>
-              < View style={{ flex: 1, paddingTop: 275 }}>
+              <View>
+                <Text style={{ textAlign: 'left', fontSize: 23, color: '#cda845', paddingTop: 50, paddingLeft: 100, marginTop: 20, fontFamily: 'inconsolata' }}>
+                  {character.characterName}
+                </Text>
+              </View>
+              <View style={{ flex: 1, paddingTop: 1 }}>
                 <Image
-                  source={require('../../assets/images/divider.png')} style={{ resizeMode: 'contain', width: '100%' }}
+                  source={require('../../assets/images/divider.png')} style={{ resizeMode: 'contain', width: '100%'}}
                 />
               </View>
             </View>
@@ -125,7 +129,7 @@ export const Profile = ({
 const AttributeItem = ({ attributeName, skills1 }) => {
   return (
     <View style={styles.skillSec}>
-      <Text style={{ color: '#ffffff', fontSize: 20, fontFamily: 'cinzel-decor' }}>{attributeName.charAt(0).toUpperCase() + attributeName.slice(1)}</Text>
+      <Text style={{ color: '#ffffff', fontSize: 25, fontFamily: 'inconsolata' }}>{attributeName.charAt(0).toUpperCase() + attributeName.slice(1)}</Text>
       <AttributeListItem
         skills={skills1
           .filter(skill => skill.attribute === attributeName)
@@ -140,17 +144,10 @@ const AttributeListItem = ({ skills, levels }) => {
     return (
 
       <View style={{ marginLeft: 45 }} key={data}>
-        <Text style={{ color: '#ffffff', fontFamily: 'cinzel-decor' }}>
-          {data.name} -{data.level}
+        <Text style={{ color: '#ffffff', fontFamily: 'inconsolata' }}>
+          {data.name}: {data.level}
         </Text>
-        <View>
-          <Progress.Bar
-            style={styles.progress}
-            color="#cda845"
-            height={15}
-            progress={data.level / 100 + 0.2}
-          />
-        </View>
+        
       </View>
     );
   });
