@@ -91,7 +91,7 @@ export const Profile = ({
                 
               </View>
               <View>
-                <Text style={{ textAlign: 'left', fontSize: 23, color: '#cda845', paddingTop: 50, paddingLeft: 100, marginTop: 20, fontFamily: 'inconsolata' }}>
+                <Text style={{ textAlign: 'left', fontSize: 23, color: 'white', paddingTop: 50, paddingLeft: 100, marginTop: 20, fontFamily: 'inconsolata' }}>
                   {character.characterName}
                 </Text>
               </View>
@@ -105,12 +105,10 @@ export const Profile = ({
               <ScrollView>
                 {attributeList.map(data => {
                   return (
-                    <View style={{ width: 200 }}>
-                      <Grid>
-                        <Col>
+                    <View style={{  }}>
+                      
                           <AttributeItem attributeName={data} skills1={skills} />
-                        </Col>
-                      </Grid>
+                        
                     </View>
                   );
                 })}
@@ -125,7 +123,7 @@ export const Profile = ({
 
 const AttributeItem = ({ attributeName, skills1 }) => {
   return (
-    <View style={styles.skillSec}>
+    <View>
       <Text style={{ color: '#ffffff', fontSize: 25, fontFamily: 'inconsolata' }}>{attributeName.charAt(0).toUpperCase() + attributeName.slice(1)}</Text>
       <AttributeListItem
         skills={skills1
@@ -140,7 +138,7 @@ const AttributeListItem = ({ skills, levels }) => {
   return skills.map(data => {
     return (
 
-      <View style={{ marginLeft: 45 }} key={data}>
+      <View style={{}} key={data}>
         <Text style={{ color: '#ffffff', fontFamily: 'inconsolata' }}>
           {data.name}: {data.level}
         </Text>
