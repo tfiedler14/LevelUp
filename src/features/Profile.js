@@ -59,15 +59,7 @@ export const Profile = ({
           <View>
             <View>
               
-              
-              <View style={{ flex: 1, alignItems: 'center', flexDirection: 'row',resizeMode: 'contain', paddingTop: 120, paddingBottom: 50 }}>
-                <Image
-                  style={styles.imageProfile}
-                  source={require('../../assets/images/newCharacter.png')}
-                />
-                <View style={{}}>
-                <View style={{ position: 'absolute',  flexDirection: 'row', flex: 1, paddingLeft: 70, zIndex: 20 }}>
-              <Icon
+            <Icon
                   style={{}}
                   name="add"
                   size={20}
@@ -81,9 +73,14 @@ export const Profile = ({
                   color="white"
                   onPress={() => setLocation('settings')}
                 />
+              <View style={{ flex: 1, alignItems: 'center', flexDirection: 'row',resizeMode: 'contain', paddingTop: 120, paddingBottom: 30 }}>
+                <Image
+                  style={styles.imageProfile}
+                  source={require('../../assets/images/newCharacter.png')}
+                />
+                <View style={{}}>
                 
-              </View>
-                  <Text style={{paddingTop: 100, color: 'white', fontSize: 25}}>Level {character.mainLevel}</Text>
+                  <Text style={{ color: 'white', fontSize: 25}}>Level {character.mainLevel}</Text>
                   <Progress.Bar
                     style={styles.progress}
                     color="#cda845"
