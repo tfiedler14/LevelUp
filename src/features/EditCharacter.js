@@ -160,12 +160,6 @@ export const validate = values => {
     errors.name = 'Must be twenty characters or less';
   }
 
-  if (!values.description) {
-    errors.description = 'Required';
-  } else if (values.description.length > 500) {
-    errors.description = 'Must be 500 characters or less';
-  }
-
   return errors;
 };
 export default compose(

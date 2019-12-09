@@ -42,11 +42,11 @@ export const Profile = ({
       'character'
     );
 
-    //name now reflects actual logged in user name instead of always the name tom, 
-    //cleaned up code for rendering skills by adding a new element called AttributeItem 
-    //and adding array of attribute names to Const, made this section a scrollview 
+    //name now reflects actual logged in user name instead of always the name tom,
+    //cleaned up code for rendering skills by adding a new element called AttributeItem
+    //and adding array of attribute names to Const, made this section a scrollview
     //but that is currently not working
-    
+
     setLoading(true);
   }, []);
 
@@ -73,6 +73,14 @@ export const Profile = ({
                   color="white"
                   onPress={() => setLocation('addSkill')}
                 />
+                <Icon
+                  style={styles.padding}
+                  name="edit"
+                  size={48}
+                  color="white"
+                  onPress={() => setLocation('editcharacter')}
+                />
+
               </View>
               <View>
                 <Text style={{ textAlign: 'center', fontSize: 40, color: '#cda845', marginTop: 20, fontFamily: 'cinzel-decor' }}>
