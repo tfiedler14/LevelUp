@@ -58,34 +58,29 @@ export const Profile = ({
         render={
           <View>
             <View>
-              <View style={{ position: 'absolute', alignSelf: 'flex-end', flex: 1, zIndex: 20 }}>
-                <Icon
-                  style={styles.padding}
-                  name="settings"
-                  size={48}
-                  color="white"
-                  onPress={() => setLocation('settings')}
-                />
-                <Icon
-                  style={styles.padding}
+              
+            <Icon
+                  style={{}}
                   name="add"
-                  size={48}
+                  size={20}
                   color="white"
                   onPress={() => setLocation('addSkill')}
                 />
-              </View>
-              <View>
-                <Text style={{ textAlign: 'center', fontSize: 40, color: '#cda845', marginTop: 20, fontFamily: 'cinzel-decor' }}>
-                  {character.characterName}
-                </Text>
-              </View>
-              <View style={{ flex: 1, alignItems: 'center', paddingTop: 20 }}>
+                <Icon
+                  style={{}}
+                  name="settings"
+                  size={20}
+                  color="white"
+                  onPress={() => setLocation('settings')}
+                />
+              <View style={{ flex: 1, alignItems: 'center', flexDirection: 'row',resizeMode: 'contain', paddingTop: 120, paddingBottom: 30 }}>
                 <Image
                   style={styles.imageProfile}
-                  source={require('../../assets/images/waycoolercharacter.png')}
+                  source={require('../../assets/images/newCharacter.png')}
                 />
-                <View style={{ paddingTop: 15 }}>
-                  <Text>Level</Text>
+                <View style={{}}>
+                
+                  <Text style={{ color: 'white', fontSize: 25}}>Level {character.mainLevel}</Text>
                   <Progress.Bar
                     style={styles.progress}
                     color="#cda845"
@@ -93,10 +88,16 @@ export const Profile = ({
                     progress={0.5}
                   />
                 </View>
+                
               </View>
-              < View style={{ flex: 1, paddingTop: 275 }}>
+              <View>
+                <Text style={{ textAlign: 'left', fontSize: 23, color: 'white', paddingTop: 50, paddingLeft: 100, marginTop: 20, fontFamily: 'inconsolata' }}>
+                  {character.characterName}
+                </Text>
+              </View>
+              <View style={{ flex: 1, paddingTop: 1 }}>
                 <Image
-                  source={require('../../assets/images/divider.png')} style={{ resizeMode: 'contain', width: '100%' }}
+                  source={require('../../assets/images/divider.png')} style={{ resizeMode: 'contain', width: '100%'}}
                 />
               </View>
             </View>
@@ -109,12 +110,11 @@ export const Profile = ({
                         automaticallyAdjustContentInsets={false}>
                 {attributeList.map(data => {
                   return (
-                    <View style={{ width: 500 }}>
-                      <Grid>
-                        <Col>
+
+                    <View style={{  }}>
+                      
                           <AttributeItem attributeName={data} skills1={skills} />
-                        </Col>
-                      </Grid>
+                        
                     </View>
                   );
                 })}
@@ -129,8 +129,8 @@ export const Profile = ({
 
 const AttributeItem = ({ attributeName, skills1 }) => {
   return (
-    <View style={styles.skillSec}>
-      <Text style={{ color: '#ffffff', fontSize: 20, fontFamily: 'cinzel-decor' }}>{attributeName.charAt(0).toUpperCase() + attributeName.slice(1)}</Text>
+    <View>
+      <Text style={{ color: '#ffffff', fontSize: 25, fontFamily: 'inconsolata' }}>{attributeName.charAt(0).toUpperCase() + attributeName.slice(1)}</Text>
       <AttributeListItem
         skills={skills1
           .filter(skill => skill.attribute === attributeName)
@@ -144,18 +144,11 @@ const AttributeListItem = ({ skills, levels }) => {
   return skills.map(data => {
     return (
 
-      <View style={{ marginLeft: 45 }} key={data}>
-        <Text style={{ color: '#ffffff', fontFamily: 'cinzel-decor' }}>
-          {data.name} -{data.level}
+      <View style={{}} key={data}>
+        <Text style={{ color: '#ffffff', fontFamily: 'inconsolata' }}>
+          {data.name}: {data.level}
         </Text>
-        <View>
-          <Progress.Bar
-            style={styles.progress}
-            color="#cda845"
-            height={15}
-            progress={data.level / 100 + 0.2}
-          />
-        </View>
+        
       </View>
     );
   });

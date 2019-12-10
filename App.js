@@ -21,6 +21,8 @@ export default class App extends React.Component {
     componentDidMount() {
         Font.loadAsync({
             'cinzel-decor': require('./assets/fonts/CinzelDecorative-Regular.ttf'),
+            'inconsolata': require('./assets/fonts/Inconsolata-Regular.ttf'),
+
         });
     }
     render() {

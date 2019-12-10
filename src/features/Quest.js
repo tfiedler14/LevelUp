@@ -126,13 +126,13 @@ export const Quest = ({
                   );
                   var newCalender = [...oldCalender];
                   newCalender.push(dateEntry);
-                  character.calender = newCalender;
+                  character.calender = newCalender;/** */
                   putData(
                     'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/character.json',
                     character,
                     null,
                     'profile'
-                  );
+                  );/*
 
                  deleteData(
                     'https://levelup-10cfc.firebaseio.com/users/' +
