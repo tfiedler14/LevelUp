@@ -52,7 +52,7 @@ export const Profile = ({
 
   return (
     <ImageBackground
-      source={require('../../assets/images/newBackgroundNoPattern.png')}
+      source={require('../../assets/images/darkverylowopacityshapes.png')}
       style={{ height: '100%', width: '100%' }}>
       <Async
         render={
@@ -100,11 +100,16 @@ export const Profile = ({
                 />
               </View>
             </View>
-            <View style={{ height: '50%', width: 500, paddingTop: 15, paddingLeft: 15 }}>
-              <ScrollView>
+            <View style={styles.scrolling}>
+              <ScrollView style={{ paddingTop: '0%', marginTop: "0%", marginBottom: 0, }}
+                        contentContainerStyle={{ top: '0%', width: '100%', alignItems: 'flex-start', justifyContent: 'flex-start' }}
+                        automaticallyAdjustContentInsets={false}
+                        showsVerticalScrollIndicator={true}
+                        directionalLockEnabled={true}
+                        automaticallyAdjustContentInsets={false}>
                 {attributeList.map(data => {
                   return (
-                    <View style={{ width: 200 }}>
+                    <View style={{ width: 500 }}>
                       <Grid>
                         <Col>
                           <AttributeItem attributeName={data} skills1={skills} />
@@ -174,6 +179,18 @@ const styles = EStyleSheet.create({
     width: 225,
     height: 225,
     resizeMode: 'stretch'
+  },
+  scrolling:{
+    position: 'absolute',  
+    height: '15rem', 
+    width: '100%', 
+    marginTop: '10%', 
+    top: 350, 
+    left: 0, 
+    right: 0,  
+    bottom: 0, 
+    justifyContent: 'flex-start', 
+    alignItems: 'flex-start',
   },
   progress: {
     height: 15,

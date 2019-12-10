@@ -33,6 +33,7 @@ export const AddSkill = ({ auth, skills, setLocation, location, handleSubmit, pu
                             iosHeader="Select one"
                             mode="dropdown"
                             style={pickerStyles}
+                            prompt="Please select an Attribute"
                         >
                             <Picker.Item style={pickerStyles} label="academics" value="academics" />
                             <Picker.Item style={pickerStyles} label="crafts" value="crafts" />
