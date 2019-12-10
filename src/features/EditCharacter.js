@@ -15,6 +15,8 @@ import { NUM_AVATARS } from '../../Const';
 
 export const EditCharacter = ({ getData, setLocation, character, location, auth }) => {
   console.log(JSON.stringify(character));
+  var avatarString = (('../../assets/images/waycoolercharacter1.png'));
+  console.log(avatarString)
   return (
     <View style={styles.sectionHeight}>
       <View style={styles.nameField}>
@@ -45,7 +47,7 @@ export const EditCharacter = ({ getData, setLocation, character, location, auth 
         <Col style={styles.avatar}>
           <Image
             style={styles.imageProfile}
-            source={require('../../assets/images/waycoolercharacter.png')}
+            source={{uri: avatarString}}
           />
         </Col>
         <Col style ={styles.arrows}>

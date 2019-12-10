@@ -84,7 +84,7 @@ export const Profile = ({
               <View style={{ flex: 1, alignItems: 'center', paddingTop: 20 }}>
                 <Image
                   style={styles.imageProfile}
-                  source={require('../../assets/images/waycoolercharacter.png')}
+                  source={require('../../assets/images/waycoolercharacter1.png')}
                 />
                 <View style={{ paddingTop: 15 }}>
                   <Text>Level</Text>

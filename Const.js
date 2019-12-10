@@ -14,4 +14,5 @@ export const attributes = [
     'academics', 'crafts', 'mental', 'fitness', 'community', 'hobby'
 ];
 
-export const NUM_AVATARS = 0;
+
+export const NUM_AVATARS = 5;

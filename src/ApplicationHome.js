@@ -19,7 +19,7 @@ import { getData, putData } from './logic/data/actions';
 import { auth } from 'firebase';
 import CustomButton from './shared-components/CustomButton';
 import CalendarPage from './features/CalendarPage';
-import { EditCharacter } from './features/EditCharacter';
+import EditCharacter  from './features/EditCharacter';
 console.disableYellowBox = true;
 
 export const ApplicationHome = ({ location, setLocation, getData }) => {
