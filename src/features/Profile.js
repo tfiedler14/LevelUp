@@ -46,7 +46,7 @@ export const Profile = ({
     //cleaned up code for rendering skills by adding a new element called AttributeItem 
     //and adding array of attribute names to Const, made this section a scrollview 
     //but that is currently not working
-    
+
     setLoading(true);
   }, []);
 
@@ -58,58 +58,60 @@ export const Profile = ({
         render={
           <View>
             <View>
-              
-            <Icon
-                  style={{}}
+              <View style={{ position: 'absolute', flexDirection: 'row', alignSelf: 'flex-end', flex: 1, zIndex: 20 }}>
+                <Icon
+                  style={styles.padding}
                   name="add"
-                  size={20}
+                  size={30}
                   color="white"
                   onPress={() => setLocation('addSkill')}
                 />
                 <Icon
-                  style={{}}
+                  style={styles.padding}
                   name="settings"
-                  size={20}
+                  size={30}
                   color="white"
                   onPress={() => setLocation('settings')}
                 />
-              <View style={{ flex: 1, alignItems: 'center', flexDirection: 'row',resizeMode: 'contain', paddingTop: 120, paddingBottom: 30 }}>
+              </View>
+              <View style={{ flex: 1, flexDirection: 'column' }}>
                 <Image
                   style={styles.imageProfile}
                   source={require('../../assets/images/newCharacter.png')}
                 />
-                <View style={{}}>
-                
-                  <Text style={{ color: 'white', fontSize: 25}}>Level {character.mainLevel}</Text>
-                  <Progress.Bar
-                    style={styles.progress}
-                    color="#cda845"
-                    height={15}
-                    progress={0.5}
-                  />
-                </View>
-                
-              </View>
-              <View>
-                <Text style={{ textAlign: 'left', fontSize: 23, color: 'white', paddingTop: 50, paddingLeft: 100, marginTop: 20, fontFamily: 'inconsolata' }}>
+
+                <Text style={styles.charName}>
                   {character.characterName}
                 </Text>
               </View>
-              <View style={{ flex: 1, paddingTop: 1 }}>
+              <View style={{ paddingTop: '20%', paddingLeft: '50%' }}>
+                <Text style={styles.levelInfo}>Level {character.mainLevel}</Text>
+                <Progress.Bar
+                  style={styles.progress}
+                  height={25}
+                  color="yellow"
+                  progress={character.mainLevelXp}
+                />
+
+              </View>
+              <View style={{ flex: 1, paddingTop: '30%' }}>
                 <Image
-                  source={require('../../assets/images/divider.png')} style={{ resizeMode: 'contain', width: '100%'}}
+                  source={require('../../assets/images/seperator.png')} style={{ resizeMode: 'contain', width: '100%' }}
                 />
               </View>
+
             </View>
-            <View style={{ height: '50%', width: 500, paddingTop: 15, paddingLeft: 15 }}>
+            <View style={{ height: '80%', width: '100%', paddingTop: '5%', paddingLeft: '5%' }}>
               <ScrollView>
                 {attributeList.map(data => {
                   return (
-                    <View style={{  }}>
-                      
+                    <View style={{ width: '50%' }}>
+                      <Grid>
+                        <Col>
                           <AttributeItem attributeName={data} skills1={skills} />
-                        
-                    </View>
+                        </Col>
+                      </Grid>
+                   </View>
                   );
                 })}
               </ScrollView>
@@ -123,13 +125,23 @@ export const Profile = ({
 
 const AttributeItem = ({ attributeName, skills1 }) => {
   return (
-    <View>
-      <Text style={{ color: '#ffffff', fontSize: 25, fontFamily: 'inconsolata' }}>{attributeName.charAt(0).toUpperCase() + attributeName.slice(1)}</Text>
+    <View style={styles.skillSec}>
+      <View style={{ flex: 1, flexDirection: 'row' }}>
+        <Text style={styles.attributeNameFont}>{attributeName.charAt(0).toUpperCase() + attributeName.slice(1)}:</Text>
+        <View style = {{flex: 1, left: "115%", position: 'absolute'}}>
+          <Progress.Bar
+            style={styles.mainProgress}
+            height={25}
+            progress={1 / 100 + 0.2} //todo real data here
+          />
+        </View>
+      </View>
       <AttributeListItem
         skills={skills1
           .filter(skill => skill.attribute === attributeName)
           .map(data => ({ name: data.name, level: data.val }))}
       />
+
     </View>
   );
 };
@@ -137,64 +149,70 @@ const AttributeItem = ({ attributeName, skills1 }) => {
 const AttributeListItem = ({ skills, levels }) => {
   return skills.map(data => {
     return (
-
-      <View style={{}} key={data}>
+      <View style={{ flex: 1, flexDirection: 'column' }} key={data}>
         <Text style={{ color: '#ffffff', fontFamily: 'inconsolata' }}>
           {data.name}: {data.level}
         </Text>
-        
       </View>
     );
   });
 };
 
+
+
 const styles = EStyleSheet.create({
-  profileHeader: {
-    backgroundColor: '#0a6e44',
-    width: '100%',
-    height: '12rem',
-    zIndex: 4
+  charName: {
+    flex: 1,
+    paddingTop: '55%',
+    paddingLeft: '13%',
+    left: 0,
+    position: 'absolute',
+    fontSize: '2rem',
+    color: 'white',
+    fontFamily: 'inconsolata'
+
   },
-  container: {
-    flex: 1
+  attributeNameFont: { 
+    color: '#ffffff', 
+    fontSize: '2rem', 
+    fontFamily: 'inconsolata' 
+  },
+  levelInfo: {
+    color: 'white',
+    fontSize: '2rem',
+    fontFamily: 'inconsolata'
   },
   skillSec: {
-    flexDirection: 'row',
-    paddingTop: 30
+    flex: 1,
+    flexDirection: 'column',
+    paddingTop: '9%'
   },
   imageProfile: {
-    width: 225,
-    height: 225,
-    resizeMode: 'stretch'
+    flex: 1,
+    left: '-20%',
+    position: 'absolute',
+    height: '15rem',
+    resizeMode: 'contain',
+    paddingTop: '35%'
   },
   progress: {
-    height: 15,
-    width: 100,
+    height: 25,
+    width: 125,
     borderColor: 'white',
-    borderWidth: 1
+    borderWidth: 2
+  },
+  mainProgress: {
+    height: 25,
+    width: 125,
+    borderColor: 'white',
+    borderWidth: 2
   },
   padding: {
-    paddingTop: '1rem',
-    paddingRight: '1rem',
-    paddingBottom: '1rem',
-    paddingLeft: '1rem'
+    paddingTop: '.5rem',
+    paddingRight: '.5rem',
+    paddingBottom: '.5rem',
+    paddingLeft: '.5rem'
   },
-  profileWrapper: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
-    width: '100%',
-    textAlign: 'center'
-  },
-
-  profileImage: {
-    borderRadius: 50,
-    width: '6rem',
-    height: '6rem',
-    marginTop: '1rem',
-    margin: 'auto'
-  },
-
   infoMargin: {
     marginTop: '1rem'
   },

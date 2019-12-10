@@ -8,6 +8,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import moment from 'moment';
 import { Button, Card, DataTable } from 'react-native-paper';
 import { useState } from 'react';
+import {ImageBackground} from 'react-native';
 
 export const CalendarPage = ({ getData, setLocation, quests, location, auth }) => {
   /* istanbul ignore next */
@@ -100,6 +101,9 @@ export const CalendarPage = ({ getData, setLocation, quests, location, auth }) =
   }
 
   return (
+    <ImageBackground
+      source={require('../../assets/images/newBackgroundNoPattern.png')}
+      style={{ height: '100%', width: '100%' }}>
     <View style={styles.paddingTop}>
       <View style={styles.sectionHeight}>
         <Card style={styles.card}>
@@ -236,6 +240,7 @@ export const CalendarPage = ({ getData, setLocation, quests, location, auth }) =
         {/*<Calendar date={moment('23/10/2015', 'DD/MM/YYYY')} onSelect={this.onSelect} />*/}
       </View>
     </View>
+    </ImageBackground>
   );
 };
 

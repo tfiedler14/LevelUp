@@ -24,7 +24,7 @@ console.disableYellowBox = true;
 export const ApplicationHome = ({ location, setLocation, getData }) => {
   return (
     <ImageBackground
-      source={require('../assets/images/darkgradient.jpg')}
+      source={require('../assets/images/newBackgroundNoPatterndarker.png')}
       style={{ width: '100%' }}>
       <View>
         {location !== 'signin' && location !== 'signup' && location !== 'androidFonts' && (
@@ -32,17 +32,17 @@ export const ApplicationHome = ({ location, setLocation, getData }) => {
             <View>
               <Grid>
                 <Col size={2}>
-                  <View style={{ position: 'absolute', paddingTop: 40, paddingLeft: 25 }}>
+                  <View style={{ position: 'absolute', paddingTop: '35%', paddingLeft: '10%' }}>
                     <CustomButton text="Character" onPress={() => setLocation('profile')} />
                   </View>
                 </Col>
                 <Col size={2}>
-                  <View style={{ position: 'absolute', paddingTop: 40, paddingLeft: 30 }}>
+                  <View style={{ position: 'absolute', paddingTop: '39%', paddingLeft: '30%' }}>
                     <CustomButton text="Quests" onPress={() => setLocation('questlist')} />
                   </View>
                 </Col>
                 <Col size={2}>
-                  <View style={{ position: 'absolute', paddingTop: 40, paddingLeft: 35 }}>
+                  <View style={{ position: 'absolute', paddingTop: '35%', paddingLeft: '15%' }}>
                     <CustomButton text="Calendar" onPress={() => setLocation('calendar')} />
                   </View>
                 </Col>
@@ -85,7 +85,7 @@ const styles = EStyleSheet.create({
     margin: '1rem'
   },
   topNav: {
-    height: '8%',
+    height: '7%',
     zIndex: 5,
     backgroundColor: 'transparent',
     top: 0,

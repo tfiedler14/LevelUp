@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
 class customButton extends Component {
@@ -20,18 +21,17 @@ customButton.propTypes = {
   onPress: PropTypes.func.isRequired
 };
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   textStyle: {
-    fontSize:20,
+    fontSize:'1.5rem',
 	color: '#ffffff',
     textAlign: 'center',
-    fontFamily: 'cinzel-decor'
+    fontFamily: 'inconsolata'
   },
   
   buttonStyle: {
-	padding:10,
 	backgroundColor: 'transparent',
-	borderRadius:5
+	borderRadius:'.5rem'
   }
 });
 
