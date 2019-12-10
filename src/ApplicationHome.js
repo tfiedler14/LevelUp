@@ -19,6 +19,7 @@ import { getData, putData } from './logic/data/actions';
 import { auth } from 'firebase';
 import CustomButton from './shared-components/CustomButton';
 import CalendarPage from './features/CalendarPage';
+import { EditCharacter } from './features/EditCharacter';
 console.disableYellowBox = true;
 
 export const ApplicationHome = ({ location, setLocation, getData }) => {
@@ -53,6 +54,7 @@ export const ApplicationHome = ({ location, setLocation, getData }) => {
 
         <View>
           {location === 'profile' && <Profile />}
+          {location === 'editcharacter' && <EditCharacter/>}
           {location === 'addquest' && <AddQuest editProp={false} />}
           {location === 'addSkill' && <AddSkill />}
           {location === 'editquest' && <AddQuest editProp={true} />}

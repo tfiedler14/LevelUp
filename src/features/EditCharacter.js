@@ -11,12 +11,10 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import {Divider} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Col, Grid } from 'react-native-easy-grid';
+import { NUM_AVATARS } from '../../Const';
 
-export const EditCharacter = ({ getData, setLocation, location, auth }) => {
-  /* istanbul ignore next */
-  useEffect(() => {
-    getData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests.json', 'quests');
-  }, []);
+export const EditCharacter = ({ getData, setLocation, character, location, auth }) => {
+  console.log(JSON.stringify(character));
   return (
     <View style={styles.sectionHeight}>
       <View style={styles.nameField}>
@@ -24,12 +22,7 @@ export const EditCharacter = ({ getData, setLocation, location, auth }) => {
           {'Edit Character'}
         </Text>
       </View>
-        <Field
-          name="name"
-          id="name"
-          props={{ title: 'Choose your name:' }}
-          component={WrappedTextInput}
-        />
+        
 
 
       <Grid style={styles.avatarSelect}>
@@ -39,6 +32,13 @@ export const EditCharacter = ({ getData, setLocation, location, auth }) => {
               name="add"
               size={48}
               color="white"
+              onPress={()=>{
+                if (character.avatar != 1){
+                    character.avatar -= 1;
+                } 
+                console.log(character.avatar);
+
+              }}
             />
           </View>
         </Col>
@@ -54,6 +54,12 @@ export const EditCharacter = ({ getData, setLocation, location, auth }) => {
               name="add"
               size={48}
               color="white"
+              onPress={()=>{
+                if (character.avatar != NUM_AVATARS){
+                    character.avatar += 1;
+                }
+                console.log(character.avatar);
+              }}
             />
           </View>
         </Col>
@@ -147,7 +153,9 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
   return {
     location: state.location,
-    auth: state.auth
+    character: state.data.character,
+    auth: state.auth,
+    
   };
 };
 
@@ -162,6 +170,7 @@ export const validate = values => {
 
   return errors;
 };
+
 export default compose(
   connect(
     mapStateToProps,

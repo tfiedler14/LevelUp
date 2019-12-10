@@ -49,8 +49,10 @@ export const Profile = ({
     
     setLoading(true);
   }, []);
+  console.log(JSON.stringify(character))
 
   return (
+    
     <ImageBackground
       source={require('../../assets/images/newBackgroundNoPattern.png')}
       style={{ height: '100%', width: '100%' }}>
@@ -64,14 +66,14 @@ export const Profile = ({
                   name="settings"
                   size={48}
                   color="white"
-                  onPress={() => setLocation('settings')}
+                  onPress={() => setLocation('editcharacter')}
                 />
                 <Icon
                   style={styles.padding}
                   name="add"
                   size={48}
                   color="white"
-                  onPress={() => setLocation('addSkill')}
+                  onPress={() => setLocation('editcharacter')}
                 />
               </View>
               <View>

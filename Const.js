@@ -13,3 +13,5 @@ export const firebaseApp = firebase.initializeApp(firebaseConfig);
 export const attributes = [
     'academics', 'crafts', 'mental', 'fitness', 'community', 'hobby'
 ];
+
+export const NUM_AVATARS = 0;
