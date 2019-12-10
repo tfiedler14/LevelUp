@@ -71,7 +71,6 @@ export const getData = (target, dataPoint) => {
           dispatch(setUser(response.data));
           dispatch(setLoading(false));
         } else if (dataPoint === 'skills') {
-          console.log("Got inside get skills");
           dispatch(setSkills(response.data));
           dispatch(setLoading(false));
         } else if (dataPoint === 'attributes') {

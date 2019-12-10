@@ -1,4 +1,4 @@
-import { Field, initialize, reduxForm } from 'redux-form';
+import { Field, getFormValues, initialize, reduxForm } from 'redux-form';
 import { WrappedTextInput } from '../shared-components/FormField';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
@@ -9,7 +9,8 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { FormHeader } from '../shared-components/FormHeader';
 import { Button, Card } from 'react-native-paper';
-import { ScrollView, View, ImageBackground } from 'react-native';
+import { ScrollView, View } from 'react-native';
+import { Dropdown } from '../shared-components/Dropdown';
 
 export const AddQuest = ({
   editProp,
@@ -20,7 +21,9 @@ export const AddQuest = ({
   handleSubmit,
   profile,
   quest,
-  quests
+  quests,
+  skills,
+  values
 }) => {
   const uid = require('uuid/v4');
   let id = uid();
@@ -34,93 +37,84 @@ export const AddQuest = ({
     }
   });
 
+  console.log(skills);
+
+  let mySkills = [];
+
+  skills.map(skill => {
+    skill && skill.name && mySkills.push({ label: skill.name, value: skill.name });
+  });
+  console.log(mySkills);
+
+
   return (
-    <ImageBackground
-      source={require('../../assets/images/darkverylowopacityshapes.png')}
-      style={{ height: '100%', width: '100%' }}>
-      <View style={styles.sectionHeight}>
-        <ScrollView>
-          <Card style={styles.card}>
-            <FormHeader title={editProp ? 'Edit quest' : 'Add quest'} />
-            <Field name="name" id="name" props={{ title: 'Name' }} component={WrappedTextInput} />
-            <Field
-              name="description"
-              id="description"
-              props={{ title: 'Description' }}
-              component={WrappedTextInput}
-            />
-            <Field
-              name="difficulty"
-              id="difficulty"
-              props={{ title: 'Difficulty' }}
-              component={WrappedTextInput}
-            />
-            <Field
-              name="time"
-              id="time"
-              props={{ title: 'Time' }}
-              component={WrappedTextInput}
-            />
-            <Field
-              name="skill"
-              id="skill"
-              props={{ title: 'Skill' }}
-              component={WrappedTextInput}
-            />
-
-
-
-            <Button
-              color="#064f2f"
-              uppercase={false}
-              mode="contained"
-              style={styles.buttons}
-              onPress={handleSubmit(values => {
-                let toInsert = {...values, finishDate: 'incomplete', expVal: 0};
-                if (quests === []) {
-                  let newQuests = [];
-                  newQuests[0] = toInsert;
+    <View style={styles.sectionHeight}>
+      <ScrollView>
+        <Card style={styles.card}>
+          <FormHeader title={editProp ? 'Edit quest' : 'Add quest'} />
+          <Field name="name" id="name" props={{ title: 'Name' }} component={WrappedTextInput} />
+          <Field
+            name="description"
+            id="description"
+            props={{ title: 'Description' }}
+            component={WrappedTextInput}
+          />
+          <Field
+            name="difficulty"
+            id="difficulty"
+            props={{ title: 'Difficulty' }}
+            component={WrappedTextInput}
+          />
+          <Field name="time" id="time" props={{ title: 'Time' }} component={WrappedTextInput} />
+          <Field
+            name="skill"
+            id="skill"
+            props={{ title: 'Skill', options: mySkills }}
+            component={Dropdown}
+          />
+          <Button
+            color="#ff0066"
+            uppercase={false}
+            mode="contained"
+            style={styles.buttons}
+            onPress={handleSubmit(values => {
+              let toInsert = { ...values, finishDate: 'incomplete', expVal: 0 };
+              if (quests === []) {
+                let newQuests = [];
+                newQuests[0] = toInsert;
+                putData(
+                  'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests' + '.json',
+                  newQuests,
+                  'questlist'
+                );
+              } else if (editProp) {
+                let newQuests = [...quests];
+                newQuests[quest.id] = toInsert;
+                putData(
+                  'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests' + '.json',
+                  newQuests,
+                  'questlist'
+                );
+              } else {
+                values.name &&
                   putData(
-                    'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests' +
-
-                    '.json',
-                    newQuests,
+                    'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests' + '.json',
+                    [...quests, toInsert],
                     'questlist'
                   );
-                } else
-                  if (editProp) {
-                    let newQuests = [...quests];
-                    newQuests[quest.id] = toInsert;
-                    putData(
-                      'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests' +
-
-                      '.json',
-                      newQuests,
-                      'questlist'
-                    );
-                  } else {
-                    values.name &&
-                      putData(
-                        'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests' +
-
-                        '.json',
-                        [...quests, toInsert],
-                        'questlist'
-                      );
-                  }
-              })}>
-              {editProp ? 'Edit quest' : 'Add quest'}
-            </Button>
-          </Card>
-        </ScrollView>
-      </View>
-    </ImageBackground>
+              }
+            })}>
+            {editProp ? 'Edit quest' : 'Add quest'}
+          </Button>
+        </Card>
+      </ScrollView>
+    </View>
   );
 };
 
 const styles = EStyleSheet.create({
   sectionHeight: {
-    height: '100% - 6rem'
+    height: '100% - 4.5rem'
   },
 
   card: {
@@ -144,9 +138,9 @@ export const mapStateToProps = (state, { editProp }) => {
     quests: state.data.quests,
     profile: state.data.profile,
     quest: state.data.quest,
-    initialValues: editProp
-      ? state.data.quest
-      : {}
+    initialValues: editProp ? state.data.quest : {},
+    skills: state.data.skills,
+    values: getFormValues('add-quest-form')(state)
   };
 };
 
@@ -218,9 +212,9 @@ export const validate = values => {
 };
 
 export default compose(
+  reduxForm({ form: 'add-quest-form', validate }),
   connect(
     mapStateToProps,
     mapDispatchToProps
-  ),
-  reduxForm({ form: 'add-quest-form', validate })
+  )
 )(AddQuest);

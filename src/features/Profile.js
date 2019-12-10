@@ -9,7 +9,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import * as Progress from 'react-native-progress';
 import Async from '../shared-components/Async';
 import { attributes } from '../../Const';
-import { Col, Grid, Row } from 'react-native-easy-grid';
+import { Col, Grid } from 'react-native-easy-grid';
+import { FAB } from 'react-native-paper';
 
 const attributeList = attributes;
 
@@ -26,8 +27,6 @@ export const Profile = ({
 }) => {
   const handleAddSkill = location => {
     setLocation('addSkill');
-    console.log('chaning location to addSkill');
-    console.log(location);
   };
   /* istanbul ignore next */
   useEffect(() => {
@@ -42,50 +41,50 @@ export const Profile = ({
       'character'
     );
 
-    //name now reflects actual logged in user name instead of always the name tom, 
-    //cleaned up code for rendering skills by adding a new element called AttributeItem 
-    //and adding array of attribute names to Const, made this section a scrollview 
+    //name now reflects actual logged in user name instead of always the name tom,
+    //cleaned up code for rendering skills by adding a new element called AttributeItem
+    //and adding array of attribute names to Const, made this section a scrollview
     //but that is currently not working
-    
+
     setLoading(true);
   }, []);
 
   return (
-    <ImageBackground
-      source={require('../../assets/images/newBackgroundNoPattern.png')}
-      style={{ height: '100%', width: '100%' }}>
-      <Async
-        render={
-          <View>
-            <View>
-              <View style={{ position: 'absolute', alignSelf: 'flex-end', flex: 1, zIndex: 20 }}>
-                <Icon
-                  style={styles.padding}
-                  name="settings"
-                  size={48}
-                  color="white"
-                  onPress={() => setLocation('settings')}
-                />
-                <Icon
-                  style={styles.padding}
-                  name="add"
-                  size={48}
-                  color="white"
-                  onPress={() => setLocation('addSkill')}
-                />
-              </View>
-              <View>
-                <Text style={{ textAlign: 'center', fontSize: 40, color: '#cda845', marginTop: 20, fontFamily: 'cinzel-decor' }}>
-                  {character.characterName}
-                </Text>
-              </View>
-              <View style={{ flex: 1, alignItems: 'center', paddingTop: 20 }}>
+    <Async
+      render={
+        <View>
+          <View style={styles.profileHeader}>
+            <View style={{ position: 'absolute', top: 0, right: 0, zIndex: 999999999 }}>
+              <FAB
+                style={styles.settingsFab}
+                icon="settings"
+                onPress={() => setLocation('settings')}
+              />
+            </View>
+            <View
+              style={{
+                ...styles.settingsFabView,
+                ...{ position: 'absolute', top: 0, right: 0, zIndex: 999999999 }
+              }}>
+              <FAB
+                style={styles.addFab}
+                icon="add"
+                onPress={() => {
+                  setLocation('addSkill');
+                }}
+              />
+            </View>
+            <Grid>
+              <Col size={2}>
                 <Image
                   style={styles.imageProfile}
                   source={require('../../assets/images/waycoolercharacter.png')}
                 />
-                <View style={{ paddingTop: 15 }}>
-                  <Text>Level</Text>
+                <Text style={styles.characterName}>{character.characterName}</Text>
+              </Col>
+              <Col size={1}>
+                <View style={styles.levelPadding}>
+                  <Text style={styles.levelText}>Level 1</Text>
                   <Progress.Bar
                     style={styles.progress}
                     color="#cda845"
@@ -93,55 +92,53 @@ export const Profile = ({
                     progress={0.5}
                   />
                 </View>
-              </View>
-              < View style={{ flex: 1, paddingTop: 275 }}>
-                <Image
-                  source={require('../../assets/images/divider.png')} style={{ resizeMode: 'contain', width: '100%' }}
-                />
-              </View>
-            </View>
-            <View style={{ height: '50%', width: 500, paddingTop: 15, paddingLeft: 15 }}>
-              <ScrollView>
-                {attributeList.map(data => {
-                  return (
-                    <View style={{ width: 200 }}>
-                      <Grid>
-                        <Col>
-                          <AttributeItem attributeName={data} skills1={skills} />
-                        </Col>
-                      </Grid>
-                    </View>
-                  );
-                })}
-              </ScrollView>
-            </View>
+              </Col>
+            </Grid>
           </View>
-        }
-      />
-    </ImageBackground>
+          <View style={styles.svHeight}>
+            <ScrollView>
+              {attributeList.map((data, index) => (
+                <View key={`${data}-${index}`} style={{ width: 200 }}>
+                  <AttributeItem attributeName={data} skills1={skills} />
+                </View>
+              ))}
+            </ScrollView>
+          </View>
+        </View>
+      }
+    />
   );
 };
 
 const AttributeItem = ({ attributeName, skills1 }) => {
   return (
     <View style={styles.skillSec}>
-      <Text style={{ color: '#ffffff', fontSize: 20, fontFamily: 'cinzel-decor' }}>{attributeName.charAt(0).toUpperCase() + attributeName.slice(1)}</Text>
-      <AttributeListItem
-        skills={skills1
-          .filter(skill => skill.attribute === attributeName)
-          .map(data => ({ name: data.name, level: data.val }))}
-      />
+      <View>
+        <Text style={styles.attrName}>
+          {attributeName.charAt(0).toUpperCase() + attributeName.slice(1)}
+        </Text>
+      </View>
+      <View>
+        <AttributeListItem
+          skills={
+            skills1
+              ? skills1
+                  .filter(skill => skill && skill.attribute === attributeName)
+                  .map(data => ({ name: data.name, level: data.val }))
+              : []
+          }
+        />
+      </View>
     </View>
   );
 };
 
 const AttributeListItem = ({ skills, levels }) => {
-  return skills.map(data => {
+  return skills.map((data, index) => {
     return (
-
-      <View style={{ marginLeft: 45 }} key={data}>
-        <Text style={{ color: '#ffffff', fontFamily: 'cinzel-decor' }}>
-          {data.name} -{data.level}
+      <View key={`${data}-${index}`} style={styles.skillStyle}>
+        <Text style={{ color: '#ffffff' }}>
+          {data.name} - {data.level}
         </Text>
         <View>
           <Progress.Bar
@@ -158,22 +155,24 @@ const AttributeListItem = ({ skills, levels }) => {
 
 const styles = EStyleSheet.create({
   profileHeader: {
-    backgroundColor: '#0a6e44',
+    backgroundColor: '#555',
     width: '100%',
-    height: '12rem',
-    zIndex: 4
+    height: '18rem',
+    borderBottomWidth: '.125rem',
+    borderBottomColor: 'white'
   },
   container: {
     flex: 1
   },
   skillSec: {
-    flexDirection: 'row',
-    paddingTop: 30
+    paddingBottom: '1rem'
   },
   imageProfile: {
-    width: 225,
-    height: 225,
-    resizeMode: 'stretch'
+    marginTop: '3rem',
+    width: '10rem',
+    height: '10rem',
+    resizeMode: 'stretch',
+    justifyContent: 'center'
   },
   progress: {
     height: 15,
@@ -195,11 +194,38 @@ const styles = EStyleSheet.create({
     textAlign: 'center'
   },
 
+  characterName: {
+    textAlign: 'center',
+    fontSize: '2rem',
+    color: 'white',
+    marginTop: '.5rem'
+  },
+
+  attrName: {
+    fontSize: '1.5rem',
+    color: 'white',
+    marginBottom: '.5rem'
+  },
+
+  levelText: {
+    fontSize: '1.5rem',
+    color: 'white'
+  },
+
+  levelPadding: {
+    marginTop: '8rem'
+  },
+
+  skillStyle: {
+    paddingLeft: '1rem',
+    paddingBottom: '1rem'
+  },
+
   profileImage: {
     borderRadius: 50,
     width: '6rem',
     height: '6rem',
-    marginTop: '1rem',
+    marginTop: '3rem',
     margin: 'auto'
   },
 
@@ -240,6 +266,29 @@ const styles = EStyleSheet.create({
   cardPadding: {
     padding: '1rem',
     margin: '1rem'
+  },
+
+  svHeight: {
+    height: '100% - 22.5rem',
+    padding: '1rem',
+    paddingBottom: 0
+  },
+
+  settingsFab: {
+    backgroundColor: '#36a',
+    color: 'white',
+    margin: '1rem',
+    marginBottom: 0
+  },
+
+  addFab: {
+    backgroundColor: '#090',
+    color: 'white',
+    margin: '1rem'
+  },
+
+  settingsFabView: {
+    marginRight: '4.5rem'
   }
 });
 

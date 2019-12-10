@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { View, ImageBackground, Image } from 'react-native';
+import { View, ImageBackground, Image, Text, ScrollView } from "react-native";
 import { setLocation } from '../logic/location/actions';
+import { setErrors } from '../logic/errors/actions';
 import { setAuth } from '../logic/auth/actions';
 import { firebaseApp } from '../../Const';
 import { Field, reduxForm } from 'redux-form';
@@ -12,68 +13,88 @@ import { Button, Card } from 'react-native-paper';
 import { FormHeader } from '../shared-components/FormHeader';
 import { putData } from '../logic/data/actions';
 
-export const SignUp = ({ setLocation, handleSubmit, setAuthentication, putData }) => {
+export const SignUp = ({ setLocation, handleSubmit, setAuthentication, putData, errors, setErrors}) => {
   return (
-    <ImageBackground source={require('../../assets/images/newBackground.png')} style={{ height: '100%', width: '100%' }}>
-      <View style={styles.mainView}>
-        <Image
-          style={{ alignSelf: 'center', resizeMode: 'contain', width: '92%' }}
-          source={require('../../assets/images/newLogo.png')}
-        />
-        <Card style={styles.card}>
-          <View>
-            <FormHeader title={'Sign Up'} />
-            <Field
-              name="email"
-              id="email"
-              props={{
-                title: 'Email', textContentType: 'emailAddress', autoCompleteType: 'email'
-              }}
-              component={WrappedTextInput}
-            />
-            <Field
-              name="password"
-              id="password"
-              props={{
-                title: 'Password',
-                textContentType: 'password',
-                autoCompleteType: 'password',
-                password: true
-              }}
-              component={WrappedTextInput}
-            />
-            <Field
-              name="cpassword"
-              id="cpassword"
-              props={{
-                title: 'Confirm Password',
-                textContentType: 'password',
-                autoCompleteType: 'password',
-                password: true
-              }}
-              component={WrappedTextInput}
-            />
-            <View style={styles.buttons}>
-              <Button
-                color="#edbf18"
-                uppercase={false}
-                mode="contained"
-                onPress={handleSubmit(values => {
-                  handleSignUp(values, setLocation, setAuthentication, putData);
-                })}>
-                Sign Up
-          </Button>
-              <Button
-                color="white"
-                uppercase={false}
-                mode="text"
-                onPress={() => setLocation('signin')}>
-                Sign In
-          </Button>
+    <ImageBackground
+      source={require('../../assets/images/newBackground.png')}
+      style={{ height: '100%', width: '100%' }}>
+      <ScrollView>
+        <View style={styles.mainView}>
+          <Image
+            style={{ alignSelf: 'center', resizeMode: 'contain', width: '92%' }}
+            source={require('../../assets/images/newLogo.png')}
+          />
+          {errors.signUp && (
+            <Card style={styles.errorCard}>
+              <View>
+                <Text style={{ color: '#FFFFFF' }}>User already exists</Text>
+              </View>
+            </Card>
+          )}
+          <Card style={styles.card}>
+            <View>
+              <FormHeader title={'Sign Up'} />
+              <Field
+                name="email"
+                id="email"
+                props={{
+                  title: 'Email',
+                  textContentType: 'emailAddress',
+                  autoCompleteType: 'email'
+                }}
+                component={WrappedTextInput}
+              />
+              <Field
+                name="password"
+                id="password"
+                props={{
+                  title: 'Password',
+                  textContentType: 'password',
+                  autoCompleteType: 'password',
+                  password: true
+                }}
+                component={WrappedTextInput}
+              />
+              <Field
+                name="cpassword"
+                id="cpassword"
+                props={{
+                  title: 'Confirm Password',
+                  textContentType: 'password',
+                  autoCompleteType: 'password',
+                  password: true
+                }}
+                component={WrappedTextInput}
+              />
+              <View style={styles.buttons}>
+                <Button
+                  color="#ff0066"
+                  uppercase={false}
+                  mode="contained"
+                  onPress={handleSubmit(values => {
+                    handleSignUp(
+                      values,
+                      setLocation,
+                      setAuthentication,
+                      putData,
+                      setErrors,
+                      errors
+                    );
+                  })}>
+                  Sign Up
+                </Button>
+                <Button
+                  color="white"
+                  uppercase={false}
+                  mode="text"
+                  onPress={() => setLocation('signin')}>
+                  Sign In
+                </Button>
+              </View>
             </View>
-          </View>
-        </Card>
-      </View>
+          </Card>
+        </View>
+      </ScrollView>
     </ImageBackground>
   );
 };
@@ -100,28 +121,48 @@ export const validate = values => {
   return errors;
 };
 
-const handleSignUp = (values, setLocation, setAuthentication, putData) => {
+const handleSignUp = (values, setLocation, setAuthentication, putData, setErrors, errors) => {
   firebaseApp
     .auth()
     .createUserWithEmailAndPassword(values.email, values.password)
     .then(response => {
       setAuthentication({ loggedIn: true, email: values.email, uid: response.user.uid });
-      putData('https://levelup-10cfc.firebaseio.com/users/' + response.user.uid + '.json', {
-
-        quests: [{
-          "description": "Welcome to Xperience, quests map to real life tasks!",
-          "expVal": 10,
-          "name": "Welcome",
-          "skill": "hobby"
-        }],
-        profile: { avatarImage: 0},
-        character: {characterName: 'name', mainLevel: 1, mainLevelXp: 0, mainLevelXpToNext: 50, calender: [{'string' : "empty"}]},
-        skills: ["empty"],
-        attributes: { fitness: { id: 'fitness', exp: 0, level: 1, xpToNext: 50}, academics: { id: 'academics',exp: 0, level: 1, xpToNext: 50 }, crafts: { id: 'crafts', exp: 0, level: 1, xpToNext: 50 }, community: {id: 'community', exp: 0, level: 1 , xpToNext: 50}, mental: { id: 'mental', exp: 0, level: 1 , xpToNext: 50}, hobby: {id: 'hobby', exp: 0, level: 1, xpToNext: 50 } }
-      }, 'profile', 'profile');
+      putData(
+        'https://levelup-10cfc.firebaseio.com/users/' + response.user.uid + '.json',
+        {
+          quests: [
+            {
+              description: 'Welcome to LevelUp, quests map to real life tasks!',
+              expVal: 10,
+              name: 'Welcome',
+              skill: 'hobby'
+            }
+          ],
+          profile: { avatarImage: 0 },
+          character: {
+            characterName: 'name',
+            mainLevel: 1,
+            mainLevelXp: 0,
+            mainLevelXpToNext: 50,
+            calender: [{ string: 'empty' }]
+          },
+          skills: ['empty'],
+          attributes: {
+            fitness: { id: 'fitness', exp: 0, level: 1, xpToNext: 50 },
+            academics: { id: 'academics', exp: 0, level: 1, xpToNext: 50 },
+            crafts: { id: 'crafts', exp: 0, level: 1, xpToNext: 50 },
+            community: { id: 'community', exp: 0, level: 1, xpToNext: 50 },
+            mental: { id: 'mental', exp: 0, level: 1, xpToNext: 50 },
+            hobby: { id: 'hobby', exp: 0, level: 1, xpToNext: 50 }
+          }
+        },
+        'profile',
+        'profile'
+      );
     })
     .catch(error => {
       console.log('Failed to create user.');
+      setErrors({...errors, signUp:true});
     });
 };
 
@@ -133,10 +174,16 @@ const styles = EStyleSheet.create({
     //  border: 'none',
   },
   mainView: {
-    paddingTop: '2rem'
+    //paddingTop: '.5rem'
+  },
+
+  errorCard: {
+    padding: '1rem',
+    margin: '1rem',
+    backgroundColor: '#770000'
   },
   buttons: {
-    marginTop: '1rem',
+    marginTop: '.5rem',
     marginLeft: '2rem',
     marginRight: '2rem'
   }
@@ -144,7 +191,8 @@ const styles = EStyleSheet.create({
 
 export const mapStateToProps = state => {
   return {
-    location: state.location
+    location: state.location,
+    errors: state.errors
   };
 };
 
@@ -158,6 +206,9 @@ export const mapDispatchToProps = dispatch => {
     },
     putData: (target, data, redirect, type) => {
       dispatch(putData(target, data, redirect, type));
+    },
+    setErrors: errors => {
+      dispatch(setErrors(errors));
     }
   };
 };

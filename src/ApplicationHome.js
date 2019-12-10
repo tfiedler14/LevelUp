@@ -23,26 +23,38 @@ console.disableYellowBox = true;
 
 export const ApplicationHome = ({ location, setLocation, getData }) => {
   return (
-    <ImageBackground
-      source={require('../assets/images/darkgradient.jpg')}
-      style={{ width: '100%' }}>
+    <View style={{ width: '100%', backgroundColor: '#222' }}>
       <View>
         {location !== 'signin' && location !== 'signup' && location !== 'androidFonts' && (
           <View style={styles.topNav}>
             <View>
               <Grid>
                 <Col size={2}>
-                  <View style={{ position: 'absolute', paddingTop: 40, paddingLeft: 25 }}>
+                  <View
+                    style={
+                      location === 'profile' ? styles.selectedNavButton : styles.topNavButtons
+                    }>
                     <CustomButton text="Character" onPress={() => setLocation('profile')} />
                   </View>
                 </Col>
                 <Col size={2}>
-                  <View style={{ position: 'absolute', paddingTop: 40, paddingLeft: 30 }}>
+                  <View
+                    style={
+                      location === 'questlist' ||
+                      location === 'quest' ||
+                      location === 'addquest' ||
+                      location === 'editquest'
+                        ? styles.selectedNavButton
+                        : styles.topNavButtons
+                    }>
                     <CustomButton text="Quests" onPress={() => setLocation('questlist')} />
                   </View>
                 </Col>
                 <Col size={2}>
-                  <View style={{ position: 'absolute', paddingTop: 40, paddingLeft: 35 }}>
+                  <View
+                    style={
+                      location === 'calendar' ? styles.selectedNavButton : styles.topNavButtons
+                    }>
                     <CustomButton text="Calendar" onPress={() => setLocation('calendar')} />
                   </View>
                 </Col>
@@ -65,7 +77,7 @@ export const ApplicationHome = ({ location, setLocation, getData }) => {
           {location === 'fonts' && <AndroidFonts />}
         </View>
       </View>
-    </ImageBackground>
+    </View>
   );
 };
 
@@ -81,31 +93,26 @@ const theme = {
 };
 
 const styles = EStyleSheet.create({
-  appMargin: {
-    margin: '1rem'
-  },
   topNav: {
-    height: '8%',
+    height: '4.5rem',
     zIndex: 5,
-    backgroundColor: 'transparent',
+    backgroundColor: '#333',
     top: 0,
     left: 0,
-    width: '100%'
-  },
-  bottomNav: {
-    flexDirection: 'row',
-    position: 'absolute',
-    bottom: 0,
     width: '100%',
-    zIndex: 5,
-    justifyContent: 'center'
+    paddingBottom: '1rem'
   },
-  profileButton: {
-    marginTop: '16rem'
+  topNavButtons: {
+    width: '100%',
+    paddingTop: '2rem',
+    position: 'absolute'
   },
-  topPadding: {
-    paddingLeft: '2.5rem',
-    paddingTop: '2.5rem'
+  selectedNavButton: {
+    width: '100%',
+    paddingTop: '2rem',
+    position: 'absolute',
+    backgroundColor: '#ff0066',
+    height: '4.5rem'
   }
 });
 

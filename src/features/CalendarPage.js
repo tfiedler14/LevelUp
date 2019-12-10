@@ -15,20 +15,16 @@ export const CalendarPage = ({ getData, setLocation, quests, location, auth }) =
     getData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests.json', 'quests');
   }, []);
 
-  console.log(quests);
   let completeQuests = {};
   for (let i = 0; i < Object.keys(quests).length; i++) {
     let currQuest = Object.keys(quests)[i];
     if (quests[currQuest] && quests[currQuest].finishDate && quests[currQuest].finishDate !== 'incomplete') {
-      console.log(quests[currQuest]);
       if (!completeQuests[quests[currQuest].finishDate]) {
         completeQuests[quests[currQuest].finishDate] = parseInt(quests[currQuest].expVal, 10);
-        console.log(completeQuests)
       } else {
         completeQuests[quests[currQuest].finishDate] =
           parseInt(completeQuests[quests[currQuest].finishDate], 10) +
           parseInt(quests[currQuest].expVal, 10);
-        console.log(completeQuests)
       }
     }
   }
@@ -100,10 +96,9 @@ export const CalendarPage = ({ getData, setLocation, quests, location, auth }) =
   }
 
   return (
-    <View style={styles.paddingTop}>
       <View style={styles.sectionHeight}>
         <Card style={styles.card}>
-          <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+          <View style={{ flexDirection: 'row', justifyContent: 'center', backgroundColor: 'transparent' }}>
             <Button
               color="#FFFFFF"
               uppercase={false}
@@ -130,27 +125,27 @@ export const CalendarPage = ({ getData, setLocation, quests, location, auth }) =
               {'>'}
             </Button>
           </View>
-          <DataTable style={{ textAlign: 'center' }}>
+          <DataTable style={{ textAlign: 'center', backgroundColor: 'transparent' }}>
             <DataTable.Header>
-              <DataTable.Title style={{ justifyContent: 'center' }}>
+              <DataTable.Title style={{ justifyContent: 'center', backgroundColor: 'transparent' }}>
                 <Text style={{ color: '#FFFFFF' }}>Sun</Text>
               </DataTable.Title>
-              <DataTable.Title style={{ justifyContent: 'center' }}>
+              <DataTable.Title style={{ justifyContent: 'center', backgroundColor: 'transparent' }}>
                 <Text style={{ color: '#FFFFFF' }}>Mon</Text>
               </DataTable.Title>
-              <DataTable.Title style={{ justifyContent: 'center' }}>
+              <DataTable.Title style={{ justifyContent: 'center', backgroundColor: 'transparent' }}>
                 <Text style={{ color: '#FFFFFF' }}>Tue</Text>
               </DataTable.Title>
-              <DataTable.Title style={{ justifyContent: 'center' }}>
+              <DataTable.Title style={{ justifyContent: 'center', backgroundColor: 'transparent' }}>
                 <Text style={{ color: '#FFFFFF' }}>Wed</Text>
               </DataTable.Title>
-              <DataTable.Title style={{ justifyContent: 'center' }}>
+              <DataTable.Title style={{ justifyContent: 'center', backgroundColor: 'transparent' }}>
                 <Text style={{ color: '#FFFFFF' }}>Thu</Text>
               </DataTable.Title>
-              <DataTable.Title style={{ justifyContent: 'center' }}>
+              <DataTable.Title style={{ justifyContent: 'center', backgroundColor: 'transparent' }}>
                 <Text style={{ color: '#FFFFFF' }}>Fri</Text>
               </DataTable.Title>
-              <DataTable.Title style={{ justifyContent: 'center' }}>
+              <DataTable.Title style={{ justifyContent: 'center', backgroundColor: 'transparent' }}>
                 <Text style={{ color: '#FFFFFF' }}>Sat</Text>
               </DataTable.Title>
             </DataTable.Header>
@@ -232,10 +227,7 @@ export const CalendarPage = ({ getData, setLocation, quests, location, auth }) =
             )}
           </DataTable>
         </Card>
-
-        {/*<Calendar date={moment('23/10/2015', 'DD/MM/YYYY')} onSelect={this.onSelect} />*/}
       </View>
-    </View>
   );
 };
 
@@ -250,9 +242,6 @@ const styles = EStyleSheet.create({
     backgroundColor: '#555'
     //  border: 'none',
   },
-  paddingTop: {
-    paddingTop: '3rem'
-  },
   sectionHeight: {
     height: '100%',
     color: 'white'
@@ -262,13 +251,17 @@ const styles = EStyleSheet.create({
     flexDirection: 'row'
   },
   buttonStyle: {
-    width: '5rem'
+    width: '5rem',
+    backgroundColor: 'transparent'
   },
   monthInfo: {
     marginLeft: '1rem',
     marginRight: '1rem',
     color: 'white',
     lineHeight: '2.5rem'
+  },
+  table: {
+    backgroundColor: 'transparent'
   }
 });
 

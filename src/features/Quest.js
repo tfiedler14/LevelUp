@@ -1,15 +1,13 @@
-import { Image, ScrollView, Text, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import React from 'react';
 import { Button, Card } from 'react-native-paper';
 import { getData, putData, deleteData } from '../logic/data/actions';
 import { setLocation } from '../logic/location/actions';
 import { connect } from 'react-redux';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { FormHeader } from '../shared-components/FormHeader';
-import { WrappedTextInput } from '../shared-components/FormField';
-import { Field, reduxForm } from 'redux-form';
 import { compose } from 'redux';
-import moment from "moment";
+import moment from 'moment';
+import { Col, Grid } from 'react-native-easy-grid';
 
 export const Quest = ({
   info,
@@ -25,46 +23,37 @@ export const Quest = ({
 }) => {
   return (
     <View style={styles.sectionHeight}>
-      <View style={styles.formPadding}></View>
+      <View style={styles.questHeader}>
+        <Text style={styles.questtitle}>{info && info.name}</Text>
+        <Text style={styles.description}>
+          {'Quest Description: ' + (info ? info.description : 'Not Available')}
+        </Text>
+      </View>
       <ScrollView>
-        <View style={styles.infoWrapper}>
-          <Card style={styles.card}>
-            <Text style={styles.questtitle}>{info && info.name}</Text>
-
-            <View>
-              <View style={styles.infoWrapper}>
-                <Text style={styles.description}>
-                  {info ? 'Quest Description: ' + info.description : 'Not Available'}
-                </Text>
-                <Text style={styles.skills}>
-                  {info ? 'Associated Skills: ' + info.skill : 'No Info'}
-                </Text>
-                <Text style={styles.time}>{info ? 'Quest Length: ' + info.time : 'No Info'}</Text>
-                <Text style={styles.time}>
-                  {info ? 'Quest Difficulty: ' + info.difficulty : 'No Info'}
-                </Text>
-              </View>
-            </View>
-            <View style={styles.completeContainer}>
+        <View style={styles.pagePadding}>
+          <View style={styles.infoWrapper}>
+            <Text style={styles.skills}>
+              {'Associated Skills: ' + (info ? info.skill : 'No Info')}
+            </Text>
+            <Text style={styles.time}>{info ? 'Quest Length: ' + info.time : 'No Info'}</Text>
+            <Text style={styles.time}>
+              {'Quest Difficulty: ' + (info ? info.difficulty : 'No Info')}
+            </Text>
+          </View>
+          <Grid>
+            <Col size={2}>
               <Button
-                color="#cda845"
+                color="#090"
                 uppercase={false}
                 mode="contained"
+                style={styles.buttonPadding}
                 onPress={() => {
                   //get skills of quest from data.skills
-                  var questSkills = skills.filter(skill => skill.name === info.skill);
-                  var questAttributes = attributes;
-                  var finalExp = 0;
-                 /* var date = new Date();
-                  var dateString =
-                    '' + date.getDate() + ' ' + date.getMonth() + ' ' + date.getFullYear();
-                  var dateEntry;
-                  if (character.calender.filter(entry => dateString == entry.string).length > 0) {
-                    dateEntry = character.calender.filter(entry => dateString == entry.string)[0];
-                  } else {
-                    dateEntry = { string: dateString, xp: 0 };
-                  }*/
-                  for (var curSkill of questSkills) {
+                  const questSkills = skills.filter(skill => skill && skill.name === info.skill);
+                  const questAttributes = attributes;
+                  let finalExp = 0;
+
+                  for (let curSkill of questSkills) {
                     //add xp to skill
                     curSkill.xp +=
                       6 * (info.difficulty + 0.1 * curSkill.val) +
@@ -96,7 +85,7 @@ export const Quest = ({
                   var newSkills = [...questSkills];
                   for (let a of skills) {
                     // if this skill hasn't been updated, put the current version in the new array
-                    if (newSkills.filter(sk => sk.name === a.name).length == 0) {
+                    if (newSkills.filter(sk => sk.name === a.name).length === 0) {
                       newSkills.push(a);
                     }
                   }
@@ -120,31 +109,10 @@ export const Quest = ({
                     character.mainLevel++;
                     character.mainLevelXpToNext += character.mainLevelXpToNext * 1.065;
                   }
-                /*  console.log('DATE ENTRY: ' + dateEntry.string);
-                  var oldCalender = character.calender.filter(
-                    entry => entry.string != dateEntry.string
-                  );
-                  var newCalender = [...oldCalender];
-                  newCalender.push(dateEntry);
-                  character.calender = newCalender;
-                  putData(
-                    'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/character.json',
-                    character,
-                    null,
-                    'profile'
-                  );
-
-                 deleteData(
-                    'https://levelup-10cfc.firebaseio.com/users/' +
-                      auth.uid +
-                      '/quests/' +
-                      info.id +
-                      '.json',
-                    'questlist'
-                  ); */
-                  var date = moment().format().split("T")[0];
-                  console.log("FINAL EXP: ", finalExp);
-                  quests[info.id].finishDate = date;
+                  console.log(info);
+                  quests[info.id].finishDate = moment()
+                    .format()
+                    .split('T')[0];
                   quests[info.id].expVal = finalExp;
                   putData(
                     'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests' + '.json',
@@ -152,25 +120,27 @@ export const Quest = ({
                     'questlist'
                   );
                 }}>
-                Complete Quest
+                Finish
               </Button>
-            </View>
-            <View style={styles.editContainer}>
+            </Col>
+            <Col size={2}>
               <Button
-                color="#cda845"
+                color="#090"
                 uppercase={false}
                 mode="contained"
+                style={styles.buttonPadding}
                 onPress={() => {
                   setLocation('editquest');
                 }}>
-                Edit Quest
+                Edit
               </Button>
-            </View>
-            <View style={styles.deleteContainer}>
+            </Col>
+            <Col size={2}>
               <Button
-                color="#cda845"
+                color="#090"
                 uppercase={false}
                 mode="contained"
+                style={styles.buttonPadding}
                 onPress={() => {
                   deleteData(
                     'https://levelup-10cfc.firebaseio.com/users/' +
@@ -181,10 +151,10 @@ export const Quest = ({
                     'questlist'
                   );
                 }}>
-                Delete Quest
+                Delete
               </Button>
-            </View>
-          </Card>
+            </Col>
+          </Grid>
         </View>
       </ScrollView>
     </View>
@@ -202,21 +172,22 @@ const styles = EStyleSheet.create({
     marginTop: '1rem'
   },
 
-  card: {
-    //  border: 'none',
-    paddingTop: '0rem',
-    marginBottom: '1rem',
-    height: '30rem',
-    paddingLeft: '1rem',
-    paddingRight: '1rem',
-    backgroundColor: 'transparent'
+  questHeader: {
+    backgroundColor: '#555',
+    paddingBottom: '1rem'
   },
 
   infoWrapper: {
-    paddingTop: '1rem'
+    paddingTop: '1rem',
+    paddingBottom: '1rem'
+  },
+
+  pagePadding: {
+    padding: '1rem'
   },
 
   description: {
+    textAlign: 'center',
     fontSize: '1.15rem',
     marginBottom: '.5rem',
     color: 'white'
@@ -262,6 +233,9 @@ const styles = EStyleSheet.create({
   },
   formPadding: {
     padding: '1rem'
+  },
+  buttonPadding: {
+    margin: '.5rem'
   }
 });
 
