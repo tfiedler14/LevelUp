@@ -18,7 +18,11 @@ export const QuestList = ({ getData, setLocation, quests, location, auth }) => {
     <View style={styles.sectionHeight}>
       <View style={styles.sectionPadding}>
         <Text style={styles.text}>Active Quests</Text>
-        <FAB style={{...styles.fab, ...{zIndex: 9999999}}} icon="add" onPress={() => setLocation('addquest')} />
+        <FAB
+          style={{ ...styles.fab, ...{ zIndex: 9999999 } }}
+          icon="add"
+          onPress={() => setLocation('addquest')}
+        />
       </View>
       <ScrollView>
         <View>
@@ -27,7 +31,8 @@ export const QuestList = ({ getData, setLocation, quests, location, auth }) => {
               .filter(quest => quest && quest.finishDate === 'incomplete')
               .map((quest, index) => (
                 <View key={index} style={{ borderBottomColor: 'white', borderBottomWidth: 1 }}>
-                  <QuestComponent info={{ ...quest, id: index }} />
+                  {console.log(quest)}
+                  <QuestComponent info={{ ...quest, id: quest.uid }} />
                 </View>
               ))}
         </View>

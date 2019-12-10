@@ -53,6 +53,9 @@ export const Quest = ({
                   const questAttributes = attributes;
                   let finalExp = 0;
 
+                  console.log(questSkills);
+                  console.log(questAttributes);
+
                   for (let curSkill of questSkills) {
                     //add xp to skill
                     curSkill.xp +=
@@ -89,6 +92,8 @@ export const Quest = ({
                       newSkills.push(a);
                     }
                   }
+
+                  console.log(newSkills);
                   //put new skill array
                   putData(
                     'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/skills.json',
@@ -96,6 +101,8 @@ export const Quest = ({
                     null,
                     'profile'
                   );
+
+                  console.log(attributes);
                   //level up attributes and grant xp to main level
                   //put attributes
                   putData(
@@ -110,10 +117,11 @@ export const Quest = ({
                     character.mainLevelXpToNext += character.mainLevelXpToNext * 1.065;
                   }
                   console.log(info);
-                  quests[info.id].finishDate = moment()
+                  quests.filter(e => e.uid === info.uid)[0].finishDate = moment()
                     .format()
                     .split('T')[0];
-                  quests[info.id].expVal = finalExp;
+                  console.log(quests);
+                  quests.filter(e => e.uid === info.uid)[0].expVal = finalExp;
                   putData(
                     'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests' + '.json',
                     quests,

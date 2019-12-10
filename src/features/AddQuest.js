@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import { FormHeader } from '../shared-components/FormHeader';
 import { Button, Card } from 'react-native-paper';
 import { ScrollView, View } from 'react-native';
-import { Dropdown } from '../shared-components/Dropdown';
+import { DropdownWrapper } from '../shared-components/Dropdown';
 
 export const AddQuest = ({
   editProp,
@@ -36,6 +36,7 @@ export const AddQuest = ({
       setInitialized(true);
     }
   });
+
 
   console.log(skills);
 
@@ -70,7 +71,7 @@ export const AddQuest = ({
             name="skill"
             id="skill"
             props={{ title: 'Skill', options: mySkills }}
-            component={Dropdown}
+            component={DropdownWrapper}
           />
           <Button
             color="#ff0066"
@@ -78,7 +79,7 @@ export const AddQuest = ({
             mode="contained"
             style={styles.buttons}
             onPress={handleSubmit(values => {
-              let toInsert = { ...values, finishDate: 'incomplete', expVal: 0 };
+              let toInsert = { ...values, finishDate: 'incomplete', expVal: 0, uid: uid() };
               if (quests === []) {
                 let newQuests = [];
                 newQuests[0] = toInsert;

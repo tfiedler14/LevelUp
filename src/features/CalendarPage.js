@@ -60,16 +60,16 @@ export const CalendarPage = ({ getData, setLocation, quests, location, auth }) =
     }
     let checkDay = year + '-' + (month + 1) + '-' + myDay;
     if (completeQuests[checkDay]) {
-      if (completeQuests[checkDay] < 20) {
-        myColor = '#ee33cc';
-      } else if (completeQuests[checkDay] < 40) {
-        myColor = '#ee33aa';
-      } else if (completeQuests[checkDay] < 60) {
-        myColor = '#ee3366';
-      } else if (completeQuests[checkDay] < 80) {
-        myColor = '#ee3344';
-      } else if (completeQuests[checkDay] > 99) {
-        myColor = '#ee3322';
+      if (completeQuests[checkDay] < 200) {
+        myColor = '#3366AA';
+      } else if (completeQuests[checkDay] < 400 ) {
+        myColor = '#664499';
+      } else if (completeQuests[checkDay] < 600) {
+        myColor = '#993388';
+      } else if (completeQuests[checkDay] < 800) {
+        myColor = '#cc2277';
+      } else if (completeQuests[checkDay] >= 1000) {
+        myColor = '#FF0066';
       }
     }
     monthInfo.push({

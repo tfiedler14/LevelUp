@@ -10,7 +10,7 @@ import { Field, getFormValues, reduxForm } from 'redux-form';
 import { compose } from 'redux';
 import { WrappedTextInput } from '../shared-components/FormField';
 import { Button, Card } from 'react-native-paper';
-import { Dropdown } from '../shared-components/Dropdown';
+import { DropdownWrapper } from '../shared-components/Dropdown';
 
 export const AddSkill = ({
   auth,
@@ -45,7 +45,7 @@ export const AddSkill = ({
               { label: 'Hobby', value: 'hobby' }
             ]
           }}
-          component={Dropdown}
+          component={DropdownWrapper}
         />
         <Field
           name="addSkillName"

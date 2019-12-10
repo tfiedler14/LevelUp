@@ -87,7 +87,7 @@ export const Profile = ({
                   <Text style={styles.levelText}>Level 1</Text>
                   <Progress.Bar
                     style={styles.progress}
-                    color="#cda845"
+                    color="#0b0"
                     height={15}
                     progress={0.5}
                   />
@@ -143,7 +143,7 @@ const AttributeListItem = ({ skills, levels }) => {
         <View>
           <Progress.Bar
             style={styles.progress}
-            color="#cda845"
+            color="#0b0"
             height={15}
             progress={data.level / 100 + 0.2}
           />

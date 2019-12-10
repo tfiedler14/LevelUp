@@ -33,7 +33,7 @@ export const WrappedTextInput = props => {
 const styles = EStyleSheet.create({
   textEntry: {
     borderBottomColor: '#ccc',
-    borderBottomWidth: '.1rem',
+    borderBottomWidth: 1,
     backgroundColor: '#666',
     color: 'white',
     padding: '.5rem',

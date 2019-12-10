@@ -90,7 +90,7 @@ const handleLogin = (values, setLocation, setAuth, setErrors, errors) => {
     .signInWithEmailAndPassword(values.email, values.password)
     .then(response => {
       setAuth({ loggedIn: true, email: response.user.email, uid: response.user.uid });
-      setLocation('calendar');
+      setLocation('profile');
     })
     .catch(error => {
       console.log('Failed to sign in.');
