@@ -16,7 +16,7 @@ export const Settings = ({ setLocation, auth, handleSubmit, setAuth }) => {
   if (auth.loggedIn) {
     return (
       <ImageBackground
-      source={require('../../assets/images/darkverylowopacityshapes.png')}
+      source={require('../../assets/images/newBackgroundNoPatterndarker.png')}
       style={{ height: '100%', width: '100%' }}>
       <View style={styles.sectionHeight}>
         <ScrollView>

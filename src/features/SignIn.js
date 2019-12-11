@@ -121,8 +121,8 @@ export const mapStateToProps = state => {
     values: getFormValues('sign-in-form')(state),
     errors: state.errors,
     initialValues: {
-      email: '',
-      password: ''
+      email: 't@f.com',
+      password: 'tftftf'
     }
   };
 };
