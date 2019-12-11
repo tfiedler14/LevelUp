@@ -53,7 +53,7 @@ export const CalendarPage = ({ getData, setLocation, quests, location, auth }) =
   for (let i = 0; i < days; i++) {
     let myColor = 'undefined';
     let myDay = '';
-    if (i < 10) {
+    if (i < 9) {
       myDay = '0' + (i + 1);
     } else {
       myDay = '' + (i + 1);

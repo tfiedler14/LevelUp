@@ -7,15 +7,26 @@ import { Field, getFormValues, reduxForm } from 'redux-form';
 import { WrappedTextInput } from '../shared-components/FormField';
 import { setLocation } from '../logic/location/actions';
 import { setErrors } from '../logic/errors/actions';
-import {putData} from '../logic/data/actions';
-import {setCharacter} from '../logic/data/actions';
+import { putData } from '../logic/data/actions';
+import { setCharacter } from '../logic/data/actions';
 import { compose } from 'redux';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { Button, Card } from 'react-native-paper';
 import { FormHeader } from '../shared-components/FormHeader';
 import { firebaseApp } from '../../Const';
 
-export const Settings = ({ setLocation, auth, handleSubmit, setAuth, setErrors, errors, setCharacter, character, putData }) => {
+export const Settings = ({
+  setLocation,
+  auth,
+  handleSubmit,
+  setAuth,
+  setErrors,
+  errors,
+  setCharacter,
+  character,
+  putData,
+  loading
+}) => {
   if (auth.loggedIn) {
     return (
       <View style={styles.sectionHeight}>
@@ -100,11 +111,12 @@ export const Settings = ({ setLocation, auth, handleSubmit, setAuth, setErrors, 
                           setErrors({ ...errors, password: true });
                         });
                     }
-
                     if (values.name) {
-                      setCharacter({...character, characterName: values.name});
-                      console.log("Character: ", character);
-                      putData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/character.json', character)
+                      putData(
+                        'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/character.json',
+                        { ...character, characterName: values.name },
+                        'profile'
+                      );
                     }
                     if (values.email) {
                       firebaseApp
@@ -115,7 +127,7 @@ export const Settings = ({ setLocation, auth, handleSubmit, setAuth, setErrors, 
                           setErrors({ ...errors, email: true });
                         });
                     }
-                    setLocation(values.email ? 'signin' : 'profile');
+                    !values.name && setLocation(values.email ? 'signin' : 'profile');
                   })}>
                   Save Profile
                 </Button>
@@ -200,7 +212,8 @@ export const mapStateToProps = state => {
     auth: state.auth,
     values: getFormValues('settings-form')(state),
     errors: state.errors,
-    character: state.data.character
+    character: state.data.character,
+    loading: state.loading
   };
 };
 
@@ -215,12 +228,12 @@ export const mapDispatchToProps = dispatch => {
     setErrors: errors => {
       dispatch(setErrors(errors));
     },
-    putData: data => {
-      dispatch(putData(data));
+    putData: (target, data, redirect) => {
+      dispatch(putData(target, data, redirect));
     },
     setCharacter: data => {
       dispatch(setCharacter(data));
-    }
+    },
   };
 };
 

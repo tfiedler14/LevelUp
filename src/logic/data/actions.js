@@ -1,7 +1,7 @@
 import axios from 'axios';
-import {databaseSecret} from '../../../Const';
+import { databaseSecret } from '../../../Const';
 import { setLocation } from '../location/actions';
-import { setLoading } from '../loading/actions';
+import { setLoading, endLoading, getLoading } from '../loading/actions';
 
 export const setData = data => {
   return {
@@ -61,27 +61,28 @@ export const setQuest = data => {
 // + "?auth=" + databaseSecret
 export const getData = (target, dataPoint) => {
   return dispatch => {
+    dispatch(setLoading());
     return axios
-      .get(target + "?auth=" + databaseSecret)
+      .get(target + '?auth=' + databaseSecret)
       .then(response => {
         if (dataPoint === 'profile') {
           dispatch(setProfile(response.data));
-          dispatch(setLoading(false));
+          dispatch(endLoading());
         } else if (dataPoint === 'user') {
           dispatch(setUser(response.data));
-          dispatch(setLoading(false));
+          dispatch(endLoading());
         } else if (dataPoint === 'skills') {
           dispatch(setSkills(response.data));
-          dispatch(setLoading(false));
+          dispatch(endLoading());
         } else if (dataPoint === 'attributes') {
           dispatch(setAttributes(response.data));
-          dispatch(setLoading(false));
-        }else if (dataPoint === 'character') {
+          dispatch(endLoading());
+        } else if (dataPoint === 'character') {
           dispatch(setCharacter(response.data));
-          dispatch(setLoading(false));
+          dispatch(endLoading());
         } else if (dataPoint === 'quests') {
           dispatch(setQuests(response.data));
-          dispatch(setLoading(false));
+          dispatch(endLoading());
         }
       })
       .catch(error => {
@@ -93,10 +94,14 @@ export const getData = (target, dataPoint) => {
 export const putData = (target, data, redirect, type) => {
   return dispatch => {
     // const token = firebaseApp.auth().currentUser.getIdToken();
+    console.log('TARGET: ', target + '?auth=' + databaseSecret);
+    console.log(data);
+    dispatch(setLoading());
     return axios
-      .put(target + "?auth=" + databaseSecret, data)
+      .put(target + '?auth=' + databaseSecret, data)
       .then(response => {
         dispatch(getData(target, 'profile'));
+        dispatch(endLoading());
         redirect && dispatch(setLocation(redirect));
         type === 'quest' && setQuest(response.data);
       })
@@ -109,7 +114,7 @@ export const putData = (target, data, redirect, type) => {
 export const deleteData = (target, redirect) => {
   return dispatch => {
     return axios
-      .delete(target + "?auth=" + databaseSecret)
+      .delete(target + '?auth=' + databaseSecret)
       .then(response => {
         redirect && dispatch(setLocation(redirect));
       })

@@ -116,7 +116,12 @@ export const Quest = ({
                     character.mainLevel++;
                     character.mainLevelXpToNext += character.mainLevelXpToNext * 1.065;
                   }
-                  console.log(info);
+                  putData(
+                    'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/character.json',
+                    character,
+                    null,
+                    'profile'
+                  );
                   quests.filter(e => e.uid === info.uid)[0].finishDate = moment()
                     .format()
                     .split('T')[0];

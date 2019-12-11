@@ -4,15 +4,13 @@ import { Image, ScrollView, View, Text, ImageBackground } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { setLocation } from '../logic/location/actions';
 import { getData, putData } from '../logic/data/actions';
-import { setLoading } from '../logic/loading/actions';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import * as Progress from 'react-native-progress';
 import Async from '../shared-components/Async';
-import { attributes } from '../../Const';
+//import { attributes } from '../../Const';
 import { Col, Grid } from 'react-native-easy-grid';
 import { FAB } from 'react-native-paper';
 
-const attributeList = attributes;
+//const attributeList = attributes;
 
 export const Profile = ({
   getData,
@@ -21,21 +19,18 @@ export const Profile = ({
   location,
   loading,
   auth,
-  setLoading,
   character,
-  profile
+  profile,
+  attributes
 }) => {
-  const handleAddSkill = location => {
-    setLocation('addSkill');
-  };
   /* istanbul ignore next */
   useEffect(() => {
-    getData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/profile.json', 'profile');
-    getData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/skills.json', 'skills');
     getData(
       'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/attributes.json',
       'attributes'
     );
+    getData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/profile.json', 'profile');
+    getData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/skills.json', 'skills');
     getData(
       'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/character.json',
       'character'
@@ -45,8 +40,6 @@ export const Profile = ({
     //cleaned up code for rendering skills by adding a new element called AttributeItem
     //and adding array of attribute names to Const, made this section a scrollview
     //but that is currently not working
-
-    setLoading(true);
   }, []);
 
   return (
@@ -84,24 +77,25 @@ export const Profile = ({
               </Col>
               <Col size={1}>
                 <View style={styles.levelPadding}>
-                  <Text style={styles.levelText}>Level 1</Text>
-                  <Progress.Bar
-                    style={styles.progress}
-                    color="#0b0"
-                    height={15}
-                    progress={0.5}
-                  />
+                  <Text style={styles.levelText}>Level {character.mainLevel}</Text>
+                  <Progress.Bar style={styles.progress} color="#0b0" height={15} progress={character.mainLevelXp} />
                 </View>
               </Col>
             </Grid>
           </View>
           <View style={styles.svHeight}>
             <ScrollView>
-              {attributeList.map((data, index) => (
-                <View key={`${data}-${index}`} style={{ width: 200 }}>
-                  <AttributeItem attributeName={data} skills1={skills} />
-                </View>
-              ))}
+              {attributes &&
+                typeof attributes === 'object' &&
+                Object.keys(attributes).map((attribute, index) => (
+                  <View key={`${index}-${attribute.id}`} style={{ width: 200 }}>
+                    <AttributeItem
+                      attributeName={attribute}
+                      attribute={attributes[attribute]}
+                      skills1={skills}
+                    />
+                  </View>
+                ))}
             </ScrollView>
           </View>
         </View>
@@ -110,13 +104,24 @@ export const Profile = ({
   );
 };
 
-const AttributeItem = ({ attributeName, skills1 }) => {
+const AttributeItem = ({ attributeName, attribute, skills1 }) => {
   return (
     <View style={styles.skillSec}>
-      <View>
+      {console.log(attribute.exp)}
+      <View style={{ flexDirection: 'row' }}>
         <Text style={styles.attrName}>
-          {attributeName.charAt(0).toUpperCase() + attributeName.slice(1)}
+          {(attributeName && attributeName.charAt(0).toUpperCase() + attributeName.slice(1)) +
+            ' - ' +
+            (attribute && attribute.level)}
         </Text>
+        <View style={styles.attrProgressBar}>
+          <Progress.Bar
+            style={styles.progress}
+            color="#0b0"
+            height={15}
+            progress={(attribute.exp || 0) / 100 + 0.2}
+          />
+        </View>
       </View>
       <View>
         <AttributeListItem
@@ -145,7 +150,7 @@ const AttributeListItem = ({ skills, levels }) => {
             style={styles.progress}
             color="#0b0"
             height={15}
-            progress={data.level / 100 + 0.2}
+            progress={(data.level || 0) / 100 + 0.2}
           />
         </View>
       </View>
@@ -289,6 +294,11 @@ const styles = EStyleSheet.create({
 
   settingsFabView: {
     marginRight: '4.5rem'
+  },
+
+  attrProgressBar: {
+    marginLeft: '1rem',
+    marginTop: '.5rem'
   }
 });
 
@@ -300,7 +310,8 @@ const mapStateToProps = state => {
     loading: state.loading,
     auth: state.auth,
     profile: state.data.profile,
-    character: state.data.character
+    character: state.data.character,
+    attributes: state.data.attributes
   };
 };
 
@@ -314,9 +325,6 @@ const mapDispatchToProps = dispatch => {
     },
     setLocation: location => {
       dispatch(setLocation(location));
-    },
-    setLoading: loading => {
-      dispatch(setLoading(loading));
     }
   };
 };

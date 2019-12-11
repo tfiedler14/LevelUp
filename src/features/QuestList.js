@@ -31,7 +31,6 @@ export const QuestList = ({ getData, setLocation, quests, location, auth }) => {
               .filter(quest => quest && quest.finishDate === 'incomplete')
               .map((quest, index) => (
                 <View key={index} style={{ borderBottomColor: 'white', borderBottomWidth: 1 }}>
-                  {console.log(quest)}
                   <QuestComponent info={{ ...quest, id: quest.uid }} />
                 </View>
               ))}

@@ -37,16 +37,11 @@ export const AddQuest = ({
     }
   });
 
-
-  console.log(skills);
-
   let mySkills = [];
 
   skills.map(skill => {
     skill && skill.name && mySkills.push({ label: skill.name, value: skill.name });
   });
-  console.log(mySkills);
-
 
   return (
     <View style={styles.sectionHeight}>
