@@ -8,7 +8,7 @@ import { setLoading } from '../logic/loading/actions';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import * as Progress from 'react-native-progress';
 import Async from '../shared-components/Async';
-import { attributes, colors } from '../../Const';
+import { attributes, colors, avatars } from '../../Const';
 import { Col, Grid, Row } from 'react-native-easy-grid';
 
 
@@ -84,8 +84,8 @@ export const Profile = ({
               </View>
               <View style={{ flex: 1, flexDirection: 'column' }}>
                 <Image
-                  style={styles.imageProfile}
-                  source={require('../../assets/images/newCharacter.png')}
+                  style={[{width: 80}, {height: 220}, {paddingLeft: '40%'}, {resizeMode: 'contain'}]}
+                  source={{uri: avatars[character.avatar]}}
                 />
 
                 <Text style={styles.charName}>
@@ -199,7 +199,7 @@ const styles = EStyleSheet.create({
     flex: 1,
     left: '-20%',
     position: 'absolute',
-    height: '15rem',
+    //height: '15rem',
     resizeMode: 'contain',
     paddingTop: '35%'
   },
