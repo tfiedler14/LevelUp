@@ -128,7 +128,6 @@ const styles = EStyleSheet.create({
     margin: '1rem',
     color: 'white',
     backgroundColor: '#555'
-    //  border: 'none',
   },
 
   buttons: {
