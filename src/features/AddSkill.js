@@ -27,6 +27,7 @@ export const AddSkill = ({ auth, skills, setLocation, location, handleSubmit, pu
             <Field
               name="addSkillAttribute"
               component={attributeDropDown}
+              props={{title: 'Define an Attribute'}}
               mode="dropdown"
             />
             
@@ -38,7 +39,7 @@ export const AddSkill = ({ auth, skills, setLocation, location, handleSubmit, pu
             />
 
             <Button
-              color="#064f2f"
+              color="#fff600"
               uppercase={false}
               mode="contained"
               style={styles.buttons}
@@ -61,7 +62,7 @@ export const AddSkill = ({ auth, skills, setLocation, location, handleSubmit, pu
             </Button>
 
             <Button
-              color="#4f0617"
+              color="#ff005c"
               uppercase={false}
               mode="contained"
               style={styles.buttons}

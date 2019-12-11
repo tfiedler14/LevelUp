@@ -25,11 +25,7 @@ export const Profile = ({
   character,
   profile
 }) => {
-  const handleAddSkill = location => {
-    setLocation('addSkill');
-    console.log('chaning location to addSkill');
-    console.log(location);
-  };
+
   /* istanbul ignore next */
   useEffect(() => {
     getData('https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/profile.json', 'profile');
