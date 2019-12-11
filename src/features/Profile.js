@@ -44,9 +44,9 @@ export const Profile = ({
       'character'
     );
 
-    //name now reflects actual logged in user name instead of always the name tom, 
-    //cleaned up code for rendering skills by adding a new element called AttributeItem 
-    //and adding array of attribute names to Const, made this section a scrollview 
+    //name now reflects actual logged in user name instead of always the name tom,
+    //cleaned up code for rendering skills by adding a new element called AttributeItem
+    //and adding array of attribute names to Const, made this section a scrollview
     //but that is currently not working
 
     setLoading(true);
@@ -72,7 +72,7 @@ var cxpnext = parseFloat(character.mainLevelXpToNext);
                 />
                 <Icon
                   style={styles.padding}
-                  name="add"
+                  name="edit"
                   size={30}
                   color="white"
                   onPress={() => setLocation('editcharacter')}
@@ -194,8 +194,8 @@ const styles = EStyleSheet.create({
 
   },
   attributeNameFont: {
-    fontSize: '2rem', 
-    fontFamily: 'inconsolata' 
+    fontSize: '2rem',
+    fontFamily: 'inconsolata'
   },
   levelInfo: {
     color: 'white',
@@ -216,15 +216,15 @@ const styles = EStyleSheet.create({
     paddingTop: '35%'
   },
   scrolling:{
-    position: 'absolute',  
-    height: '15rem', 
-    width: '100%', 
-    marginTop: '10%', 
-    top: 350, 
-    left: 0, 
-    right: 0,  
-    bottom: 0, 
-    justifyContent: 'flex-start', 
+    position: 'absolute',
+    height: '15rem',
+    width: '100%',
+    marginTop: '10%',
+    top: 350,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: 'flex-start',
     alignItems: 'flex-start',
   },
   progress: {

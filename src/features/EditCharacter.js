@@ -99,12 +99,15 @@ export const EditCharacter = ({ getData, setLocation, character, location, putDa
             color='green'
             mode= 'contained'
             title="Confirm Changes"
-            onPress={() => handleSubmit(values => {
-              character.name = values.characterName;
+            onPress={handleSubmit(values => {
+              console.log(values);
+              console.log(values.characterName);
+              character.characterName = values.characterName;
+              console.log("state: " + character.characterName);
               putData(
                 'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/character.json',
                 character,
-                'editcharacter'
+                'profile'
               );})}>
             Confirm Changes
           </Button>
@@ -195,6 +198,7 @@ const mapStateToProps = state => {
     location: state.location,
     character: state.data.character,
     auth: state.auth,
+    values: state.data.character
 
   };
 };
@@ -202,9 +206,9 @@ const mapStateToProps = state => {
 export const validate = values => {
   const errors = {};
 
-  if (!values.name) {
-    errors.name = 'Required';
-  } else if (values.name.length > 20) {
+  if (!values.characterName) {
+    errors.characterName = 'Required';
+  } else if (values.characterName.length > 20) {
     errors.name = 'Must be twenty characters or less';
   }
 
@@ -216,5 +220,5 @@ export default compose(
     mapStateToProps,
     mapDispatchToProps
   ),
-  reduxForm({ form: 'add-quest-form', validate })
+  reduxForm({ form: 'edit-character-form', validate })
 )(EditCharacter);
