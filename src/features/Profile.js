@@ -53,7 +53,7 @@ export const Profile = ({
 
   return (
     <ImageBackground
-      source={require('../../assets/images/newBackgroundNoPattern.png')}
+      source={require('../../assets/images/darkverylowopacityshapes.png')}
       style={{ height: '100%', width: '100%' }}>
       <Async
         render={
@@ -195,6 +195,18 @@ const styles = EStyleSheet.create({
     height: '15rem',
     resizeMode: 'contain',
     paddingTop: '35%'
+  },
+  scrolling:{
+    position: 'absolute',  
+    height: '15rem', 
+    width: '100%', 
+    marginTop: '10%', 
+    top: 350, 
+    left: 0, 
+    right: 0,  
+    bottom: 0, 
+    justifyContent: 'flex-start', 
+    alignItems: 'flex-start',
   },
   progress: {
     height: 25,
