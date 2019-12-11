@@ -19,4 +19,4 @@ export const avatars = [
     'https://i.imgur.com/yFAH4g4.png', 'https://i.imgur.com/uwXVrNm.png',
     'https://i.imgur.com/uIHDjmn.png'
 ];
-export const NUM_AVATARS = 5;
+export const NUM_AVATARS = 4;

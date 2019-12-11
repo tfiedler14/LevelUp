@@ -38,7 +38,7 @@ export const EditCharacter = ({ getData, setLocation, character, location, putDa
               size={48}
               color="white"
               onPress={()=>{
-                if (character.avatar != 1){
+                if (character.avatar != 0){
                     character.avatar -= 1;
                     putData(
                       'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/character.json',
