@@ -8,8 +8,9 @@ import { setLoading } from '../logic/loading/actions';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import * as Progress from 'react-native-progress';
 import Async from '../shared-components/Async';
-import { attributes } from '../../Const';
+import { attributes, colors } from '../../Const';
 import { Col, Grid, Row } from 'react-native-easy-grid';
+
 
 const attributeList = attributes;
 
@@ -85,7 +86,7 @@ export const Profile = ({
                 </Text>
               </View>
               <View style={{ paddingTop: '20%', paddingLeft: '50%' }}>
-                <Text style={styles.levelInfo}>Level {character.mainLevel}</Text>
+                <Text style={[styles.attributeNameFont, {color:'white'}]}>Level {character.mainLevel}</Text>
                 <Progress.Bar
                   style={styles.progress}
                   height={25}
@@ -101,7 +102,7 @@ export const Profile = ({
               </View>
 
             </View>
-            <View style={{ height: '80%', width: '100%', paddingTop: '5%', paddingLeft: '5%' }}>
+            <View style={{ height: '100%', width: '100%', paddingTop: '5%', paddingLeft: '5%' }}>
               <ScrollView>
                 {attributeList.map(data => {
                   return (
@@ -127,10 +128,11 @@ const AttributeItem = ({ attributeName, skills1 }) => {
   return (
     <View style={styles.skillSec}>
       <View style={{ flex: 1, flexDirection: 'row' }}>
-        <Text style={styles.attributeNameFont}>{attributeName.charAt(0).toUpperCase() + attributeName.slice(1)}:</Text>
+        <Text style={[styles.attributeNameFont, {color:colors[attributeName]}]} >{attributeName.charAt(0).toUpperCase() + attributeName.slice(1)}:</Text>
         <View style = {{flex: 1, left: "115%", position: 'absolute'}}>
           <Progress.Bar
             style={styles.mainProgress}
+            color={colors[attributeName]}
             height={25}
             progress={1 / 100 + 0.2} //todo real data here
           />
@@ -139,7 +141,7 @@ const AttributeItem = ({ attributeName, skills1 }) => {
       <AttributeListItem
         skills={skills1
           .filter(skill => skill.attribute === attributeName)
-          .map(data => ({ name: data.name, level: data.val }))}
+          .map(data => ({ name: data.name, level: data.val}))}
       />
 
     </View>
@@ -150,7 +152,7 @@ const AttributeListItem = ({ skills, levels }) => {
   return skills.map(data => {
     return (
       <View style={{ flex: 1, flexDirection: 'column' }} key={data}>
-        <Text style={{ color: '#ffffff', fontFamily: 'inconsolata' }}>
+        <Text style={styles.levelInfo}>
           {data.name}: {data.level}
         </Text>
       </View>
@@ -172,14 +174,13 @@ const styles = EStyleSheet.create({
     fontFamily: 'inconsolata'
 
   },
-  attributeNameFont: { 
-    color: '#ffffff', 
+  attributeNameFont: {
     fontSize: '2rem', 
     fontFamily: 'inconsolata' 
   },
   levelInfo: {
     color: 'white',
-    fontSize: '2rem',
+    fontSize: '1.5rem',
     fontFamily: 'inconsolata'
   },
   skillSec: {

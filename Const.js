@@ -13,3 +13,4 @@ export const firebaseApp = firebase.initializeApp(firebaseConfig);
 export const attributes = [
     'academics', 'crafts', 'mental', 'fitness', 'community', 'hobby'
 ];
+export const colors = {'academics' : 'yellow','crafts' : 'blue','mental' : 'purple','fitness' : 'red', 'community' : 'green','hobby' : 'orange'};
