@@ -58,10 +58,29 @@ export const AddQuest = ({
           <Field
             name="difficulty"
             id="difficulty"
-            props={{ title: 'Difficulty' }}
-            component={WrappedTextInput}
+            props={{
+              title: 'Difficulty',
+              options: [
+                { label: 'Easy', value: 1 },
+                { label: 'Medium', value: 2 },
+                { label: 'Hard', value: 3 }
+              ]
+            }}
+            component={DropdownWrapper}
           />
-          <Field name="time" id="time" props={{ title: 'Time' }} component={WrappedTextInput} />
+          <Field
+            name="time"
+            id="time"
+            props={{
+              title: 'Time',
+              options: [
+                { label: 'Short', value: 1 },
+                { label: 'Medium', value: 2 },
+                { label: 'Long', value: 3 }
+              ]
+            }}
+            component={DropdownWrapper}
+          />
           <Field
             name="skill"
             id="skill"
