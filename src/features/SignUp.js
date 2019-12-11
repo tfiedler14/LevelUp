@@ -110,7 +110,7 @@ const handleSignUp = (values, setLocation, setAuthentication, putData) => {
 
         quests: [{
           "description": "Welcome to Xperience, quests map to real life tasks!",
-          "expVal": 10,
+          "val": 10,
           "name": "Welcome",
           "skill": "hobby"
         }],

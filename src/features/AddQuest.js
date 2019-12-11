@@ -54,15 +54,16 @@ export const AddQuest = ({
               props={{ title: 'Description' }}
               component={WrappedTextInput}
             />
-            <Text style={{color: 'white'}}>Duration</Text>
-             <Field
-              name="finishDate"
-              id="finishDate"
+            <Text style={{ color: 'white', marginBottom:5 }}>Duration</Text>
+            <Field
+              name="time"
+              id="time"
               component={timeDropDown}
               props={{ title: 'Time' }}
               mode="datetime"
             />
 
+            <Text style={{ color: 'white', marginBottom:5 }}>Difficulty</Text>
             <Field
               name="difficulty"
               id="difficulty"
@@ -71,12 +72,13 @@ export const AddQuest = ({
               mode="dropdown"
             />
 
-           
+            <Text style={{ color: 'white', marginBottom:5 }}>Time</Text>
+
             <Field
               name="skill"
               id='skill'
               component={skillDropDown}
-              props={{ title: 'Skill', skills: skills}}
+              props={{ title: 'Skill', skills: skills }}
               mode="dropdown"
             />
 
@@ -86,7 +88,7 @@ export const AddQuest = ({
               mode="contained"
               style={styles.buttons}
               onPress={handleSubmit(values => {
-                let toInsert = { ...values, finishDate: 'incomplete', expVal: 0 };
+                let toInsert = { ...values, finishDate: 'incomplete', val: 0 };
                 if (quests === []) {
                   let newQuests = [];
                   newQuests[0] = toInsert;
@@ -155,9 +157,9 @@ const difficultDropDown = ({ input: { onChange } }) => (
       color: 'white'
     }}
     items={[
-      { label: 'hard', value: 'hard' },
-      { label: 'medium', value: 'medium' },
-      { label: 'easy', value: 'easy' },
+      { label: 'hard', value: '3' },
+      { label: 'medium', value: '2' },
+      { label: 'easy', value: '1' },
     ]}
 
   >
@@ -167,38 +169,63 @@ const difficultDropDown = ({ input: { onChange } }) => (
 
 
 const timeDropDown = ({ input: { onChange } }) => (
-  <DatePicker
-    date={getDate()}
-    mode="date"
-    placeholder="When will you finish?"
-    format="MM-DD-YYYY"
-    minDate={getDate()}
-    maxDate="12-31-2025"
-    confirmBtnText="Confirm"
-    cancelBtnText="Cancel"
-    style={{width: '100%', marginTop:8, marginBottom:8 }}
-    customStyles={{
-      dateInput: {
-        marginLeft: 36,
-        colors: 'white',
-        backgroundColor: '#666',
-      },
-      dateText: {
-        color: 'white',
-        fontWeight: "bold"
+  // <DatePicker
+  //   date={getDate()}
+  //   mode="date"
+  //   placeholder="When will you finish?"
+  //   format="MM-DD-YYYY"
+  //   minDate={getDate()}
+  //   maxDate="12-31-2025"
+  //   confirmBtnText="Confirm"
+  //   cancelBtnText="Cancel"
+  //   style={{width: '100%', marginTop:8, marginBottom:8 }}
+  //   customStyles={{
+  //     dateInput: {
+  //       marginLeft: 36,
+  //       colors: 'white',
+  //       backgroundColor: '#666',
+  //     },
+  //     dateText: {
+  //       color: 'white',
+  //       fontWeight: "bold"
+  //     }
+  //   }}
+  //   onDateChange={(date) => onChange(date)}
+  //   onValueChange={(value) => onChange(value)} />
+  <RNPickerSelect
+    onValueChange={value => onChange(value)}
+    useNativeAndroidPickerStyle={false}
+    returnKeyType="next"
+    enablesReturnKeyAutomatically
+    style={{
+      ...pickerStyles,
+      iconContainer: {
+        top: 10,
+        right: 12,
       }
     }}
-    onDateChange={(date) => onChange(date)}
-    onValueChange={(value) => onChange(value)} />
+    placeholder={{
+      label: 'Select a Duration...',
+      color: 'white'
+    }}
+    items={[
+      { label: 'Long', value: '3' },
+      { label: 'medium', value: '2' },
+      { label: 'short', value: '1' },
+    ]}
+
+  >
+
+  </RNPickerSelect>
 );
 
-const skillDropDown = ({input:{onChange}, skills}) => (
-  pickItems= [],
-  skills.map(skill=>{
+const skillDropDown = ({ input: { onChange }, skills }) => (
+  pickItems = [],
+  skills.map(skill => {
     console.log("iteration", skill)
-    if(skill !== 'empty' && skill !== undefined && skill !== null){
+    if (skill !== 'empty' && skill !== undefined && skill !== null) {
       console.log("passed check.", skill.name)
-      pickItems.push({label: skill.name, value: skill.name})
+      pickItems.push({ label: skill.name, value: skill.name })
     }
   }),
 
@@ -330,9 +357,9 @@ export const validate = values => {
   } else if (values.description.length > 500) {
     errors.description = 'Must be 500 characters or less';
   }
-   if(!values.skill || values.skill === null){
+  if (!values.skill || values.skill === null) {
     errors.skill = 'A quest is required to have a skill';
-   }
+  }
 
   return errors;
 };

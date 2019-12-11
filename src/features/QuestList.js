@@ -41,7 +41,7 @@ export const QuestList = ({ getData, setLocation, quests, location, auth }) => {
               <>
                 {quest && quest.finishDate === 'incomplete' &&
                 <View style={{ borderBottomColor: colors['academics'], borderBottomWidth: 1 }}>
-                  <QuestComponent info={{ ...quest, id: index }}/>
+                  <QuestComponent key={null} info={{ ...quest, id: index }}/>
                 </View>}
                 </>
             ))

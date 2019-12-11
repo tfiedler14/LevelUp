@@ -115,7 +115,7 @@ var cxpnext = parseFloat(character.mainLevelXpToNext);
                     <View style={{ width: '50%' }}>
                       <Grid>
                         <Col>
-                          <AttributeItem attributeName={data} attributes2={attributes} skills1={skills} />
+                          <AttributeItem  key={null} attributeName={data} attributes2={attributes} skills1={skills} />
                         </Col>
                       </Grid>
                    </View>
@@ -151,10 +151,11 @@ const AttributeItem = ({ attributeName, attributes2, skills1 }) => {
             color={colors[attributeName]}
             height={25}
             progress={axp / axpnext}
+            key={null}
           />
         </View>
       </View>
-      <AttributeListItem
+      <AttributeListItem key={null}
         skills={skills1
           .filter(skill => skill.attribute === attributeName)
           .map(data => ({ name: data.name, level: data.val, attribute: name}))}
