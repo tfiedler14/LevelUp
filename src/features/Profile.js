@@ -140,7 +140,8 @@ const AttributeItem = ({ attributeName, attributes2, skills1 }) => {
   } else {
     console.log("waiting");
   }
-  
+  var axp = parseFloat(attributes2[attributeName].exp);
+  var axpnext = parseFloat(attributes2[attributeName].xpToNext);
   return (
     <View style={styles.skillSec}>
       <View style={{ flex: 1, flexDirection: 'row' }}>
@@ -150,7 +151,7 @@ const AttributeItem = ({ attributeName, attributes2, skills1 }) => {
             style={styles.mainProgress}
             color={colors[attributeName]}
             height={25}
-            progress={1 / 100 + 0.2} //todo real data here
+            progress={axp / axpnext} //todo real data here
           />
         </View>
       </View>
