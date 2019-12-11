@@ -15,7 +15,7 @@ import { Col, Grid } from 'react-native-easy-grid';
 import { NUM_AVATARS } from '../../Const';
 import {avatars} from '../../Const';
 
-export const EditCharacter = ({ getData, setLocation, character, location, putData, auth }) => {
+export const EditCharacter = ({ getData, setLocation, character, location, putData, auth, handleSubmit }) => {
   console.log(JSON.stringify(character));
   var avatarString = (('../../assets/images/waycoolercharacter1.png'));
   console.log(avatarString)
@@ -28,7 +28,12 @@ export const EditCharacter = ({ getData, setLocation, character, location, putDa
         </Text>
       </View>
 
-
+      <Field
+        name="characterName"
+        id="characterName"
+        props={{ title: 'Character Name' }}
+        component={WrappedTextInput}
+      />
 
       <Grid style={styles.avatarSelect}>
         <Col style ={styles.arrows}>
@@ -47,7 +52,7 @@ export const EditCharacter = ({ getData, setLocation, character, location, putDa
                     );
                     setLoading(true);
                     setLocation('editcharacterfake');
-                    
+
 
                 }
                 console.log(character.avatar);
@@ -76,7 +81,7 @@ export const EditCharacter = ({ getData, setLocation, character, location, putDa
                       'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/character.json',
                       character,
                       'editcharacter'
-                  
+
                     );
                     setLoading(true);
                     setLocation('editcharacterfake');
@@ -94,7 +99,13 @@ export const EditCharacter = ({ getData, setLocation, character, location, putDa
             color='green'
             mode= 'contained'
             title="Confirm Changes"
-            onPress={() => setLocation('profile')}>
+            onPress={() => handleSubmit(values => {
+              character.name = values.characterName;
+              putData(
+                'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/character.json',
+                character,
+                'editcharacter'
+              );})}>
             Confirm Changes
           </Button>
         </Col>
