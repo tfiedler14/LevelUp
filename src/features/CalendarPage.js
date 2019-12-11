@@ -101,9 +101,7 @@ export const CalendarPage = ({ getData, setLocation, quests, location, auth }) =
   }
 
   return (
-    <ImageBackground
-      source={require('../../assets/images/newBackgroundNoPattern.png')}
-      style={{ height: '100%', width: '100%' }}>
+    
     <View style={styles.paddingTop}>
       <View style={styles.sectionHeight}>
         <Card style={styles.card}>
@@ -240,7 +238,6 @@ export const CalendarPage = ({ getData, setLocation, quests, location, auth }) =
         {/*<Calendar date={moment('23/10/2015', 'DD/MM/YYYY')} onSelect={this.onSelect} />*/}
       </View>
     </View>
-    </ImageBackground>
   );
 };
 
