@@ -14,5 +14,9 @@ export const attributes = [
     'academics', 'crafts', 'mental', 'fitness', 'community', 'hobby'
 ];
 
-
+export const avatars = [
+    'https://i.imgur.com/UiKFeEK.png', 'https://i.imgur.com/vZSJAK4.png',
+    'https://i.imgur.com/yFAH4g4.png', 'https://i.imgur.com/uwXVrNm.png',
+    'https://i.imgur.com/uIHDjmn.png'
+];
 export const NUM_AVATARS = 5;

@@ -15,7 +15,7 @@ import { Col, Grid } from 'react-native-easy-grid';
 import { NUM_AVATARS } from '../../Const';
 import {avatars} from '../../Const';
 
-export const EditCharacter = ({ getData, setLocation, character, location, putData, auth }) => {
+export const EditCharacterFake = ({ getData, setLocation, character, location, putData, auth }) => {
   console.log(JSON.stringify(character));
   var avatarString = (('../../assets/images/waycoolercharacter1.png'));
   console.log(avatarString)
@@ -37,30 +37,14 @@ export const EditCharacter = ({ getData, setLocation, character, location, putDa
               name="arrow-back"
               size={48}
               color="white"
-              onPress={()=>{
-                if (character.avatar != 1){
-                    character.avatar -= 1;
-                    putData(
-                      'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/character.json',
-                      character,
-                      'editcharacter'
-                    );
-                    setLoading(true);
-                    setLocation('editcharacterfake');
-                    
-
-                }
-                console.log(character.avatar);
-
-
-              }}
+              
             />
           </View>
         </Col>
         <Col style={styles.avatar}>
           <Image
             style={styles.imageProfile}
-            source={{uri: avatars[character.avatar]}}
+            source={{}}
           />
         </Col>
         <Col style ={styles.arrows}>
@@ -69,20 +53,9 @@ export const EditCharacter = ({ getData, setLocation, character, location, putDa
               name="arrow-forward"
               size={48}
               color="white"
-              onPress={()=>{
-                if (character.avatar != NUM_AVATARS){
-                    character.avatar += 1;
-                    putData(
-                      'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/character.json',
-                      character,
-                      'editcharacter'
-                  
-                    );
-                    setLoading(true);
-                    setLocation('editcharacterfake');
-                }
-                console.log(character.avatar);
-              }}
+              
+                
+              
             />
           </View>
         </Col>
@@ -206,4 +179,4 @@ export default compose(
     mapDispatchToProps
   ),
   reduxForm({ form: 'add-quest-form', validate })
-)(EditCharacter);
+)(EditCharacterFake);
