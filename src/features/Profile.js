@@ -144,23 +144,24 @@ const AttributeItem = ({ attributeName, attributes2, skills1 }) => {
   }
   var axp = parseFloat(attributes2[attributeName].exp);
   var axpnext = parseFloat(attributes2[attributeName].xpToNext);
+  var name = attributeName;
   return (
     <View style={styles.skillSec}>
       <View style={{ flex: 1, flexDirection: 'row' }}>
-        <Text style={[styles.attributeNameFont, {color:colors[attributeName]}]} >{attributeName.charAt(0).toUpperCase() + attributeName.slice(1) + ": " + attributeLevel }:</Text>
-        <View style = {{flex: 1, left: "115%", position: 'absolute'}}>
+        <Text style={[styles.attributeNameFont, {color:colors[attributeName]}]} >{attributeName.charAt(0).toUpperCase() + attributeName.slice(1) + ": " + attributeLevel }</Text>
+        <View style = {{flex: 1, left: "125%", position: 'absolute'}}>
           <Progress.Bar
             style={styles.mainProgress}
             color={colors[attributeName]}
             height={25}
-            progress={axp / axpnext} //todo real data here
+            progress={axp / axpnext}
           />
         </View>
       </View>
       <AttributeListItem
         skills={skills1
           .filter(skill => skill.attribute === attributeName)
-          .map(data => ({ name: data.name, level: data.val}))}
+          .map(data => ({ name: data.name, level: data.val, attribute: name}))}
       />
 
     </View>
@@ -171,7 +172,7 @@ const AttributeListItem = ({ skills, levels }) => {
   return skills.map(data => {
     return (
       <View style={{ flex: 1, flexDirection: 'column' }} key={data}>
-        <Text style={styles.levelInfo}>
+        <Text style={[styles.levelInfo, {color:colors[data.attribute]}]}>
           {data.name}: {data.level}
         </Text>
       </View>
@@ -206,14 +207,6 @@ const styles = EStyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     paddingTop: '9%'
-  },
-  imageProfile: {
-    flex: 1,
-    left: '-20%',
-    position: 'absolute',
-    //height: '15rem',
-    resizeMode: 'contain',
-    paddingTop: '35%'
   },
   scrolling:{
     position: 'absolute',  
