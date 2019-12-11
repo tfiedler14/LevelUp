@@ -111,6 +111,15 @@ export const AddQuest = ({
               })}>
               {editProp ? 'Edit quest' : 'Add quest'}
             </Button>
+
+            <Button
+              color="#4f0617"
+              uppercase={false}
+              mode="contained"
+              style={styles.buttons}
+              onPress={() => setLocation('questlist')}>
+                Cancel
+            </Button>
           </Card>
         </ScrollView>
       </View>

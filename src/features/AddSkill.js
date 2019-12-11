@@ -85,7 +85,11 @@ const attributeDropDown = ({ input: { onChange}}) => (
     useNativeAndroidPickerStyle={false}
     returnKeyType="next"
     enablesReturnKeyAutomatically
-    style={pickerStyles}
+    style={{...pickerStyles,
+    iconContainer: {
+      top: 10,
+      right: 12,
+    }}}
     placeholder={{
       label: 'Select an Attribute...',
       color: 'white'
@@ -154,7 +158,8 @@ const styles = EStyleSheet.create({
     backgroundColor: '#555',
     flex: 1,
     flexDirection: 'column',
-    width: '95%'
+    width: '95%',
+    alignSelf: 'center'
   },
   padding: {
     paddingTop: '2rem',
