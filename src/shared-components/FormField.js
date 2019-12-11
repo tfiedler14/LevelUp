@@ -39,7 +39,7 @@ const styles = EStyleSheet.create({
     padding: '.5rem',
     marginRight: '1rem',
     marginLeft: '1rem',
-    marginBottom: '.5rem'
+    marginBottom: '.5rem',
   },
   title: {
     color: 'white',

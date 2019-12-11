@@ -172,7 +172,6 @@ const styles = EStyleSheet.create({
     fontSize: '2rem',
     color: 'white',
     fontFamily: 'inconsolata'
-
   },
   attributeNameFont: {
     fontSize: '2rem', 
