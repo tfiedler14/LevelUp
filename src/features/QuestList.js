@@ -10,6 +10,7 @@ import QuestComponent from '../shared-components/QuestComponent';
 import { Card } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Col, Grid } from 'react-native-easy-grid';
+import { attributes, colors } from '../../Const';
 
 export const QuestList = ({ getData, setLocation, quests, location, auth }) => {
   /* istanbul ignore next */
@@ -20,14 +21,14 @@ export const QuestList = ({ getData, setLocation, quests, location, auth }) => {
     <View style={styles.sectionHeight}>
       <View style = {styles.sectionPadding}>
 
-        <Text style={{ textAlign: 'center', fontSize: 26, color: 'white', marginTop: 20 }}>
+        <Text style={styles.title}>
           {'Active Quests'}
         </Text>
         <View style = {styles.iconcontainer}>
           <Icon
             name="add"
             size={48}
-            color="white"
+            color="yellow"
             onPress={() => setLocation('addquest')}
             />
         </View>
@@ -39,7 +40,7 @@ export const QuestList = ({ getData, setLocation, quests, location, auth }) => {
             Object.values(quests).map((quest, index) => (
               <>
                 {quest && quest.finishDate === 'incomplete' &&
-                <View style={{ borderBottomColor: 'white', borderBottomWidth: 1 }}>
+                <View style={{ borderBottomColor: colors['academics'], borderBottomWidth: 1 }}>
                   <QuestComponent info={{ ...quest, id: index }}/>
                 </View>}
                 </>
@@ -52,6 +53,14 @@ export const QuestList = ({ getData, setLocation, quests, location, auth }) => {
 };
 
 const styles = EStyleSheet.create({
+  title: {
+    fontSize: '2rem',
+    marginTop: '.8rem',
+    textAlign: 'center',
+    color:colors['academics'],
+    fontFamily: 'inconsolata'
+
+  },
   card: {
     width: '100%',
     height: '5rem',
@@ -61,14 +70,14 @@ const styles = EStyleSheet.create({
     justifyContent: 'center'
   },
   iconcontainer: {
-    paddingLeft: '7rem',
-    paddingTop: '.6rem'
+    paddingLeft: '4rem',
+    paddingTop: '.5rem'
   },
   sectionHeight: {
     height: '100%',
   },
   sectionPadding: {
-    padding: '2rem',
+    padding: '1.7rem',
     flexDirection: 'row'
   },
 });

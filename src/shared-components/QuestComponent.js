@@ -7,6 +7,8 @@ import { setLocation } from '../logic/location/actions';
 import { connect } from 'react-redux';
 import {deleteData, setQuest} from '../logic/data/actions';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { attributes, colors } from '../../Const';
+
 
 export const QuestComponent = ({ info, key, setLocation, setQuest, deleteData }) => {
   return (
@@ -53,9 +55,10 @@ const styles = EStyleSheet.create({
 
   questName: {
     fontWeight: 'bold',
-    fontSize: '1rem',
+    fontSize: '1.1rem',
     marginBottom: '1rem',
-    color: 'white'
+    color:colors['academics'],
+    fontFamily: 'inconsolata'
     // fontFamily: 'sans-serif',
   },
 
@@ -63,7 +66,8 @@ const styles = EStyleSheet.create({
     fontSize: '1rem',
     marginBottom: '.5rem',
     fontStyle: 'italic',
-    color: 'white'
+    color:colors['academics'],
+    fontFamily: 'inconsolata'
     // fontFamily: 'sans-serif',
   },
 });
