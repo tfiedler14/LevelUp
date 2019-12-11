@@ -19,11 +19,13 @@ export const AddQuest = ({
   auth,
   handleSubmit,
   profile,
+  skills,
   quest,
   quests
 }) => {
   const uid = require('uuid/v4');
   let id = uid();
+  console.log("SKILLS: " + skills)
 
   const [initialized, setInitialized] = useState(false);
   /* istanbul ignore next*/
@@ -152,6 +154,7 @@ export const mapStateToProps = (state, { editProp }) => {
     auth: state.auth,
     quests: state.data.quests,
     profile: state.data.profile,
+    skills: state.data.skills,
     quest: state.data.quest,
     initialValues: editProp
       ? state.data.quest

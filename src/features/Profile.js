@@ -8,11 +8,11 @@ import { setLoading } from '../logic/loading/actions';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import * as Progress from 'react-native-progress';
 import Async from '../shared-components/Async';
-import { attributes, colors } from '../../Const';
+import { attributes1, colors } from '../../Const';
 import { Col, Grid, Row } from 'react-native-easy-grid';
 
 
-const attributeList = attributes;
+const attributeList = attributes1;
 
 export const Profile = ({
   getData,
@@ -23,6 +23,7 @@ export const Profile = ({
   auth,
   setLoading,
   character,
+  attributes,
   profile
 }) => {
   const handleAddSkill = location => {
@@ -50,7 +51,7 @@ export const Profile = ({
 
     setLoading(true);
   }, []);
-
+console.log("ATTRIBUTES: "  + JSON.stringify(attributes));
   return (
     <ImageBackground
       source={require('../../assets/images/newBackgroundNoPatterndarker.png')}
@@ -116,7 +117,7 @@ export const Profile = ({
                     <View style={{ width: '50%' }}>
                       <Grid>
                         <Col>
-                          <AttributeItem attributeName={data} skills1={skills} />
+                          <AttributeItem attributeName={data} attributes2={attributes} skills1={skills} />
                         </Col>
                       </Grid>
                    </View>
@@ -131,11 +132,19 @@ export const Profile = ({
   );
 };
 
-const AttributeItem = ({ attributeName, skills1 }) => {
+const AttributeItem = ({ attributeName, attributes2, skills1 }) => {
+  console.log("ATTRIBUTES2 " + JSON.stringify(attributes2))
+  attributeLevel = " ";
+  if (attributes2 != []){
+    attributeLevel = attributes2[attributeName].level;
+  } else {
+    console.log("waiting");
+  }
+  
   return (
     <View style={styles.skillSec}>
       <View style={{ flex: 1, flexDirection: 'row' }}>
-        <Text style={[styles.attributeNameFont, {color:colors[attributeName]}]} >{attributeName.charAt(0).toUpperCase() + attributeName.slice(1)}:</Text>
+        <Text style={[styles.attributeNameFont, {color:colors[attributeName]}]} >{attributeName.charAt(0).toUpperCase() + attributeName.slice(1) + ": " + attributeLevel }:</Text>
         <View style = {{flex: 1, left: "115%", position: 'absolute'}}>
           <Progress.Bar
             style={styles.mainProgress}
@@ -187,7 +196,7 @@ const styles = EStyleSheet.create({
   },
   levelInfo: {
     color: 'white',
-    fontSize: '1.5rem',
+    fontSize: '1.2rem',
     fontFamily: 'inconsolata'
   },
   skillSec: {
@@ -280,6 +289,7 @@ const mapStateToProps = state => {
     location: state.location,
     loading: state.loading,
     auth: state.auth,
+    attributes: state.data.attributes,
     profile: state.data.profile,
     character: state.data.character
   };
