@@ -69,6 +69,13 @@ export const Profile = ({
                 />
                 <Icon
                   style={styles.padding}
+                  name="add"
+                  size={30}
+                  color="white"
+                  onPress={() => setLocation('editcharacter')}
+                />
+                <Icon
+                  style={styles.padding}
                   name="settings"
                   size={30}
                   color="white"
@@ -172,6 +179,7 @@ const styles = EStyleSheet.create({
     fontSize: '2rem',
     color: 'white',
     fontFamily: 'inconsolata'
+
   },
   attributeNameFont: {
     fontSize: '2rem', 
