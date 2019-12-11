@@ -52,6 +52,8 @@ export const Profile = ({
     setLoading(true);
   }, []);
 console.log("ATTRIBUTES: "  + JSON.stringify(attributes));
+var cxp = parseFloat(character.mainLevelXp);
+var cxpnext = parseFloat(character.mainLevelXpToNext);
   return (
     <ImageBackground
       source={require('../../assets/images/newBackgroundNoPatterndarker.png')}
@@ -99,7 +101,7 @@ console.log("ATTRIBUTES: "  + JSON.stringify(attributes));
                   style={styles.progress}
                   height={25}
                   color="yellow"
-                  progress={character.mainLevelXp}
+                  progress={cxp / cxpnext}
                 />
 
               </View>
