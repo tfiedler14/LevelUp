@@ -8,7 +8,7 @@ import { setLoading } from '../logic/loading/actions';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import * as Progress from 'react-native-progress';
 import Async from '../shared-components/Async';
-import { attributes, colors, avatars } from '../../Const';
+import { attributes1, colors, avatars } from '../../Const';
 import { Col, Grid, Row } from 'react-native-easy-grid';
 
 
