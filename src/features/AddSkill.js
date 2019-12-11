@@ -82,7 +82,7 @@ export const AddSkill = ({ auth, skills, setLocation, location, handleSubmit, pu
 const attributeDropDown = ({ input: { onChange}}) => (
   <RNPickerSelect
     onValueChange={value => onChange(value)}
-    useNativeAndroidPickerStyle={true}
+    useNativeAndroidPickerStyle={false}
     returnKeyType="next"
     enablesReturnKeyAutomatically
     style={pickerStyles}
@@ -117,6 +117,19 @@ const pickerStyles = StyleSheet.create({
     width: '90%',
     alignSelf: 'center'
   },
+  inputAndriod: {
+    color: 'white',
+    fontSize: 22,
+    paddingTop: 8,
+    paddingHorizontal: 10,
+    paddingBottom: 8,
+    borderColor: '#6e6e6e',
+    borderRadius: 4,
+    borderWidth: 2,
+    marginBottom: 10,
+    width: '90%',
+    alignSelf: 'center'
+  }
 
 });
 
