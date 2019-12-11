@@ -14,9 +14,9 @@ export const attributes = [
     'academics', 'crafts', 'mental', 'fitness', 'community', 'hobby'
 ];
 export const avatars = [
-    'https://i.imgur.com/UiKFeEK.png', 'https://i.imgur.com/vZSJAK4.png',
-    'https://i.imgur.com/yFAH4g4.png', 'https://i.imgur.com/uwXVrNm.png',
-    'https://i.imgur.com/uIHDjmn.png'
+    'https://i.imgur.com/s70WG3H.png', 'https://i.imgur.com/D7h7R6L.png',
+    'https://i.imgur.com/DxZ4yJO.png', 'https://i.imgur.com/ofnJ0lZ.png',
+    'https://i.imgur.com/0gtU6Do.png'
 ];
 export const NUM_AVATARS = 4;
 export const colors = {'academics' : 'yellow','crafts' : 'blue','mental' : 'purple','fitness' : 'red', 'community' : 'green','hobby' : 'orange'};
