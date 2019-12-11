@@ -103,11 +103,11 @@ export const AddQuest = ({
                   'questlist'
                 );
               } else if (editProp) {
-                let newQuests = [...quests];
-                newQuests[quest.id] = toInsert;
+                let otherQuests = quests.filter(e => e.uid !== quest.uid);
+                otherQuests.push(toInsert);
                 putData(
                   'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests' + '.json',
-                  newQuests,
+                  otherQuests,
                   'questlist'
                 );
               } else {
@@ -148,14 +148,14 @@ const styles = EStyleSheet.create({
 });
 
 export const mapStateToProps = (state, { editProp }) => {
+  console.log(state.data.quest);
   return {
     auth: state.auth,
     quests: state.data.quests,
     profile: state.data.profile,
     quest: state.data.quest,
     initialValues: editProp ? state.data.quest : {},
-    skills: state.data.skills,
-    values: getFormValues('add-quest-form')(state)
+    skills: state.data.skills
   };
 };
 
@@ -227,9 +227,9 @@ export const validate = values => {
 };
 
 export default compose(
-  reduxForm({ form: 'add-quest-form', validate }),
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )
+  ),
+  reduxForm({ form: 'add-quest-form', validate })
 )(AddQuest);

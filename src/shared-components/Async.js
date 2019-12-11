@@ -7,7 +7,6 @@ export const Async = ({ render, loading }) => {
   console.log(loading);
   return (
     <View>
-      {console.log(loading)}
       {loading !== 0 ? (
         <View style={styles.page}>
           <Text style={styles.text}>Loading...</Text>

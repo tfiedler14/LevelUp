@@ -125,7 +125,6 @@ export const Quest = ({
                   quests.filter(e => e.uid === info.uid)[0].finishDate = moment()
                     .format()
                     .split('T')[0];
-                  console.log(quests);
                   quests.filter(e => e.uid === info.uid)[0].expVal = finalExp;
                   putData(
                     'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests' + '.json',
@@ -143,6 +142,7 @@ export const Quest = ({
                 mode="contained"
                 style={styles.buttonPadding}
                 onPress={() => {
+                  console.log("QUEST: ", info);
                   setLocation('editquest');
                 }}>
                 Edit
@@ -155,12 +155,10 @@ export const Quest = ({
                 mode="contained"
                 style={styles.buttonPadding}
                 onPress={() => {
-                  deleteData(
-                    'https://levelup-10cfc.firebaseio.com/users/' +
-                      auth.uid +
-                      '/quests/' +
-                      info.id +
-                      '.json',
+                  quests.filter(e => e.uid === info.uid)[0].finishDate = "deleted";
+                  putData(
+                    'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/quests' + '.json',
+                    quests,
                     'questlist'
                   );
                 }}>
@@ -259,7 +257,7 @@ const mapStateToProps = state => {
     skills: state.data.skills,
     attributes: state.data.attributes,
     character: state.data.character,
-    quests: state.data.quests
+    quests: state.data.quests,
   };
 };
 

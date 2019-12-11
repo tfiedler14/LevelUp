@@ -9,7 +9,7 @@
       "android",
       "web"
     ],
-    "version": "1.0.1",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/images/logoIcon.png",
     "splash": {
@@ -24,7 +24,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "self.improvement.group"
     },
     "android": {
       "package": "self.improvement.group"

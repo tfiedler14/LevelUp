@@ -16,6 +16,8 @@ export const DropdownWrapper = props => {
   const touched = meta.touched;
   return (
     <View>
+      {console.log(input.value)}
+      {console.log(options)}
       <Text style={styles.title}>{title}</Text>
       <View style={styles.bgC}>
         <Dropdown
@@ -26,6 +28,7 @@ export const DropdownWrapper = props => {
           onBlur={input.onBlur}
           onFocus={input.onFocus}
           selectedValue={input.value}
+          value={input.value}
           data={options}
           textColor={'#FFFFFF'}
           itemColor={'#555555'}
