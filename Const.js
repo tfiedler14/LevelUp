@@ -10,7 +10,7 @@ const firebaseConfig = {
 export const databaseSecret = "D1ExzUbYDYreTuI7wrk1EphceuNN6Ssxgs9vt9rj";
 
 export const firebaseApp = firebase.initializeApp(firebaseConfig);
-export const attributes = [
+export const attributes1 = [
     'academics', 'crafts', 'mental', 'fitness', 'community', 'hobby'
 ];
 export const avatars = [
@@ -19,4 +19,4 @@ export const avatars = [
     'https://i.imgur.com/0gtU6Do.png'
 ];
 export const NUM_AVATARS = 4;
-export const colors = {'academics' : 'yellow','crafts' : 'blue','mental' : 'purple','fitness' : 'red', 'community' : 'green','hobby' : 'orange'};
+export const colors = {'academics' : '#fff600','crafts' : '#60cafa','mental' : '#d971ff','fitness' : '#ff005c', 'community' : '#00ff8c','hobby' : '#ff8500'};

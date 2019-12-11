@@ -15,7 +15,7 @@ import { Col, Grid } from 'react-native-easy-grid';
 import { NUM_AVATARS } from '../../Const';
 import {avatars} from '../../Const';
 
-export const EditCharacter = ({ getData, setLocation, character, location, putData, auth }) => {
+export const EditCharacter = ({ getData, setLocation, character, location, putData, auth, handleSubmit }) => {
   console.log(JSON.stringify(character));
   var avatarString = (('../../assets/images/waycoolercharacter1.png'));
   console.log(avatarString)
@@ -23,12 +23,17 @@ export const EditCharacter = ({ getData, setLocation, character, location, putDa
   return (
     <View style={styles.sectionHeight}>
       <View style={styles.nameField}>
-        <Text style={{ textAlign: 'center', fontSize: 26, color: 'white', marginTop: 20 }}>
+        <Text style={styles.title}>
           {'Edit Character'}
         </Text>
       </View>
 
-
+      <Field
+        name="characterName"
+        id="characterName"
+        props={{ title: 'Character Name' }}
+        component={WrappedTextInput}
+      />
 
       <Grid style={styles.avatarSelect}>
         <Col style ={styles.arrows}>
@@ -47,7 +52,7 @@ export const EditCharacter = ({ getData, setLocation, character, location, putDa
                     );
                     setLoading(true);
                     setLocation('editcharacterfake');
-                    
+
 
                 }
                 console.log(character.avatar);
@@ -76,7 +81,7 @@ export const EditCharacter = ({ getData, setLocation, character, location, putDa
                       'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/character.json',
                       character,
                       'editcharacter'
-                  
+
                     );
                     setLoading(true);
                     setLocation('editcharacterfake');
@@ -94,7 +99,16 @@ export const EditCharacter = ({ getData, setLocation, character, location, putDa
             color='green'
             mode= 'contained'
             title="Confirm Changes"
-            onPress={() => setLocation('profile')}>
+            onPress={handleSubmit(values => {
+              console.log(values);
+              console.log(values.characterName);
+              character.characterName = values.characterName;
+              console.log("state: " + character.characterName);
+              putData(
+                'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/character.json',
+                character,
+                'profile'
+              );})}>
             Confirm Changes
           </Button>
         </Col>
@@ -118,6 +132,14 @@ export const EditCharacter = ({ getData, setLocation, character, location, putDa
 const styles = EStyleSheet.create({
   avatarSelect: {
     paddingTop: '2rem'
+  },
+  title: {
+    fontSize: '2rem',
+    marginTop: '.8rem',
+    textAlign: 'center',
+    color:'white',
+    fontFamily: 'inconsolata'
+
   },
   arrows: {
     paddingTop: '5rem',
@@ -184,6 +206,7 @@ const mapStateToProps = state => {
     location: state.location,
     character: state.data.character,
     auth: state.auth,
+    values: state.data.character
 
   };
 };
@@ -191,9 +214,9 @@ const mapStateToProps = state => {
 export const validate = values => {
   const errors = {};
 
-  if (!values.name) {
-    errors.name = 'Required';
-  } else if (values.name.length > 20) {
+  if (!values.characterName) {
+    errors.characterName = 'Required';
+  } else if (values.characterName.length > 20) {
     errors.name = 'Must be twenty characters or less';
   }
 
@@ -205,5 +228,5 @@ export default compose(
     mapStateToProps,
     mapDispatchToProps
   ),
-  reduxForm({ form: 'add-quest-form', validate })
+  reduxForm({ form: 'edit-character-form', validate })
 )(EditCharacter);

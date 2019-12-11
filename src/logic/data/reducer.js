@@ -1,5 +1,5 @@
 export default (
-  state = { profile: {}, character: {}, quests: [], quest: {}, skills: [], attributes: [] },
+  state = { profile: {}, character: {characterName: 'name', avatar: 0, mainLevel: 1, mainLevelXp: 0, mainLevelXpToNext: 50, calender: [{'string' : "empty"}]}, quests: [], quest: {}, skills: [], attributes: { fitness: { id: 'fitness', exp: 0, level: 1, xpToNext: 50}, academics: { id: 'academics',exp: 0, level: 1, xpToNext: 50 }, crafts: { id: 'crafts', exp: 0, level: 1, xpToNext: 50 }, community: {id: 'community', exp: 0, level: 1 , xpToNext: 50}, mental: { id: 'mental', exp: 0, level: 1 , xpToNext: 50}, hobby: {id: 'hobby', exp: 0, level: 1, xpToNext: 50 } } },
   action
 ) => {
   switch (action.type) {
