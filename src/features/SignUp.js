@@ -115,7 +115,7 @@ const handleSignUp = (values, setLocation, setAuthentication, putData) => {
           "skill": "hobby"
         }],
         profile: { avatarImage: 0},
-        character: {characterName: 'name', mainLevel: 1, avatar: 1, mainLevelXp: 0, mainLevelXpToNext: 50, calender: [{'string' : "empty"}]},
+        character: {characterName: 'name', mainLevel: 1, avatar: 1, imageURL: 'https://i.imgur.com/UiKFeEK.png', mainLevelXp: 0, mainLevelXpToNext: 50, calender: [{'string' : "empty"}]},
         skills: ["empty"],
         attributes: { fitness: { id: 'fitness', exp: 0, level: 1, xpToNext: 50}, academics: { id: 'academics',exp: 0, level: 1, xpToNext: 50 }, crafts: { id: 'crafts', exp: 0, level: 1, xpToNext: 50 }, community: {id: 'community', exp: 0, level: 1 , xpToNext: 50}, mental: { id: 'mental', exp: 0, level: 1 , xpToNext: 50}, hobby: {id: 'hobby', exp: 0, level: 1, xpToNext: 50 } }
       }, 'profile', 'profile');

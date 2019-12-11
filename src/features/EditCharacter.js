@@ -17,6 +17,7 @@ export const EditCharacter = ({ getData, setLocation, character, location, auth 
   console.log(JSON.stringify(character));
   var avatarString = (('../../assets/images/waycoolercharacter1.png'));
   console.log(avatarString)
+
   return (
     <View style={styles.sectionHeight}>
       <View style={styles.nameField}>
@@ -24,21 +25,22 @@ export const EditCharacter = ({ getData, setLocation, character, location, auth 
           {'Edit Character'}
         </Text>
       </View>
-        
+
 
 
       <Grid style={styles.avatarSelect}>
         <Col style ={styles.arrows}>
           <View>
             <Icon style={{paddingRight:10}}
-              name="add"
+              name="arrow-back"
               size={48}
               color="white"
               onPress={()=>{
                 if (character.avatar != 1){
                     character.avatar -= 1;
-                } 
+                }
                 console.log(character.avatar);
+
 
               }}
             />
@@ -47,13 +49,13 @@ export const EditCharacter = ({ getData, setLocation, character, location, auth 
         <Col style={styles.avatar}>
           <Image
             style={styles.imageProfile}
-            source={{uri: avatarString}}
+            source={{uri: character.imageURL}}
           />
         </Col>
         <Col style ={styles.arrows}>
           <View>
             <Icon style={{paddingLeft:10}}
-              name="add"
+              name="arrow-forward"
               size={48}
               color="white"
               onPress={()=>{
@@ -157,7 +159,7 @@ const mapStateToProps = state => {
     location: state.location,
     character: state.data.character,
     auth: state.auth,
-    
+
   };
 };
 
