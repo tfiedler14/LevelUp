@@ -59,7 +59,7 @@ export const EditCharacter = ({ getData, setLocation, character, location, putDa
         </Col>
         <Col style={styles.avatar}>
           <Image
-            style={styles.imageProfile}
+            style={[{width: 150}, {height: 220}, {resizeMode: 'contain'}]}
             source={{uri: avatars[character.avatar]}}
           />
         </Col>
