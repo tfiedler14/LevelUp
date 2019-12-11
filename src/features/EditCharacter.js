@@ -23,7 +23,7 @@ export const EditCharacter = ({ getData, setLocation, character, location, putDa
   return (
     <View style={styles.sectionHeight}>
       <View style={styles.nameField}>
-        <Text style={{ textAlign: 'center', fontSize: 26, color: 'white', marginTop: 20 }}>
+        <Text style={styles.title}>
           {'Edit Character'}
         </Text>
       </View>
@@ -132,6 +132,14 @@ export const EditCharacter = ({ getData, setLocation, character, location, putDa
 const styles = EStyleSheet.create({
   avatarSelect: {
     paddingTop: '2rem'
+  },
+  title: {
+    fontSize: '2rem',
+    marginTop: '.8rem',
+    textAlign: 'center',
+    color:'white',
+    fontFamily: 'inconsolata'
+
   },
   arrows: {
     paddingTop: '5rem',
