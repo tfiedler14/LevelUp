@@ -26,7 +26,6 @@ export const AddQuest = ({
   skills,
   quest,
   quests,
-  skills
 }) => {
   const uid = require('uuid/v4');
   let id = uid();
