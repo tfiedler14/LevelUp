@@ -23,12 +23,17 @@ export const EditCharacterFake = ({ getData, setLocation, character, location, p
   return (
     <View style={styles.sectionHeight}>
       <View style={styles.nameField}>
-        <Text style={{ textAlign: 'center', fontSize: 26, color: 'white', marginTop: 20 }}>
+        <Text style={styles.title}>
           {'Edit Character'}
         </Text>
       </View>
 
-
+      <Field
+        name="characterName"
+        id="characterName"
+        props={{ title: 'Character Name' }}
+        component={WrappedTextInput}
+      />
 
       <Grid style={styles.avatarSelect}>
         <Col style ={styles.arrows}>
@@ -37,7 +42,7 @@ export const EditCharacterFake = ({ getData, setLocation, character, location, p
               name="arrow-back"
               size={48}
               color="white"
-              
+
             />
           </View>
         </Col>
@@ -53,9 +58,9 @@ export const EditCharacterFake = ({ getData, setLocation, character, location, p
               name="arrow-forward"
               size={48}
               color="white"
-              
-                
-              
+
+
+
             />
           </View>
         </Col>
@@ -91,6 +96,14 @@ export const EditCharacterFake = ({ getData, setLocation, character, location, p
 const styles = EStyleSheet.create({
   avatarSelect: {
     paddingTop: '2rem'
+  },
+  title: {
+    fontSize: '2rem',
+    marginTop: '.8rem',
+    textAlign: 'center',
+    color:'white',
+    fontFamily: 'inconsolata'
+
   },
   arrows: {
     paddingTop: '5rem',
@@ -132,6 +145,7 @@ const styles = EStyleSheet.create({
   buttons: {
     width: '40%'
   }
+
 
 });
 
