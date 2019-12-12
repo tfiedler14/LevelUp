@@ -19,7 +19,7 @@ export const AddSkill = ({ auth, skills, setLocation, location, handleSubmit, pu
 
   return (
 
-    <ImageBackground source={require('../../assets/images/newBackgroundNoPatterndarker.png')} style={{ height: '100%', width: '100%' }}>
+    <ImageBackground source={require('../../assets/images/newBackground.png')} style={{ height: '100%', width: '100%' }}>
       <View style={styles.sectionHeight}>
         <ScrollView>
           <Card style={styles.card}>

@@ -41,7 +41,7 @@ export const AddQuest = ({
   });
   return (
     <ImageBackground
-      source={require('../../assets/images/newBackgroundNoPatterndarker.png')}
+      source={require('../../assets/images/newBackground.png')}
       style={{ height: '100%', width: '100%' }}>
       <View style={styles.sectionHeight}>
         <ScrollView>
@@ -54,7 +54,7 @@ export const AddQuest = ({
               props={{ title: 'Description' }}
               component={WrappedTextInput}
             />
-            <Text style={{ color: 'white', marginBottom:5 }}>Duration</Text>
+            <Text style={{ color: 'white', marginTop: 12 }}>Duration</Text>
             <Field
               name="time"
               id="time"
@@ -63,7 +63,7 @@ export const AddQuest = ({
               mode="datetime"
             />
 
-            <Text style={{ color: 'white', marginBottom:5 }}>Difficulty</Text>
+            <Text style={{ color: 'white', marginTop: 12}}>Difficulty</Text>
             <Field
               name="difficulty"
               id="difficulty"
@@ -72,7 +72,7 @@ export const AddQuest = ({
               mode="dropdown"
             />
 
-            <Text style={{ color: 'white', marginBottom:5 }}>Time</Text>
+            <Text style={{ color: 'white', marginTop:12 }}>Time</Text>
 
             <Field
               name="skill"
@@ -169,29 +169,7 @@ const difficultDropDown = ({ input: { onChange } }) => (
 
 
 const timeDropDown = ({ input: { onChange } }) => (
-  // <DatePicker
-  //   date={getDate()}
-  //   mode="date"
-  //   placeholder="When will you finish?"
-  //   format="MM-DD-YYYY"
-  //   minDate={getDate()}
-  //   maxDate="12-31-2025"
-  //   confirmBtnText="Confirm"
-  //   cancelBtnText="Cancel"
-  //   style={{width: '100%', marginTop:8, marginBottom:8 }}
-  //   customStyles={{
-  //     dateInput: {
-  //       marginLeft: 36,
-  //       colors: 'white',
-  //       backgroundColor: '#666',
-  //     },
-  //     dateText: {
-  //       color: 'white',
-  //       fontWeight: "bold"
-  //     }
-  //   }}
-  //   onDateChange={(date) => onChange(date)}
-  //   onValueChange={(value) => onChange(value)} />
+
   <RNPickerSelect
     onValueChange={value => onChange(value)}
     useNativeAndroidPickerStyle={false}
