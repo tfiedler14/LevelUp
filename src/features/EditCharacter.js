@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Image, ScrollView, View, Text, ImageBackground, Button } from 'react-native';
-import { Field, initialize, reduxForm } from 'redux-form';
+import { Field, initialize, getFormValues, reduxForm } from 'redux-form';
 import { WrappedTextInput } from '../shared-components/FormField';
 import { setLocation} from '../logic/location/actions';
 import { getData, putData} from '../logic/data/actions';
@@ -15,7 +15,7 @@ import { Col, Grid } from 'react-native-easy-grid';
 import { NUM_AVATARS } from '../../Const';
 import {avatars} from '../../Const';
 
-export const EditCharacter = ({ getData, setLocation, character, location, putData, auth, handleSubmit }) => {
+export const EditCharacter = ({ getData, setLocation, initialValues, character, location, putData, auth, handleSubmit }) => {
   console.log(JSON.stringify(character));
   var avatarString = (('../../assets/images/waycoolercharacter1.png'));
   console.log(avatarString)
@@ -42,23 +42,21 @@ export const EditCharacter = ({ getData, setLocation, character, location, putDa
               name="arrow-back"
               size={48}
               color="white"
-              onPress={()=>{
+              onPress={handleSubmit(values => {
+                console.log(values);
+                console.log(values.characterName);
                 if (character.avatar != 0){
-                    character.avatar -= 1;
-                    putData(
-                      'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/character.json',
-                      character,
-                      'editcharacter'
-                    );
-                    setLoading(true);
-                    setLocation('editcharacterfake');
-
-
+                  character.avatar -= 1;
                 }
-                console.log(character.avatar);
-
-
-              }}
+                character.characterName = values.characterName;
+                console.log("state: " + character.characterName);
+                putData(
+                  'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/character.json',
+                  character,
+                  'editcharacter'
+                );
+                setLoading(true);
+                      setLocation('editcharacterfake');})}
             />
           </View>
         </Col>
@@ -74,20 +72,21 @@ export const EditCharacter = ({ getData, setLocation, character, location, putDa
               name="arrow-forward"
               size={48}
               color="white"
-              onPress={()=>{
+              onPress={handleSubmit(values => {
+                console.log(values);
+                console.log(values.characterName);
                 if (character.avatar != NUM_AVATARS){
-                    character.avatar += 1;
-                    putData(
-                      'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/character.json',
-                      character,
-                      'editcharacter'
-
-                    );
-                    setLoading(true);
-                    setLocation('editcharacterfake');
+                  character.avatar += 1;
                 }
-                console.log(character.avatar);
-              }}
+                character.characterName = values.characterName;
+                console.log("state: " + character.characterName);
+                putData(
+                  'https://levelup-10cfc.firebaseio.com/users/' + auth.uid + '/character.json',
+                  character,
+                  'editcharacter'
+                );
+                setLoading(true);
+                      setLocation('editcharacterfake');})}
             />
           </View>
         </Col>
@@ -206,7 +205,10 @@ const mapStateToProps = state => {
     location: state.location,
     character: state.data.character,
     auth: state.auth,
-    values: state.data.character
+    values: state.data.character,
+    initialValues: {
+      characterName: state.data.character.characterName
+    }
 
   };
 };
@@ -228,5 +230,5 @@ export default compose(
     mapStateToProps,
     mapDispatchToProps
   ),
-  reduxForm({ form: 'edit-character-form', validate })
+  reduxForm({ form: 'edit-character-form', validate, enableReinitialize: true })
 )(EditCharacter);

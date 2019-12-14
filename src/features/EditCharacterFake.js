@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Image, ScrollView, View, Text, ImageBackground, Button } from 'react-native';
-import { Field, initialize, reduxForm } from 'redux-form';
+import { Field, initialize, getFormValues, reduxForm  } from 'redux-form';
 import { WrappedTextInput } from '../shared-components/FormField';
 import { setLocation} from '../logic/location/actions';
 import { getData, putData} from '../logic/data/actions';
@@ -171,6 +171,9 @@ const mapStateToProps = state => {
     location: state.location,
     character: state.data.character,
     auth: state.auth,
+    initialValues: {
+      characterName: state.data.character.characterName
+    }
 
   };
 };
@@ -192,5 +195,5 @@ export default compose(
     mapStateToProps,
     mapDispatchToProps
   ),
-  reduxForm({ form: 'add-quest-form', validate })
+  reduxForm({ form: 'add-quest-form', validate, enableReinitialize: true })
 )(EditCharacterFake);
